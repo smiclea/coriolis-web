@@ -22,4 +22,4 @@ app.listen(PORT, function () {
   console.log('Express server is up on port ' + PORT);
 });
 
-opn('http://localhost:' + PORT);
+//opn('http://localhost:' + PORT);
