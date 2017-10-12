@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import connectToStores from 'alt-utils/lib/connectToStores'
 import styled, { injectGlobal } from 'styled-components'
 import NotificationSystem from 'react-notification-system'
 
@@ -15,24 +14,26 @@ injectGlobal`
 const Wrapper = styled.div``
 
 class Notifications extends React.Component {
-  static propTypes = {
-    notifications: PropTypes.array,
+  constructor() {
+    super()
+
+    this.state = NotificationStore.getState()
   }
 
-  static getStores() {
-    return [NotificationStore]
+  componentDidMount() {
+    NotificationStore.listen((state) => { this.onStoreChange(state) })
   }
 
-  static getPropsFromStores() {
-    return NotificationStore.getState()
+  componentWillUnmount() {
+    NotificationStore.unlisten((state) => { this.onStoreChange(state) })
   }
 
-  componentWillReceiveProps(props) {
-    if (!props.notifications.length) {
+  onStoreChange(state) {
+    if (!state.notifications.length) {
       return
     }
 
-    let lastNotification = props.notifications[props.notifications.length - 1]
+    let lastNotification = state.notifications[state.notifications.length - 1]
     this.notificationSystem.addNotification({
       title: lastNotification.title || lastNotification.message,
       message: lastNotification.title ? lastNotification.message : null,
@@ -52,4 +53,4 @@ class Notifications extends React.Component {
   }
 }
 
-export default connectToStores(Notifications)
+export default Notifications

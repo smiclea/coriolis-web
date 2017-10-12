@@ -1,0 +1,58 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+import { Logo } from 'components'
+
+import backgroundImage from './images/star-bg.jpg'
+
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 320px;
+  background-image: url('${backgroundImage}');
+  display: flex;
+  flex-direction: column;
+`
+
+const LogoStyled = styled(Logo)`margin-top: 40px;`
+
+const Menu = styled.div`margin-top:32px`
+
+const MenuItem = styled.div`
+  font-size: 18px;
+  color: ${props => props.selected ? '#007AFF' : 'white'};
+  cursor: pointer;
+  margin-top: 26px;
+  margin-left: 96px;
+`
+const Footer = styled.div``
+
+class Navigation extends React.Component {
+  static propTypes = {
+    currentPage: PropTypes.string,
+  }
+
+  handleMenuItemClick(item) {
+    window.location.href = `/#/${item}`
+  }
+
+  render() {
+    return (
+      <Wrapper>
+        <LogoStyled small />
+        <Menu>
+          <MenuItem selected={this.props.currentPage === 'replicas'}>Replicas</MenuItem>
+          <MenuItem onClick={() => { this.handleMenuItemClick('migrations') }}>Migrations</MenuItem>
+          <MenuItem>Cloud Endpoints</MenuItem>
+          <MenuItem>Projects</MenuItem>
+        </Menu>
+        <Footer />
+      </Wrapper>
+    )
+  }
+}
+
+export default Navigation

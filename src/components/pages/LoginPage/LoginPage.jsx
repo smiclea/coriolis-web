@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { LoginTemplate, Logo, LoginForm } from 'components'
+import { EmptyTemplate, Logo, LoginForm } from 'components'
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
 import UserActions from '../../../actions/UserActions'
@@ -65,6 +65,7 @@ const FooterLogo = styled.div`
 class LoginPage extends React.Component {
   static propTypes = {
     loading: PropTypes.bool,
+    user: PropTypes.object,
   }
 
   static getStores() {
@@ -89,6 +90,10 @@ class LoginPage extends React.Component {
 
   componentWillReceiveProps(props) {
     this.setState({ loading: props.loading })
+
+    if (props.user) {
+      window.location.href = '/#/replicas'
+    }
   }
 
   handleFormSubmit(data) {
@@ -102,7 +107,7 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <LoginTemplate>
+      <EmptyTemplate>
         <Wrapper>
           <Content>
             <Logo />
@@ -113,7 +118,7 @@ class LoginPage extends React.Component {
             </Footer>
           </Content>
         </Wrapper>
-      </LoginTemplate>
+      </EmptyTemplate>
     )
   }
 }

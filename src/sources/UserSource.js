@@ -85,6 +85,34 @@ class UserSource {
       }, reject).catch(reject)
     })
   }
+
+  static tokenLogin() {
+    let token = cookie.get('token')
+    let projectId = cookie.get('projectId')
+    if (token) {
+      Api.setDefaultHeader('X-Auth-Token', token)
+    }
+
+    return new Promise((resolve, reject) => {
+      if (!token || !projectId) {
+        reject()
+        return
+      }
+      Api.sendAjaxRequest({
+        url: servicesUrl.identity,
+        method: 'GET',
+        headers: { 'X-Subject-Token': token },
+      }).then(resolve, () => {
+        cookie.remove('token')
+        cookie.remove('projectId')
+        Api.resetHeaders()
+      }).catch(() => {
+        cookie.remove('token')
+        cookie.remove('projectId')
+        Api.resetHeaders()
+      })
+    })
+  }
 }
 
 export default UserSource

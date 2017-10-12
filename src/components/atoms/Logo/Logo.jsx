@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import StyleProps from '../../styleUtils/StyleProps'
@@ -11,6 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   ${StyleProps.media.handheld`
     flex-direction: row;
   `}
@@ -23,6 +25,7 @@ const CoriolisLogo = styled.div`
   ${StyleProps.media.handheld`
     display: none;
   `}
+  ${props => !props || !props.large ? 'display: none;' : 'display: block;'}
 `
 
 const CoriolisText = styled.div`
@@ -33,6 +36,7 @@ const CoriolisText = styled.div`
   ${StyleProps.media.handheld`
     display: none;
   `}
+  ${props => !props || !props.large ? 'display: none;' : 'display: block;'}
 `
 
 const CoriolisLogoSmall = styled.div`
@@ -44,6 +48,7 @@ const CoriolisLogoSmall = styled.div`
   ${StyleProps.media.handheld`
     display: block;
   `}
+  ${props => !props || !props.small ? 'display: none;' : 'display: block;'}
 `
 
 const CoriolisTextSmall = styled.div`
@@ -54,17 +59,24 @@ const CoriolisTextSmall = styled.div`
   ${StyleProps.media.handheld`
     display: block;
   `}
+  ${props => !props || !props.small ? 'display: none;' : 'display: block;'}
 `
 
-const Logo = () => {
+const Logo = ({ className, large, small }) => {
   return (
-    <Wrapper>
-      <CoriolisLogo />
-      <CoriolisText />
-      <CoriolisLogoSmall />
-      <CoriolisTextSmall />
+    <Wrapper className={className}>
+      <CoriolisLogo large={large} />
+      <CoriolisText large={large} />
+      <CoriolisLogoSmall small={small} />
+      <CoriolisTextSmall small={small} />
     </Wrapper>
   )
+}
+
+Logo.propTypes = {
+  className: PropTypes.string,
+  large: PropTypes.bool,
+  small: PropTypes.bool,
 }
 
 export default Logo

@@ -8,49 +8,50 @@ import NotificationActions from './NotificationActions'
 
 class UserActions {
   login(data) {
-    return (dispatch) => {
-      dispatch()
-      UserSource.login(data).then(this.loginSuccess, this.loginFailed)
-    }
+    UserSource.login(data).then(this.loginSuccess, this.loginFailed)
+    return data
   }
 
   loginSuccess() {
-    return (dispatch) => {
-      dispatch()
-      
-      this.loginScoped()
-    }
+    this.loginScoped()
+    return true
   }
 
   loginFailed() {
-    return (dispatch) => {
-      dispatch()
-    }
+    return true
   }
 
   loginScoped() {
-    return (dispatch) => {
-      dispatch()
-
-      ProjectActions.getScoped()
-      Wait.for(ProjectStore, state => state.projects.length, () => {
-        UserSource.loginScoped(ProjectStore.getState().projects)
-          .then(this.loginScopedSuccess, this.loginScopedFailed)
-      })
-    }
+    ProjectActions.getScoped()
+    Wait.for(() => ProjectStore.getState().projects.length, () => {
+      UserSource.loginScoped(ProjectStore.getState().projects)
+        .then(this.loginScopedSuccess, this.loginScopedFailed)
+    })
+    return true
   }
 
-  loginScopedSuccess(reponse) {
-    return (dispatch) => {
-      NotificationActions.notify('Signed in', 'success')
-      dispatch(reponse)
-    }
+  loginScopedSuccess(response) {
+    NotificationActions.notify('Signed', 'success')
+    return response
   }
 
   loginScopedFailed(response) {
-    return (dispatch) => {
-      dispatch(response)
-    }
+    return response || true
+  }
+
+  tokenLogin() {
+    UserSource.tokenLogin().then(this.tokenLoginSuccess, this.tokenLoginFailed)
+    return true
+  }
+
+  tokenLoginSuccess(response) {
+    NotificationActions.notify('Signed in', 'success')
+    return response || true
+  }
+
+  tokenLoginFailed(response) {
+    NotificationActions.notify('Not logged in', 'error')
+    return response || true
   }
 }
 
