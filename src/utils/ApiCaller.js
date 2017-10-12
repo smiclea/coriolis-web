@@ -60,12 +60,15 @@ class ApiCaller {
           resolve(result)
         } else {
           console.log(`Error Response: ${options.url}`, result.data) // eslint-disable-line no-console
-          if (result.data && result.data.error && result.data.error.message) {
+
+          if (result.data && result.data.error && result.data.error.message &&
+            (result.status !== 401 || window.location.hash !== '#/')) {
             NotificationActions.notify(result.data.error.message, 'error')
           }
-          if (result.status === 401) {
+
+          if (result.status === 401 && window.location.hash !== '#/') {
             this.resetHeaders()
-            window.location.href = '/'
+            window.location.href = '/#/'
           }
           reject({ status: request.status })
         }

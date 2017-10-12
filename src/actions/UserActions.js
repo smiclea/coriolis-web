@@ -50,7 +50,6 @@ class UserActions {
   }
 
   tokenLoginFailed(response) {
-    NotificationActions.notify('Not logged in', 'error')
     return response || true
   }
 }

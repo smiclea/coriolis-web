@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 
 import { LoginFormField, Button, LoginOptions, Spinner } from 'components'
 
+import errorIcon from './images/error.svg'
+
 import { loginButtons } from '../../../config'
 import NotificationActions from '../../../actions/NotificationActions'
 
@@ -44,11 +46,33 @@ const SpinnerLayout = styled(Spinner)`
   top: 8px;
   right: 8px;
 `
+const LoginError = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 16px;
+`
+
+const LoginErrorIcon = styled.div`
+  width: 26px;
+  height: 26px;
+  background-image: url('${errorIcon}');
+`
+
+const LoginErrorText = styled.div`
+  color: white;
+  font-size: 12px;
+  margin-top: 4px;
+  width: 192px;
+  text-align: center;
+`
 
 class LoginForm extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     loading: PropTypes.bool,
+    loginFailed: PropTypes.bool,
     onFormSubmit: PropTypes.func,
   }
 
@@ -66,14 +90,7 @@ class LoginForm extends React.Component {
     this.state = {
       username: '',
       password: '',
-      loading: false,
     }
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      loading: props.loading,
-    })
   }
 
   handleUsernameChange(e) {
@@ -103,11 +120,21 @@ class LoginForm extends React.Component {
       </LoginSeparator>
     ) : null
 
-    let buttonContent = this.state.loading ?
+    let buttonContent = this.props.loading ?
       <span>Please wait ... <SpinnerLayout /></span> : 'Login'
+
+    let loginError = this.props.loginFailed ? (
+      <LoginError>
+        <LoginErrorIcon />
+        <LoginErrorText>
+          The username or password did not match. Please try again.
+        </LoginErrorText>
+      </LoginError>
+    ) : null
 
     return (
       <Form className={this.props.className} onSubmit={this.handleFormSubmit}>
+        {loginError}  
         <LoginOptions />
         {loginSeparator}
         <FormFields>
@@ -125,7 +152,7 @@ class LoginForm extends React.Component {
             type="password"
           />
         </FormFields>
-        <Button style={{ position: 'relative', width: '100%', marginTop: '16px' }} disabled={this.state.loading}>
+        <Button style={{ position: 'relative', width: '100%', marginTop: '16px' }} disabled={this.props.loading}>
           {buttonContent}
         </Button>
       </Form>

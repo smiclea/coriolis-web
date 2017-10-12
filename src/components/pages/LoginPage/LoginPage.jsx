@@ -65,6 +65,7 @@ const FooterLogo = styled.div`
 class LoginPage extends React.Component {
   static propTypes = {
     loading: PropTypes.bool,
+    loginFailed: PropTypes.bool,
     user: PropTypes.object,
   }
 
@@ -89,8 +90,6 @@ class LoginPage extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ loading: props.loading })
-
     if (props.user) {
       window.location.href = '/#/replicas'
     }
@@ -111,7 +110,11 @@ class LoginPage extends React.Component {
         <Wrapper>
           <Content>
             <Logo />
-            <StyledLoginForm onFormSubmit={data => this.handleFormSubmit(data)} loading={this.state.loading} />
+            <StyledLoginForm
+              onFormSubmit={data => this.handleFormSubmit(data)}
+              loading={this.props.loading}
+              loginFailed={this.props.loginFailed}
+            />
             <Footer>
               <FooterText>Coriolis® is a service offered by</FooterText>
               <FooterLogo />

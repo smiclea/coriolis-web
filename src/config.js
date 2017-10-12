@@ -12,24 +12,9 @@ export const servicesUrl = {
 }
 
 export const loginButtons = [
-  {
-    name: 'Google',
-    id: 'google',
-    url: '',
-  },
   // {
-  //   name: 'Microsoft',
-  //   id: 'microsoft',
-  //   url: '',
-  // },
-  // {
-  //   name: 'Facebook',
-  //   id: 'facebook',
-  //   url: '',
-  // },
-  // {
-  //   name: 'Github',
-  //   id: 'github',
+  //   name: 'Google',
+  //   id: 'google',
   //   url: '',
   // },
 ]
