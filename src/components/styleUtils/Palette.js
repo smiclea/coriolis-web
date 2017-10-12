@@ -7,12 +7,12 @@ const Palette = {
   alert: '#F91661',
   success: '#34C555',
   grayscale: [
-    '#D8DBE2',
-    '#ECEDF1',
-    '#C8CCD7',
-    '#A4AAB5',
-    '#616770',
-    '#1B2733',
+    '#D8DBE2', // 0
+    '#ECEDF1', // 1
+    '#C8CCD7', // 2
+    '#A4AAB5', // 3
+    '#616770', // 4
+    '#1B2733', // 5
   ],
 }
 

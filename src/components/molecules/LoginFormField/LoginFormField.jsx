@@ -6,6 +6,7 @@ import { FieldLabel, TextInput } from 'components'
 
 const Wrapper = styled.div`
   margin-bottom: 16px;
+  margin-left: 16px;
 `
 
 const StyledTextInput = styled(TextInput) `

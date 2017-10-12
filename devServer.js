@@ -9,7 +9,11 @@ var PORT = 3001;
 var compiler = webpack(webpackConfig);
 
 app.use(require("webpack-dev-middleware")(compiler, {
-  noInfo: false, publicPath: webpackConfig.output.publicPath
+  noInfo: false,
+  publicPath: webpackConfig.output.publicPath,
+  stats: {
+    colors: true
+  }
 }));
 
 app.use(require("webpack-hot-middleware")(compiler, {

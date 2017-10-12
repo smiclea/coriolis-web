@@ -1,4 +1,4 @@
-import alt from '../alt/alt'
+import alt from '../alt'
 import NotificationActions from '../actions/NotificationActions'
 
 class NotificationStore {
@@ -7,19 +7,15 @@ class NotificationStore {
       notify: NotificationActions.NOTIFY,
     })
 
-    this.state = {
-      notifications: [{ message: 'blabla' }],
-    }
+    this.notifications = []
   }
 
-  notify(message) {
+  notify(options) {
     let newItem = {
-      message,
+      ...options,
     }
 
-    this.setState({
-      notifications: this.state.notifications.concat(newItem),
-    })
+    this.notifications = this.notifications.concat(newItem)
   }
 }
 

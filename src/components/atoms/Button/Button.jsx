@@ -60,15 +60,13 @@ const StyledButton = styled.button`
   padding: 0;
   width: 192px;
   cursor: pointer;
-  $:disabled {
-    opacity: 0.7
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
   &:hover {
     ${props => props.hollow ? 'color: white' : ''}
-    background-color: ${props => hoverBackgroundColor(props)}
-  }
-  &:disabled:hover {
-    cursor: not-allowed;
+    background-color: ${props => hoverBackgroundColor(props)};
   }
   &:focus {
     outline: none;

@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
+import { LoginFormField, Button, LoginOptions, Spinner } from 'components'
+
+import { loginButtons } from '../../../config'
 import NotificationActions from '../../../actions/NotificationActions'
-import { LoginFormField, Button } from 'components'
 
 const Form = styled.form`
   background: rgba(221, 224, 229, 0.5);
@@ -11,9 +13,43 @@ const Form = styled.form`
   border-radius: 8px;
 `
 
+const FormFields = styled.div`
+  display: flex;
+  margin-left: -16px;
+  ${loginButtons.length < 3 ? css`flex-direction: column;` : ''}
+`
+
+const LoginSeparator = styled.div`
+  margin: 8px 0 24px;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const SeparatorLine = styled.div`
+  width: 19px;
+  border-top: 1px solid white;
+`
+
+const SeparatorText = styled.div`
+  font-size: 12px;
+  color: white;
+  flex-grow: 1;
+  text-align: center;
+`
+
+const SpinnerLayout = styled(Spinner)`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+`
+
 class LoginForm extends React.Component {
   static propTypes = {
     className: PropTypes.string,
+    loading: PropTypes.bool,
+    onFormSubmit: PropTypes.func,
   }
 
   static defaultProps = {
@@ -30,7 +66,14 @@ class LoginForm extends React.Component {
     this.state = {
       username: '',
       password: '',
+      loading: false,
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      loading: props.loading,
+    })
   }
 
   handleUsernameChange(e) {
@@ -44,38 +87,47 @@ class LoginForm extends React.Component {
   handleFormSubmit(e) {
     e.preventDefault()
 
-    NotificationActions.notify('hellow')
-
-    // if (this.state.username.length == 0 || this.state.password.length == 0) {
-    //   NotificationActions.notify("Please fill in all fields")
-    // } else {
-    //   this.setState({ disableLogin: true })
-    //   UserActions.login({
-    //     name: this.state.username,
-    //     password: this.state.password
-    //   }, () => {
-    //     this.setState({ disableLogin: false })
-    //   })
-    // }
+    if (this.state.username.length === 0 || this.state.password.length === 0) {
+      NotificationActions.notify('Please fill in all fields')
+    } else {
+      this.props.onFormSubmit({ username: this.state.username, password: this.state.password })
+    }
   }
 
   render() {
+    let loginSeparator = loginButtons.length ? (
+      <LoginSeparator>
+        <SeparatorLine />
+        <SeparatorText>or sign in with username</SeparatorText>
+        <SeparatorLine />
+      </LoginSeparator>
+    ) : null
+
+    let buttonContent = this.state.loading ?
+      <span>Please wait ... <SpinnerLayout /></span> : 'Login'
+
     return (
       <Form className={this.props.className} onSubmit={this.handleFormSubmit}>
-        <LoginFormField
-          label="Username"
-          value={this.state.username}
-          name="password"
-          onChange={this.handleUsernameChange}
-        />
-        <LoginFormField
-          label="Password"
-          value={this.state.password}
-          onChange={this.handlePasswordChange}
-          name="password"
-          type="password"
-        />
-        <Button style={{ marginTop: '16px' }}>Login</Button>
+        <LoginOptions />
+        {loginSeparator}
+        <FormFields>
+          <LoginFormField
+            label="Username"
+            value={this.state.username}
+            name="password"
+            onChange={this.handleUsernameChange}
+          />
+          <LoginFormField
+            label="Password"
+            value={this.state.password}
+            onChange={this.handlePasswordChange}
+            name="password"
+            type="password"
+          />
+        </FormFields>
+        <Button style={{ position: 'relative', width: '100%', marginTop: '16px' }} disabled={this.state.loading}>
+          {buttonContent}
+        </Button>
       </Form>
     )
   }

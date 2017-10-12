@@ -10,7 +10,7 @@ injectGlobal`
     margin: 0;
     font-family: Rubik;
     font-size: 9px;
-    font-weight: ${StyleProps.fontWeights.medium}
+    font-weight: ${StyleProps.fontWeights.regular}
   }
 `
 
