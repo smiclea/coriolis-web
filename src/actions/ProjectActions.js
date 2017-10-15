@@ -4,25 +4,20 @@ import PojectSource from '../sources/ProjectSource'
 
 class ProjectActions {
   getScoped() {
-    return (dispatch) => {
-      dispatch()
-      PojectSource.getScoped().then(
-        this.getScopedCompleted.bind(this),
-        this.getScopedFailed.bind(this)
-      ).catch(this.getScopedFailed.bind(this))
-    }
+    PojectSource.getScoped().then(
+      this.getScopedCompleted.bind(this),
+      this.getScopedFailed.bind(this)
+    ).catch(this.getScopedFailed.bind(this))
+
+    return true
   }
 
   getScopedCompleted(response) {
-    return (dispatch) => {
-      dispatch(response)
-    }
+    return response
   }
 
   getScopedFailed(response) {
-    return (dispatch) => {
-      dispatch(response)
-    }
+    return response
   }
 }
 

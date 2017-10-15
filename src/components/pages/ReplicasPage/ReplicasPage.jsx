@@ -1,14 +1,75 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { MainTemplate, Navigation, ReplicasView } from 'components'
+import { MainTemplate, Navigation, ReplicasList, PageHeader } from 'components'
 
-const ReplicasPage = () => {
-  return (
-    <MainTemplate
-      navigationComponent={<Navigation currentPage="replicas" />}
-      contentComponent={<ReplicasView />}
-    />
-  )
+import ProjectStore from '../../../stores/ProjectStore'
+import UserStore from '../../../stores/UserStore'
+import ReplicaStore from '../../../stores/ReplicaStore'
+import ProjectActions from '../../../actions/ProjectActions'
+import ReplicaActions from '../../../actions/ReplicaActions'
+import UserActions from '../../../actions/UserActions'
+import Wait from '../../../utils/Wait'
+
+
+class ReplicasPage extends React.Component {
+  static propTypes = {
+    projectStore: PropTypes.object,
+    replicaStore: PropTypes.object,
+    userStore: PropTypes.object,
+  }
+
+  static getStores() {
+    return [UserStore, ProjectStore, ReplicaStore]
+  }
+
+  static getPropsFromStores() {
+    return {
+      userStore: UserStore.getState(),
+      projectStore: ProjectStore.getState(),
+      replicaStore: ReplicaStore.getState(),
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.projectStore.projects.length === 0) {
+      ProjectActions.getScoped()
+    }
+
+    if (this.props.replicaStore.replicas.length === 0) {
+      ReplicaActions.loadReplicas()
+    }
+  }
+
+  handleProjectChange(project) {
+    Wait.for(() => {
+      return UserStore.getState().user.project.id === project.id
+    }, () => {
+      ReplicaActions.loadReplicas()
+    })
+
+    UserActions.switchProject(project.id)
+  }
+
+  render() {
+    return (
+      <MainTemplate
+        navigationComponent={<Navigation currentPage="replicas" />}
+        listComponent={
+          <ReplicasList replicas={this.props.replicaStore.replicas} />
+        }
+        headerComponent={
+          <PageHeader
+            title="Coriolis Replicas"
+            projects={this.props.projectStore.projects}
+            user={this.props.userStore.user}
+            onProjectChange={project => { this.handleProjectChange(project) }}
+          />
+        }
+      />
+    )
+  }
 }
 
-export default ReplicasPage
+export default connectToStores(ReplicasPage)

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled, { injectGlobal } from 'styled-components'
 import NotificationSystem from 'react-notification-system'
 
@@ -25,7 +24,7 @@ class Notifications extends React.Component {
   }
 
   componentWillUnmount() {
-    NotificationStore.unlisten((state) => { this.onStoreChange(state) })
+    NotificationStore.unlisten(this.onStoreChange.bind(this))
   }
 
   onStoreChange(state) {

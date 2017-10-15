@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Palette } from 'components'
 
+import StyleProps from '../../styleUtils/StyleProps'
+
 const backgroundColor = (props) => {
   if (props.hollow) {
     return 'white'
@@ -58,7 +60,7 @@ const StyledButton = styled.button`
   ${props => border(props)}
   color: ${props => color(props)};
   padding: 0;
-  width: 192px;
+  width: ${StyleProps.inputSize.width - 2}px;
   cursor: pointer;
   &:disabled {
     opacity: 0.7;

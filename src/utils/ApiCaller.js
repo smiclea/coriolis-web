@@ -61,14 +61,16 @@ class ApiCaller {
         } else {
           console.log(`Error Response: ${options.url}`, result.data) // eslint-disable-line no-console
 
+          let loginUrl = '#/'
+
           if (result.data && result.data.error && result.data.error.message &&
-            (result.status !== 401 || window.location.hash !== '#/')) {
+            (result.status !== 401 || window.location.hash !== loginUrl)) {
             NotificationActions.notify(result.data.error.message, 'error')
           }
 
-          if (result.status === 401 && window.location.hash !== '#/') {
+          if (result.status === 401 && window.location.hash !== loginUrl) {
             this.resetHeaders()
-            window.location.href = '/#/'
+            window.location.href = `/${loginUrl}`
           }
           reject({ status: request.status })
         }

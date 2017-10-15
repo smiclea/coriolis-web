@@ -27,6 +27,7 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-top: 26px;
   margin-left: 96px;
+  display: inline-block;
 `
 const Footer = styled.div``
 

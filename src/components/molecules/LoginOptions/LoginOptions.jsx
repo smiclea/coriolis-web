@@ -58,8 +58,8 @@ const buttonStyle = (id, isLogo) => {
 }
 
 const Button = styled.div`
-  width: 192px;
-  height: 32px;
+  width: ${StyleProps.inputSize.width - 2}px;
+  height: ${StyleProps.inputSize.height - 2}px;
   display: flex;
   align-items: center;
   border: 1px solid;

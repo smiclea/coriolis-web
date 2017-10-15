@@ -6,6 +6,10 @@ class ProjectStore {
     this.projects = []
     this.loading = false
 
+    if (!ProjectActions) {
+      return
+    }
+
     this.bindListeners({
       handleGetScoped: ProjectActions.GET_SCOPED,
       handleGetScopedCompleted: ProjectActions.GET_SCOPED_COMPLETED,
@@ -14,7 +18,6 @@ class ProjectStore {
   }
 
   handleGetScoped() {
-    this.projects = []
     this.loading = true
   }
 

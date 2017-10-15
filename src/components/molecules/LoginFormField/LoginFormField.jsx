@@ -4,13 +4,15 @@ import styled from 'styled-components'
 
 import { FieldLabel, TextInput } from 'components'
 
+import StyleProps from '../../styleUtils/StyleProps'
+
 const Wrapper = styled.div`
   margin-bottom: 16px;
   margin-left: 16px;
 `
 
 const StyledTextInput = styled(TextInput) `
-  width: 192px;
+  width: ${StyleProps.inputSize.width}px;
 `
 
 const LoginFormField = ({ label, ...props }) => {

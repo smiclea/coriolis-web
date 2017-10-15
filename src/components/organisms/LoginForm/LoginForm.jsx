@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 
 import { LoginFormField, Button, LoginOptions, Spinner } from 'components'
 
+import StyleProps from '../../styleUtils/StyleProps'
+
 import errorIcon from './images/error.svg'
 
 import { loginButtons } from '../../../config'
@@ -64,7 +66,7 @@ const LoginErrorText = styled.div`
   color: white;
   font-size: 12px;
   margin-top: 4px;
-  width: 192px;
+  width: ${StyleProps.inputSize.width}px;
   text-align: center;
 `
 

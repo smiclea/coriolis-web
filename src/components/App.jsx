@@ -4,12 +4,14 @@ import { injectGlobal } from 'styled-components'
 
 import { LoginPage, Fonts, StyleProps, Notifications, NotFoundPage, ReplicasPage } from 'components'
 
+import Palette from './styleUtils/Palette'
 import UserActions from '../actions/UserActions'
 
 injectGlobal`
   ${Fonts}
   body {
     margin: 0;
+    color: ${Palette.black};
     font-family: Rubik;
     font-size: 9px;
     font-weight: ${StyleProps.fontWeights.regular}

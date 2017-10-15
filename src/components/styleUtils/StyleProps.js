@@ -8,10 +8,12 @@ const StyleProps = {
     bold: '600',
   },
 
+  inputSize: { width: 192, height: 32 },
+
   borderRadius: '4px',
 
   animations: {
-    swift: '.45s cubic-bezier(0.3, 1, 0.4, 1) 0s;',
+    swift: '.45s cubic-bezier(0.3, 1, 0.4, 1) 0s',
   },
 
   media: {

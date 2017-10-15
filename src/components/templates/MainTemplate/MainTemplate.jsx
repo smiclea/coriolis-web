@@ -6,20 +6,30 @@ const Wrapper = styled.div`
   display: flex;
 `
 const Navigation = styled.div`width: 320px`
-const Content = styled.div``
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`
+const List = styled.div``
+const Header = styled.div``
 
 const MainTemplate = (props) => {
   return (
     <Wrapper>
       <Navigation>{props.navigationComponent}</Navigation>
-      <Content>{props.contentComponent}</Content>
+      <Content>
+        <Header>{props.headerComponent}</Header>
+        <List>{props.listComponent}</List>
+      </Content>
     </Wrapper>
   )
 }
 
 MainTemplate.propTypes = {
   navigationComponent: PropTypes.node.isRequired,
-  contentComponent: PropTypes.node.isRequired,
+  listComponent: PropTypes.node.isRequired,
+  headerComponent: PropTypes.node.isRequired,
 }
 
 export default MainTemplate

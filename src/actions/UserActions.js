@@ -21,17 +21,23 @@ class UserActions {
     return true
   }
 
-  loginScoped() {
-    ProjectActions.getScoped()
-    Wait.for(() => ProjectStore.getState().projects.length, () => {
-      UserSource.loginScoped(ProjectStore.getState().projects)
+  loginScoped(projectId) {
+    let projectStore = ProjectStore.getState()
+    if (projectStore.projects && projectStore.projects.length) {
+      UserSource.loginScoped(projectId || projectStore.projects[0].id)
         .then(this.loginScopedSuccess, this.loginScopedFailed)
-    })
+    } else {
+      ProjectActions.getScoped()
+      Wait.for(() => ProjectStore.getState().projects.length, () => {
+        UserSource.loginScoped(projectId || ProjectStore.getState().projects[0].id)
+          .then(this.loginScopedSuccess, this.loginScopedFailed)
+      })
+    }
     return true
   }
 
   loginScopedSuccess(response) {
-    NotificationActions.notify('Signed', 'success')
+    NotificationActions.notify('Signed in', 'success')
     return response
   }
 
@@ -51,6 +57,38 @@ class UserActions {
 
   tokenLoginFailed(response) {
     return response || true
+  }
+
+  switchProject(projectId) {
+    NotificationActions.notify('Switching projects')
+    UserSource.switchProject().then(
+      () => { this.switchProjectSuccess(projectId) },
+      response => { this.switchProjectFailed(response) }
+    )
+    return true
+  }
+
+  switchProjectSuccess(projectId) {
+    this.loginScoped(projectId)
+    return projectId || true
+  }
+
+  switchProjectFailed(response) {
+    this.logout()
+    return response || true
+  }
+
+  logout() {
+    UserSource.logout().then(() => { this.logoutSuccess() }, () => { this.logoutFailed() })
+    return true
+  }
+
+  logoutSuccess() {
+    return true
+  }
+
+  logoutFailed() {
+    return true
   }
 }
 

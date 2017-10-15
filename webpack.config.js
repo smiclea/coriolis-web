@@ -8,7 +8,7 @@ const {
   sourceMaps, defineConstants, webpack,
 } = require('@webpack-blocks/webpack2')
 
-const sourceDir = process.env.SOURCE || 'src'
+const sourceDir = 'src'
 const publicPath = `/${process.env.PUBLIC_PATH || ''}/`.replace('//', '/')
 const sourcePath = path.join(process.cwd(), sourceDir)
 const outputPath = path.join(process.cwd(), 'dist')
