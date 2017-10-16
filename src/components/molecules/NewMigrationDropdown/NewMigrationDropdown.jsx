@@ -27,6 +27,7 @@ const ListItem = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid white;
+  transition: all ${StyleProps.animations.swift};
 
   &:first-child {
     position: relative;
@@ -39,8 +40,9 @@ const ListItem = styled.div`
       border: 1px solid ${Palette.grayscale[1]};
       border-color: transparent transparent ${Palette.grayscale[1]} ${Palette.grayscale[1]};
       transform: rotate(135deg);
-      right: 8px;
+      right: 10px;
       top: -6px;
+      transition: all ${StyleProps.animations.swift};
     }
   }
 `

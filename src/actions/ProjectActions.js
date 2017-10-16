@@ -3,20 +3,20 @@ import alt from '../alt'
 import PojectSource from '../sources/ProjectSource'
 
 class ProjectActions {
-  getScoped() {
-    PojectSource.getScoped().then(
-      this.getScopedCompleted.bind(this),
-      this.getScopedFailed.bind(this)
-    ).catch(this.getScopedFailed.bind(this))
+  getProjects() {
+    PojectSource.getProjects().then(
+      this.getProjectsCompleted.bind(this),
+      this.getProjectsFailed.bind(this)
+    ).catch(this.getProjectsFailed.bind(this))
 
     return true
   }
 
-  getScopedCompleted(response) {
+  getProjectsCompleted(response) {
     return response || true
   }
 
-  getScopedFailed(response) {
+  getProjectsFailed(response) {
     return response || true
   }
 }

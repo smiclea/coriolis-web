@@ -27,6 +27,7 @@ const ListItem = styled.div`
   font-size: 14px;
   color: ${Palette.grayscale[4]};
   padding: 8px 16px;
+  transition: all ${StyleProps.animations.swift};
 
   &:first-child {
     border-top-left-radius: ${StyleProps.borderRadius};
@@ -43,6 +44,7 @@ const ListItem = styled.div`
       transform: rotate(135deg);
       right: 8px;
       top: -6px;
+      transition: all ${StyleProps.animations.swift};
     }
 
     &:hover:after {

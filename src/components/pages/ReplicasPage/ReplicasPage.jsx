@@ -36,7 +36,7 @@ class ReplicasPage extends React.Component {
     document.title = 'Coriolis Replicas'
 
     if (this.props.projectStore.projects.length === 0) {
-      ProjectActions.getScoped()
+      ProjectActions.getProjects()
     }
 
     if (this.props.replicaStore.replicas.length === 0) {
@@ -54,6 +54,18 @@ class ReplicasPage extends React.Component {
     UserActions.switchProject(project.id)
   }
 
+  handleUserItemClick(item) {
+    switch (item.value) {
+      case 'signout':
+        UserActions.logout()
+        return
+      case 'profile':
+        window.location.href = '/#/profile'
+        break
+      default:
+    }
+  }
+
   render() {
     return (
       <MainTemplate
@@ -67,6 +79,7 @@ class ReplicasPage extends React.Component {
             projects={this.props.projectStore.projects}
             user={this.props.userStore.user}
             onProjectChange={project => { this.handleProjectChange(project) }}
+            onUserItemClick={item => { this.handleUserItemClick(item) }}
           />
         }
       />

@@ -157,6 +157,17 @@ class UserSource {
       Api.resetHeaders()
     })
   }
+
+  static getUserInfo(user) {
+    return new Promise((resolve, reject) => {
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.users}/${user.id}`,
+        method: 'GET',
+      }).then((response) => {
+        resolve(response.data.user)
+      }, reject).catch(reject)
+    })
+  }
 }
 
 export default UserSource

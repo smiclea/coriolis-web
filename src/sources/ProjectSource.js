@@ -3,7 +3,7 @@ import Api from '../utils/ApiCaller'
 import { servicesUrl } from '../config'
 
 class ProjectsSource {
-  static getScoped() {
+  static getProjects() {
     return new Promise((resolve, reject) => {
       Api.sendAjaxRequest({
         url: servicesUrl.projects,

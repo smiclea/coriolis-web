@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Dropdown, NewMigrationDropdown } from 'components'
+import { Dropdown, NewMigrationDropdown, NotificationDropdown, UserDropdown } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
@@ -32,6 +32,7 @@ class PageHeader extends React.Component {
     user: PropTypes.object,
     projects: PropTypes.array,
     onProjectChange: PropTypes.func,
+    onUserItemClick: PropTypes.func,
   }
 
   getCurrentProject() {
@@ -56,6 +57,8 @@ class PageHeader extends React.Component {
             small
           />
           <NewMigrationDropdown />
+          <NotificationDropdown />
+          <UserDropdown user={this.props.user} onItemClick={this.props.onUserItemClick} />
         </Controls>
       </Wrapper>
     )

@@ -49,10 +49,17 @@ class ApiCaller {
       }
 
       request.onload = () => {
-        let data = options.json !== false ? JSON.parse(request.responseText) : request.responseText
+        let data = null
+
+        if (options.json !== false && request.responseText) {
+          data = JSON.parse(request.responseText)
+        } else if (request.responseText) {
+          data = request.responseText
+        }
+
         let result = {
           status: request.status,
-          data: (request.responseText && data) || null,
+          data,
           headers: ApiCaller.processHeaders(request.getAllResponseHeaders()),
         }
         if (result.status >= 200 && result.status <= 299) {

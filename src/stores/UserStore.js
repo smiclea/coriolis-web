@@ -15,6 +15,7 @@ class UserStore {
       handleTokenLogin: UserActions.TOKEN_LOGIN,
       handleTokenLoginSuccess: UserActions.TOKEN_LOGIN_SUCCESS,
       handleTokenLoginFailed: UserActions.TOKEN_LOGIN_FAILED,
+      handleGetUserInfoSuccess: UserActions.GET_USER_INFO_SUCCESS,
     })
   }
 
@@ -53,6 +54,10 @@ class UserStore {
   handleTokenLoginFailed() {
     this.user = null
     this.loading = false
+  }
+
+  handleGetUserInfoSuccess(user) {
+    this.user = { ...this.user, ...user }
   }
 }
 

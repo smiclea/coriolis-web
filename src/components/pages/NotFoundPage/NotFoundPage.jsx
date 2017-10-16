@@ -9,7 +9,7 @@ const NotFoundPage = () => {
   return (
     <EmptyTemplate>
       <Wrapper>
-        Not found17
+        Not found
       </Wrapper>
     </EmptyTemplate>
   )

@@ -27,7 +27,7 @@ class UserActions {
       UserSource.loginScoped(projectId || projectStore.projects[0].id)
         .then(this.loginScopedSuccess, this.loginScopedFailed)
     } else {
-      ProjectActions.getScoped()
+      ProjectActions.getProjects()
       Wait.for(() => ProjectStore.getState().projects.length, () => {
         UserSource.loginScoped(projectId || ProjectStore.getState().projects[0].id)
           .then(this.loginScopedSuccess, this.loginScopedFailed)
@@ -37,6 +37,7 @@ class UserActions {
   }
 
   loginScopedSuccess(response) {
+    this.getUserInfo(response)
     NotificationActions.notify('Signed in', 'success')
     return response || true
   }
@@ -52,6 +53,7 @@ class UserActions {
 
   tokenLoginSuccess(response) {
     NotificationActions.notify('Signed in', 'success')
+    this.getUserInfo(response)
     return response || true
   }
 
@@ -89,6 +91,22 @@ class UserActions {
 
   logoutFailed() {
     return true
+  }
+
+  getUserInfo(user) {
+    UserSource.getUserInfo(user).then(
+      response => { this.getUserInfoSuccess(response) },
+      response => { this.getUserInfoFailed(response) }
+    )
+    return user || true
+  }
+
+  getUserInfoSuccess(response) {
+    return response || true
+  }
+
+  getUserInfoFailed(response) {
+    return response || true
   }
 }
 

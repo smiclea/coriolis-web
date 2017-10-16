@@ -11,22 +11,22 @@ class ProjectStore {
     }
 
     this.bindListeners({
-      handleGetScoped: ProjectActions.GET_SCOPED,
-      handleGetScopedCompleted: ProjectActions.GET_SCOPED_COMPLETED,
-      handleGetScopedFailed: ProjectActions.GET_SCOPED_FAILED,
+      handleGetProjects: ProjectActions.GET_PROJECTS,
+      handleGetProjectsCompleted: ProjectActions.GET_PROJECTS_COMPLETED,
+      handleGetProjectsFailed: ProjectActions.GET_PROJECTS_FAILED,
     })
   }
 
-  handleGetScoped() {
+  handleGetProjects() {
     this.loading = true
   }
 
-  handleGetScopedCompleted(projects) {
+  handleGetProjectsCompleted(projects) {
     this.projects = projects
     this.loading = false
   }
 
-  handleGetScopedFailed() {
+  handleGetProjectsFailed() {
     this.loading = false
   }
 }
