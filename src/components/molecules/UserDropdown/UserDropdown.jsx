@@ -9,7 +9,6 @@ import userImage from './images/user.svg'
 
 const Wrapper = styled.div`
   position: relative;
-  font-size: 14px;
 `
 const Icon = styled.div`
   position: relative;

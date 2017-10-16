@@ -65,7 +65,6 @@ const Button = styled.div`
   border: 1px solid;
   border-radius: ${StyleProps.borderRadius};
   color: white;
-  font-size: 14px;
   cursor: pointer;
   margin-left: 16px;
   margin-bottom: 16px;

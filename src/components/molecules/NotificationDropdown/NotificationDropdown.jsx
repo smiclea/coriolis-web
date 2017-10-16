@@ -13,7 +13,6 @@ import successImage from './images/success.svg'
 const Wrapper = styled.div`
   cursor: pointer;
   position: relative;
-  font-size: 14px;
 `
 const Icon = styled.div`
   position: relative;

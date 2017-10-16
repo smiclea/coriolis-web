@@ -24,7 +24,6 @@ const List = styled.div`
 
 const ListItem = styled.div`
   position: relative;
-  font-size: 14px;
   color: ${Palette.grayscale[4]};
   padding: 8px 16px;
   transition: all ${StyleProps.animations.swift};

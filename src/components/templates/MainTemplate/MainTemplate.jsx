@@ -11,7 +11,9 @@ const Content = styled.div`
   flex-direction: column;
   flex-grow: 1;
 `
-const List = styled.div``
+const List = styled.div`
+  margin: 0 64px 0 32px;
+`
 const Header = styled.div``
 
 const MainTemplate = (props) => {

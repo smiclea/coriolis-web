@@ -8,7 +8,6 @@ import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 const Label = styled.div`
-  font-size: 14px;
   color: ${props => props.primary ? 'white' : Palette.black};
   margin: 7px 32px 0 16px;
   overflow: hidden;
@@ -39,7 +38,7 @@ const Wrapper = styled.div`
 const Arrow = styled.div`
   position: absolute;
   right: 8px;
-  top: 11px;
+  top: 6px;
 `
 
 const DropdownButton = ({ value, onClick, ...props }) => {

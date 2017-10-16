@@ -7,21 +7,23 @@ import { MainTemplate, Navigation, ReplicasList, PageHeader } from 'components'
 import ProjectStore from '../../../stores/ProjectStore'
 import UserStore from '../../../stores/UserStore'
 import ReplicaStore from '../../../stores/ReplicaStore'
+import EndpointStore from '../../../stores/EndpointStore'
 import ProjectActions from '../../../actions/ProjectActions'
 import ReplicaActions from '../../../actions/ReplicaActions'
+import EndpointActions from '../../../actions/EndpointActions'
 import UserActions from '../../../actions/UserActions'
 import Wait from '../../../utils/Wait'
-
 
 class ReplicasPage extends React.Component {
   static propTypes = {
     projectStore: PropTypes.object,
     replicaStore: PropTypes.object,
     userStore: PropTypes.object,
+    endpointStore: PropTypes.object,
   }
 
   static getStores() {
-    return [UserStore, ProjectStore, ReplicaStore]
+    return [UserStore, ProjectStore, ReplicaStore, EndpointStore]
   }
 
   static getPropsFromStores() {
@@ -29,6 +31,7 @@ class ReplicasPage extends React.Component {
       userStore: UserStore.getState(),
       projectStore: ProjectStore.getState(),
       replicaStore: ReplicaStore.getState(),
+      endpointStore: EndpointStore.getState(),
     }
   }
 
@@ -41,6 +44,15 @@ class ReplicasPage extends React.Component {
 
     if (this.props.replicaStore.replicas.length === 0) {
       ReplicaActions.loadReplicas()
+      Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
+        this.props.replicaStore.replicas.forEach(replica => {
+          ReplicaActions.loadReplicaExecutions(replica.id)
+        })
+      })
+    }
+
+    if (this.props.endpointStore.endpoints.length === 0) {
+      EndpointActions.getEndpoints()
     }
   }
 
@@ -49,6 +61,12 @@ class ReplicasPage extends React.Component {
       return UserStore.getState().user.project.id === project.id
     }, () => {
       ReplicaActions.loadReplicas()
+      Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
+        this.props.replicaStore.replicas.forEach(replica => {
+          ReplicaActions.loadReplicaExecutions(replica.id)
+        })
+      })
+      EndpointActions.getEndpoints()
     })
 
     UserActions.switchProject(project.id)
@@ -66,12 +84,20 @@ class ReplicasPage extends React.Component {
     }
   }
 
+  handleItemSelectedChange(item, selected) {
+    item.selected = selected
+  }
+
   render() {
     return (
       <MainTemplate
         navigationComponent={<Navigation currentPage="replicas" />}
         listComponent={
-          <ReplicasList replicas={this.props.replicaStore.replicas} />
+          <ReplicasList
+            replicas={this.props.replicaStore.replicas}
+            endpoints={this.props.endpointStore.endpoints}
+            onSelectedChange={(item, selected) => this.handleItemSelectedChange(item, selected)}
+          />
         }
         headerComponent={
           <PageHeader

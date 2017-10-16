@@ -16,6 +16,18 @@ class ReplicaSource {
       }, reject).catch(reject)
     })
   }
+
+  static loadReplicaExecutions(replicaId) {
+    return new Promise((resolve, reject) => {
+      let projectId = cookie.get('projectId')
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}/executions/detail`,
+        method: 'GET',
+      }).then((response) => {
+        resolve({ replicaId, executions: response.data.executions.sort((a, b) => a.number - b.number) })
+      }, reject).catch(reject)
+    })
+  }
 }
 
 export default ReplicaSource

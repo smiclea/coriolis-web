@@ -18,6 +18,22 @@ class ReplicaActions {
   loadReplicasFailed(response) {
     return response || true
   }
+
+  loadReplicaExecutions(replicaId) {
+    ReplicaSource.loadReplicaExecutions(replicaId).then(
+      response => { this.loadReplicaExecutionsSuccess(response) },
+      response => { this.loadReplicaExecutionsFailed(response) },
+    )
+    return replicaId
+  }
+
+  loadReplicaExecutionsSuccess({ replicaId, executions }) {
+    return { replicaId, executions }
+  }
+
+  loadReplicaExecutionsFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(ReplicaActions)

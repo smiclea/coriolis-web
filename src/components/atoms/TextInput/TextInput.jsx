@@ -8,7 +8,6 @@ const Input = styled.input`
   border-radius: ${StyleProps.borderRadius - 2}px;
   background-color: #FFF;
   border: 1px solid ${Palette.grayscale[3]};
-  font-size: 14px;
   color: ${Palette.grayscale[4]};
   padding: 0 8px 0 16px;
   font-weight: ${StyleProps.fontWeights.light};

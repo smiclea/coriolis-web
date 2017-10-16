@@ -56,7 +56,6 @@ const StyledButton = styled.button`
   border-radius: 4px;
   background-color: ${props => backgroundColor(props)};
   border: none;
-  font-size: 14px;
   ${props => border(props)}
   color: ${props => color(props)};
   padding: 0;

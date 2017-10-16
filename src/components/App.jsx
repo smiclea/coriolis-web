@@ -13,7 +13,7 @@ injectGlobal`
     margin: 0;
     color: ${Palette.black};
     font-family: Rubik;
-    font-size: 9px;
+    font-size: 14px;
     font-weight: ${StyleProps.fontWeights.regular}
   }
 `

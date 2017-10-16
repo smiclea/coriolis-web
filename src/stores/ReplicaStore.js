@@ -10,6 +10,7 @@ class ReplicaStore {
       handleLoadReplicas: ReplicaActions.LOAD_REPLICAS,
       handleLoadReplicasSuccess: ReplicaActions.LOAD_REPLICAS_SUCCESS,
       handleLoadReplicasFailed: ReplicaActions.LOAD_REPLICAS_FAILED,
+      handleLoadReplicaExecutionsSuccess: ReplicaActions.LOAD_REPLICA_EXECUTIONS_SUCCESS,
     })
   }
 
@@ -25,6 +26,14 @@ class ReplicaStore {
 
   handleLoadReplicasFailed() {
     this.loading = false
+  }
+
+  handleLoadReplicaExecutionsSuccess({ replicaId, executions }) {
+    let replica = this.replicas.find(replica => replica.id === replicaId)
+
+    if (replica) {
+      replica.executions = executions
+    }
   }
 }
 
