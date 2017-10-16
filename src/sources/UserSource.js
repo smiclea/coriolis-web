@@ -148,7 +148,7 @@ class UserSource {
         cookie.remove('token')
         window.location.href = '/'
         resolve()
-      }, resolve).catch(() => {
+      }, reject).catch(() => {
         cookie.remove('token')
         window.location.href = '/'
         reject()

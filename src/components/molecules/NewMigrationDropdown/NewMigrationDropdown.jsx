@@ -81,17 +81,19 @@ class NewMigrationDropdown extends React.Component {
     this.state = {
       showDropdownList: false,
     }
+
+    this.handlePageClick = this.handlePageClick.bind(this)
   }
 
   componentDidMount() {
-    window.addEventListener('mousedown', () => { this.onPageClick() }, false)
+    window.addEventListener('mousedown', this.handlePageClick, false)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousedown', () => { this.onPageClick() }, false)
+    window.removeEventListener('mousedown', this.handlePageClick, false)
   }
 
-  onPageClick() {
+  handlePageClick() {
     if (!this.itemMouseDown) {
       this.setState({ showDropdownList: false })
     }

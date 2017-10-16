@@ -33,6 +33,8 @@ class ReplicasPage extends React.Component {
   }
 
   componentDidMount() {
+    document.title = 'Coriolis Replicas'
+
     if (this.props.projectStore.projects.length === 0) {
       ProjectActions.getScoped()
     }

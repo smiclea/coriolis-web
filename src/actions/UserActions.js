@@ -33,12 +33,12 @@ class UserActions {
           .then(this.loginScopedSuccess, this.loginScopedFailed)
       })
     }
-    return true
+    return projectId || true
   }
 
   loginScopedSuccess(response) {
     NotificationActions.notify('Signed in', 'success')
-    return response
+    return response || true
   }
 
   loginScopedFailed(response) {
@@ -65,7 +65,7 @@ class UserActions {
       () => { this.switchProjectSuccess(projectId) },
       response => { this.switchProjectFailed(response) }
     )
-    return true
+    return projectId || true
   }
 
   switchProjectSuccess(projectId) {

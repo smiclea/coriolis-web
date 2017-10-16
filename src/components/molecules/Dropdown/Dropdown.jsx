@@ -76,20 +76,16 @@ class Dropdown extends React.Component {
     this.state = {
       showDropdownList: false,
     }
+
+    this.handlePageClick = this.handlePageClick.bind(this)
   }
 
   componentDidMount() {
-    window.addEventListener('mousedown', () => { this.onPageClick() }, false)
+    window.addEventListener('mousedown', this.handlePageClick, false)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousedown', () => { this.onPageClick() }, false)
-  }
-
-  onPageClick() {
-    if (!this.itemMouseDown) {
-      this.setState({ showDropdownList: false })
-    }
+    window.removeEventListener('mousedown', this.handlePageClick, false)
   }
 
   getLabel(item) {
@@ -102,6 +98,12 @@ class Dropdown extends React.Component {
     }
 
     return 'Select an item'
+  }
+
+  handlePageClick() {
+    if (!this.itemMouseDown) {
+      this.setState({ showDropdownList: false })
+    }
   }
 
   handleButtonClick() {

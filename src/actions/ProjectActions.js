@@ -13,11 +13,11 @@ class ProjectActions {
   }
 
   getScopedCompleted(response) {
-    return response
+    return response || true
   }
 
   getScopedFailed(response) {
-    return response
+    return response || true
   }
 }
 
