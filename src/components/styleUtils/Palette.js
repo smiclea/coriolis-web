@@ -5,7 +5,7 @@ const Palette = {
   secondaryLight: '#7F8795',
   black: '#202134',
   alert: '#F91661',
-  success: '#34C555',
+  success: '#4CD964',
   grayscale: [
     '#D8DBE2', // 0
     '#ECEDF1', // 1

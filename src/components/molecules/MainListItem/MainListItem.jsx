@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Checkbox } from 'components'
+import { Checkbox, StatusPill } from 'components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
@@ -115,7 +115,7 @@ class MainListItem extends React.Component {
           <Image type={this.props.type} />
           <Title>
             <TitleLabel>{this.props.item.instances[0]}</TitleLabel>
-            <div>{this.getStatus()}</div>
+            {this.getStatus() ? <StatusPill status={this.getStatus()} /> : null}
           </Title>
           <EndpointsImages>{this.props.sourceType} - {this.props.destinationType}</EndpointsImages>
           <LastExecution>{this.getLastExecutionTime()}</LastExecution>
