@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { injectGlobal } from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 
 import { LoginPage, Fonts, StyleProps, Notifications, NotFoundPage, ReplicasPage } from 'components'
 
@@ -9,6 +9,9 @@ import UserActions from '../actions/UserActions'
 
 injectGlobal`
   ${Fonts}
+  html, body, #app {
+    height: 100%
+  }
   body {
     margin: 0;
     color: ${Palette.black};
@@ -17,6 +20,8 @@ injectGlobal`
     font-weight: ${StyleProps.fontWeights.regular}
   }
 `
+const Wrapper = styled.div`height: 100%`
+
 class App extends React.Component {
   componentWillMount() {
     UserActions.tokenLogin()
@@ -24,14 +29,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
         <Switch>
           <Route path="/" component={LoginPage} exact />
           <Route path="/replicas" component={ReplicasPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <Notifications />
-      </div>
+      </Wrapper>
     )
   }
 }

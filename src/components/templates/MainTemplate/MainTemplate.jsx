@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 const Wrapper = styled.div`
   display: flex;
+  height: 100%;
 `
 const Navigation = styled.div`
   flex: 0 0 320px;
@@ -13,10 +14,12 @@ const Content = styled.div`
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
+  height: 100%;
 `
 const List = styled.div`
   margin: 0 64px 0 32px;
   overflow: auto;
+  height: 100%;
 `
 const Header = styled.div`
   min-width: 675px;

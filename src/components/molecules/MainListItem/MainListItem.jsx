@@ -11,7 +11,7 @@ import replicaImage from './images/replica.svg'
 import arrowImage from './images/arrow.svg'
 
 const CheckboxStyled = styled(Checkbox) `
-  opacity: ${props => { console.log(props); return props.checked ? 1 : 0}};
+  opacity: 0;
   transition: all ${StyleProps.animations.swift};
 `
 

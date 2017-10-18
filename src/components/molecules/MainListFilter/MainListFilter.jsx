@@ -37,19 +37,38 @@ const ReloadButton = styled.div`
 `
 
 class MainListFilter extends React.Component {
+  static propTypes = {
+    onFilterItemClick: PropTypes.func,
+    onReloadButtonClick: PropTypes.func,
+    selectedValue: PropTypes.string,
+  }
+
+  getItem(label, value) {
+    return {
+      label,
+      value,
+      selected: this.props.selectedValue === value,
+    }
+  }
+
   renderFilterGroup() {
     let items = [
-      { label: 'All', value: 'all', selected: true },
-      { label: 'Running', value: 'running' },
-      { label: 'Error', value: 'error' },
-      { label: 'Completed', value: 'completed' },
+      this.getItem('All', 'all'),
+      this.getItem('Running', 'RUNNING'),
+      this.getItem('Error', 'ERROR'),
+      this.getItem('Completed', 'COMPLETED'),
     ]
 
     return (
       <FilterGroup>
         {items.map(item => {
           return (
-            <FilterItem key={item.value} selected={item.selected}>{item.label}</FilterItem>
+            <FilterItem
+              onClick={() => this.props.onFilterItemClick(item)}
+              key={item.value}
+              selected={item.selected}
+            >{item.label}
+            </FilterItem>
           )
         })}
       </FilterGroup>
@@ -61,7 +80,7 @@ class MainListFilter extends React.Component {
       <Wrapper>
         <Checkbox />
         {this.renderFilterGroup()}
-        <ReloadButton />
+        <ReloadButton onClick={this.props.onReloadButtonClick} />
         <SearchButton />
       </Wrapper>
     )

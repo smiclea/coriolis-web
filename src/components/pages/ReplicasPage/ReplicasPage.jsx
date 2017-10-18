@@ -88,15 +88,26 @@ class ReplicasPage extends React.Component {
     item.selected = selected
   }
 
+  handleReloadButtonClick() {
+    ReplicaActions.loadReplicas()
+    Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
+      this.props.replicaStore.replicas.forEach(replica => {
+        ReplicaActions.loadReplicaExecutions(replica.id)
+      })
+    })
+  }
+
   render() {
     return (
       <MainTemplate
         navigationComponent={<Navigation currentPage="replicas" />}
         listComponent={
           <ReplicasList
+            loading={this.props.replicaStore.loading}
             replicas={this.props.replicaStore.replicas}
             endpoints={this.props.endpointStore.endpoints}
             onSelectedChange={(item, selected) => this.handleItemSelectedChange(item, selected)}
+            onReloadButtonClick={() => { this.handleReloadButtonClick() }}
           />
         }
         headerComponent={
