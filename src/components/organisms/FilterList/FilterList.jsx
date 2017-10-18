@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { MainListFilter, MainList } from 'components'
 
 const Wrapper = styled.div`
-  height: 100%;
 `
 
 class FilterList extends React.Component {
@@ -15,6 +14,7 @@ class FilterList extends React.Component {
     endpoints: PropTypes.array,
     loading: PropTypes.bool,
     onReloadButtonClick: PropTypes.func,
+    onItemClick: PropTypes.func,
     type: PropTypes.string,
   }
 
@@ -123,6 +123,7 @@ class FilterList extends React.Component {
           endpoints={this.props.endpoints}
           selectedItems={this.state.selectedItems}
           onSelectedChange={(item, selected) => { this.handleItemSelectedChange(item, selected) }}
+          onItemClick={this.props.onItemClick}
           itemImage={this.props.itemImage}
         />
       </Wrapper>

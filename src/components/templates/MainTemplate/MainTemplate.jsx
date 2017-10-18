@@ -3,26 +3,26 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Wrapper = styled.div`
-  display: flex;
-  height: 100%;
 `
 const Navigation = styled.div`
-  flex: 0 0 320px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 320px;
 `
 const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  padding: 0 64px 0 32px;
+  position: absolute;
+  left: 320px;
+  right: 0;
+  top: 0;
+  bottom: 0;
   overflow: auto;
-  height: 100%;
 `
 const List = styled.div`
-  margin: 0 64px 0 32px;
-  overflow: auto;
-  height: 100%;
 `
 const Header = styled.div`
-  min-width: 675px;
 `
 
 const MainTemplate = (props) => {

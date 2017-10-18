@@ -9,7 +9,7 @@ import StyleProps from '../../styleUtils/StyleProps'
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 48px 64px 48px 80px;
+  margin: 48px 0;
   align-items: center;
 `
 const Title = styled.div`

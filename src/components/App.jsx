@@ -9,9 +9,6 @@ import UserActions from '../actions/UserActions'
 
 injectGlobal`
   ${Fonts}
-  html, body, #app {
-    height: 100%
-  }
   body {
     margin: 0;
     color: ${Palette.black};
@@ -20,7 +17,7 @@ injectGlobal`
     font-weight: ${StyleProps.fontWeights.regular}
   }
 `
-const Wrapper = styled.div`height: 100%`
+const Wrapper = styled.div``
 
 class App extends React.Component {
   componentWillMount() {

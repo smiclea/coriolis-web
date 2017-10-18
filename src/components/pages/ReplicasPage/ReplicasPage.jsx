@@ -95,6 +95,10 @@ class ReplicasPage extends React.Component {
     })
   }
 
+  handleItemClick(item) {
+    window.location.href = `/#/replica/${item.id}`
+  }
+
   render() {
     return (
       <MainTemplate
@@ -106,6 +110,7 @@ class ReplicasPage extends React.Component {
             loading={this.props.replicaStore.loading}
             items={this.props.replicaStore.replicas}
             endpoints={this.props.endpointStore.endpoints}
+            onItemClick={item => { this.handleItemClick(item) }}
             onReloadButtonClick={() => { this.handleReloadButtonClick() }}
           />
         }

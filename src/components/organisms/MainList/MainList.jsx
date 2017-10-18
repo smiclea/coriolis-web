@@ -10,11 +10,8 @@ import loadingImage from './images/loading.svg'
 
 const Wrapper = styled.div`
   margin-top: 40px;
-  overflow: auto;
-  height: calc(100% - 75px);
 `
 const Separator = styled.div`
-  width: calc(100% - 48px);
   height: 1px;
   background: ${Palette.grayscale[1]};;
   float: right;
@@ -59,6 +56,7 @@ class MainList extends React.Component {
     endpoints: PropTypes.array,
     loading: PropTypes.bool,
     onSelectedChange: PropTypes.func,
+    onItemClick: PropTypes.func,
   }
 
   getEndpoint(endpointId) {
@@ -84,6 +82,7 @@ class MainList extends React.Component {
               key={item.id}
               item={item}
               selected={selected}
+              onClick={() => { this.props.onItemClick(item) }}
               sourceType={this.getEndpoint(item.origin_endpoint_id).type}
               destinationType={this.getEndpoint(item.destination_endpoint_id).type}
               onSelectedChange={(e) => { this.props.onSelectedChange(item, e.target.checked) }}

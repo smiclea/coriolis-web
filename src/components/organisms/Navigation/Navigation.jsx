@@ -7,14 +7,10 @@ import { Logo } from 'components'
 import backgroundImage from './images/star-bg.jpg'
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 320px;
   background-image: url('${backgroundImage}');
   display: flex;
   flex-direction: column;
+  height: 100%;
 `
 
 const LogoStyled = styled(Logo)`margin-top: 40px;`

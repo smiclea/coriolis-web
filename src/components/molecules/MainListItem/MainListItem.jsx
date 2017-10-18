@@ -85,6 +85,7 @@ const TasksRemaining = styled.div`
 class MainListItem extends React.Component {
   static propTypes = {
     item: PropTypes.object,
+    onClick: PropTypes.func,
     selected: PropTypes.bool,
     image: PropTypes.string,
     sourceType: PropTypes.string,
@@ -150,7 +151,7 @@ class MainListItem extends React.Component {
           checked={this.props.selected}
           onChange={this.props.onSelectedChange}
         />
-        <Content>
+        <Content onClick={this.props.onClick}>
           <Image image={this.props.image} />
           <Title>
             <TitleLabel>{this.props.item.instances[0]}</TitleLabel>
