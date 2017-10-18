@@ -1,4 +1,5 @@
 import cookie from 'js-cookie'
+import moment from 'moment'
 
 import Api from '../utils/ApiCaller'
 
@@ -12,7 +13,17 @@ class ReplicaSource {
         url: `${servicesUrl.coriolis}/${projectId}/replicas/detail`,
         method: 'GET',
       }).then(response => {
-        resolve(response.data.replicas)
+        let replicas = response.data.replicas
+        replicas.sort((a, b) => {
+          let aLastExecution = a.executions && a.executions.length ?
+            a.executions[a.executions.length - 1].updated_at : null
+          let bLastExecution = b.executions && b.executions.length ?
+            b.executions[b.executions.length - 1].updated_at : null
+          let aTime = aLastExecution || a.updated_at || a.created_at
+          let bTime = bLastExecution || b.updated_at || b.created_at
+          return moment(bTime).diff(moment(aTime))
+        })
+        resolve(replicas)
       }, reject).catch(reject)
     })
   }

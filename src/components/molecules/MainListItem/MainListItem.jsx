@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import moment from 'moment'
 
-import { Checkbox, StatusPill } from 'components'
+import { Checkbox, StatusPill, EndpointLogos } from 'components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 import replicaImage from './images/replica.svg'
+import arrowImage from './images/arrow.svg'
 
 const CheckboxStyled = styled(Checkbox) `
   opacity: ${props => { console.log(props); return props.checked ? 1 : 0}};
@@ -31,6 +33,7 @@ const Content = styled.div`
   cursor: pointer;
   flex-grow: 1;
   transition: all ${StyleProps.animations.swift};
+  min-width: 785px;
 
   &:hover {
     background: ${Palette.grayscale[1]};
@@ -38,18 +41,48 @@ const Content = styled.div`
 `
 
 const Image = styled.div`
-  width: 48px;
+  min-width: 48px;
   height: 48px;
   background: url('${replicaImage}') no-repeat center;
   margin-right: 16px;
 `
-const Title = styled.div``
+const Title = styled.div`
+  flex-grow: 1;
+  overflow: hidden;
+  margin-right: 48px;
+  min-width: 100px;
+`
 const TitleLabel = styled.div`
   font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
-const EndpointsImages = styled.div``
-const LastExecution = styled.div``
-const TasksRemaining = styled.div``
+const EndpointsImages = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 48px;
+`
+const EndpointImageArrow = styled.div`
+  width: 16px;
+  height: 16px;
+  margin: 0 16px;
+  background: url('${arrowImage}') center no-repeat;
+`
+const LastExecution = styled.div`
+  min-width: 175px;
+  margin-right: 25px;
+`
+const ItemLabel = styled.div`
+  color: ${Palette.grayscale[4]};
+`
+const ItemValue = styled.div`
+  color: ${Palette.primary};
+`
+
+const TasksRemaining = styled.div`
+  min-width: 114px;
+`
 
 class MainListItem extends React.Component {
   static propTypes = {
@@ -105,6 +138,13 @@ class MainListItem extends React.Component {
   }
 
   render() {
+    let endpointImages = this.props.sourceType && this.props.destinationType ? (
+      <EndpointsImages>
+        <EndpointLogos small endpoint={this.props.sourceType} />
+        <EndpointImageArrow />
+        <EndpointLogos small endpoint={this.props.destinationType} />
+      </EndpointsImages>
+    ) : null
     return (
       <Wrapper>
         <CheckboxStyled
@@ -117,9 +157,15 @@ class MainListItem extends React.Component {
             <TitleLabel>{this.props.item.instances[0]}</TitleLabel>
             {this.getStatus() ? <StatusPill status={this.getStatus()} /> : null}
           </Title>
-          <EndpointsImages>{this.props.sourceType} - {this.props.destinationType}</EndpointsImages>
-          <LastExecution>{this.getLastExecutionTime()}</LastExecution>
-          <TasksRemaining>{this.getTasksRemaining()}</TasksRemaining>
+          {endpointImages}
+          <LastExecution>
+            <ItemLabel>Last Execution</ItemLabel>
+            <ItemValue>{moment(this.getLastExecutionTime()).format('DD MMMM YYYY, HH:mm')}</ItemValue>
+          </LastExecution>
+          <TasksRemaining>
+            <ItemLabel>Tasks Remaining</ItemLabel>
+            <ItemValue>{this.getTasksRemaining()}</ItemValue>
+          </TasksRemaining>
         </Content>
       </Wrapper>
     )

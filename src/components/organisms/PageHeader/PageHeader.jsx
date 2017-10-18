@@ -17,6 +17,9 @@ const Title = styled.div`
   font-size: 32px;
   font-weight: ${StyleProps.fontWeights.light};
   flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 const Controls = styled.div`
   display: flex;

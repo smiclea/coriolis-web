@@ -10,7 +10,7 @@ const Input = styled.input`
   border: 1px solid ${Palette.grayscale[3]};
   color: ${Palette.grayscale[4]};
   padding: 0 8px 0 16px;
-  font-weight: ${StyleProps.fontWeights.light};
+  font-size: inherit;
   transition: all ${StyleProps.animations.swift};
   box-sizing: border-box;
   &:hover {

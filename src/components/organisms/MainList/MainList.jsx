@@ -6,6 +6,7 @@ import { MainListItem } from 'components'
 
 const Wrapper = styled.div`
   margin-top: 40px;
+  overflow: auto;
 `
 
 const List = styled.div``

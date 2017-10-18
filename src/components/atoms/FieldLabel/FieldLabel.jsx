@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   text-transform: uppercase;
   margin-bottom: 6px;
   font-weight: ${StyleProps.fontWeights.medium};
+  font-size: 9px;
 `
 
 const FieldLabel = ({ content }) => {

@@ -61,6 +61,7 @@ const StyledButton = styled.button`
   padding: 0;
   width: ${StyleProps.inputSize.width - 2}px;
   cursor: pointer;
+  font-size: inherit;
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;

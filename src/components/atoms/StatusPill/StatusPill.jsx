@@ -35,7 +35,7 @@ const statuses = {
 }
 
 const Wrapper = styled.div`
-  width: 62px;
+  width: 94px;
   height: 14px;
   line-height: 14px;
   border: 1px solid;
