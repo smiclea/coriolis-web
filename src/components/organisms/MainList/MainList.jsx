@@ -48,6 +48,11 @@ const List = styled.div`
   clear: both;
 `
 
+const NoResults = styled.div`
+  margin-top: 39px;
+  text-align: center;
+`
+
 class MainList extends React.Component {
   static propTypes = {
     items: PropTypes.array,
@@ -97,11 +102,28 @@ class MainList extends React.Component {
     )
   }
 
+  renderNoResults() {
+    return (
+      <NoResults>No results</NoResults>
+    )
+  }
+
   render() {
+    let renderContent = () => {
+      if (this.props.loading) {
+        return this.renderLoading()
+      }
+
+      if (this.props.items.length === 0) {
+        return this.renderNoResults()
+      }
+
+      return this.renderList()
+    }
     return (
       <Wrapper>
         <Separator />
-        {this.props.loading ? this.renderLoading() : this.renderList()}
+        {renderContent()}
       </Wrapper>
     )
   }
