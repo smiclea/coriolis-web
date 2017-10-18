@@ -44,9 +44,7 @@ const LoadingText = styled.div`
   margin-top: 39px;
 `
 
-const List = styled.div`
-  clear: both;
-`
+const List = styled.div``
 
 const NoResults = styled.div`
   margin-top: 39px;
@@ -56,7 +54,8 @@ const NoResults = styled.div`
 class MainList extends React.Component {
   static propTypes = {
     items: PropTypes.array,
-    type: PropTypes.string,
+    selectedItems: PropTypes.array,
+    itemImage: PropTypes.string,
     endpoints: PropTypes.array,
     loading: PropTypes.bool,
     onSelectedChange: PropTypes.func,
@@ -78,11 +77,13 @@ class MainList extends React.Component {
     return (
       <List>
         {this.props.items.map(item => {
+          let selected = Boolean(this.props.selectedItems.find(i => i.id === item.id))
           return (
             <MainListItem
+              image={this.props.itemImage}
               key={item.id}
-              type={this.props.type}
               item={item}
+              selected={selected}
               sourceType={this.getEndpoint(item.origin_endpoint_id).type}
               destinationType={this.getEndpoint(item.destination_endpoint_id).type}
               onSelectedChange={(e) => { this.props.onSelectedChange(item, e.target.checked) }}
@@ -120,9 +121,10 @@ class MainList extends React.Component {
 
       return this.renderList()
     }
+
     return (
       <Wrapper>
-        <Separator />
+        {this.props.loading || this.props.items.length === 0 ? <Separator /> : null}
         {renderContent()}
       </Wrapper>
     )

@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { MainTemplate, Navigation, ReplicasList, PageHeader } from 'components'
+import { MainTemplate, Navigation, FilterList, PageHeader } from 'components'
+
+import replicaItemImage from './images/replica.svg'
 
 import ProjectStore from '../../../stores/ProjectStore'
 import UserStore from '../../../stores/UserStore'
@@ -84,10 +86,6 @@ class ReplicasPage extends React.Component {
     }
   }
 
-  handleItemSelectedChange(item, selected) {
-    item.selected = selected
-  }
-
   handleReloadButtonClick() {
     ReplicaActions.loadReplicas()
     Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
@@ -102,11 +100,12 @@ class ReplicasPage extends React.Component {
       <MainTemplate
         navigationComponent={<Navigation currentPage="replicas" />}
         listComponent={
-          <ReplicasList
+          <FilterList
+            type="replica"
+            itemImage={replicaItemImage}
             loading={this.props.replicaStore.loading}
-            replicas={this.props.replicaStore.replicas}
+            items={this.props.replicaStore.replicas}
             endpoints={this.props.endpointStore.endpoints}
-            onSelectedChange={(item, selected) => this.handleItemSelectedChange(item, selected)}
             onReloadButtonClick={() => { this.handleReloadButtonClick() }}
           />
         }

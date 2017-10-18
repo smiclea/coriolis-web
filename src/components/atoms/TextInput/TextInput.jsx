@@ -5,7 +5,7 @@ import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 const Input = styled.input`
-  height: ${StyleProps.inputSize.height - 2}px;
+  height: ${StyleProps.inputSize.height}px;
   border-radius: ${StyleProps.borderRadius};
   background-color: #FFF;
   border: 1px solid ${Palette.grayscale[3]};

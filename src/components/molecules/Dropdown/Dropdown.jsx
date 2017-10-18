@@ -69,6 +69,11 @@ class Dropdown extends React.Component {
     labelField: PropTypes.string,
     onChange: PropTypes.func,
     noItemsMessage: PropTypes.string,
+    noSelectionMessage: PropTypes.string,
+  }
+
+  static defaultProps = {
+    noSelectionMessage: 'Select an item',
   }
 
   constructor() {
@@ -94,11 +99,9 @@ class Dropdown extends React.Component {
 
     if (item) {
       return item[labelField].toString() || item.toString()
-    } else if (this.props.items && this.props.items[0]) {
-      return this.props.items[0][labelField].toString() || this.props.items[0].toString()
     }
 
-    return 'Select an item'
+    return this.props.noSelectionMessage
   }
 
   handlePageClick() {

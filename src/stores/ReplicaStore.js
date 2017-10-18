@@ -4,7 +4,7 @@ import ReplicaActions from '../actions/ReplicaActions'
 class ReplicaStore {
   constructor() {
     this.replicas = []
-    this.loading = false
+    this.loading = true
 
     this.bindListeners({
       handleLoadReplicas: ReplicaActions.LOAD_REPLICAS,

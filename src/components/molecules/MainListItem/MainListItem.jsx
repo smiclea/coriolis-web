@@ -7,11 +7,10 @@ import { Checkbox, StatusPill, EndpointLogos } from 'components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
-import replicaImage from './images/replica.svg'
 import arrowImage from './images/arrow.svg'
 
 const CheckboxStyled = styled(Checkbox) `
-  opacity: 0;
+  opacity: ${props => props.checked ? 1 : 0};
   transition: all ${StyleProps.animations.swift};
 `
 
@@ -23,12 +22,11 @@ const Wrapper = styled.div`
     opacity: 1;
   }
 `
-
 const Content = styled.div`
   display: flex;
   align-items: center;
   margin-left: 32px;
-  border-bottom: 1px solid ${Palette.grayscale[1]};
+  border-top: 1px solid ${Palette.grayscale[1]};
   padding: 8px 16px;
   cursor: pointer;
   flex-grow: 1;
@@ -43,7 +41,7 @@ const Content = styled.div`
 const Image = styled.div`
   min-width: 48px;
   height: 48px;
-  background: url('${replicaImage}') no-repeat center;
+  background: url('${props => props.image}') no-repeat center;
   margin-right: 16px;
 `
 const Title = styled.div`
@@ -87,7 +85,8 @@ const TasksRemaining = styled.div`
 class MainListItem extends React.Component {
   static propTypes = {
     item: PropTypes.object,
-    type: PropTypes.string,
+    selected: PropTypes.bool,
+    image: PropTypes.string,
     sourceType: PropTypes.string,
     destinationType: PropTypes.string,
     onSelectedChange: PropTypes.func,
@@ -148,11 +147,11 @@ class MainListItem extends React.Component {
     return (
       <Wrapper>
         <CheckboxStyled
-          checked={this.props.item.selected}
+          checked={this.props.selected}
           onChange={this.props.onSelectedChange}
         />
         <Content>
-          <Image type={this.props.type} />
+          <Image image={this.props.image} />
           <Title>
             <TitleLabel>{this.props.item.instances[0]}</TitleLabel>
             {this.getStatus() ? <StatusPill status={this.getStatus()} /> : null}
