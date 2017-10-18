@@ -28,7 +28,7 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   margin-left: 32px;
-  border-top: 1px solid ${Palette.grayscale[1]};
+  border-bottom: 1px solid ${Palette.grayscale[1]};
   padding: 8px 16px;
   cursor: pointer;
   flex-grow: 1;

@@ -1,11 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 const Input = styled.input`
   height: ${StyleProps.inputSize.height - 2}px;
-  border-radius: ${StyleProps.borderRadius - 2}px;
+  border-radius: ${StyleProps.borderRadius};
   background-color: #FFF;
   border: 1px solid ${Palette.grayscale[3]};
   color: ${Palette.grayscale[4]};
@@ -25,12 +26,19 @@ const Input = styled.input`
     border-color: ${Palette.grayscale[0]};
     background-color: ${Palette.grayscale[0]};
   }
+  &::placeholder {
+    color: ${Palette.grayscale[3]};
+  }
 `
 
-const TextInput = ({ ...props }) => {
+const TextInput = ({ _ref, ...props }) => {
   return (
-    <Input type="text" {...props} />
+    <Input innerRef={_ref} type="text" {...props} />
   )
+}
+
+TextInput.propTypes = {
+  _ref: PropTypes.func,
 }
 
 export default TextInput

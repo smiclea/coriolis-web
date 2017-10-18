@@ -44,7 +44,9 @@ const LoadingText = styled.div`
   margin-top: 39px;
 `
 
-const List = styled.div``
+const List = styled.div`
+  clear: both;
+`
 
 class MainList extends React.Component {
   static propTypes = {

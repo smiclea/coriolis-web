@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { Checkbox, SearchButton } from 'components'
+import { Checkbox, SearchInput } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 
@@ -11,6 +11,7 @@ import reloadImage from './images/reload.svg'
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  padding-top: 8px;
 `
 const FilterGroup = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ class MainListFilter extends React.Component {
   static propTypes = {
     onFilterItemClick: PropTypes.func,
     onReloadButtonClick: PropTypes.func,
+    onSearchChange: PropTypes.func,
     selectedValue: PropTypes.string,
   }
 
@@ -81,7 +83,7 @@ class MainListFilter extends React.Component {
         <Checkbox />
         {this.renderFilterGroup()}
         <ReloadButton onClick={this.props.onReloadButtonClick} />
-        <SearchButton />
+        <SearchInput onChange={this.props.onSearchChange} />
       </Wrapper>
     )
   }
