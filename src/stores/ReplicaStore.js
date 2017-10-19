@@ -4,13 +4,18 @@ import ReplicaActions from '../actions/ReplicaActions'
 class ReplicaStore {
   constructor() {
     this.replicas = []
+    this.replicaDetails = {}
     this.loading = true
+    this.detailsLoading = true
 
     this.bindListeners({
       handleLoadReplicas: ReplicaActions.LOAD_REPLICAS,
       handleLoadReplicasSuccess: ReplicaActions.LOAD_REPLICAS_SUCCESS,
       handleLoadReplicasFailed: ReplicaActions.LOAD_REPLICAS_FAILED,
       handleLoadReplicaExecutionsSuccess: ReplicaActions.LOAD_REPLICA_EXECUTIONS_SUCCESS,
+      handleGetReplica: ReplicaActions.GET_REPLICA,
+      handleGetReplicaSuccess: ReplicaActions.GET_REPLICA_SUCCESS,
+      handleGetReplicaFailed: ReplicaActions.GET_REPLICA_FAILED,
     })
   }
 
@@ -34,6 +39,24 @@ class ReplicaStore {
     if (replica) {
       replica.executions = executions
     }
+
+    if (this.replicaDetails.id === replicaId) {
+      this.replicaDetails.executions = executions
+    }
+  }
+
+  handleGetReplica() {
+    this.detailsLoading = true
+    this.replicaDetails = {}
+  }
+
+  handleGetReplicaSuccess(replica) {
+    this.detailsLoading = false
+    this.replicaDetails = replica
+  }
+
+  handleGetReplicaFailed() {
+    this.detailsLoading = false
   }
 }
 

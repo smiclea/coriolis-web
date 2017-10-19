@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Palette } from 'components'
 
+import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 const backgroundColor = (props) => {
@@ -10,7 +10,7 @@ const backgroundColor = (props) => {
     return 'white'
   }
   if (props.secondary) {
-    return Palette.secondary
+    return Palette.secondaryLight
   }
   return Palette.primary
 }
@@ -59,7 +59,7 @@ const StyledButton = styled.button`
   ${props => border(props)}
   color: ${props => color(props)};
   padding: 0;
-  width: ${StyleProps.inputSize.width - 2}px;
+  width: ${StyleProps.inputSize.width}px;
   cursor: pointer;
   font-size: inherit;
   &:disabled {

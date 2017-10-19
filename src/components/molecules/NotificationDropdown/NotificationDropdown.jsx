@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
-import bellImage from './images/bell.svg'
+import bellImage from './images/bell.js'
 import errorImage from './images/error.svg'
 import infoImage from './images/info.svg'
 import successImage from './images/success.svg'
@@ -22,11 +22,7 @@ const Icon = styled.div`
     opacity: 0.9;
   }
 `
-const BellIcon = styled.div`
-  width: 32px;
-  height: 32px;
-  background: url('${bellImage}') no-repeat center;
-`
+const BellIcon = styled.div``
 const Badge = styled.div`
   position: absolute;
   top: 0;
@@ -123,6 +119,7 @@ const Description = styled.div``
 class NotificationDropdown extends React.Component {
   static propTypes = {
     onItemClick: PropTypes.func,
+    white: PropTypes.bool,
   }
 
   constructor() {
@@ -216,7 +213,9 @@ class NotificationDropdown extends React.Component {
           onMouseUp={() => { this.itemMouseDown = false }}
           onClick={() => this.handleButtonClick()}
         >
-          <BellIcon />
+          <BellIcon
+            dangerouslySetInnerHTML={{ __html: bellImage(this.props.white ? 'white' : Palette.grayscale[2]) }}
+          />
           <Badge>
             <BadgeLabel>7</BadgeLabel>
           </Badge>

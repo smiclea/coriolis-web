@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+const bell = color => `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
     <title>Icon/Notification/Normal</title>
@@ -8,12 +8,14 @@
     </defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Icon/Notification/Normal">
-            <path d="M16,5 L16,5 L16,5 C20.418278,5 24,8.581722 24,13 L24,23 L8,23 L8,13 L8,13 C8,8.581722 11.581722,5 16,5 Z" id="Rectangle-9" fill="#C8CCD7"></path>
+            <path d="M16,5 L16,5 L16,5 C20.418278,5 24,8.581722 24,13 L24,23 L8,23 L8,13 L8,13 C8,8.581722 11.581722,5 16,5 Z" id="Rectangle-9" fill="${color}"></path>
             <mask id="mask-2" fill="white">
                 <use xlink:href="#path-1"></use>
             </mask>
             <g id="Mask"></g>
-            <circle id="Oval" fill="#C8CCD7" mask="url(#mask-2)" cx="16" cy="25" r="3"></circle>
+            <circle id="Oval" fill="${color}" mask="url(#mask-2)" cx="16" cy="25" r="3"></circle>
         </g>
     </g>
-</svg>
+</svg>`
+
+export default bell

@@ -32,8 +32,26 @@ const statuses = {
       100% { background-position: 0 -1px; }
     }
   `,
+  INFO: css`
+    background: white;
+  `,
 }
 
+const primaryColors = css`
+  color: ${Palette.primary};
+  border-color: ${Palette.primary};
+`
+const alertColors = css`
+  color: ${Palette.alert};
+  border-color: ${Palette.alert};
+`
+const getStatusColor = props => {
+  if (props.alert) {
+    return alertColors
+  }
+
+  return primaryColors
+}
 const Wrapper = styled.div`
   width: 94px;
   height: 14px;
@@ -44,17 +62,29 @@ const Wrapper = styled.div`
   text-align: center;
   border-radius: 4px;
   ${props => statuses[props.status]}
+  ${props => props.status === 'INFO' ? getStatusColor(props) : ''}
 `
 
 class StatusPill extends React.Component {
   static propTypes = {
-    status: PropTypes.string.isRequired,
+    status: PropTypes.string,
+    label: PropTypes.string,
+    primary: PropTypes.bool,
+    alert: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    status: 'INFO',
   }
 
   render() {
     return (
-      <Wrapper status={this.props.status}>
-        {this.props.status}
+      <Wrapper
+        status={this.props.status}
+        primary={this.props.primary}
+        alert={this.props.alert}
+      >
+        {this.props.label || this.props.status}
       </Wrapper>
     )
   }

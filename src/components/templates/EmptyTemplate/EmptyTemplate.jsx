@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   display: flex;
 `
 
-const LoginTemplate = (props) => {
+const EmptyTemplate = (props) => {
   return (
     <Wrapper>
       {props.children}
@@ -14,8 +14,8 @@ const LoginTemplate = (props) => {
   )
 }
 
-LoginTemplate.propTypes = {
+EmptyTemplate.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default LoginTemplate
+export default EmptyTemplate

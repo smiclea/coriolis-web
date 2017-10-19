@@ -6,6 +6,7 @@ import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 import userImage from './images/user.svg'
+import userWhiteImage from './images/user-white.svg'
 
 const Wrapper = styled.div`
   position: relative;
@@ -13,10 +14,10 @@ const Wrapper = styled.div`
 const Icon = styled.div`
   position: relative;
   cursor: pointer;
-  transition: all ${StyleProps.animations.swift};
   width: 32px;
   height: 32px;
-  background: url('${userImage}') no-repeat center;
+  transition: all ${StyleProps.animations.swift};
+  background: url('${props => props.white ? userWhiteImage : userImage}') no-repeat center;
 
   &:hover {
     opacity: 0.8;
@@ -82,6 +83,7 @@ class UserDropdown extends React.Component {
   static propTypes = {
     onItemClick: PropTypes.func,
     user: PropTypes.object,
+    white: PropTypes.bool,
   }
 
   constructor() {
@@ -156,11 +158,12 @@ class UserDropdown extends React.Component {
   }
   render() {
     return (
-      <Wrapper>
+      <Wrapper {...this.props}>
         <Icon
           onMouseDown={() => { this.itemMouseDown = true }}
           onMouseUp={() => { this.itemMouseDown = false }}
           onClick={() => this.handleButtonClick()}
+          white={this.props.white}
         />
         {this.renderList()}
       </Wrapper>

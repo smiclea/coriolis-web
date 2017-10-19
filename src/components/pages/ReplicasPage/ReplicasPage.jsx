@@ -118,8 +118,8 @@ class ReplicasPage extends React.Component {
           <PageHeader
             title="Coriolis Replicas"
             projects={this.props.projectStore.projects}
-            user={this.props.userStore.user}
             onProjectChange={project => { this.handleProjectChange(project) }}
+            user={this.props.userStore.user}
             onUserItemClick={item => { this.handleUserItemClick(item) }}
           />
         }

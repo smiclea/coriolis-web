@@ -39,6 +39,19 @@ class ReplicaSource {
       }, reject).catch(reject)
     })
   }
+
+  static getReplica(replicaId) {
+    return new Promise((resolve, reject) => {
+      let projectId = cookie.get('projectId')
+
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}`,
+        method: 'GET',
+      }).then(response => {
+        resolve(response.data.replica)
+      }, reject).catch(reject)
+    })
+  }
 }
 
 export default ReplicaSource

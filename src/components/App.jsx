@@ -2,7 +2,15 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
-import { LoginPage, Fonts, StyleProps, Notifications, NotFoundPage, ReplicasPage } from 'components'
+import {
+  LoginPage,
+  Fonts,
+  StyleProps,
+  Notifications,
+  NotFoundPage,
+  ReplicasPage,
+  ReplicaDetailsPage,
+} from 'components'
 
 import Palette from './styleUtils/Palette'
 import UserActions from '../actions/UserActions'
@@ -30,6 +38,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/" component={LoginPage} exact />
           <Route path="/replicas" component={ReplicasPage} />
+          <Route path="/replica/:id" component={ReplicaDetailsPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <Notifications />
