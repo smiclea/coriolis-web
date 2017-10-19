@@ -1,16 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import StyleProps from '../../styleUtils/StyleProps'
+
 import copyImage from './images/copy.svg'
 
 const Wrapper = styled.span`
-  opacity: 1;
+  opacity: 0;
   width: 16px;
   height: 16px;
   display: inline-block;
-  margin-left: 8px;
   background: url('${copyImage}') no-repeat;
-  background-position-y: 4px;
+  background-position-y: 1px;
+  transition: all ${StyleProps.animations.swift};
 `
 
 class CopyButton extends React.Component {

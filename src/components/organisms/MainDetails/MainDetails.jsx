@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 
 import { EndpointLogos, CopyButton } from 'components'
 
+import NotificationActions from '../../../actions/NotificationActions'
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
+import Clipboard from '../../../utils/Clipboard'
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,13 +29,22 @@ const Label = styled.div`
   text-transform: uppercase;
 `
 const Value = styled.div`
+  display: inline-table;
   margin-top: 3px;
   ${props => props.link ? `color: ${Palette.primary};` : ''}
-  ${props => props.link ? 'display: inline-table;' : ''}
-  ${props => props.link ? 'cursor: pointer;' : ''}
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  ${props => props.link || props.pointer ? 'cursor: pointer;' : ''}
+
+   & > span:first-child {
+    width: 192px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+   }
+
+    &:hover > span:last-child {
+      opacity: 1;
+    }
 `
 
 class MainDetails extends React.Component {
@@ -45,6 +56,16 @@ class MainDetails extends React.Component {
   getSourceEndpoint() {
     let endpoint = this.props.endpoints.find(e => e.id === this.props.item.origin_endpoint_id)
     return endpoint || {}
+  }
+
+  handleCopyIdClick() {
+    let succesful = Clipboard.copyTextToClipboard(this.props.item.id)
+
+    if (succesful) {
+      NotificationActions.notify('The ID has been copied to clipboard.')
+    } else {
+      NotificationActions.notify('The ID couldn\'t be copied', 'error')
+    }
   }
 
   render() {
@@ -64,12 +85,12 @@ class MainDetails extends React.Component {
             <Field>
               <Label>Id</Label>
               <Value
-                width="192"
+                pointer
                 onClick={() => this.handleCopyIdClick()}
                 onMouseDown={e => e.stopPropagation()}
                 onMouseUp={e => e.stopPropagation()}
               >
-                {this.props.item.id}<CopyButton />
+                <span>{this.props.item.id}</span><CopyButton />
               </Value>
             </Field>
           </Row>
