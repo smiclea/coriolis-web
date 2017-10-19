@@ -12,14 +12,14 @@ const Wrapper = styled.div`
   font-size: 9px;
 `
 
-const FieldLabel = ({ content }) => {
+const FormFieldLabel = ({ content }) => {
   return (
     <Wrapper>{content}</Wrapper>
   )
 }
 
-FieldLabel.propTypes = {
+FormFieldLabel.propTypes = {
   content: PropTypes.string.isRequired,
 }
 
-export default FieldLabel
+export default FormFieldLabel

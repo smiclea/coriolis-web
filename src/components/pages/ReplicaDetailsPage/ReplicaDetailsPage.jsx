@@ -2,7 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { DetailsTemplate, DetailsPageHeader, DetailsContentHeader } from 'components'
+import {
+  DetailsTemplate,
+  DetailsPageHeader,
+  DetailsContentHeader,
+  ReplicaDetailsContent,
+} from 'components'
 
 import Wait from '../../../utils/Wait'
 import ReplicaStore from '../../../stores/ReplicaStore'
@@ -39,11 +44,10 @@ class ReplicaDetailsPage extends React.Component {
 
     if (this.props.replicaStore.replicaDetails.id !== this.props.match.params.id) {
       ReplicaActions.getReplica(this.props.match.params.id)
+      Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id, () => {
+        ReplicaActions.loadReplicaExecutions(this.props.replicaStore.replicaDetails.id)
+      })
     }
-
-    Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id, () => {
-      ReplicaActions.loadReplicaExecutions(this.props.replicaStore.replicaDetails.id)
-    })
 
     if (this.props.endpointStore.endpoints.length === 0) {
       EndpointActions.getEndpoints()
@@ -80,7 +84,10 @@ class ReplicaDetailsPage extends React.Component {
           alertInfoPill
           buttonLabel="Execute Now"
         />}
-        contentComponent={<div>Content</div>}
+        contentComponent={<ReplicaDetailsContent
+          item={this.props.replicaStore.replicaDetails}
+          endpoints={this.props.endpointStore.endpoints}
+        />}
       />
     )
   }

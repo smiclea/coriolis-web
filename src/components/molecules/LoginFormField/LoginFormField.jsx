@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { FieldLabel, TextInput } from 'components'
+import { FormFieldLabel, TextInput } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 
@@ -18,7 +18,7 @@ const StyledTextInput = styled(TextInput) `
 const LoginFormField = ({ label, ...props }) => {
   return (
     <Wrapper>
-      <FieldLabel content={label} />
+      <FormFieldLabel content={label} />
       <StyledTextInput {...props} />
     </Wrapper>
   )

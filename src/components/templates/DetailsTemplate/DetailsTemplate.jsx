@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 const Wrapper = styled.div``
 const PageHeader = styled.div``
 const ContentHeader = styled.div``
-const Content = styled.div``
+const Content = styled.div`
+  margin-top: 32px;
+`
 
 const DetailsTemplate = (props) => {
   return (
