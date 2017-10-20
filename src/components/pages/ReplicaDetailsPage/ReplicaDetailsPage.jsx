@@ -49,6 +49,12 @@ class ReplicaDetailsPage extends React.Component {
     if (this.props.endpointStore.endpoints.length === 0) {
       EndpointActions.getEndpoints()
     }
+
+    if (this.props.match.params.page === 'executions') {
+      Wait.for(() => this.props.replicaStore.replicaDetails.id, () => {
+        ReplicaActions.loadReplicaExecutions(this.props.replicaStore.replicaDetails.id)
+      })
+    }
   }
 
   handleUserItemClick(item) {
@@ -84,6 +90,7 @@ class ReplicaDetailsPage extends React.Component {
         contentComponent={<ReplicaDetailsContent
           item={this.props.replicaStore.replicaDetails}
           endpoints={this.props.endpointStore.endpoints}
+          page={this.props.match.params.page || ''}
         />}
       />
     )

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { EndpointLogos, CopyButton, Table } from 'components'
+import { EndpointLogos, CopyButton, Table, IdValue } from 'components'
 
 import NotificationActions from '../../../actions/NotificationActions'
 import StyleProps from '../../styleUtils/StyleProps'
@@ -15,12 +15,13 @@ import arrowImage from './images/arrow.svg'
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: 48px;
 `
 const ColumnsLayout = styled.div`
   display: flex;
 `
 const Column = styled.div`
-  width: ${props => props.small ? '160px' : '320px'};
+  width: ${props => props.width};
 `
 const Arrow = styled.div`
   width: 34px;
@@ -45,30 +46,19 @@ const Value = styled.div`
   display: inline-table;
   margin-top: 3px;
   ${props => props.link ? `color: ${Palette.primary};` : ''}
-  ${props => props.link || props.pointer ? 'cursor: pointer;' : ''}
+  ${props => props.link ? 'cursor: pointer;' : ''}
   ${props => props.capitalize ? 'text-transform: capitalize;' : ''}
-
-   & > span:first-child {
-    width: 192px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-   }
-
-    &:hover > span:last-child {
-      opacity: 1;
-    }
 `
 const TableStyled = styled(Table)`
-  width: 800px;
   margin-top: 89px;
+  margin-bottom: 48px;
 `
 
 class MainDetails extends React.Component {
   static propTypes = {
     item: PropTypes.object,
     endpoints: PropTypes.array,
+    bottomControls: PropTypes.node,
   }
 
   getSourceEndpoint() {
@@ -172,7 +162,7 @@ class MainDetails extends React.Component {
     return (
       <Wrapper>
         <ColumnsLayout>
-          <Column>
+          <Column width="40%">
             <Row>
               <Field>
                 <Label>Source</Label>
@@ -185,14 +175,7 @@ class MainDetails extends React.Component {
             <Row marginBottom>
               <Field>
                 <Label>Id</Label>
-                <Value
-                  pointer
-                  onClick={() => this.handleCopyIdClick()}
-                  onMouseDown={e => e.stopPropagation()}
-                  onMouseUp={e => e.stopPropagation()}
-                >
-                  <span>{this.props.item.id}</span><CopyButton />
-                </Value>
+                <IdValue value={this.props.item.id} />
               </Field>
             </Row>
             <Row>
@@ -202,10 +185,10 @@ class MainDetails extends React.Component {
               </Field>
             </Row>
           </Column>
-          <Column small>
+          <Column width="20%">
             <Arrow />
           </Column>
-          <Column>
+          <Column width="40%">
             <Row>
               <Field>
                 <Label>Target</Label>
@@ -230,6 +213,7 @@ class MainDetails extends React.Component {
           </Column>
         </ColumnsLayout>
         {this.renderNetworksTable()}
+        {this.props.bottomControls}
       </Wrapper>
     )
   }

@@ -38,7 +38,8 @@ class App extends React.Component {
         <Switch>
           <Route path="/" component={LoginPage} exact />
           <Route path="/replicas" component={ReplicasPage} />
-          <Route path="/replica/:id" component={ReplicaDetailsPage} />
+          <Route path="/replica/:id" component={ReplicaDetailsPage} exact />
+          <Route path="/replica/:page/:id" component={ReplicaDetailsPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <Notifications />

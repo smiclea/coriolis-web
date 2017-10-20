@@ -11,7 +11,7 @@ const Wrapper = styled.span`
   height: 16px;
   display: inline-block;
   background: url('${copyImage}') no-repeat;
-  background-position-y: 1px;
+  background-position-y: 2px;
   transition: all ${StyleProps.animations.swift};
 `
 

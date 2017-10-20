@@ -23,6 +23,13 @@ class ReplicaSource {
           let bTime = bLastExecution || b.updated_at || b.created_at
           return moment(bTime).diff(moment(aTime))
         })
+        replicas = replicas.map(replica => {
+          if (replica.executions) {
+            replica.executions = replica.executions.sort((a, b) => a.number - b.number)
+          }
+
+          return replica
+        })
         resolve(replicas)
       }, reject).catch(reject)
     })
@@ -48,7 +55,12 @@ class ReplicaSource {
         url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}`,
         method: 'GET',
       }).then(response => {
-        resolve(response.data.replica)
+        let replica = response.data.replica
+        if (replica.executions) {
+          replica.executions = replica.executions.sort((a, b) => a.number - b.number)
+        }
+
+        resolve(replica)
       }, reject).catch(reject)
     })
   }

@@ -45,7 +45,6 @@ class ReplicaActions {
   }
 
   getReplicaSuccess(replica) {
-    console.log('replica loaded', replica)
     return replica
   }
 

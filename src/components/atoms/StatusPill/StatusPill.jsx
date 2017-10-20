@@ -53,7 +53,7 @@ const getStatusColor = props => {
   return primaryColors
 }
 const Wrapper = styled.div`
-  width: 94px;
+  width: ${props => props.small ? 78 : 94}px;
   height: 14px;
   line-height: 14px;
   border: 1px solid;
@@ -71,6 +71,7 @@ class StatusPill extends React.Component {
     label: PropTypes.string,
     primary: PropTypes.bool,
     alert: PropTypes.bool,
+    small: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -80,9 +81,11 @@ class StatusPill extends React.Component {
   render() {
     return (
       <Wrapper
+        {...this.props}
         status={this.props.status}
         primary={this.props.primary}
         alert={this.props.alert}
+        small={this.props.small}
       >
         {this.props.label || this.props.status}
       </Wrapper>

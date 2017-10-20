@@ -19,11 +19,19 @@ const Item = styled.div`
 class DetailsNavigation extends React.Component {
   static propTypes = {
     items: PropTypes.array,
+    selectedValue: PropTypes.string,
+    onChange: PropTypes.func,
   }
 
   renderItems() {
     return (
-      this.props.items.map(item => <Item selected={item.selected} key={item.label}>{item.label}</Item>)
+      this.props.items.map(item => (
+        <Item
+          selected={item.value === this.props.selectedValue}
+          key={item.value}
+          onClick={() => { this.props.onChange(item) }}
+        >{item.label}</Item>
+      ))
     )
   }
 

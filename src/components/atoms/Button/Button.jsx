@@ -28,12 +28,12 @@ const hoverBackgroundColor = (props) => {
 const border = (props) => {
   if (props.hollow) {
     if (props.secondary) {
-      return `border: 1px solid ${Palette.grayscale[3]}`
+      return `border: 1px solid ${Palette.grayscale[3]};`
     }
     if (props.alert) {
-      return `border: 1px solid ${Palette.alert}`
+      return `border: 1px solid ${Palette.alert};`
     }
-    return `border: 1px solid ${Palette.primary}`
+    return `border: 1px solid ${Palette.primary};`
   }
   return ''
 }
@@ -59,7 +59,8 @@ const StyledButton = styled.button`
   ${props => border(props)}
   color: ${props => color(props)};
   padding: 0;
-  width: ${StyleProps.inputSize.width}px;
+  min-width: ${StyleProps.inputSize.width}px;
+  max-width: ${StyleProps.inputSize.width}px;
   cursor: pointer;
   font-size: inherit;
   &:disabled {
@@ -67,7 +68,7 @@ const StyledButton = styled.button`
     cursor: not-allowed;
   }
   &:hover {
-    ${props => props.hollow ? 'color: white' : ''}
+    ${props => props.hollow ? 'color: white;' : ''}
     background-color: ${props => hoverBackgroundColor(props)};
   }
   &:focus {

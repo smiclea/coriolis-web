@@ -14,6 +14,13 @@ const StyleProps = {
 
   animations: {
     swift: '.45s cubic-bezier(0.3, 1, 0.4, 1) 0s',
+    rotation: css`
+      animation: rotate 2s infinite linear;
+      @keyframes rotate {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+      }
+    `,
   },
 
   media: {
