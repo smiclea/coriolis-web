@@ -44,9 +44,6 @@ class ReplicaDetailsPage extends React.Component {
 
     if (this.props.replicaStore.replicaDetails.id !== this.props.match.params.id) {
       ReplicaActions.getReplica(this.props.match.params.id)
-      Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id, () => {
-        ReplicaActions.loadReplicaExecutions(this.props.replicaStore.replicaDetails.id)
-      })
     }
 
     if (this.props.endpointStore.endpoints.length === 0) {
