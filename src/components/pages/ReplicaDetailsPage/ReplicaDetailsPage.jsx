@@ -41,20 +41,12 @@ class ReplicaDetailsPage extends React.Component {
 
   componentDidMount() {
     document.title = 'Replica Details'
+    this.loadData(true)
+    this.pollInterval = setInterval(() => { this.loadData() }, 5000)
+  }
 
-    if (this.props.replicaStore.replicaDetails.id !== this.props.match.params.id) {
-      ReplicaActions.getReplica(this.props.match.params.id)
-    }
-
-    if (this.props.endpointStore.endpoints.length === 0) {
-      EndpointActions.getEndpoints()
-    }
-
-    if (this.props.match.params.page === 'executions') {
-      Wait.for(() => this.props.replicaStore.replicaDetails.id, () => {
-        ReplicaActions.loadReplicaExecutions(this.props.replicaStore.replicaDetails.id)
-      })
-    }
+  componentWillUnmount() {
+    clearInterval(this.pollInterval)
   }
 
   handleUserItemClick(item) {
@@ -71,6 +63,19 @@ class ReplicaDetailsPage extends React.Component {
 
   handleBackButtonClick() {
     window.location.href = '/#/replicas'
+  }
+
+  loadData(fullReload) {
+    if (!fullReload) {
+      Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id,
+        () => { ReplicaActions.loadReplicaExecutions(this.props.match.params.id) })
+      return
+    }
+
+    ReplicaActions.getReplica(this.props.match.params.id)
+    Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id,
+      () => { ReplicaActions.loadReplicaExecutions(this.props.match.params.id) })
+    EndpointActions.getEndpoints()
   }
 
   render() {

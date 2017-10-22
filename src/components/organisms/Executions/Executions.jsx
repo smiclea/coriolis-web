@@ -45,33 +45,40 @@ class Executions extends React.Component {
   }
 
   componentWillMount() {
-    this.setSelectedExecution()
+    this.setSelectedExecution(this.props)
   }
 
-  componentWillReceiveProps() {
-    this.setSelectedExecution()
+  componentWillReceiveProps(props) {
+    this.setSelectedExecution(props)
   }
 
-  setSelectedExecution() {
+  setSelectedExecution(props) {
     let selectedExecution = this.state.selectedExecution
+    let goToLast = false
+    let lastExecution = this.getLastExecution(props)
 
-    if (!selectedExecution) {
+    if (props.item.executions && this.props.item.executions) {
+      goToLast = this.props.item.executions.length !== props.item.executions.length
+        && lastExecution.status === 'RUNNING'
+    }
+
+    if (!selectedExecution || goToLast) {
       this.setState({
-        selectedExecution: this.getLastExecution(),
+        selectedExecution: lastExecution,
       })
-    } else if (this.hasExecutions()) {
+    } else if (this.hasExecutions(props)) {
       this.setState({
-        selectedExecution: this.props.item.executions.find(e => e.id === this.state.selectedExecution.id),
+        selectedExecution: props.item.executions.find(e => e.id === this.state.selectedExecution.id),
       })
     }
   }
 
-  getLastExecution() {
-    return this.hasExecutions() && this.props.item.executions[this.props.item.executions.length - 1]
+  getLastExecution(props) {
+    return this.hasExecutions(props) && props.item.executions[props.item.executions.length - 1]
   }
 
-  hasExecutions() {
-    return this.props.item.executions && this.props.item.executions.length
+  hasExecutions(props) {
+    return props.item.executions && props.item.executions.length
   }
 
   handlePreviousExecutionClick() {
@@ -141,7 +148,8 @@ class Executions extends React.Component {
   }
 
   renderTasks() {
-    if (!this.state.selectedExecution || !this.state.selectedExecution.tasks || !this.state.selectedExecution.tasks.length) {
+    if (!this.state.selectedExecution || !this.state.selectedExecution.tasks
+      || !this.state.selectedExecution.tasks.length) {
       return null
     }
 

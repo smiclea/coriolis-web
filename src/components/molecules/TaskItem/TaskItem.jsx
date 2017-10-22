@@ -101,9 +101,8 @@ class TaskItem extends React.Component {
 
   getLastMessage() {
     let message
-    if (this.props.item.progress_updates.length &&
-      this.props.item.progress_updates[this.props.item.progress_updates.length - 1]) {
-      message = this.props.item.progress_updates[this.props.item.progress_updates.length - 1].message
+    if (this.props.item.progress_updates.length) {
+      message = this.props.item.progress_updates[0].message
     } else {
       message = '-'
     }
@@ -151,10 +150,6 @@ class TaskItem extends React.Component {
     let naValue = <Value margin>N/A</Value>
     if (!this.props.item.progress_updates.length) {
       return naValue
-    }
-
-    if (this.props.item.progress_updates[0] !== null) {
-      this.props.item.progress_updates.sort((a, b) => moment(a.created_at).isAfter(moment(b.created_at)))
     }
 
     return (

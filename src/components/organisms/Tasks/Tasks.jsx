@@ -39,6 +39,18 @@ class Tasks extends React.Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    let openedItems = this.state.openedItems
+
+    props.items.forEach(item => {
+      if (item.status === 'RUNNING') {
+        openedItems.push(item)
+      }
+    })
+
+    this.setState({ openedItems })
+  }
+
   handleItemMouseDown(e) {
     this.dragStartPosition = { x: e.screenX, y: e.screenY }
   }
@@ -58,12 +70,11 @@ class Tasks extends React.Component {
     if (openedItems.find(i => i.id === item.id)) {
       openedItems = openedItems.filter(i => i.id !== item.id)
     } else {
-      openedItems = [item]
+      openedItems = openedItems.filter(item => item.status === 'RUNNING')
+      openedItems.push(item)
     }
 
-    this.setState({
-      openedItems,
-    })
+    this.setState({ openedItems })
   }
 
   renderHeader() {

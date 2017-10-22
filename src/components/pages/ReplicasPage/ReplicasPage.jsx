@@ -40,28 +40,18 @@ class ReplicasPage extends React.Component {
   componentDidMount() {
     document.title = 'Coriolis Replicas'
 
-    if (this.props.projectStore.projects.length === 0) {
-      ProjectActions.getProjects()
-    }
-
-    if (this.props.replicaStore.replicas.length === 0) {
-      ReplicaActions.loadReplicas()
-      Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
-        this.props.replicaStore.replicas.forEach(replica => {
-          ReplicaActions.loadReplicaExecutions(replica.id)
-        })
+    ProjectActions.getProjects()
+    ReplicaActions.loadReplicas()
+    Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
+      this.props.replicaStore.replicas.forEach(replica => {
+        ReplicaActions.loadReplicaExecutions(replica.id)
       })
-    }
-
-    if (this.props.endpointStore.endpoints.length === 0) {
-      EndpointActions.getEndpoints()
-    }
+    })
+    EndpointActions.getEndpoints()
   }
 
   handleProjectChange(project) {
-    Wait.for(() => {
-      return UserStore.getState().user.project.id === project.id
-    }, () => {
+    Wait.for(() => UserStore.getState().user.project.id === project.id, () => {
       ReplicaActions.loadReplicas()
       Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
         this.props.replicaStore.replicas.forEach(replica => {

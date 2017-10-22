@@ -51,6 +51,23 @@ class ReplicaActions {
   getReplicaFailed(response) {
     return response || true
   }
+
+  getReplicaWithExecutions(replicaId) {
+    ReplicaSource.getReplicaWithExecutions(replicaId).then(
+      replica => { this.getReplicaWithExecutionsSuccess(replica) },
+      response => { this.getReplicaWithExecutionsFailed(response) },
+    )
+
+    return replicaId
+  }
+
+  getReplicaWithExecutionsSuccess(replica) {
+    return replica
+  }
+
+  getReplicaWithExecutionsFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(ReplicaActions)

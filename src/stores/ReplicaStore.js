@@ -16,16 +16,25 @@ class ReplicaStore {
       handleGetReplica: ReplicaActions.GET_REPLICA,
       handleGetReplicaSuccess: ReplicaActions.GET_REPLICA_SUCCESS,
       handleGetReplicaFailed: ReplicaActions.GET_REPLICA_FAILED,
+      handleGetReplicaWithExecutions: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS,
+      handleGetReplicaWithExecutionsSuccess: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS_SUCCESS,
+      handleGetReplicaWithExecutionsFailed: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS_FAILED,
     })
   }
 
   handleLoadReplicas() {
-    this.replicas = []
     this.loading = true
   }
 
   handleLoadReplicasSuccess(replicas) {
-    this.replicas = replicas
+    this.replicas = replicas.map(replica => {
+      let oldReplica = this.replicas.find(r => r.id === replica.id)
+      if (oldReplica) {
+        replica.executions = oldReplica.executions
+      }
+
+      return replica
+    })
     this.loading = false
   }
 
@@ -41,26 +50,36 @@ class ReplicaStore {
     }
 
     if (this.replicaDetails.id === replicaId) {
-      this.replicaDetails.executions = executions
+      this.replicaDetails = {
+        ...this.replicaDetails,
+        executions,
+      }
     }
   }
 
   handleGetReplica() {
     this.detailsLoading = true
-    this.replicaDetails = {}
   }
 
   handleGetReplicaSuccess(replica) {
     this.detailsLoading = false
     this.replicaDetails = replica
-
-    let oldReplicaInfo = this.replicas.find(r => r.id === replica.id)
-    if (oldReplicaInfo) {
-      this.replicaDetails.executions = oldReplicaInfo.executions
-    }
   }
 
   handleGetReplicaFailed() {
+    this.detailsLoading = false
+  }
+
+  handleGetReplicaWithExecutions() {
+    this.detailsLoading = true
+  }
+
+  handleGetReplicaWithExecutionsSuccess(replica) {
+    this.detailsLoading = false
+    this.replicaDetails = replica
+  }
+
+  handleGetReplicaWithExecutionsFailed() {
     this.detailsLoading = false
   }
 }
