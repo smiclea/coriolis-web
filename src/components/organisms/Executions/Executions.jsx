@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { Timeline, StatusPill, IdValue, Button } from 'components'
+import { Timeline, StatusPill, IdValue, Button, Tasks } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 
@@ -45,24 +45,33 @@ class Executions extends React.Component {
   }
 
   componentWillMount() {
-    this.setFirstSelectedExecution()
+    this.setSelectedExecution()
   }
 
   componentWillReceiveProps() {
-    this.setFirstSelectedExecution()
+    this.setSelectedExecution()
   }
 
-  setFirstSelectedExecution() {
-    if (!this.state.selectedExecution) {
+  setSelectedExecution() {
+    let selectedExecution = this.state.selectedExecution
+
+    if (!selectedExecution) {
       this.setState({
         selectedExecution: this.getLastExecution(),
+      })
+    } else if (this.hasExecutions()) {
+      this.setState({
+        selectedExecution: this.props.item.executions.find(e => e.id === this.state.selectedExecution.id),
       })
     }
   }
 
   getLastExecution() {
+    return this.hasExecutions() && this.props.item.executions[this.props.item.executions.length - 1]
+  }
+
+  hasExecutions() {
     return this.props.item.executions && this.props.item.executions.length
-      && this.props.item.executions[this.props.item.executions.length - 1]
   }
 
   handlePreviousExecutionClick() {
@@ -131,11 +140,22 @@ class Executions extends React.Component {
     )
   }
 
+  renderTasks() {
+    if (!this.state.selectedExecution || !this.state.selectedExecution.tasks || !this.state.selectedExecution.tasks.length) {
+      return null
+    }
+
+    return (
+      <Tasks items={this.state.selectedExecution.tasks} />
+    )
+  }
+
   render() {
     return (
       <Wrapper>
         {this.renderTimeline()}
         {this.renderExecutionInfo()}
+        {this.renderTasks()}
       </Wrapper>
     )
   }

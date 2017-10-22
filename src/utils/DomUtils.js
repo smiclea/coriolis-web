@@ -1,4 +1,4 @@
-class Clipboard {
+class DomUtils {
   /**
    * Copies specified text to clipboard
    * @param {string} text The text to copy
@@ -34,4 +34,4 @@ class Clipboard {
   }
 }
 
-export default Clipboard
+export default DomUtils

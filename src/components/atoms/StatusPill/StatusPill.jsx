@@ -17,6 +17,11 @@ const statuses = {
     color: white;
     border-color: transparent;
   `,
+  CANCELED: css`
+    background: ${Palette.warning};
+    color: ${Palette.black};
+    border-color: transparent;
+  `,
   PAUSED: css`
     background: white;
     color: ${Palette.primary};

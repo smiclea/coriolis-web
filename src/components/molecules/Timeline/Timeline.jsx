@@ -46,7 +46,6 @@ const ItemsWrapper = styled.div`
 `
 const Items = styled.div`
   display: flex;
-  transition: all ${StyleProps.animations.swift};
 `
 const Item = styled.div`
   display: flex;
@@ -76,6 +75,7 @@ class Timeline extends React.Component {
 
   componentDidMount() {
     this.moveToSelectedItem()
+    this.itemsRef.style.transition = `all ${StyleProps.animations.swift}`
   }
 
   componentDidUpdate() {
@@ -92,7 +92,6 @@ class Timeline extends React.Component {
     let itemGap = this.itemRef.offsetWidth + 90
     let itemHalfWidth = this.itemRef.offsetWidth / 2
     let offset = (halfWidth - (itemGap * itemIndex)) - itemHalfWidth
-
 
     this.itemsRef.style.marginLeft = `${offset}px`
 
@@ -120,7 +119,7 @@ class Timeline extends React.Component {
               innerRef={item => { this.itemRef = item }}
               onClick={() => { this.props.onItemClick(item) }}
             >
-              <StatusIcon status={item.status} />
+              <StatusIcon status={item.status} useBackground />
               <ItemLabel selected={this.props.selectedItem && this.props.selectedItem.id === item.id}>
                 {moment(item.created_at).format('DD MMM YYYY')}
               </ItemLabel>

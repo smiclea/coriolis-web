@@ -6,13 +6,15 @@ const Palette = {
   black: '#202134',
   alert: '#F91661',
   success: '#4CD964',
+  warning: '#FDC02F',
   grayscale: [
     '#D8DBE2', // 0
     '#ECEDF1', // 1
     '#C8CCD7', // 2
     '#A4AAB5', // 3
     '#616770', // 4
-    '#1B2733', // 5
+    '#7F8795', // 5
+    '#1B2733', // 6
   ],
 }
 

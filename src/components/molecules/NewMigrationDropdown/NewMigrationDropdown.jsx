@@ -22,6 +22,7 @@ const List = styled.div`
   position: absolute;
   right: 0;
   top: 45px;
+  z-index: 10;
 `
 const ListItem = styled.div`
   display: flex;

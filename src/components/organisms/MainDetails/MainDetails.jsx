@@ -3,12 +3,10 @@ import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { EndpointLogos, CopyButton, Table, IdValue } from 'components'
+import { EndpointLogos, Table, IdValue } from 'components'
 
-import NotificationActions from '../../../actions/NotificationActions'
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
-import Clipboard from '../../../utils/Clipboard'
 
 import arrowImage from './images/arrow.svg'
 
@@ -130,16 +128,6 @@ class MainDetails extends React.Component {
     })
 
     return networks
-  }
-
-  handleCopyIdClick() {
-    let succesful = Clipboard.copyTextToClipboard(this.props.item.id)
-
-    if (succesful) {
-      NotificationActions.notify('The ID has been copied to clipboard.')
-    } else {
-      NotificationActions.notify('The ID couldn\'t be copied', 'error')
-    }
   }
 
   renderNetworksTable() {

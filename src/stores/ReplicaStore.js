@@ -53,6 +53,11 @@ class ReplicaStore {
   handleGetReplicaSuccess(replica) {
     this.detailsLoading = false
     this.replicaDetails = replica
+
+    let oldReplicaInfo = this.replicas.find(r => r.id === replica.id)
+    if (oldReplicaInfo) {
+      this.replicaDetails.executions = oldReplicaInfo.executions
+    }
   }
 
   handleGetReplicaFailed() {
