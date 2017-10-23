@@ -10,6 +10,7 @@ import {
   ReplicaDetailsContent,
   Modal,
   ReplicaExecutionOptions,
+  ConfirmationModal,
 } from 'components'
 
 import Wait from '../../../utils/Wait'
@@ -19,6 +20,7 @@ import UserActions from '../../../actions/UserActions'
 import ReplicaActions from '../../../actions/ReplicaActions'
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
+import NotificationActions from '../../../actions/NotificationActions'
 
 import replicaImage from './images/replica.svg'
 
@@ -49,6 +51,8 @@ class ReplicaDetailsPage extends React.Component {
 
     this.state = {
       showOptionsModal: false,
+      showDeleteExecutionConfirmation: false,
+      confirmationItem: null,
     }
   }
 
@@ -87,11 +91,27 @@ class ReplicaDetailsPage extends React.Component {
   }
 
   handleCancelExecutionClick(execution) {
+    NotificationActions.notify('Cancelling execution')
     ReplicaActions.cancelExecution(this.props.replicaStore.replicaDetails.id, execution.id)
   }
 
+  handleDeleteExecutionConfirmation() {
+    ReplicaActions.deleteExecution(this.props.replicaStore.replicaDetails.id, this.state.confirmationItem.id)
+    this.handleCloseExecutionConfirmation()
+  }
+
   handleDeleteExecutionClick(execution) {
-    ReplicaActions.deleteExecution(this.props.replicaStore.replicaDetails.id, execution.id)
+    this.setState({
+      showDeleteExecutionConfirmation: true,
+      confirmationItem: execution,
+    })
+  }
+
+  handleCloseExecutionConfirmation() {
+    this.setState({
+      showDeleteExecutionConfirmation: false,
+      confirmationItem: null,
+    })
   }
 
   executeReplica(fields) {
@@ -146,6 +166,14 @@ class ReplicaDetailsPage extends React.Component {
             onExecuteClick={fields => { this.handleCloseOptionsModal(); this.executeReplica(fields) }}
           />
         </Modal>
+        <ConfirmationModal
+          isOpen={this.state.showDeleteExecutionConfirmation}
+          title="Delete Execution?"
+          message="Are you sure you want to delete this execution?"
+          extraMessage="Deleting a Coriolis Execution in permanent!"
+          onConfirmation={() => { this.handleDeleteExecutionConfirmation() }}
+          onRequestClose={() => { this.handleCloseExecutionConfirmation() }}
+        />
       </Wrapper>
     )
   }
