@@ -9,7 +9,7 @@ import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 const ArrowStyled = styled(Arrow) `
-  opacity: 0;
+  opacity: ${props => props.forceShow ? 1 : 0};
   position: absolute;
   top: 0;
   transition: all ${StyleProps.animations.swift};
@@ -66,7 +66,7 @@ const ItemLabel = styled.div`
 
 class Timeline extends React.Component {
   static propTypes = {
-    items: PropTypes.array.isRequired,
+    items: PropTypes.array,
     selectedItem: PropTypes.object,
     onPreviousClick: PropTypes.func,
     onNextClick: PropTypes.func,
@@ -75,6 +75,10 @@ class Timeline extends React.Component {
 
   componentDidMount() {
     this.moveToSelectedItem()
+
+    if (!this.itemsRef) {
+      return
+    }
     this.itemsRef.style.transition = `all ${StyleProps.animations.swift}`
   }
 
@@ -83,7 +87,9 @@ class Timeline extends React.Component {
   }
 
   moveToSelectedItem() {
-    if (!this.itemRef || !this.props.selectedItem) {
+    if (!this.itemRef || !this.props.selectedItem || !this.itemsRef) {
+      this.progressLineRef.style.width = 0
+      this.endLineRef.style.width = '100%'
       return
     }
 
@@ -110,6 +116,10 @@ class Timeline extends React.Component {
   }
 
   renderItems() {
+    if (!this.props.items || !this.props.items.length) {
+      return null
+    }
+
     return (
       <ItemsWrapper>
         <Items innerRef={items => { this.itemsRef = items }}>
@@ -135,13 +145,15 @@ class Timeline extends React.Component {
       <Wrapper innerRef={w => { this.wrapperRef = w }}>
         <ArrowStyled
           orientation="left"
-          primary
+          forceShow={!this.props.items || !this.props.items.length}
+          primary={Boolean(this.props.items && this.props.items.length)}
           onClick={this.props.onPreviousClick}
         />
         {this.renderMainLine()}
         {this.renderItems()}
         <ArrowStyled
           orientation="right"
+          forceShow={!this.props.items || !this.props.items.length}
           onClick={this.props.onNextClick}
         />
       </Wrapper>

@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
@@ -7,6 +8,8 @@ import {
   DetailsPageHeader,
   DetailsContentHeader,
   ReplicaDetailsContent,
+  Modal,
+  ReplicaExecutionOptions,
 } from 'components'
 
 import Wait from '../../../utils/Wait'
@@ -18,6 +21,8 @@ import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
 
 import replicaImage from './images/replica.svg'
+
+const Wrapper = styled.div``
 
 class ReplicaDetailsPage extends React.Component {
   static propTypes = {
@@ -36,6 +41,14 @@ class ReplicaDetailsPage extends React.Component {
       replicaStore: ReplicaStore.getState(),
       endpointStore: EndpointStore.getState(),
       userStore: UserStore.getState(),
+    }
+  }
+
+  constructor() {
+    super()
+
+    this.state = {
+      showOptionsModal: false,
     }
   }
 
@@ -65,6 +78,26 @@ class ReplicaDetailsPage extends React.Component {
     window.location.href = '/#/replicas'
   }
 
+  handleActionButtonClick() {
+    this.setState({ showOptionsModal: true })
+  }
+
+  handleCloseOptionsModal() {
+    this.setState({ showOptionsModal: false })
+  }
+
+  handleCancelExecutionClick(execution) {
+    ReplicaActions.cancelExecution(this.props.replicaStore.replicaDetails.id, execution.id)
+  }
+
+  handleDeleteExecutionClick(execution) {
+    ReplicaActions.deleteExecution(this.props.replicaStore.replicaDetails.id, execution.id)
+  }
+
+  executeReplica(fields) {
+    ReplicaActions.execute(this.props.replicaStore.replicaDetails.id, fields)
+  }
+
   loadData(fullReload) {
     if (!fullReload) {
       Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id,
@@ -80,24 +113,40 @@ class ReplicaDetailsPage extends React.Component {
 
   render() {
     return (
-      <DetailsTemplate
-        pageHeaderComponent={<DetailsPageHeader
-          user={this.props.userStore.user}
-          onUserItemClick={item => { this.handleUserItemClick(item) }}
-        />}
-        contentHeaderComponent={<DetailsContentHeader
-          item={this.props.replicaStore.replicaDetails}
-          onBackButonClick={() => { this.handleBackButtonClick() }}
-          typeImage={replicaImage}
-          alertInfoPill
-          buttonLabel="Execute Now"
-        />}
-        contentComponent={<ReplicaDetailsContent
-          item={this.props.replicaStore.replicaDetails}
-          endpoints={this.props.endpointStore.endpoints}
-          page={this.props.match.params.page || ''}
-        />}
-      />
+      <Wrapper>
+        <DetailsTemplate
+          pageHeaderComponent={<DetailsPageHeader
+            user={this.props.userStore.user}
+            onUserItemClick={item => { this.handleUserItemClick(item) }}
+          />}
+          contentHeaderComponent={<DetailsContentHeader
+            item={this.props.replicaStore.replicaDetails}
+            onBackButonClick={() => { this.handleBackButtonClick() }}
+            onActionButtonClick={() => { this.handleActionButtonClick() }}
+            typeImage={replicaImage}
+            alertInfoPill
+            buttonLabel="Execute Now"
+          />}
+          contentComponent={<ReplicaDetailsContent
+            item={this.props.replicaStore.replicaDetails}
+            endpoints={this.props.endpointStore.endpoints}
+            page={this.props.match.params.page || ''}
+            onCancelExecutionClick={execution => { this.handleCancelExecutionClick(execution) }}
+            onDeleteExecutionClick={execution => { this.handleDeleteExecutionClick(execution) }}
+            onExecuteClick={() => { this.handleActionButtonClick() }}
+          />}
+        />
+        <Modal
+          isOpen={this.state.showOptionsModal}
+          title="New Execution"
+          onRequestClose={() => { this.handleCloseOptionsModal() }}
+        >
+          <ReplicaExecutionOptions
+            onCancelClick={() => { this.handleCloseOptionsModal() }}
+            onExecuteClick={fields => { this.handleCloseOptionsModal(); this.executeReplica(fields) }}
+          />
+        </Modal>
+      </Wrapper>
     )
   }
 }

@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   ${StyleProps.media.handheld`
     flex-direction: row;
   `}
+  ${props => props.small || props.large ? 'flex-direction: row;' : ''}
 `
 
 const CoriolisLogo = styled.div`
@@ -64,7 +65,7 @@ const CoriolisTextSmall = styled.div`
 
 const Logo = ({ className, large, small }) => {
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} small={small} large={large}>
       <CoriolisLogo large={large} />
       <CoriolisText large={large} />
       <CoriolisLogoSmall small={small} />

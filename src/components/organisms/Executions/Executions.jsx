@@ -7,6 +7,8 @@ import { Timeline, StatusPill, IdValue, Button, Tasks } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 
+import executionImage from './images/execution.svg'
+
 const Wrapper = styled.div`
 `
 const ExecutionInfo = styled.div`
@@ -30,10 +32,33 @@ const ExecutionInfoId = styled.div`
   margin-right: 16px;
   flex-grow: 1;
 `
+const NoExecutions = styled.div`
+  background: ${Palette.grayscale[7]};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 74px;
+`
+const ExecutionImage = styled.div`
+  width: 96px;
+  height: 96px;
+  background: url('${executionImage}');
+  margin: 106px 0 43px 0;
+`
+const NoExecutionTitle = styled.div`
+  font-size: 18px;
+`
+const NoExecutionText = styled.div`
+  color: ${Palette.grayscale[4]};
+  margin-bottom: 48px;
+`
 
 class Executions extends React.Component {
   static propTypes = {
     item: PropTypes.object,
+    onCancelExecutionClick: PropTypes.func,
+    onDeleteExecutionClick: PropTypes.func,
+    onExecuteClick: PropTypes.func,
   }
 
   constructor() {
@@ -53,23 +78,45 @@ class Executions extends React.Component {
   }
 
   setSelectedExecution(props) {
-    let selectedExecution = this.state.selectedExecution
-    let goToLast = false
     let lastExecution = this.getLastExecution(props)
+    let selectExecution = null
 
     if (props.item.executions && this.props.item.executions) {
-      goToLast = this.props.item.executions.length !== props.item.executions.length
-        && lastExecution.status === 'RUNNING'
+      if (this.props.item.executions.length !== props.item.executions.length
+        && lastExecution.status === 'RUNNING') {
+        selectExecution = lastExecution
+      }
+
+      if (this.props.item.executions.length > props.item.executions.length) {
+        let isSelectedAvailable = props.item.executions.find(e => e.id === this.state.selectedExecution.id)
+        if (!isSelectedAvailable) {
+          let lastIndex = this.props.item.executions.findIndex(e => e.id === this.state.selectedExecution.id)
+
+          if (props.item.executions.length) {
+            if (props.item.executions[lastIndex]) {
+              selectExecution = props.item.executions[lastIndex]
+            } else {
+              selectExecution = props.item.executions[lastIndex - 1]
+            }
+          }
+        }
+      }
     }
 
-    if (!selectedExecution || goToLast) {
+    if (!this.state.selectedExecution) {
       this.setState({
-        selectedExecution: lastExecution,
+        selectedExecution: lastExecution || null,
+      })
+    } else if (selectExecution) {
+      this.setState({
+        selectedExecution: selectExecution,
       })
     } else if (this.hasExecutions(props)) {
       this.setState({
-        selectedExecution: props.item.executions.find(e => e.id === this.state.selectedExecution.id),
+        selectedExecution: props.item.executions.find(e => e.id === this.state.selectedExecution.id) || null,
       })
+    } else {
+      this.setState({ selectedExecution: null })
     }
   }
 
@@ -106,13 +153,9 @@ class Executions extends React.Component {
   }
 
   renderTimeline() {
-    if (!this.props.item.executions || !this.props.item.executions.length) {
-      return null
-    }
-
     return (
       <Timeline
-        items={this.props.item.executions}
+        items={this.props.item.executions || null}
         selectedItem={this.state.selectedExecution}
         onPreviousClick={() => { this.handlePreviousExecutionClick() }}
         onNextClick={() => { this.handleNextExecutionClick() }}
@@ -123,10 +166,21 @@ class Executions extends React.Component {
 
   renderExecutionInfoButton() {
     if (this.state.selectedExecution.status === 'RUNNING') {
-      return (<Button secondary hollow>Cancel Execution</Button>)
+      return (
+        <Button
+          secondary
+          hollow
+          onClick={() => { this.props.onCancelExecutionClick(this.state.selectedExecution) }}
+        >Cancel Execution</Button>)
     }
 
-    return <Button alert hollow>Delete Execution</Button>
+    return (
+      <Button
+        alert
+        hollow
+        onClick={() => { this.props.onDeleteExecutionClick(this.state.selectedExecution) }}
+      >Delete Execution</Button>
+    )
   }
 
   renderExecutionInfo() {
@@ -158,12 +212,28 @@ class Executions extends React.Component {
     )
   }
 
+  renderNoExecution() {
+    if (this.hasExecutions(this.props)) {
+      return null
+    }
+
+    return (
+      <NoExecutions>
+        <ExecutionImage />
+        <NoExecutionTitle>It looks like there are no executions in this replica.</NoExecutionTitle>
+        <NoExecutionText>This replica has not been executed yet.</NoExecutionText>
+        <Button onClick={this.props.onExecuteClick}>Execute Now</Button>
+      </NoExecutions>
+    )
+  }
+
   render() {
     return (
       <Wrapper>
         {this.renderTimeline()}
         {this.renderExecutionInfo()}
         {this.renderTasks()}
+        {this.renderNoExecution()}
       </Wrapper>
     )
   }

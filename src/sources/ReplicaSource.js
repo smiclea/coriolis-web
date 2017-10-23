@@ -27,14 +27,18 @@ class ReplicaSourceUtils {
   static sortExecutionsAndTaskUpdates(executions) {
     this.sortExecutions(executions)
     executions.forEach(execution => {
-      if (execution.tasks) {
-        execution.tasks.forEach(task => {
-          if (task.progress_updates) {
-            task.progress_updates.sort((a, b) => moment(a.created_at).isBefore(moment(b.created_at)))
-          }
-        })
-      }
+      this.sortTaskUpdates(execution)
     })
+  }
+
+  static sortTaskUpdates(execution) {
+    if (execution.tasks) {
+      execution.tasks.forEach(task => {
+        if (task.progress_updates) {
+          task.progress_updates.sort((a, b) => moment(a.created_at).isBefore(moment(b.created_at)))
+        }
+      })
+    }
   }
 }
 
@@ -101,6 +105,55 @@ class ReplicaSource {
           ReplicaSourceUtils.sortExecutionsAndTaskUpdates(replica.executions)
           resolve(replica)
         }, reject).catch(reject)
+      }, reject).catch(reject)
+    })
+  }
+
+  static execute(replicaId, fields) {
+    return new Promise((resolve, reject) => {
+      let payload = { execution: { } }
+      if (fields) {
+        fields.forEach(f => {
+          payload.execution[f.name] = f.value || false
+        })
+      }
+      let projectId = cookie.get('projectId')
+
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}/executions`,
+        method: 'POST',
+        data: payload,
+      }).then((response) => {
+        let execution = response.data.execution
+        ReplicaSourceUtils.sortTaskUpdates(execution)
+        resolve({ replicaId, execution })
+      }, reject).catch(reject)
+    })
+  }
+
+  static cancelExecution(replicaId, executionId) {
+    return new Promise((resolve, reject) => {
+      let projectId = cookie.get('projectId')
+
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}/executions/${executionId}/actions`,
+        method: 'POST',
+        data: { cancel: null },
+      }).then(() => {
+        resolve(replicaId, executionId)
+      }, reject).catch(reject)
+    })
+  }
+
+  static deleteExecution(replicaId, executionId) {
+    return new Promise((resolve, reject) => {
+      let projectId = cookie.get('projectId')
+
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}/executions/${executionId}`,
+        method: 'DELETE',
+      }).then(() => {
+        resolve(replicaId, executionId)
       }, reject).catch(reject)
     })
   }

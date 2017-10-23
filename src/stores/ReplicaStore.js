@@ -19,6 +19,10 @@ class ReplicaStore {
       handleGetReplicaWithExecutions: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS,
       handleGetReplicaWithExecutionsSuccess: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS_SUCCESS,
       handleGetReplicaWithExecutionsFailed: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS_FAILED,
+      handleExecute: ReplicaActions.EXECUTE,
+      handleExecuteSuccess: ReplicaActions.EXECUTE_SUCCESS,
+      handleExecuteFailed: ReplicaActions.EXECUTE_FAILED,
+      handleDeleteExecutionSuccess: ReplicaActions.DELETE_EXECUTION_SUCCESS,
     })
   }
 
@@ -81,6 +85,44 @@ class ReplicaStore {
 
   handleGetReplicaWithExecutionsFailed() {
     this.detailsLoading = false
+  }
+
+  handleExecute() {
+    this.detailsLoading = true
+  }
+
+  handleExecuteSuccess({ replicaId, execution }) {
+    let executions = []
+
+    if (this.replicaDetails.executions) {
+      executions = [...this.replicaDetails.executions, execution]
+    }
+
+    if (this.replicaDetails.id === replicaId) {
+      this.replicaDetails = {
+        ...this.replicaDetails,
+        executions,
+      }
+    }
+  }
+
+  handleExecuteFailed() {
+    this.detailsLoading = false
+  }
+
+  handleDeleteExecutionSuccess({ replicaId, executionId }) {
+    let executions = []
+
+    if (this.replicaDetails.id === replicaId) {
+      if (this.replicaDetails.executions) {
+        executions = [...this.replicaDetails.executions.filter(e => e.id !== executionId)]
+      }
+
+      this.replicaDetails = {
+        ...this.replicaDetails,
+        executions,
+      }
+    }
   }
 }
 

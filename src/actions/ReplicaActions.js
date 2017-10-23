@@ -68,6 +68,57 @@ class ReplicaActions {
   getReplicaWithExecutionsFailed(response) {
     return response || true
   }
+
+  execute(replicaId, fields) {
+    ReplicaSource.execute(replicaId, fields).then(
+      executions => { this.executeSuccess(executions) },
+      response => { this.executeFailed(response) },
+    )
+
+    return replicaId
+  }
+
+  executeSuccess({ replicaId, execution }) {
+    return { replicaId, execution }
+  }
+
+  executeFailed(response) {
+    return response || true
+  }
+
+  cancelExecution(replicaId, executionId) {
+    ReplicaSource.cancelExecution(replicaId, executionId).then(
+      () => { this.cancelExecutionSuccess(replicaId, executionId) },
+      response => { this.cancelExecutionFailed(response) },
+    )
+
+    return { replicaId, executionId }
+  }
+
+  cancelExecutionSuccess(replicaId, executionId) {
+    return { replicaId, executionId }
+  }
+
+  cancelExecutionFailed(response) {
+    return response || true
+  }
+
+  deleteExecution(replicaId, executionId) {
+    ReplicaSource.deleteExecution(replicaId, executionId).then(
+      () => { this.deleteExecutionSuccess(replicaId, executionId) },
+      response => { this.deleteExecutionFailed(response) },
+    )
+
+    return { replicaId, executionId }
+  }
+
+  deleteExecutionSuccess(replicaId, executionId) {
+    return { replicaId, executionId }
+  }
+
+  deleteExecutionFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(ReplicaActions)

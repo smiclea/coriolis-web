@@ -50,6 +50,7 @@ const StatusPills = styled.div`
 class DetailsContentHeader extends React.Component {
   static propTypes = {
     onBackButonClick: PropTypes.func,
+    onActionButtonClick: PropTypes.func,
     typeImage: PropTypes.string,
     buttonLabel: PropTypes.string,
     item: PropTypes.object,
@@ -95,6 +96,7 @@ class DetailsContentHeader extends React.Component {
         </Title>
         <Button
           secondary
+          onClick={this.props.onActionButtonClick}
         >{this.props.buttonLabel}</Button>
       </Wrapper>
     )

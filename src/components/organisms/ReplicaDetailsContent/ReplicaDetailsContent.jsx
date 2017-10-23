@@ -24,6 +24,9 @@ class ReplicaDetailsContent extends React.Component {
     item: PropTypes.object,
     endpoints: PropTypes.array,
     page: PropTypes.string,
+    onCancelExecutionClick: PropTypes.func,
+    onDeleteExecutionClick: PropTypes.func,
+    onExecuteClick: PropTypes.func,
   }
 
   navigationItems = [{
@@ -70,7 +73,12 @@ class ReplicaDetailsContent extends React.Component {
     }
 
     return (
-      <Executions item={this.props.item} />
+      <Executions
+        item={this.props.item}
+        onCancelExecutionClick={this.props.onCancelExecutionClick}
+        onDeleteExecutionClick={this.props.onDeleteExecutionClick}
+        onExecuteClick={this.props.onExecuteClick}
+      />
     )
   }
 

@@ -45,6 +45,12 @@ class Tasks extends React.Component {
     props.items.forEach(item => {
       if (item.status === 'RUNNING') {
         openedItems.push(item)
+        return
+      }
+
+      let oldItem = this.props.items.find(i => i.id === item.id)
+      if (oldItem && oldItem.status === 'RUNNING') {
+        openedItems = openedItems.filter(i => i.id !== oldItem.id)
       }
     })
 
