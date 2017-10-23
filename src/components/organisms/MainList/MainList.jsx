@@ -14,7 +14,6 @@ const Wrapper = styled.div`
 const Separator = styled.div`
   height: 1px;
   background: ${Palette.grayscale[1]};;
-  float: right;
 `
 
 const Loading = styled.div`
