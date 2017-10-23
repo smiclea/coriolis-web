@@ -52,23 +52,6 @@ class ReplicaActions {
     return response || true
   }
 
-  getReplicaWithExecutions(replicaId) {
-    ReplicaSource.getReplicaWithExecutions(replicaId).then(
-      replica => { this.getReplicaWithExecutionsSuccess(replica) },
-      response => { this.getReplicaWithExecutionsFailed(response) },
-    )
-
-    return replicaId
-  }
-
-  getReplicaWithExecutionsSuccess(replica) {
-    return replica
-  }
-
-  getReplicaWithExecutionsFailed(response) {
-    return response || true
-  }
-
   execute(replicaId, fields) {
     ReplicaSource.execute(replicaId, fields).then(
       executions => { this.executeSuccess(executions) },

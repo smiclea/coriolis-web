@@ -21,6 +21,7 @@ import ReplicaActions from '../../../actions/ReplicaActions'
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
 import NotificationActions from '../../../actions/NotificationActions'
+import { requestPollTimeout } from '../../../config'
 
 import replicaImage from './images/replica.svg'
 
@@ -59,7 +60,7 @@ class ReplicaDetailsPage extends React.Component {
   componentDidMount() {
     document.title = 'Replica Details'
     this.loadData(true)
-    this.pollInterval = setInterval(() => { this.loadData() }, 5000)
+    this.pollInterval = setInterval(() => { this.loadData() }, requestPollTimeout)
   }
 
   componentWillUnmount() {

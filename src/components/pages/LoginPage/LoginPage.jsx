@@ -5,12 +5,11 @@ import connectToStores from 'alt-utils/lib/connectToStores'
 
 import { EmptyTemplate, Logo, LoginForm } from 'components'
 import StyleProps from '../../styleUtils/StyleProps'
-import Palette from '../../styleUtils/Palette'
 import UserActions from '../../../actions/UserActions'
 import UserStore from '../../../stores/UserStore'
 
 import backgroundImage from './images/star-bg.jpg'
-import cloudbaseLogo from './images/cloudbase-logo.svg'
+import footerImage from './images/footer.svg'
 
 const Wrapper = styled.div`
   background-image: url('${backgroundImage}');
@@ -19,6 +18,7 @@ const Wrapper = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   position: absolute;
+  overflow: auto;
   top: 0;
   left: 0;
   right: 0;
@@ -29,37 +29,25 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 142px;
+  margin-top: 77px;
   ${StyleProps.media.handheld`
-    margin-top: 48px;
+    margin-top: 96px;
   `}
 `
 
 const StyledLoginForm = styled(LoginForm)`
-  margin-top: 48px;
+  margin-top: 32px;
   ${StyleProps.media.handheld`
     margin-top: 32px;
   `}
 `
 
 const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: absolute;
   bottom: 48px;
-`
-
-const FooterText = styled.div`
-  font-size: 10px;
-  color: ${Palette.grayscale[4]};
-  margin-bottom: 12px;
-`
-
-const FooterLogo = styled.div`
-  background-image: url('${cloudbaseLogo}');
-  width: 128px;
-  height: 32px;
+  width: 176px;
+  height: 62px;
+  background: url('${footerImage}') center no-repeat;
 `
 
 class LoginPage extends React.Component {
@@ -115,10 +103,7 @@ class LoginPage extends React.Component {
               loading={this.props.loading}
               loginFailed={this.props.loginFailed}
             />
-            <Footer>
-              <FooterText>Coriolis® is a service offered by</FooterText>
-              <FooterLogo />
-            </Footer>
+            <Footer />
           </Content>
         </Wrapper>
       </EmptyTemplate>

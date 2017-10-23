@@ -11,6 +11,8 @@ export const servicesUrl = {
   openId: `${coriolisUrl}identity/OS-FEDERATION/identity_providers/google/protocols/openid/auth`,
 }
 
+export const requestPollTimeout = 5000
+
 export const loginButtons = [
   // {
   //   name: 'Google',

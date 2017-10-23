@@ -87,28 +87,6 @@ class ReplicaSource {
     })
   }
 
-  static getReplicaWithExecutions(replicaId) {
-    return new Promise((resolve, reject) => {
-      let projectId = cookie.get('projectId')
-
-      Api.sendAjaxRequest({
-        url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}`,
-        method: 'GET',
-      }).then(response => {
-        let replica = response.data.replica
-
-        Api.sendAjaxRequest({
-          url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}/executions/detail`,
-          method: 'GET',
-        }).then((response) => {
-          replica.executions = response.data.executions
-          ReplicaSourceUtils.sortExecutionsAndTaskUpdates(replica.executions)
-          resolve(replica)
-        }, reject).catch(reject)
-      }, reject).catch(reject)
-    })
-  }
-
   static execute(replicaId, fields) {
     return new Promise((resolve, reject) => {
       let payload = { execution: { } }

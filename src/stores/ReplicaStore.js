@@ -16,9 +16,6 @@ class ReplicaStore {
       handleGetReplica: ReplicaActions.GET_REPLICA,
       handleGetReplicaSuccess: ReplicaActions.GET_REPLICA_SUCCESS,
       handleGetReplicaFailed: ReplicaActions.GET_REPLICA_FAILED,
-      handleGetReplicaWithExecutions: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS,
-      handleGetReplicaWithExecutionsSuccess: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS_SUCCESS,
-      handleGetReplicaWithExecutionsFailed: ReplicaActions.GET_REPLICA_WITH_EXECUTIONS_FAILED,
       handleExecute: ReplicaActions.EXECUTE,
       handleExecuteSuccess: ReplicaActions.EXECUTE_SUCCESS,
       handleExecuteFailed: ReplicaActions.EXECUTE_FAILED,
@@ -71,19 +68,6 @@ class ReplicaStore {
   }
 
   handleGetReplicaFailed() {
-    this.detailsLoading = false
-  }
-
-  handleGetReplicaWithExecutions() {
-    this.detailsLoading = true
-  }
-
-  handleGetReplicaWithExecutionsSuccess(replica) {
-    this.detailsLoading = false
-    this.replicaDetails = replica
-  }
-
-  handleGetReplicaWithExecutionsFailed() {
     this.detailsLoading = false
   }
 

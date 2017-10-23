@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   height: 100%;
 `
 
-const LogoStyled = styled(Logo)`margin-top: 40px;`
+const LogoStyled = styled(Logo)`margin: 40px auto 0 auto;`
 
 const Menu = styled.div`margin-top:32px`
 
