@@ -1,5 +1,6 @@
 import alt from '../alt'
 import ReplicaActions from '../actions/ReplicaActions'
+import NotificationActions from '../actions/NotificationActions'
 
 class ReplicaStore {
   constructor() {
@@ -21,6 +22,7 @@ class ReplicaStore {
       handleExecuteFailed: ReplicaActions.EXECUTE_FAILED,
       handleDeleteExecutionSuccess: ReplicaActions.DELETE_EXECUTION_SUCCESS,
       handleDeleteSuccess: ReplicaActions.DELETE_SUCCESS,
+      handleCancelExecutionSuccess: ReplicaActions.CANCEL_EXECUTION_SUCCESS,
     })
   }
 
@@ -77,13 +79,13 @@ class ReplicaStore {
   }
 
   handleExecuteSuccess({ replicaId, execution }) {
-    let executions = []
-
-    if (this.replicaDetails.executions) {
-      executions = [...this.replicaDetails.executions, execution]
-    }
+    let executions = [execution]
 
     if (this.replicaDetails.id === replicaId) {
+      if (this.replicaDetails.executions) {
+        executions = [...this.replicaDetails.executions, execution]
+      }
+
       this.replicaDetails = {
         ...this.replicaDetails,
         executions,
@@ -112,6 +114,10 @@ class ReplicaStore {
 
   handleDeleteSuccess(replicaId) {
     this.replicas = this.replicas.filter(r => r.id !== replicaId)
+  }
+
+  handleCancelExecutionSuccess() {
+    setTimeout(() => { NotificationActions.notify('Cancelled', 'success') }, 0)
   }
 }
 

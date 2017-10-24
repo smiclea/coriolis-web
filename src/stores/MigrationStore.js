@@ -1,5 +1,6 @@
 import alt from '../alt'
 import MigrationActions from '../actions/MigrationActions'
+import NotificationActions from '../actions/NotificationActions'
 
 class MigrationStore {
   constructor() {
@@ -62,6 +63,17 @@ class MigrationStore {
       migration,
       ...this.migrations,
     ]
+
+    setTimeout(() => {
+      NotificationActions.notify('Migration successfully created from replica.', 'success', {
+        action: {
+          label: 'View Migration Status',
+          callback: () => {
+            window.location.href = `/#/migration/tasks/${migration.id}`
+          },
+        },
+      })
+    }, 0)
   }
 }
 

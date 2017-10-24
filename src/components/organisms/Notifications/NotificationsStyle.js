@@ -12,8 +12,11 @@ const NotificationsStyle = css`
     border-radius: 4px !important;
     margin-top: 8px !important;
     padding: 4px 16px !important;
-    line-height: 1;
-    width: auto;
+    line-height: 1 !important;
+    height: 26px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 25px !important;
   }
   .notification {
     border-radius: ${StyleProps.borderRadius} !important;

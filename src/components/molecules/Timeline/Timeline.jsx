@@ -83,6 +83,10 @@ class Timeline extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.itemsRef && !this.itemsRef.style.transition) {
+      this.itemsRef.style.transition = `all ${StyleProps.animations.swift}`
+    }
+
     this.moveToSelectedItem()
   }
 

@@ -99,7 +99,6 @@ class ReplicaDetailsPage extends React.Component {
   }
 
   handleCancelExecutionClick(execution) {
-    NotificationActions.notify('Cancelling execution')
     ReplicaActions.cancelExecution(this.props.replicaStore.replicaDetails.id, execution.id)
   }
 
@@ -144,7 +143,6 @@ class ReplicaDetailsPage extends React.Component {
   }
 
   migrateReplica(options) {
-    NotificationActions.notify('Migrating replica')
     MigrationActions.migrateReplica(this.props.replicaStore.replicaDetails.id, options)
     this.handleCloseMigrationModal()
   }

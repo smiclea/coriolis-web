@@ -1,8 +1,8 @@
 import alt from '../alt'
 
 class NotificationActions {
-  notify(message, level) {
-    return { message, level }
+  notify(message, level, options) {
+    return { message, level, ...options }
   }
 }
 
