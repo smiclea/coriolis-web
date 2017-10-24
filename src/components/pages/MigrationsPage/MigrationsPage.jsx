@@ -58,9 +58,10 @@ class MigrationsPage extends React.Component {
   componentDidMount() {
     document.title = 'Coriolis Migrations'
 
+    ProjectActions.getProjects()
+    EndpointActions.getEndpoints()
+
     if (!this.props.migrationStore.migrations.length) {
-      ProjectActions.getProjects()
-      EndpointActions.getEndpoints()
       MigrationActions.getMigrations()
     }
   }

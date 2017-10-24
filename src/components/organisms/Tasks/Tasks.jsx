@@ -48,6 +48,7 @@ class Tasks extends React.Component {
         return
       }
 
+      // Close items that were previously in RUNNING state, but they no longer are
       let oldItem = this.props.items.find(i => i.id === item.id)
       if (oldItem && oldItem.status === 'RUNNING') {
         openedItems = openedItems.filter(i => i.id !== oldItem.id)

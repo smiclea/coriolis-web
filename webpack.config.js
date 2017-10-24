@@ -24,7 +24,14 @@ const babel = () => () => ({
 const assets = () => () => ({
   module: {
     rules: [
-      { test: /\.(png|jpe?g|svg|woff2?|ttf|eot)$/, loader: 'url-loader?limit=8000' },
+      {
+        test: /\.(png|jpe?g|svg|woff2?|ttf|eot)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: './assets/[hash].[ext]',
+        },
+      },
     ],
   },
 })
