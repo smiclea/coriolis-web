@@ -22,6 +22,7 @@ class Field extends React.Component {
     type: PropTypes.string,
     value: PropTypes.any,
     onChange: PropTypes.func,
+    className: PropTypes.string,
   }
 
   renderSwitch() {
@@ -44,7 +45,7 @@ class Field extends React.Component {
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper className={this.props.className}>
         <Label>{this.props.label}</Label>
         {this.renderInput()}
       </Wrapper>

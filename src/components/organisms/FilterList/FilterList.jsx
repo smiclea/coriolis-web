@@ -12,6 +12,7 @@ class FilterList extends React.Component {
     items: PropTypes.array,
     itemImage: PropTypes.string,
     endpoints: PropTypes.array,
+    actions: PropTypes.array,
     loading: PropTypes.bool,
     onReloadButtonClick: PropTypes.func,
     onItemClick: PropTypes.func,
@@ -38,12 +39,23 @@ class FilterList extends React.Component {
     if (props.items.length !== this.props.items.length) {
       this.setState({
         items: props.items,
+        filterStatus: 'all',
+        filterText: '',
         selectedItems: [],
       })
       return
     }
 
     this.setState({ items: this.filterItems(props.items) })
+  }
+
+  getLastExecution(item) {
+    if (typeof item.executions === 'undefined') {
+      return item
+    }
+
+    return item.executions && item.executions.length ?
+      item.executions[item.executions.length - 1] : null
   }
 
   handleFilterItemClick(item) {
@@ -77,9 +89,7 @@ class FilterList extends React.Component {
     filterText = typeof filterText === 'undefined' ? this.state.filterText : filterText
 
     let filteredItems = items.filter(item => {
-      let lastExecution = item.executions && item.executions.length ?
-        item.executions[item.executions.length - 1] : null
-
+      let lastExecution = this.getLastExecution(item)
       if (
         (filterStatus !== 'all' && (!lastExecution || lastExecution.status !== filterStatus)) ||
         (item.instances[0].toLowerCase().indexOf(filterText) === -1)
@@ -129,6 +139,7 @@ class FilterList extends React.Component {
           onSelectAllChange={selected => { this.handleSelectAllChange(selected) }}
           selectAllSelected={this.state.selectAllSelected}
           selectionInfo={{ selected: this.state.selectedItems.length, total: this.state.items.length }}
+          actions={this.props.actions}
           onActionChange={action => { this.handleActionChange(action) }}
         />
         <MainList

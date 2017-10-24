@@ -5,44 +5,43 @@ import connectToStores from 'alt-utils/lib/connectToStores'
 
 import { MainTemplate, Navigation, FilterList, PageHeader, ConfirmationModal } from 'components'
 
-import replicaItemImage from './images/replica.svg'
+import migrationItemImage from './images/migration.svg'
 
 import ProjectStore from '../../../stores/ProjectStore'
 import UserStore from '../../../stores/UserStore'
-import ReplicaStore from '../../../stores/ReplicaStore'
+import MigrationStore from '../../../stores/MigrationStore'
 import EndpointStore from '../../../stores/EndpointStore'
 import ProjectActions from '../../../actions/ProjectActions'
-import ReplicaActions from '../../../actions/ReplicaActions'
+import MigrationActions from '../../../actions/MigrationActions'
 import EndpointActions from '../../../actions/EndpointActions'
 import UserActions from '../../../actions/UserActions'
 import Wait from '../../../utils/Wait'
 import NotificationActions from '../../../actions/NotificationActions'
-import { requestPollTimeout } from '../../../config'
 
 const Wrapper = styled.div``
 
 const BulkActions = [
-  { label: 'Execute', value: 'execute' },
+  { label: 'Cancel', value: 'cancel' },
   { label: 'Delete', value: 'delete' },
 ]
 
-class ReplicasPage extends React.Component {
+class MigrationsPage extends React.Component {
   static propTypes = {
     projectStore: PropTypes.object,
-    replicaStore: PropTypes.object,
+    migrationStore: PropTypes.object,
     userStore: PropTypes.object,
     endpointStore: PropTypes.object,
   }
 
   static getStores() {
-    return [UserStore, ProjectStore, ReplicaStore, EndpointStore]
+    return [UserStore, ProjectStore, MigrationStore, EndpointStore]
   }
 
   static getPropsFromStores() {
     return {
       userStore: UserStore.getState(),
       projectStore: ProjectStore.getState(),
-      replicaStore: ReplicaStore.getState(),
+      migrationStore: MigrationStore.getState(),
       endpointStore: EndpointStore.getState(),
     }
   }
@@ -51,42 +50,26 @@ class ReplicasPage extends React.Component {
     super()
 
     this.state = {
-      showDeleteReplicaConfirmation: false,
+      showDeleteMigrationConfirmation: false,
       confirmationItems: null,
     }
   }
 
   componentDidMount() {
-    document.title = 'Coriolis Replicas'
+    document.title = 'Coriolis Migrations'
 
-    if (!this.props.replicaStore.replicas.length) {
+    if (!this.props.migrationStore.migrations.length) {
       ProjectActions.getProjects()
-      ReplicaActions.getReplicas()
       EndpointActions.getEndpoints()
+      MigrationActions.getMigrations()
     }
-
-    this.pollData()
-    this.pollInterval = setInterval(() => { this.pollData() }, requestPollTimeout)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.pollInterval)
-  }
-
-  pollData() {
-    Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
-      this.props.replicaStore.replicas.forEach(replica => {
-        ReplicaActions.getReplicaExecutions(replica.id)
-      })
-    })
   }
 
   handleProjectChange(project) {
     Wait.for(() => UserStore.getState().user.project.id === project.id, () => {
       ProjectActions.getProjects()
-      ReplicaActions.getReplicas()
       EndpointActions.getEndpoints()
-      this.pollData()
+      MigrationActions.getMigrations()
     })
 
     UserActions.switchProject(project.id)
@@ -106,54 +89,53 @@ class ReplicasPage extends React.Component {
 
   handleReloadButtonClick() {
     ProjectActions.getProjects()
-    ReplicaActions.getReplicas()
     EndpointActions.getEndpoints()
-    this.pollData()
+    MigrationActions.getMigrations()
   }
 
   handleItemClick(item) {
-    window.location.href = `/#/replica/${item.id}`
+    window.location.href = `/#/migration/${item.id}`
   }
 
   handleActionChange(items, action) {
-    if (action === 'execute') {
-      items.forEach(replica => {
-        ReplicaActions.execute(replica.id)
+    if (action === 'cancel') {
+      items.forEach(migration => {
+        MigrationActions.cancel(migration.id)
       })
-      NotificationActions.notify('Executing replicas')
+      NotificationActions.notify('Canceling migrations')
     } else if (action === 'delete') {
       this.setState({
-        showDeleteReplicaConfirmation: true,
+        showDeleteMigrationConfirmation: true,
         confirmationItems: items,
       })
     }
   }
 
-  handleCloseDeleteReplicaConfirmation() {
+  handleCloseDeleteMigrationConfirmation() {
     this.setState({
-      showDeleteReplicaConfirmation: false,
+      showDeleteMigrationConfirmation: false,
       confirmationItems: null,
     })
   }
 
-  handleDeleteReplicaConfirmation() {
-    this.state.confirmationItems.forEach(replica => {
-      ReplicaActions.delete(replica.id)
+  handleDeleteMigrationConfirmation() {
+    this.state.confirmationItems.forEach(migration => {
+      MigrationActions.delete(migration.id)
     })
-    this.handleCloseDeleteReplicaConfirmation()
+    this.handleCloseDeleteMigrationConfirmation()
   }
 
   render() {
     return (
       <Wrapper>
         <MainTemplate
-          navigationComponent={<Navigation currentPage="replicas" />}
+          navigationComponent={<Navigation currentPage="migrations" />}
           listComponent={
             <FilterList
-              type="replica"
-              itemImage={replicaItemImage}
-              loading={this.props.replicaStore.loading}
-              items={this.props.replicaStore.replicas}
+              type="migration"
+              itemImage={migrationItemImage}
+              loading={this.props.migrationStore.loading}
+              items={this.props.migrationStore.migrations}
               endpoints={this.props.endpointStore.endpoints}
               onItemClick={item => { this.handleItemClick(item) }}
               onReloadButtonClick={() => { this.handleReloadButtonClick() }}
@@ -163,7 +145,7 @@ class ReplicasPage extends React.Component {
           }
           headerComponent={
             <PageHeader
-              title="Coriolis Replicas"
+              title="Coriolis Migrations"
               projects={this.props.projectStore.projects}
               onProjectChange={project => { this.handleProjectChange(project) }}
               user={this.props.userStore.user}
@@ -172,16 +154,16 @@ class ReplicasPage extends React.Component {
           }
         />
         <ConfirmationModal
-          isOpen={this.state.showDeleteReplicaConfirmation}
-          title="Delete Replicas?"
-          message="Are you sure you want to delete the selected replicas?"
-          extraMessage="Deleting a Coriolis Replica is permanent!"
-          onConfirmation={() => { this.handleDeleteReplicaConfirmation() }}
-          onRequestClose={() => { this.handleCloseDeleteReplicaConfirmation() }}
+          isOpen={this.state.showDeleteMigrationConfirmation}
+          title="Delete Migrations?"
+          message="Are you sure you want to delete the selected migrations?"
+          extraMessage="Deleting a Coriolis Migration is permanent!"
+          onConfirmation={() => { this.handleDeleteMigrationConfirmation() }}
+          onRequestClose={() => { this.handleCloseDeleteMigrationConfirmation() }}
         />
       </Wrapper>
     )
   }
 }
 
-export default connectToStores(ReplicasPage)
+export default connectToStores(MigrationsPage)

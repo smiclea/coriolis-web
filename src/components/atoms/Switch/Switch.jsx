@@ -69,7 +69,6 @@ class Switch extends React.Component {
         </InputBackground>
         <Input
           type="checkbox"
-          defaultChecked={false}
           checked={this.props.checked}
           onChange={(e) => this.props.onChange(e.target.checked)}
         />

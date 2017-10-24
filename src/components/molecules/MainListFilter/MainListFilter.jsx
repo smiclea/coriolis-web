@@ -61,6 +61,7 @@ class MainListFilter extends React.Component {
     onSearchChange: PropTypes.func,
     onSelectAllChange: PropTypes.func,
     onActionChange: PropTypes.func,
+    actions: PropTypes.array,
     selectedValue: PropTypes.string,
     selectionInfo: PropTypes.object,
     type: PropTypes.string,
@@ -100,14 +101,6 @@ class MainListFilter extends React.Component {
   }
 
   render() {
-    let selectionItems = [{
-      label: 'Execute',
-      value: 'execute',
-    }, {
-      label: 'Delete',
-      value: 'delete',
-    }]
-
     return (
       <Wrapper>
         <Main>
@@ -126,7 +119,7 @@ class MainListFilter extends React.Component {
           <Dropdown
             small
             noSelectionMessage="Select an action"
-            items={selectionItems}
+            items={this.props.actions}
             onChange={item => { this.props.onActionChange(item.value) }}
           />
         </Selection>

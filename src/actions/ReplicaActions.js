@@ -3,35 +3,35 @@ import alt from '../alt'
 import ReplicaSource from '../sources/ReplicaSource'
 
 class ReplicaActions {
-  loadReplicas() {
-    ReplicaSource.loadReplicas().then(
-      response => { this.loadReplicasSuccess(response) },
-      response => { this.loadReplicasFailed(response) },
+  getReplicas() {
+    ReplicaSource.getReplicas().then(
+      response => { this.getReplicasSuccess(response) },
+      response => { this.getReplicasFailed(response) },
     )
     return true
   }
 
-  loadReplicasSuccess(replicas) {
+  getReplicasSuccess(replicas) {
     return replicas || true
   }
 
-  loadReplicasFailed(response) {
+  getReplicasFailed(response) {
     return response || true
   }
 
-  loadReplicaExecutions(replicaId) {
-    ReplicaSource.loadReplicaExecutions(replicaId).then(
-      response => { this.loadReplicaExecutionsSuccess(response) },
-      response => { this.loadReplicaExecutionsFailed(response) },
+  getReplicaExecutions(replicaId) {
+    ReplicaSource.getReplicaExecutions(replicaId).then(
+      response => { this.getReplicaExecutionsSuccess(response) },
+      response => { this.getReplicaExecutionsFailed(response) },
     )
     return replicaId
   }
 
-  loadReplicaExecutionsSuccess({ replicaId, executions }) {
+  getReplicaExecutionsSuccess({ replicaId, executions }) {
     return { replicaId, executions }
   }
 
-  loadReplicaExecutionsFailed(response) {
+  getReplicaExecutionsFailed(response) {
     return response || true
   }
 

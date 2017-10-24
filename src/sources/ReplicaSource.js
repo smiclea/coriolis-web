@@ -43,7 +43,7 @@ class ReplicaSourceUtils {
 }
 
 class ReplicaSource {
-  static loadReplicas() {
+  static getReplicas() {
     return new Promise((resolve, reject) => {
       let projectId = cookie.get('projectId')
       Api.sendAjaxRequest({
@@ -57,7 +57,7 @@ class ReplicaSource {
     })
   }
 
-  static loadReplicaExecutions(replicaId) {
+  static getReplicaExecutions(replicaId) {
     return new Promise((resolve, reject) => {
       let projectId = cookie.get('projectId')
       Api.sendAjaxRequest({
@@ -139,6 +139,7 @@ class ReplicaSource {
   static delete(replicaId) {
     return new Promise((resolve, reject) => {
       let projectId = cookie.get('projectId')
+
       Api.sendAjaxRequest({
         url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}`,
         method: 'DELETE',

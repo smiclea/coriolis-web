@@ -27,6 +27,22 @@ const MenuItem = styled.div`
 `
 const Footer = styled.div``
 
+const MenuItems = [
+  {
+    label: 'Replicas',
+    value: 'replicas',
+  }, {
+    label: 'Migrations',
+    value: 'migrations',
+  }, {
+    label: 'Cloud Endpoints',
+    value: 'endpoints',
+  }, {
+    label: 'Projects',
+    value: 'projects',
+  },
+]
+
 class Navigation extends React.Component {
   static propTypes = {
     currentPage: PropTypes.string,
@@ -36,16 +52,27 @@ class Navigation extends React.Component {
     window.location.href = `/#/${item}`
   }
 
+  renderMenu() {
+    return (
+      <Menu>
+        {MenuItems.map(item => {
+          return (
+            <MenuItem
+              key={item.value}
+              selected={this.props.currentPage === item.value}
+              onClick={() => { this.handleMenuItemClick(item.value) }}
+            >{item.label}</MenuItem>
+          )
+        })}
+      </Menu>
+    )
+  }
+
   render() {
     return (
       <Wrapper>
         <LogoStyled small />
-        <Menu>
-          <MenuItem selected={this.props.currentPage === 'replicas'}>Replicas</MenuItem>
-          <MenuItem onClick={() => { this.handleMenuItemClick('migrations') }}>Migrations</MenuItem>
-          <MenuItem>Cloud Endpoints</MenuItem>
-          <MenuItem>Projects</MenuItem>
-        </Menu>
+        {this.renderMenu()}
         <Footer />
       </Wrapper>
     )

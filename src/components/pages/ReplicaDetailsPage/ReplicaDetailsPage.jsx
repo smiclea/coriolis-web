@@ -11,6 +11,7 @@ import {
   Modal,
   ReplicaExecutionOptions,
   ConfirmationModal,
+  ReplicaMigrationOptions,
 } from 'components'
 
 import Wait from '../../../utils/Wait'
@@ -18,6 +19,7 @@ import ReplicaStore from '../../../stores/ReplicaStore'
 import UserStore from '../../../stores/UserStore'
 import UserActions from '../../../actions/UserActions'
 import ReplicaActions from '../../../actions/ReplicaActions'
+import MigrationActions from '../../../actions/MigrationActions'
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
 import NotificationActions from '../../../actions/NotificationActions'
@@ -52,7 +54,9 @@ class ReplicaDetailsPage extends React.Component {
 
     this.state = {
       showOptionsModal: false,
+      showMigrationModal: false,
       showDeleteExecutionConfirmation: false,
+      showDeleteReplicaConfirmation: false,
       confirmationItem: null,
     }
   }
@@ -118,13 +122,41 @@ class ReplicaDetailsPage extends React.Component {
     })
   }
 
+  handleDeleteReplicaClick() {
+    this.setState({ showDeleteReplicaConfirmation: true })
+  }
+
+  handleDeleteReplicaConfirmation() {
+    window.location.href = '/#/replicas'
+    ReplicaActions.delete(this.props.replicaStore.replicaDetails.id)
+  }
+
+  handleCloseDeleteReplicaConfirmation() {
+    this.setState({ showDeleteReplicaConfirmation: false })
+  }
+
+  handleCloseMigrationModal() {
+    this.setState({ showMigrationModal: false })
+  }
+
+  handleCreateMigrationClick() {
+    this.setState({ showMigrationModal: true })
+  }
+
+  migrateReplica(options) {
+    NotificationActions.notify('Migrating replica')
+    MigrationActions.migrateReplica(this.props.replicaStore.replicaDetails.id, options)
+    this.handleCloseMigrationModal()
+  }
+
   executeReplica(fields) {
     ReplicaActions.execute(this.props.replicaStore.replicaDetails.id, fields)
+    this.handleCloseOptionsModal()
   }
 
   pollData() {
     Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id,
-      () => { ReplicaActions.loadReplicaExecutions(this.props.match.params.id) })
+      () => { ReplicaActions.getReplicaExecutions(this.props.match.params.id) })
   }
 
   render() {
@@ -150,6 +182,8 @@ class ReplicaDetailsPage extends React.Component {
             onCancelExecutionClick={execution => { this.handleCancelExecutionClick(execution) }}
             onDeleteExecutionClick={execution => { this.handleDeleteExecutionClick(execution) }}
             onExecuteClick={() => { this.handleActionButtonClick() }}
+            onCreateMigrationClick={() => { this.handleCreateMigrationClick() }}
+            onDeleteReplicaClick={() => { this.handleDeleteReplicaClick() }}
           />}
         />
         <Modal
@@ -159,16 +193,34 @@ class ReplicaDetailsPage extends React.Component {
         >
           <ReplicaExecutionOptions
             onCancelClick={() => { this.handleCloseOptionsModal() }}
-            onExecuteClick={fields => { this.handleCloseOptionsModal(); this.executeReplica(fields) }}
+            onExecuteClick={fields => { this.executeReplica(fields) }}
+          />
+        </Modal>
+        <Modal
+          isOpen={this.state.showMigrationModal}
+          title="Create Migration from Replica"
+          onRequestClose={() => { this.handleCloseMigrationModal() }}
+        >
+          <ReplicaMigrationOptions
+            onCancelClick={() => { this.handleCloseMigrationModal() }}
+            onMigrateClick={options => { this.migrateReplica(options) }}
           />
         </Modal>
         <ConfirmationModal
           isOpen={this.state.showDeleteExecutionConfirmation}
           title="Delete Execution?"
           message="Are you sure you want to delete this execution?"
-          extraMessage="Deleting a Coriolis Execution in permanent!"
+          extraMessage="Deleting a Coriolis Execution is permanent!"
           onConfirmation={() => { this.handleDeleteExecutionConfirmation() }}
           onRequestClose={() => { this.handleCloseExecutionConfirmation() }}
+        />
+        <ConfirmationModal
+          isOpen={this.state.showDeleteReplicaConfirmation}
+          title="Delete Replica?"
+          message="Are you sure you want to delete this replica?"
+          extraMessage="Deleting a Coriolis Replica is permanent!"
+          onConfirmation={() => { this.handleDeleteReplicaConfirmation() }}
+          onRequestClose={() => { this.handleCloseDeleteReplicaConfirmation() }}
         />
       </Wrapper>
     )

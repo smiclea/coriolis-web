@@ -98,6 +98,10 @@ class MainListItem extends React.Component {
       return this.props.item.executions[this.props.item.executions.length - 1]
     }
 
+    if (typeof this.props.item.executions === 'undefined') {
+      return this.props.item
+    }
+
     return {}
   }
 
@@ -138,6 +142,19 @@ class MainListItem extends React.Component {
     return `${unfinished} of ${total}`
   }
 
+  renderLastExecution() {
+    return (
+      <LastExecution>
+        <ItemLabel>
+          {typeof this.props.item.executions !== 'undefined' ? 'Last Execution' : 'Created'}
+        </ItemLabel>
+        <ItemValue>
+          {this.getLastExecutionTime()}
+        </ItemValue>
+      </LastExecution>
+    )
+  }
+
   render() {
     let endpointImages = this.props.sourceType && this.props.destinationType ? (
       <EndpointsImages>
@@ -159,12 +176,7 @@ class MainListItem extends React.Component {
             {this.getStatus() ? <StatusPill status={this.getStatus()} /> : null}
           </Title>
           {endpointImages}
-          <LastExecution>
-            <ItemLabel>Last Execution</ItemLabel>
-            <ItemValue>
-              {this.getLastExecutionTime()}
-            </ItemValue>
-          </LastExecution>
+          {this.renderLastExecution()}
           <TasksRemaining>
             <ItemLabel>Tasks Remaining</ItemLabel>
             <ItemValue>{this.getTasksRemaining()}</ItemValue>

@@ -19,17 +19,8 @@ const DetailsBody = styled.div`
   max-width: 800px;
 `
 
-class ReplicaDetailsContent extends React.Component {
-  static propTypes = {
-    item: PropTypes.object,
-    endpoints: PropTypes.array,
-    page: PropTypes.string,
-    onCancelExecutionClick: PropTypes.func,
-    onDeleteExecutionClick: PropTypes.func,
-    onExecuteClick: PropTypes.func,
-  }
-
-  navigationItems = [{
+const NavigationItems = [
+  {
     label: 'Replica',
     value: '',
   }, {
@@ -38,7 +29,30 @@ class ReplicaDetailsContent extends React.Component {
   }, {
     label: 'Schedule',
     value: 'schedule',
-  }]
+  }
+]
+
+class ReplicaDetailsContent extends React.Component {
+  static propTypes = {
+    item: PropTypes.object,
+    endpoints: PropTypes.array,
+    page: PropTypes.string,
+    onCancelExecutionClick: PropTypes.func,
+    onDeleteExecutionClick: PropTypes.func,
+    onExecuteClick: PropTypes.func,
+    onCreateMigrationClick: PropTypes.func,
+    onDeleteReplicaClick: PropTypes.func,
+  }
+
+  getLastExecution() {
+    return this.props.item.executions && this.props.item.executions.length
+      && this.props.item.executions[this.props.item.executions.length - 1]
+  }
+
+  getStatus() {
+    let lastExecution = this.getLastExecution()
+    return lastExecution && lastExecution.status
+  }
 
   handleDetailsNavigationChange(item) {
     window.location.href = `/#/replica${(item.value && '/') || ''}${item.value}/${this.props.item.id}`
@@ -47,8 +61,16 @@ class ReplicaDetailsContent extends React.Component {
   renderBottomControls() {
     return (
       <Buttons>
-        <Button primary>Create Migration</Button>
-        <Button alert hollow>Delete Replica</Button>
+        <Button
+          primary
+          disabled={this.getStatus() !== 'COMPLETED'}
+          onClick={this.props.onCreateMigrationClick}
+        >Create Migration</Button>
+        <Button
+          alert
+          hollow
+          onClick={this.props.onDeleteReplicaClick}
+        >Delete Replica</Button>
       </Buttons>
     )
   }
@@ -86,7 +108,7 @@ class ReplicaDetailsContent extends React.Component {
     return (
       <Wrapper>
         <DetailsNavigation
-          items={this.navigationItems}
+          items={NavigationItems}
           selectedValue={this.props.page}
           onChange={item => this.handleDetailsNavigationChange(item)}
         />
