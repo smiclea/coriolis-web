@@ -59,8 +59,11 @@ class ReplicaDetailsPage extends React.Component {
 
   componentDidMount() {
     document.title = 'Replica Details'
-    this.loadData(true)
-    this.pollInterval = setInterval(() => { this.loadData() }, requestPollTimeout)
+
+    ReplicaActions.getReplica(this.props.match.params.id)
+    EndpointActions.getEndpoints()
+    this.pollData()
+    this.pollInterval = setInterval(() => { this.pollData() }, requestPollTimeout)
   }
 
   componentWillUnmount() {
@@ -119,17 +122,9 @@ class ReplicaDetailsPage extends React.Component {
     ReplicaActions.execute(this.props.replicaStore.replicaDetails.id, fields)
   }
 
-  loadData(fullReload) {
-    if (!fullReload) {
-      Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id,
-        () => { ReplicaActions.loadReplicaExecutions(this.props.match.params.id) })
-      return
-    }
-
-    ReplicaActions.getReplica(this.props.match.params.id)
+  pollData() {
     Wait.for(() => this.props.replicaStore.replicaDetails.id === this.props.match.params.id,
       () => { ReplicaActions.loadReplicaExecutions(this.props.match.params.id) })
-    EndpointActions.getEndpoints()
   }
 
   render() {

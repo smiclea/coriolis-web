@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 
 import { Arrow, StatusIcon } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
+import DateUtils from '../../../utils/DateUtils'
 
 const ArrowStyled = styled(Arrow) `
   opacity: ${props => props.forceShow ? 1 : 0};
@@ -131,7 +131,7 @@ class Timeline extends React.Component {
             >
               <StatusIcon status={item.status} useBackground />
               <ItemLabel selected={this.props.selectedItem && this.props.selectedItem.id === item.id}>
-                {moment(item.created_at).format('DD MMM YYYY')}
+                {DateUtils.getLocalTime(item.created_at).format('DD MMM YYYY')}
               </ItemLabel>
             </Item>
           ))}

@@ -60,6 +60,7 @@ class MainListFilter extends React.Component {
     onReloadButtonClick: PropTypes.func,
     onSearchChange: PropTypes.func,
     onSelectAllChange: PropTypes.func,
+    onActionChange: PropTypes.func,
     selectedValue: PropTypes.string,
     selectionInfo: PropTypes.object,
     type: PropTypes.string,
@@ -104,7 +105,7 @@ class MainListFilter extends React.Component {
       value: 'execute',
     }, {
       label: 'Delete',
-      value: 'Delete',
+      value: 'delete',
     }]
 
     return (
@@ -126,6 +127,7 @@ class MainListFilter extends React.Component {
             small
             noSelectionMessage="Select an action"
             items={selectionItems}
+            onChange={item => { this.props.onActionChange(item.value) }}
           />
         </Selection>
       </Wrapper>

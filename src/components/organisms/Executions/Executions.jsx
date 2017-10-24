@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 
 import { Timeline, StatusPill, IdValue, Button, Tasks } from 'components'
 
 import Palette from '../../styleUtils/Palette'
+import DateUtils from '../../../utils/DateUtils'
 
 import executionImage from './images/execution.svg'
 
@@ -192,7 +192,9 @@ class Executions extends React.Component {
       <ExecutionInfo>
         <ExecutionInfoNumber>Execution #{this.state.selectedExecution.number}</ExecutionInfoNumber>
         <StatusPill style={{ marginRight: '16px' }} small status={this.state.selectedExecution.status} />
-        <ExecutionInfoDate>{moment(this.state.selectedExecution.created_at).format('DD MMMM YYYY HH:mm')}</ExecutionInfoDate>
+        <ExecutionInfoDate>
+          {DateUtils.getLocalTime(this.state.selectedExecution.created_at).format('DD MMMM YYYY HH:mm')}
+        </ExecutionInfoDate>
         <ExecutionInfoId>
           ID:&nbsp;<IdValue width={107} value={this.state.selectedExecution.id} />
         </ExecutionInfoId>

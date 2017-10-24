@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import moment from 'moment'
 
 import { Checkbox, StatusPill, EndpointLogos } from 'components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
+import DateUtils from '../../../utils/DateUtils'
 
 import arrowImage from './images/arrow.svg'
 
@@ -113,7 +113,8 @@ class MainListItem extends React.Component {
   getLastExecutionTime() {
     let lastExecution = this.getLastExecution()
     if (lastExecution) {
-      return lastExecution.updated_at
+      return DateUtils.getLocalTime(lastExecution.updated_at || lastExecution.created_at)
+        .format('DD MMMM YYYY, HH:mm')
     }
 
     return null
@@ -160,7 +161,9 @@ class MainListItem extends React.Component {
           {endpointImages}
           <LastExecution>
             <ItemLabel>Last Execution</ItemLabel>
-            <ItemValue>{moment(this.getLastExecutionTime()).format('DD MMMM YYYY, HH:mm')}</ItemValue>
+            <ItemValue>
+              {this.getLastExecutionTime()}
+            </ItemValue>
           </LastExecution>
           <TasksRemaining>
             <ItemLabel>Tasks Remaining</ItemLabel>

@@ -102,6 +102,22 @@ class ReplicaActions {
   deleteExecutionFailed(response) {
     return response || true
   }
+
+  delete(replicaId) {
+    ReplicaSource.delete(replicaId).then(
+      () => { this.deleteSuccess(replicaId) },
+      response => { this.deleteFailed(response) },
+    )
+    return replicaId
+  }
+
+  deleteSuccess(replicaId) {
+    return replicaId
+  }
+
+  deleteFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(ReplicaActions)

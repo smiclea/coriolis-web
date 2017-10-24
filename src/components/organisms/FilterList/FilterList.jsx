@@ -15,6 +15,7 @@ class FilterList extends React.Component {
     loading: PropTypes.bool,
     onReloadButtonClick: PropTypes.func,
     onItemClick: PropTypes.func,
+    onActionChange: PropTypes.func,
     type: PropTypes.string,
   }
 
@@ -34,6 +35,14 @@ class FilterList extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    if (props.items.length !== this.props.items.length) {
+      this.setState({
+        items: props.items,
+        selectedItems: [],
+      })
+      return
+    }
+
     this.setState({ items: this.filterItems(props.items) })
   }
 
@@ -104,6 +113,10 @@ class FilterList extends React.Component {
     this.setState({ selectedItems, selectAllSelected: selected })
   }
 
+  handleActionChange(action) {
+    this.props.onActionChange(this.state.selectedItems, action)
+  }
+
   render() {
     return (
       <Wrapper>
@@ -116,6 +129,7 @@ class FilterList extends React.Component {
           onSelectAllChange={selected => { this.handleSelectAllChange(selected) }}
           selectAllSelected={this.state.selectAllSelected}
           selectionInfo={{ selected: this.state.selectedItems.length, total: this.state.items.length }}
+          onActionChange={action => { this.handleActionChange(action) }}
         />
         <MainList
           loading={this.props.loading}

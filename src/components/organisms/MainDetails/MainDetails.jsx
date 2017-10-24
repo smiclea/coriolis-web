@@ -1,12 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 
 import { EndpointLogos, Table, IdValue } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
+import DateUtils from '../../../utils/DateUtils'
 
 import arrowImage from './images/arrow.svg'
 
@@ -80,7 +80,7 @@ class MainDetails extends React.Component {
   getLastExecutionTime() {
     let lastExecution = this.getLastExecution()
     if (lastExecution) {
-      return moment(lastExecution.updated_at).format('YYYY-MM-DD HH:mm:ss')
+      return DateUtils.getLocalTime(lastExecution.updated_at).format('YYYY-MM-DD HH:mm:ss')
     }
 
     return '-'
@@ -169,7 +169,7 @@ class MainDetails extends React.Component {
             <Row>
               <Field>
                 <Label>Created</Label>
-                <Value>{moment(this.props.item.created_at).format('YYYY-MM-DD HH:mm:ss')}</Value>
+                <Value>{DateUtils.getLocalTime(this.props.item.created_at).format('YYYY-MM-DD HH:mm:ss')}</Value>
               </Field>
             </Row>
           </Column>

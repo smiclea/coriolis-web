@@ -20,6 +20,7 @@ class ReplicaStore {
       handleExecuteSuccess: ReplicaActions.EXECUTE_SUCCESS,
       handleExecuteFailed: ReplicaActions.EXECUTE_FAILED,
       handleDeleteExecutionSuccess: ReplicaActions.DELETE_EXECUTION_SUCCESS,
+      handleDeleteSuccess: ReplicaActions.DELETE_SUCCESS,
     })
   }
 
@@ -107,6 +108,10 @@ class ReplicaStore {
         executions,
       }
     }
+  }
+
+  handleDeleteSuccess(replicaId) {
+    this.replicas = this.replicas.filter(r => r.id !== replicaId)
   }
 }
 

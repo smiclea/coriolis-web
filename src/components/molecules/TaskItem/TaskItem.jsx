@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 import LinesEllipsis from 'react-lines-ellipsis'
 import { Collapse } from 'react-collapse'
 
@@ -9,6 +8,7 @@ import { StatusIcon, Arrow, StatusPill, IdValue, ProgressBar } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
+import DateUtils from '../../../utils/DateUtils'
 
 const Wrapper = styled.div`
   cursor: pointer;
@@ -131,7 +131,8 @@ class TaskItem extends React.Component {
           {this.getLastMessage()}
         </HeaderData>
         <HeaderData width={this.props.columnWidths[3]}>
-          {this.props.item.created_at ? moment(this.props.item.created_at).format('YYYY-MM-DD HH:mm:ss') : '-'}
+          {this.props.item.created_at ?
+            DateUtils.getLocalTime(this.props.item.created_at).format('YYYY-MM-DD HH:mm:ss') : '-'}
         </HeaderData>
         <ArrowStyled primary orientation={this.props.open ? 'up' : 'down'} opacity={this.props.open ? 1 : 0} />
       </Header>
@@ -163,7 +164,7 @@ class TaskItem extends React.Component {
           return (
             <ProgressUpdate key={i}>
               <ProgressUpdateDate width={this.props.columnWidths[0]}>
-                <span>{moment(update.created_at).format('YYYY-MM-DD HH:mm:ss')}</span>
+                <span>{DateUtils.getLocalTime(update.created_at).format('YYYY-MM-DD HH:mm:ss')}</span>
               </ProgressUpdateDate>
               <ProgressUpdateValue>
                 {update.message}

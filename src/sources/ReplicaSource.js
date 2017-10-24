@@ -89,7 +89,7 @@ class ReplicaSource {
 
   static execute(replicaId, fields) {
     return new Promise((resolve, reject) => {
-      let payload = { execution: { } }
+      let payload = { execution: { shutdown_instances: false } }
       if (fields) {
         fields.forEach(f => {
           payload.execution[f.name] = f.value || false
@@ -133,6 +133,16 @@ class ReplicaSource {
       }).then(() => {
         resolve(replicaId, executionId)
       }, reject).catch(reject)
+    })
+  }
+
+  static delete(replicaId) {
+    return new Promise((resolve, reject) => {
+      let projectId = cookie.get('projectId')
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.coriolis}/${projectId}/replicas/${replicaId}`,
+        method: 'DELETE',
+      }).then(() => { resolve(replicaId) }, reject).catch(reject)
     })
   }
 }
