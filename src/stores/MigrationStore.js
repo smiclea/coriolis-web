@@ -7,7 +7,6 @@ class MigrationStore {
     this.migrations = []
     this.migrationDetails = {}
     this.loading = true
-    this.detailsGeting = true
 
     this.bindListeners({
       handleGetMigrations: MigrationActions.GET_MIGRATIONS,

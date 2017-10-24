@@ -60,14 +60,11 @@ class MigrationsPage extends React.Component {
 
     ProjectActions.getProjects()
     EndpointActions.getEndpoints()
-
-    if (!this.props.migrationStore.migrations.length) {
-      MigrationActions.getMigrations()
-    }
+    MigrationActions.getMigrations()
   }
 
   handleProjectChange(project) {
-    Wait.for(() => UserStore.getState().user.project.id === project.id, () => {
+    Wait.for(() => this.props.userStore.user.project.id === project.id, () => {
       ProjectActions.getProjects()
       EndpointActions.getEndpoints()
       MigrationActions.getMigrations()

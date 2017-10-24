@@ -59,11 +59,9 @@ class ReplicasPage extends React.Component {
   componentDidMount() {
     document.title = 'Coriolis Replicas'
 
-    if (!this.props.replicaStore.replicas.length) {
-      ProjectActions.getProjects()
-      ReplicaActions.getReplicas()
-      EndpointActions.getEndpoints()
-    }
+    ProjectActions.getProjects()
+    ReplicaActions.getReplicas()
+    EndpointActions.getEndpoints()
 
     this.pollData()
     this.pollInterval = setInterval(() => { this.pollData() }, requestPollTimeout)
@@ -82,7 +80,7 @@ class ReplicasPage extends React.Component {
   }
 
   handleProjectChange(project) {
-    Wait.for(() => UserStore.getState().user.project.id === project.id, () => {
+    Wait.for(() => this.props.userStore.user.project.id === project.id, () => {
       ProjectActions.getProjects()
       ReplicaActions.getReplicas()
       EndpointActions.getEndpoints()

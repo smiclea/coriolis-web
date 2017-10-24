@@ -7,7 +7,6 @@ class ReplicaStore {
     this.replicas = []
     this.replicaDetails = {}
     this.loading = true
-    this.detailsGeting = true
 
     this.bindListeners({
       handleGetReplicas: ReplicaActions.GET_REPLICAS,
