@@ -10,14 +10,14 @@ const Wrapper = styled.div`
 class FilterList extends React.Component {
   static propTypes = {
     items: PropTypes.array,
-    itemImage: PropTypes.string,
-    endpoints: PropTypes.array,
     actions: PropTypes.array,
     loading: PropTypes.bool,
     onReloadButtonClick: PropTypes.func,
     onItemClick: PropTypes.func,
     onActionChange: PropTypes.func,
-    type: PropTypes.string,
+    selectionLabel: PropTypes.string,
+    renderItemComponent: PropTypes.func,
+    itemFilterFunction: PropTypes.func,
   }
 
   constructor() {
@@ -49,15 +49,6 @@ class FilterList extends React.Component {
     this.setState({ items: this.filterItems(props.items) })
   }
 
-  getLastExecution(item) {
-    if (typeof item.executions === 'undefined') {
-      return item
-    }
-
-    return item.executions && item.executions.length ?
-      item.executions[item.executions.length - 1] : null
-  }
-
   handleFilterItemClick(item) {
     let items = this.filterItems(this.props.items, item.value)
     let selectedItems = this.state.selectedItems.filter(selItem => {
@@ -87,17 +78,8 @@ class FilterList extends React.Component {
   filterItems(items, filterStatus, filterText) {
     filterStatus = filterStatus || this.state.filterStatus
     filterText = typeof filterText === 'undefined' ? this.state.filterText : filterText
-
     let filteredItems = items.filter(item => {
-      let lastExecution = this.getLastExecution(item)
-      if (
-        (filterStatus !== 'all' && (!lastExecution || lastExecution.status !== filterStatus)) ||
-        (item.instances[0].toLowerCase().indexOf(filterText) === -1)
-      ) {
-        return false
-      }
-
-      return true
+      return this.props.itemFilterFunction(item, filterStatus, filterText)
     })
 
     return filteredItems
@@ -131,25 +113,27 @@ class FilterList extends React.Component {
     return (
       <Wrapper>
         <MainListFilter
-          type={this.props.type}
           onFilterItemClick={item => { this.handleFilterItemClick(item) }}
           selectedValue={this.state.filterStatus}
           onReloadButtonClick={this.props.onReloadButtonClick}
           onSearchChange={text => { this.handleSearchChange(text) }}
           onSelectAllChange={selected => { this.handleSelectAllChange(selected) }}
           selectAllSelected={this.state.selectAllSelected}
-          selectionInfo={{ selected: this.state.selectedItems.length, total: this.state.items.length }}
+          selectionInfo={{
+            selected: this.state.selectedItems.length,
+            total: this.state.items.length,
+            label: this.props.selectionLabel,
+          }}
           actions={this.props.actions}
           onActionChange={action => { this.handleActionChange(action) }}
         />
         <MainList
           loading={this.props.loading}
           items={this.state.items}
-          endpoints={this.props.endpoints}
           selectedItems={this.state.selectedItems}
           onSelectedChange={(item, selected) => { this.handleItemSelectedChange(item, selected) }}
           onItemClick={this.props.onItemClick}
-          itemImage={this.props.itemImage}
+          renderItemComponent={this.props.renderItemComponent}
         />
       </Wrapper>
     )

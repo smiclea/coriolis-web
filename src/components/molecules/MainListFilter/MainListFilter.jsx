@@ -64,8 +64,8 @@ class MainListFilter extends React.Component {
     actions: PropTypes.array,
     selectedValue: PropTypes.string,
     selectionInfo: PropTypes.object,
-    type: PropTypes.string,
     selectAllSelected: PropTypes.bool,
+    items: PropTypes.array,
   }
 
   getItem(label, value) {
@@ -114,7 +114,8 @@ class MainListFilter extends React.Component {
         </Main>
         <Selection show={this.props.selectionInfo.selected}>
           <SelectionText>
-            {this.props.selectionInfo.selected} of {this.props.selectionInfo.total} {this.props.type}(s) selected
+            {this.props.selectionInfo.selected} of {this.props.selectionInfo.total}
+            {this.props.selectionInfo.label}(s) selected
           </SelectionText>
           <Dropdown
             small

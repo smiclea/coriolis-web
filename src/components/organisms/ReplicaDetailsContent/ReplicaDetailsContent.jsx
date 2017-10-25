@@ -44,6 +44,16 @@ class ReplicaDetailsContent extends React.Component {
     onDeleteReplicaClick: PropTypes.func,
   }
 
+  getLastExecution() {
+    return this.props.item.executions && this.props.item.executions.length
+      && this.props.item.executions[this.props.item.executions.length - 1]
+  }
+
+  getStatus() {
+    let lastExecution = this.getLastExecution()
+    return lastExecution && lastExecution.status
+  }
+
   handleDetailsNavigationChange(item) {
     window.location.href = `/#/replica${(item.value && '/') || ''}${item.value}/${this.props.item.id}`
   }

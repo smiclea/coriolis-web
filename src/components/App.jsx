@@ -12,6 +12,7 @@ import {
   ReplicaDetailsPage,
   MigrationsPage,
   MigrationDetailsPage,
+  EndpointsPage,
 } from 'components'
 
 import Palette from './styleUtils/Palette'
@@ -45,6 +46,7 @@ class App extends React.Component {
           <Route path="/migrations" component={MigrationsPage} />
           <Route path="/migration/:id" component={MigrationDetailsPage} exact />
           <Route path="/migration/:page/:id" component={MigrationDetailsPage} />
+          <Route path="/endpoints" component={EndpointsPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <Notifications />

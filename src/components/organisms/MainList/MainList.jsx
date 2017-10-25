@@ -51,19 +51,10 @@ class MainList extends React.Component {
   static propTypes = {
     items: PropTypes.array,
     selectedItems: PropTypes.array,
-    itemImage: PropTypes.string,
-    endpoints: PropTypes.array,
     loading: PropTypes.bool,
     onSelectedChange: PropTypes.func,
     onItemClick: PropTypes.func,
-  }
-
-  getEndpoint(endpointId) {
-    if (!this.props.endpoints || this.props.endpoints.length === 0) {
-      return {}
-    }
-
-    return this.props.endpoints.find(endpoint => endpoint.id === endpointId) || {}
+    renderItemComponent: PropTypes.func,
   }
 
   renderList() {
@@ -75,18 +66,13 @@ class MainList extends React.Component {
       <List>
         {this.props.items.map(item => {
           let selected = Boolean(this.props.selectedItems.find(i => i.id === item.id))
-          return (
-            <MainListItem
-              image={this.props.itemImage}
-              key={item.id}
-              item={item}
-              selected={selected}
-              onClick={() => { this.props.onItemClick(item) }}
-              sourceType={this.getEndpoint(item.origin_endpoint_id).type}
-              destinationType={this.getEndpoint(item.destination_endpoint_id).type}
-              onSelectedChange={(e) => { this.props.onSelectedChange(item, e.target.checked) }}
-            />
-          )
+          return this.props.renderItemComponent({
+            key: item.id,
+            item,
+            selected,
+            onClick: () => { this.props.onItemClick(item) },
+            onSelectedChange: e => { this.props.onSelectedChange(item, e.target.checked) },
+          })
         })}
       </List>
     )

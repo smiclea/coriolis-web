@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { MainTemplate, Navigation, FilterList, PageHeader, ConfirmationModal } from 'components'
+import { MainTemplate, Navigation, FilterList, PageHeader, ConfirmationModal, MainListItem } from 'components'
 
 import replicaItemImage from './images/replica.svg'
 
@@ -141,6 +141,26 @@ class ReplicasPage extends React.Component {
     this.handleCloseDeleteReplicaConfirmation()
   }
 
+  getEndpoint(endpointId) {
+    if (!this.props.endpointStore.endpoints || this.props.endpointStore.endpoints === 0) {
+      return {}
+    }
+
+    return this.props.endpointStore.endpoints.find(endpoint => endpoint.id === endpointId) || {}
+  }
+
+  itemFilterFunction(item, filterStatus, filterText) {
+    let lastExecution = item.executions && item.executions.length ?
+      item.executions[item.executions.length - 1] : null
+    if ((filterStatus !== 'all' && (!lastExecution || lastExecution.status !== filterStatus)) ||
+      (item.instances[0].toLowerCase().indexOf(filterText) === -1)
+    ) {
+      return false
+    }
+
+    return true
+  }
+
   render() {
     return (
       <Wrapper>
@@ -148,15 +168,21 @@ class ReplicasPage extends React.Component {
           navigationComponent={<Navigation currentPage="replicas" />}
           listComponent={
             <FilterList
-              type="replica"
-              itemImage={replicaItemImage}
+              selectionLabel="replica"
               loading={this.props.replicaStore.loading}
               items={this.props.replicaStore.replicas}
-              endpoints={this.props.endpointStore.endpoints}
               onItemClick={item => { this.handleItemClick(item) }}
               onReloadButtonClick={() => { this.handleReloadButtonClick() }}
               actions={BulkActions}
               onActionChange={(items, action) => { this.handleActionChange(items, action) }}
+              itemFilterFunction={(...args) => this.itemFilterFunction(...args)}
+              renderItemComponent={options =>
+                (<MainListItem
+                  {...options}
+                  image={replicaItemImage}
+                  endpointType={id => this.getEndpoint(id).type}
+                />)
+              }
             />
           }
           headerComponent={

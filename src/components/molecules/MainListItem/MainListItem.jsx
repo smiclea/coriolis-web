@@ -88,8 +88,7 @@ class MainListItem extends React.Component {
     onClick: PropTypes.func,
     selected: PropTypes.bool,
     image: PropTypes.string,
-    sourceType: PropTypes.string,
-    destinationType: PropTypes.string,
+    endpointType: PropTypes.func,
     onSelectedChange: PropTypes.func,
   }
 
@@ -156,11 +155,13 @@ class MainListItem extends React.Component {
   }
 
   render() {
-    let endpointImages = this.props.sourceType && this.props.destinationType ? (
+    let sourceType = this.props.endpointType(this.props.item.origin_endpoint_id)
+    let destinationType = this.props.endpointType(this.props.item.destination_endpoint_id)
+    let endpointImages = sourceType && destinationType ? (
       <EndpointsImages>
-        <EndpointLogos small endpoint={this.props.sourceType} />
+        <EndpointLogos small endpoint={sourceType} />
         <EndpointImageArrow />
-        <EndpointLogos small endpoint={this.props.destinationType} />
+        <EndpointLogos small endpoint={destinationType} />
       </EndpointsImages>
     ) : null
     return (
