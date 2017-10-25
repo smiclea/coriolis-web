@@ -48,6 +48,10 @@ if (isDev) {
 
 app.use(express.static('dist'));
 
+app.use(function (req, res, next) {
+  res.redirect(req.baseUrl + '/#' + req.url)
+});
+
 app.listen(PORT, function () {
   console.log('Express server is up on port ' + PORT);
 });
