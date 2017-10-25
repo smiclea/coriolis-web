@@ -120,7 +120,7 @@ class EndpointsPage extends React.Component {
   }
 
   handleItemClick(item) {
-    window.location.href = `/#/endpoints/${item.id}`
+    window.location.href = `/#/endpoint/${item.id}`
   }
 
   handleActionChange(items, action) {

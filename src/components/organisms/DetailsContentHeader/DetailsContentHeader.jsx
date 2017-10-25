@@ -46,6 +46,10 @@ const StatusPills = styled.div`
     margin-right: 16px;
   }
 `
+const Description = styled.div`
+  color: ${Palette.grayscale[4]};
+  margin-top: 3px;
+`
 
 class DetailsContentHeader extends React.Component {
   static propTypes = {
@@ -53,6 +57,7 @@ class DetailsContentHeader extends React.Component {
     onActionButtonClick: PropTypes.func,
     typeImage: PropTypes.string,
     buttonLabel: PropTypes.string,
+    description: PropTypes.string,
     item: PropTypes.object,
     alertInfoPill: PropTypes.bool,
     primaryInfoPill: PropTypes.bool,
@@ -79,8 +84,51 @@ class DetailsContentHeader extends React.Component {
     return null
   }
 
+  renderStatusPill() {
+    if (!this.getStatus()) {
+      return null
+    }
+
+    return (
+      <StatusPills>
+        <StatusPill
+          status="INFO"
+          label={this.props.item.type && this.props.item.type.toUpperCase()}
+          alert={this.props.alertInfoPill}
+          primary={this.props.primaryInfoPill}
+        />
+        {<StatusPill status={this.getStatus()} />}
+      </StatusPills>
+    )
+  }
+
+  renderButton() {
+    if (!this.props.onActionButtonClick) {
+      return null
+    }
+
+    return (
+      <Button
+        secondary={!this.props.alertButton}
+        alert={this.props.alertButton}
+        hollow={this.props.hollowButton}
+        onClick={this.props.onActionButtonClick}
+      >{this.props.buttonLabel}</Button>
+    )
+  }
+
+  renderDescription() {
+    if (!this.props.item.description) {
+      return null
+    }
+
+    return (
+      <Description>{this.props.item.description}</Description>
+    )
+  }
+
   render() {
-    let title = this.props.item.instances && this.props.item.instances[0]
+    let title = (this.props.item.instances && this.props.item.instances[0]) || this.props.item.name
 
     return (
       <Wrapper>
@@ -88,22 +136,10 @@ class DetailsContentHeader extends React.Component {
         <TypeImage image={this.props.typeImage} />
         <Title>
           <Text>{title}</Text>
-          <StatusPills>
-            <StatusPill
-              status="INFO"
-              label={this.props.item.type && this.props.item.type.toUpperCase()}
-              alert={this.props.alertInfoPill}
-              primary={this.props.primaryInfoPill}
-            />
-            {this.getStatus() ? <StatusPill status={this.getStatus()} /> : null}
-          </StatusPills>
+          {this.renderStatusPill()}
+          {this.renderDescription()}
         </Title>
-        <Button
-          secondary={!this.props.alertButton}
-          alert={this.props.alertButton}
-          hollow={this.props.hollowButton}
-          onClick={this.props.onActionButtonClick}
-        >{this.props.buttonLabel}</Button>
+        {this.renderButton()}
       </Wrapper>
     )
   }
