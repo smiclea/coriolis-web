@@ -39,6 +39,10 @@ class Tasks extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.componentWillReceiveProps(this.props)
+  }
+
   componentWillReceiveProps(props) {
     let openedItems = this.state.openedItems
 

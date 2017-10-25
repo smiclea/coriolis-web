@@ -12,6 +12,9 @@ const backgroundColor = (props) => {
   if (props.secondary) {
     return Palette.secondaryLight
   }
+  if (props.alert) {
+    return Palette.alert
+  }
   return Palette.primary
 }
 

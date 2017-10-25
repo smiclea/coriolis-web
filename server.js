@@ -19,11 +19,24 @@ if (isDev) {
       colors: true
     },
     log: function (text) {
-      console.log(text)
+      let statusIndex = text.indexOf('webpack: Compiled') > -1
+        ? text.indexOf('webpack: Compiled') : text.indexOf('webpack: Failed')
+      if (statusIndex > -1) {
+        let left = text.substr(0, statusIndex)
+        let isSuccesfull = text.indexOf('webpack: Compiled successfully.') > -1
+        let color = text.indexOf('webpack: Compiled with warnings.') > -1 ? '\033[43m\033[30m' : ''
+        color = isSuccesfull ? '\033[42m\033[30m' : color
+        color = text.indexOf('webpack: Failed to compile.') > -1 ? '\033[41m' : color
 
-      if (!isBrowserOpen && text.indexOf('webpack: Compiled successfully.')) {
-        isBrowserOpen = true
-        opn('http://localhost:' + PORT);
+        let end = color + text.substr(statusIndex) + '\033[0m'
+        console.log(left + end)
+
+        if (!isBrowserOpen && isSuccesfull) {
+          isBrowserOpen = true
+          opn('http://localhost:' + PORT);
+        }
+      } else {
+        console.log(text)
       }
     } 
   }));

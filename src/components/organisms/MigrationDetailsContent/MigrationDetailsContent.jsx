@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { DetailsNavigation, MainDetails, Button, Executions } from 'components'
+import { DetailsNavigation, MainDetails, Button, Tasks } from 'components'
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,46 +21,34 @@ const DetailsBody = styled.div`
 
 const NavigationItems = [
   {
-    label: 'Replica',
+    label: 'Migration',
     value: '',
   }, {
-    label: 'Executions',
-    value: 'executions',
-  }, {
-    label: 'Schedule',
-    value: 'schedule',
+    label: 'Tasks',
+    value: 'tasks',
   },
 ]
 
-class ReplicaDetailsContent extends React.Component {
+class MigrationDetailsContent extends React.Component {
   static propTypes = {
     item: PropTypes.object,
     endpoints: PropTypes.array,
     page: PropTypes.string,
-    onCancelExecutionClick: PropTypes.func,
-    onDeleteExecutionClick: PropTypes.func,
-    onExecuteClick: PropTypes.func,
-    onCreateMigrationClick: PropTypes.func,
-    onDeleteReplicaClick: PropTypes.func,
+    onDeleteMigrationClick: PropTypes.func,
   }
 
   handleDetailsNavigationChange(item) {
-    window.location.href = `/#/replica${(item.value && '/') || ''}${item.value}/${this.props.item.id}`
+    window.location.href = `/#/migration${(item.value && '/') || ''}${item.value}/${this.props.item.id}`
   }
 
   renderBottomControls() {
     return (
       <Buttons>
         <Button
-          primary
-          disabled={this.getStatus() !== 'COMPLETED'}
-          onClick={this.props.onCreateMigrationClick}
-        >Create Migration</Button>
-        <Button
           alert
           hollow
-          onClick={this.props.onDeleteReplicaClick}
-        >Delete Replica</Button>
+          onClick={this.props.onDeleteMigrationClick}
+        >Delete Migration</Button>
       </Buttons>
     )
   }
@@ -79,17 +67,14 @@ class ReplicaDetailsContent extends React.Component {
     )
   }
 
-  renderExecutions() {
-    if (this.props.page !== 'executions') {
+  renderTasks() {
+    if (this.props.page !== 'tasks' || !this.props.item.tasks) {
       return null
     }
 
     return (
-      <Executions
-        item={this.props.item}
-        onCancelExecutionClick={this.props.onCancelExecutionClick}
-        onDeleteExecutionClick={this.props.onDeleteExecutionClick}
-        onExecuteClick={this.props.onExecuteClick}
+      <Tasks
+        items={this.props.item.tasks}
       />
     )
   }
@@ -104,11 +89,11 @@ class ReplicaDetailsContent extends React.Component {
         />
         <DetailsBody>
           {this.renderMainDetails()}
-          {this.renderExecutions()}
+          {this.renderTasks()}
         </DetailsBody>
       </Wrapper>
     )
   }
 }
 
-export default ReplicaDetailsContent
+export default MigrationDetailsContent

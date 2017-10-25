@@ -56,11 +56,15 @@ class DetailsContentHeader extends React.Component {
     item: PropTypes.object,
     alertInfoPill: PropTypes.bool,
     primaryInfoPill: PropTypes.bool,
+    alertButton: PropTypes.bool,
+    hollowButton: PropTypes.bool,
   }
 
   getLastExecution() {
     if (this.props.item.executions && this.props.item.executions.length) {
       return this.props.item.executions[this.props.item.executions.length - 1]
+    } else if (typeof this.props.item.executions === 'undefined') {
+      return this.props.item
     }
 
     return {}
@@ -95,7 +99,9 @@ class DetailsContentHeader extends React.Component {
           </StatusPills>
         </Title>
         <Button
-          secondary
+          secondary={!this.props.alertButton}
+          alert={this.props.alertButton}
+          hollow={this.props.hollowButton}
           onClick={this.props.onActionButtonClick}
         >{this.props.buttonLabel}</Button>
       </Wrapper>

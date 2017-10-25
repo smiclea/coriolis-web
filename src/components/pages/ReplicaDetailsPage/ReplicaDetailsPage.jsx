@@ -22,7 +22,6 @@ import ReplicaActions from '../../../actions/ReplicaActions'
 import MigrationActions from '../../../actions/MigrationActions'
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
-import NotificationActions from '../../../actions/NotificationActions'
 import { requestPollTimeout } from '../../../config'
 
 import replicaImage from './images/replica.svg'
