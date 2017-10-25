@@ -71,12 +71,21 @@ class ReplicasPage extends React.Component {
     clearInterval(this.pollInterval)
   }
 
-  pollData() {
-    Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
-      this.props.replicaStore.replicas.forEach(replica => {
-        ReplicaActions.getReplicaExecutions(replica.id)
-      })
-    })
+  getEndpoint(endpointId) {
+    if (!this.props.endpointStore.endpoints || this.props.endpointStore.endpoints === 0) {
+      return {}
+    }
+
+    return this.props.endpointStore.endpoints.find(endpoint => endpoint.id === endpointId) || {}
+  }
+
+  getFilterItems() {
+    return [
+      { label: 'All', value: 'all' },
+      { label: 'Running', value: 'RUNNING' },
+      { label: 'Error', value: 'ERROR' },
+      { label: 'Completed', value: 'COMPLETED' },
+    ]
   }
 
   handleProjectChange(project) {
@@ -141,12 +150,12 @@ class ReplicasPage extends React.Component {
     this.handleCloseDeleteReplicaConfirmation()
   }
 
-  getEndpoint(endpointId) {
-    if (!this.props.endpointStore.endpoints || this.props.endpointStore.endpoints === 0) {
-      return {}
-    }
-
-    return this.props.endpointStore.endpoints.find(endpoint => endpoint.id === endpointId) || {}
+  pollData() {
+    Wait.for(() => this.props.replicaStore.replicas.length !== 0, () => {
+      this.props.replicaStore.replicas.forEach(replica => {
+        ReplicaActions.getReplicaExecutions(replica.id)
+      })
+    })
   }
 
   itemFilterFunction(item, filterStatus, filterText) {
@@ -168,6 +177,7 @@ class ReplicasPage extends React.Component {
           navigationComponent={<Navigation currentPage="replicas" />}
           listComponent={
             <FilterList
+              filterItems={this.getFilterItems()}
               selectionLabel="replica"
               loading={this.props.replicaStore.loading}
               items={this.props.replicaStore.replicas}

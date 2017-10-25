@@ -63,6 +63,23 @@ class MigrationsPage extends React.Component {
     MigrationActions.getMigrations()
   }
 
+  getEndpoint(endpointId) {
+    if (!this.props.endpointStore.endpoints || this.props.endpointStore.endpoints === 0) {
+      return {}
+    }
+
+    return this.props.endpointStore.endpoints.find(endpoint => endpoint.id === endpointId) || {}
+  }
+
+  getFilterItems() {
+    return [
+      { label: 'All', value: 'all' },
+      { label: 'Running', value: 'RUNNING' },
+      { label: 'Error', value: 'ERROR' },
+      { label: 'Completed', value: 'COMPLETED' },
+    ]
+  }
+
   handleProjectChange(project) {
     Wait.for(() => this.props.userStore.user.project.id === project.id, () => {
       ProjectActions.getProjects()
@@ -123,14 +140,6 @@ class MigrationsPage extends React.Component {
     this.handleCloseDeleteMigrationConfirmation()
   }
 
-  getEndpoint(endpointId) {
-    if (!this.props.endpointStore.endpoints || this.props.endpointStore.endpoints === 0) {
-      return {}
-    }
-
-    return this.props.endpointStore.endpoints.find(endpoint => endpoint.id === endpointId) || {}
-  }
-
   itemFilterFunction(item, filterStatus, filterText) {
     if ((filterStatus !== 'all' && (item.status !== filterStatus)) ||
       (item.instances[0].toLowerCase().indexOf(filterText) === -1)
@@ -148,6 +157,7 @@ class MigrationsPage extends React.Component {
           navigationComponent={<Navigation currentPage="migrations" />}
           listComponent={
             <FilterList
+              filterItems={this.getFilterItems()}
               selectionLabel="migration"
               loading={this.props.migrationStore.loading}
               items={this.props.migrationStore.migrations}

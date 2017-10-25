@@ -13,12 +13,14 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   padding-top: 8px;
+  flex-wrap: wrap;
 `
 const Main = styled.div`
   display: flex;
   align-items: center;
   margin-right: 16px;
   flex-grow: 1;
+  margin-bottom: 32px;
 `
 const FilterGroup = styled.div`
   display: flex;
@@ -30,6 +32,7 @@ const FilterItem = styled.div`
   color: ${props => props.selected ? Palette.primary : Palette.grayscale[4]};
   ${props => props.selected ? 'text-decoration: underline;' : ''}
   cursor: pointer;
+  white-space: nowrap;
 
   &:last-child {
     margin-right: 16px;
@@ -47,6 +50,7 @@ const Selection = styled.div`
   align-items: center;
   opacity: ${props => props.show ? 1 : 0};
   transition: all ${StyleProps.animations.swift};
+  margin-bottom: 32px;
 `
 const SelectionText = styled.div`
   margin-right: 16px;
@@ -68,30 +72,15 @@ class MainListFilter extends React.Component {
     items: PropTypes.array,
   }
 
-  getItem(label, value) {
-    return {
-      label,
-      value,
-      selected: this.props.selectedValue === value,
-    }
-  }
-
   renderFilterGroup() {
-    let items = [
-      this.getItem('All', 'all'),
-      this.getItem('Running', 'RUNNING'),
-      this.getItem('Error', 'ERROR'),
-      this.getItem('Completed', 'COMPLETED'),
-    ]
-
     return (
       <FilterGroup>
-        {items.map(item => {
+        {this.props.items.map(item => {
           return (
             <FilterItem
               onClick={() => this.props.onFilterItemClick(item)}
               key={item.value}
-              selected={item.selected}
+              selected={this.props.selectedValue === item.value}
             >{item.label}
             </FilterItem>
           )
@@ -114,7 +103,7 @@ class MainListFilter extends React.Component {
         </Main>
         <Selection show={this.props.selectionInfo.selected}>
           <SelectionText>
-            {this.props.selectionInfo.selected} of {this.props.selectionInfo.total}
+            {this.props.selectionInfo.selected} of {this.props.selectionInfo.total}&nbsp;
             {this.props.selectionInfo.label}(s) selected
           </SelectionText>
           <Dropdown

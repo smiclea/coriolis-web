@@ -10,6 +10,7 @@ class EndpointStore {
       handleGetEndpoints: EndpointActions.GET_ENDPOINTS,
       handleGetEndpointsCompleted: EndpointActions.GET_ENDPOINTS_COMPLETED,
       handleGetEndpointsFailed: EndpointActions.GET_ENDPOINTS_FAILED,
+      handleDeleteSuccess: EndpointActions.DELETE_SUCCESS,
     })
   }
 
@@ -24,6 +25,10 @@ class EndpointStore {
 
   handleGetEndpointsFailed() {
     this.loading = false
+  }
+
+  handleDeleteSuccess(endpointId) {
+    this.endpoints = this.endpoints.filter(e => e.id !== endpointId)
   }
 }
 

@@ -19,6 +19,22 @@ class EndpointActions {
   getEndpointsFailed(response) {
     return response || true
   }
+
+  delete(endpoint) {
+    EndpointSource.delete(endpoint).then(
+      () => { this.deleteSuccess(endpoint.id) },
+      response => { this.deleteFailed(response) },
+    )
+    return endpoint
+  }
+
+  deleteSuccess(endpointId) {
+    return endpointId
+  }
+
+  deleteFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(EndpointActions)

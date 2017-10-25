@@ -9,7 +9,7 @@ import Palette from '../../styleUtils/Palette'
 import loadingImage from './images/loading.svg'
 
 const Wrapper = styled.div`
-  margin-top: 40px;
+  margin-top: 8px;
 `
 const Separator = styled.div`
   height: 1px;

@@ -18,6 +18,7 @@ class FilterList extends React.Component {
     selectionLabel: PropTypes.string,
     renderItemComponent: PropTypes.func,
     itemFilterFunction: PropTypes.func,
+    filterItems: PropTypes.array,
   }
 
   constructor() {
@@ -124,6 +125,7 @@ class FilterList extends React.Component {
             total: this.state.items.length,
             label: this.props.selectionLabel,
           }}
+          items={this.props.filterItems}
           actions={this.props.actions}
           onActionChange={action => { this.handleActionChange(action) }}
         />

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import { css } from 'styled-components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
