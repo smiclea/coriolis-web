@@ -1,11 +1,13 @@
 const search = color => `<?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" 
+xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
     <title>Search</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Coriolis" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Replica-List-and-Notifications" transform="translate(-770.000000, -137.000000)" stroke="${color}">
+        <g id="Replica-List-and-Notifications" transform="translate(-770.000000, -137.000000)"
+        stroke="${color}">
             <g id="Icon/Search/Dark" transform="translate(768.000000, 135.000000)">
                 <circle id="Oval-32" cx="8" cy="8" r="5.5"></circle>
                 <path d="M12,12 L15.5,15.5" id="Line" stroke-linecap="round"></path>
