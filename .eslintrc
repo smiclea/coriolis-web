@@ -25,6 +25,7 @@
     "semi": [2, "never"],
     "comma-dangle": [2, "always-multiline"],
     "class-methods-use-this": 0,
+    "max-len": "error",
     "prefer-const": 0,
     "arrow-parens": 0,
     "react/prefer-stateless-function": 0,

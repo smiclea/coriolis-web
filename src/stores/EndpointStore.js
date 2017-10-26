@@ -5,12 +5,14 @@ class EndpointStore {
   constructor() {
     this.endpoints = []
     this.loading = false
+    this.connectionInfo = null
 
     this.bindListeners({
       handleGetEndpoints: EndpointActions.GET_ENDPOINTS,
       handleGetEndpointsCompleted: EndpointActions.GET_ENDPOINTS_COMPLETED,
       handleGetEndpointsFailed: EndpointActions.GET_ENDPOINTS_FAILED,
       handleDeleteSuccess: EndpointActions.DELETE_SUCCESS,
+      handleGetConnectionInfoSuccess: EndpointActions.GET_CONNECTION_INFO_SUCCESS,
     })
   }
 
@@ -29,6 +31,10 @@ class EndpointStore {
 
   handleDeleteSuccess(endpointId) {
     this.endpoints = this.endpoints.filter(e => e.id !== endpointId)
+  }
+
+  handleGetConnectionInfoSuccess(connectionInfo) {
+    this.connectionInfo = connectionInfo
   }
 }
 

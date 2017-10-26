@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import LinesEllipsis from 'react-lines-ellipsis'
 import { Collapse } from 'react-collapse'
 
-import { StatusIcon, Arrow, StatusPill, IdValue, ProgressBar } from 'components'
+import { StatusIcon, Arrow, StatusPill, CopyValue, ProgressBar } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
@@ -141,7 +141,7 @@ class TaskItem extends React.Component {
 
   renderDependsOnValue() {
     if (this.props.item.depends_on && this.props.item.depends_on[0]) {
-      return <IdValue value={this.props.item.depends_on[0]} autoWidth />
+      return <CopyValue value={this.props.item.depends_on[0]} autoWidth />
     }
 
     return <Value>N/A</Value>
@@ -204,7 +204,7 @@ class TaskItem extends React.Component {
             <Column>
               <Row>
                 <Label>ID</Label>
-                <IdValue value={this.props.item.id} autoWidth />
+                <CopyValue value={this.props.item.id} autoWidth />
               </Row>
               <Row>
                 <Label>Depends on</Label>

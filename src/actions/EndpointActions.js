@@ -35,6 +35,22 @@ class EndpointActions {
   deleteFailed(response) {
     return response || true
   }
+
+  getConnectionInfo(endpoint) {
+    EndpointSource.getConnectionInfo(endpoint).then(
+      connectionInfo => { this.getConnectionInfoSuccess(connectionInfo) },
+      response => { this.getConnectionInfoFailed(response) },
+    )
+    return endpoint
+  }
+
+  getConnectionInfoSuccess(connectionInfo) {
+    return connectionInfo
+  }
+
+  getConnectionInfoFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(EndpointActions)

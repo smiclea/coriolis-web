@@ -33,6 +33,7 @@ class EdnpointSource {
   static delete(endpoint) {
     return new Promise((resolve, reject) => {
       let projectId = cookie.get('projectId')
+
       Api.sendAjaxRequest({
         url: `${servicesUrl.coriolis}/${projectId}/endpoints/${endpoint.id}`,
         method: 'DELETE',
@@ -47,6 +48,22 @@ class EdnpointSource {
         } else {
           resolve(endpoint.id)
         }
+      }, reject).catch(reject)
+    })
+  }
+
+  static getConnectionInfo(endpoint) {
+    let index = endpoint.connection_info.secret_ref.lastIndexOf('/')
+    let uuid = endpoint.connection_info.secret_ref.substr(index + 1)
+
+    return new Promise((resolve, reject) => {
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.barbican}/v1/secrets/${uuid}/payload`,
+        method: 'GET',
+        json: false,
+        headers: { Accept: 'text/plain' },
+      }).then((response) => {
+        resolve(JSON.parse(response.data))
       }, reject).catch(reject)
     })
   }

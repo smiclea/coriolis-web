@@ -22,7 +22,7 @@ const Value = styled.span`
   margin-right: 4px;
 `
 
-class IdValue extends React.Component {
+class CopyValue extends React.Component {
   static propTypes = {
     value: PropTypes.string,
     width: PropTypes.number,
@@ -39,9 +39,9 @@ class IdValue extends React.Component {
     let succesful = DomUtils.copyTextToClipboard(this.props.value)
 
     if (succesful) {
-      NotificationActions.notify('The ID has been copied to clipboard.')
+      NotificationActions.notify('The value has been copied to clipboard.')
     } else {
-      NotificationActions.notify('The ID couldn\'t be copied', 'error')
+      NotificationActions.notify('The value couldn\'t be copied', 'error')
     }
   }
 
@@ -52,10 +52,14 @@ class IdValue extends React.Component {
         onMouseDown={e => { e.stopPropagation() }}
         onMouseUp={e => { e.stopPropagation() }}
       >
-        <Value width={this.props.width} autoWidth={this.props.autoWidth}>{this.props.value}</Value><CopyButton />
+        <Value
+          width={this.props.width}
+          autoWidth={this.props.autoWidth}
+        >{this.props.value}</Value>
+        <CopyButton />
       </Wrapper>
     )
   }
 }
 
-export default IdValue
+export default CopyValue

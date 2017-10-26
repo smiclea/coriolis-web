@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { Timeline, StatusPill, IdValue, Button, Tasks } from 'components'
+import { Timeline, StatusPill, CopyValue, Button, Tasks } from 'components'
 
 import Palette from '../../styleUtils/Palette'
 import DateUtils from '../../../utils/DateUtils'
@@ -196,7 +196,7 @@ class Executions extends React.Component {
           {DateUtils.getLocalTime(this.state.selectedExecution.created_at).format('DD MMMM YYYY HH:mm')}
         </ExecutionInfoDate>
         <ExecutionInfoId>
-          ID:&nbsp;<IdValue width={107} value={this.state.selectedExecution.id} />
+          ID:&nbsp;<CopyValue width={107} value={this.state.selectedExecution.id} />
         </ExecutionInfoId>
         {this.renderExecutionInfoButton()}
       </ExecutionInfo>

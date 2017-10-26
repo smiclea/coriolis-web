@@ -15,6 +15,7 @@ import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
 import UserStore from '../../../stores/UserStore'
 import UserActions from '../../../actions/UserActions'
+import Wait from '../../../utils/Wait'
 
 import endpointImage from './images/endpoint.svg'
 
@@ -49,7 +50,7 @@ class EndpointDetailsPage extends React.Component {
   componentDidMount() {
     document.title = 'Endpoint Details'
 
-    EndpointActions.getEndpoints()
+    this.loadData()
   }
 
   getEndpoint() {
@@ -85,6 +86,20 @@ class EndpointDetailsPage extends React.Component {
     this.setState({ showDeleteEndpointConfirmation: false })
   }
 
+  loadData() {
+    EndpointActions.getEndpoints()
+
+    Wait.for(() => this.getEndpoint().id, () => {
+      let endpoint = this.getEndpoint()
+
+      if (endpoint.connection_info && endpoint.connection_info.secret_ref) {
+        EndpointActions.getConnectionInfo(endpoint)
+      } else {
+        EndpointActions.getConnectionInfoSuccess(endpoint.connection_info)
+      }
+    })
+  }
+
   render() {
     return (
       <Wrapper>
@@ -101,7 +116,8 @@ class EndpointDetailsPage extends React.Component {
           />}
           contentComponent={<EndpointDetailsContent
             item={this.getEndpoint()}
-            onDeleteEndpointClick={() => { this.handleDeleteEndpointClick() }}
+            connectionInfo={this.props.endpointStore.connectionInfo}
+            onDeleteClick={() => { this.handleDeleteEndpointClick() }}
           />}
         />
         <ConfirmationModal

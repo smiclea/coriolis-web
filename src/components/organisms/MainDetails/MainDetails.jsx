@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { EndpointLogos, Table, IdValue } from 'components'
+import { EndpointLogos, Table, CopyValue } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
@@ -163,7 +163,7 @@ class MainDetails extends React.Component {
             <Row marginBottom>
               <Field>
                 <Label>Id</Label>
-                <IdValue value={this.props.item.id} />
+                <CopyValue value={this.props.item.id} />
               </Field>
             </Row>
             <Row>
