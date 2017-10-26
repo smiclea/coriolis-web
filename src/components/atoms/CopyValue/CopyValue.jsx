@@ -14,7 +14,8 @@ const Wrapper = styled.div`
   }
 `
 const Value = styled.span`
-  width: ${props => props.autoWidth ? 'auto' : `${props.width}px`};
+  width: ${props => `${props.width || 'auto'}`};
+  ${props => props.maxWidth ? `max-width: ${props.maxWidth};` : ''}
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -25,12 +26,8 @@ const Value = styled.span`
 class CopyValue extends React.Component {
   static propTypes = {
     value: PropTypes.string,
-    width: PropTypes.number,
-    autoWidth: PropTypes.bool,
-  }
-
-  static defaultProps = {
-    width: 192,
+    width: PropTypes.string,
+    maxWidth: PropTypes.string,
   }
 
   handleCopyIdClick(e) {
@@ -54,7 +51,7 @@ class CopyValue extends React.Component {
       >
         <Value
           width={this.props.width}
-          autoWidth={this.props.autoWidth}
+          maxWidth={this.props.maxWidth}
         >{this.props.value}</Value>
         <CopyButton />
       </Wrapper>

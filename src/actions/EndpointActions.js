@@ -51,6 +51,22 @@ class EndpointActions {
   getConnectionInfoFailed(response) {
     return response || true
   }
+
+  validate(endpoint) {
+    EndpointSource.validate(endpoint).then(
+      validation => { this.validateSuccess(validation) },
+      response => { this.validateFailed(response) },
+    )
+    return endpoint
+  }
+
+  validateSuccess(validation) {
+    return validation
+  }
+
+  validateFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(EndpointActions)

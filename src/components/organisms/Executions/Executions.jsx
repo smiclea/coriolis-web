@@ -196,7 +196,7 @@ class Executions extends React.Component {
           {DateUtils.getLocalTime(this.state.selectedExecution.created_at).format('DD MMMM YYYY HH:mm')}
         </ExecutionInfoDate>
         <ExecutionInfoId>
-          ID:&nbsp;<CopyValue width={107} value={this.state.selectedExecution.id} />
+          ID:&nbsp;<CopyValue width="107px" value={this.state.selectedExecution.id} />
         </ExecutionInfoId>
         {this.renderExecutionInfoButton()}
       </ExecutionInfo>

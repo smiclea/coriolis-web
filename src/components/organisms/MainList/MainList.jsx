@@ -2,11 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { MainListItem } from 'components'
+import { LoadingAnimation } from 'components'
 
 import Palette from '../../styleUtils/Palette'
-
-import loadingImage from './images/loading.svg'
 
 const Wrapper = styled.div`
   margin-top: 8px;
@@ -15,31 +13,17 @@ const Separator = styled.div`
   height: 1px;
   background: ${Palette.grayscale[1]};;
 `
-
 const Loading = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  clear: both;
   margin-top: 88px;
-`
-const LoadingAnimation = styled.div`
-  width: 96px;
-  height: 96px;
-  background: url('${loadingImage}') center no-repeat;
-  animation: rotate 1s linear infinite;
-
-  @keyframes rotate {
-    0% {transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
-  }
 `
 const LoadingText = styled.div`
   font-size: 18px;
   margin-top: 39px;
 `
-
 const List = styled.div``
 
 const NoResults = styled.div`

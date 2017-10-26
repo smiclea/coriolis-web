@@ -163,7 +163,7 @@ class MainDetails extends React.Component {
             <Row marginBottom>
               <Field>
                 <Label>Id</Label>
-                <CopyValue value={this.props.item.id} />
+                <CopyValue value={this.props.item.id} width="192px" />
               </Field>
             </Row>
             <Row>

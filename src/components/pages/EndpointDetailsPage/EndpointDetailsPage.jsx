@@ -9,6 +9,8 @@ import {
   DetailsContentHeader,
   EndpointDetailsContent,
   ConfirmationModal,
+  Modal,
+  EndpointValidation,
 } from 'components'
 
 import EndpointStore from '../../../stores/EndpointStore'
@@ -44,6 +46,7 @@ class EndpointDetailsPage extends React.Component {
 
     this.state = {
       showDeleteEndpointConfirmation: false,
+      showValidationModal: false,
     }
   }
 
@@ -86,6 +89,19 @@ class EndpointDetailsPage extends React.Component {
     this.setState({ showDeleteEndpointConfirmation: false })
   }
 
+  handleValidateClick() {
+    EndpointActions.validate(this.getEndpoint())
+    this.setState({ showValidationModal: true })
+  }
+
+  handleRetryValidation() {
+    EndpointActions.validate(this.getEndpoint())
+  }
+
+  handleCloseValidationModal() {
+    this.setState({ showValidationModal: false })
+  }
+
   loadData() {
     EndpointActions.getEndpoints()
 
@@ -118,6 +134,7 @@ class EndpointDetailsPage extends React.Component {
             item={this.getEndpoint()}
             connectionInfo={this.props.endpointStore.connectionInfo}
             onDeleteClick={() => { this.handleDeleteEndpointClick() }}
+            onValidateClick={() => { this.handleValidateClick() }}
           />}
         />
         <ConfirmationModal
@@ -128,6 +145,18 @@ class EndpointDetailsPage extends React.Component {
           onConfirmation={() => { this.handleDeleteEndpointConfirmation() }}
           onRequestClose={() => { this.handleCloseDeleteEndpointConfirmation() }}
         />
+        <Modal
+          isOpen={this.state.showValidationModal}
+          title="Validate Endpoint"
+          onRequestClose={() => { this.handleCloseValidationModal() }}
+        >
+          <EndpointValidation
+            validation={this.props.endpointStore.validation}
+            loading={this.props.endpointStore.validationLoading}
+            onCancelClick={() => { this.handleCloseValidationModal() }}
+            onRetryClick={() => { this.handleRetryValidation() }}
+          />
+        </Modal>
       </Wrapper>
     )
   }

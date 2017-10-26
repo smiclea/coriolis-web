@@ -67,6 +67,19 @@ class EdnpointSource {
       }, reject).catch(reject)
     })
   }
+
+  static validate(endpoint) {
+    return new Promise((resolve, reject) => {
+      let projectId = cookie.get('projectId')
+      Api.sendAjaxRequest({
+        url: `${servicesUrl.coriolis}/${projectId}/endpoints/${endpoint.id}/actions`,
+        method: 'POST',
+        data: { 'validate-connection': null },
+      }).then(response => {
+        resolve(response.data['validate-connection'])
+      }, reject).catch(reject)
+    })
+  }
 }
 
 export default EdnpointSource

@@ -141,7 +141,7 @@ class TaskItem extends React.Component {
 
   renderDependsOnValue() {
     if (this.props.item.depends_on && this.props.item.depends_on[0]) {
-      return <CopyValue value={this.props.item.depends_on[0]} autoWidth />
+      return <CopyValue value={this.props.item.depends_on[0]} width="auto" />
     }
 
     return <Value>N/A</Value>
@@ -204,7 +204,7 @@ class TaskItem extends React.Component {
             <Column>
               <Row>
                 <Label>ID</Label>
-                <CopyValue value={this.props.item.id} autoWidth />
+                <CopyValue value={this.props.item.id} width="auto" />
               </Row>
               <Row>
                 <Label>Depends on</Label>

@@ -21,6 +21,7 @@ const Info = styled.div`
 const Field = styled.div`
   margin-bottom: 32px;
   min-width: 50%;
+  max-width: 50%;
 `
 const Label = styled.div`
   font-size: 10px;
@@ -48,6 +49,7 @@ class EndpointDetailsContent extends React.Component {
     item: PropTypes.object,
     connectionInfo: PropTypes.object,
     onDeleteClick: PropTypes.func,
+    onValidateClick: PropTypes.func,
   }
 
   isUrl(value) {
@@ -85,7 +87,7 @@ class EndpointDetailsContent extends React.Component {
       if (key === 'password') {
         valueClass = <PasswordValue value={value} />
       } else if (this.isUrl(value)) {
-        valueClass = <CopyValue value={value} autoWidth />
+        valueClass = <CopyValue value={value} maxWidth="90%" />
       } else {
         valueClass = <Value>{value}</Value>
       }
