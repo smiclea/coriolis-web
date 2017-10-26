@@ -17,8 +17,10 @@ const Label = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  width: ${props => props.small ? 174 : StyleProps.inputSize.width - 2}px;
-  height: ${StyleProps.inputSize.height - 2}px;
+  width: ${props => props.large ? StyleProps.inputSizes.large.width - 2
+    : StyleProps.inputSizes.regular.width - 2}px;
+  height: ${props => props.large ? StyleProps.inputSizes.large.height - 2
+    : StyleProps.inputSizes.regular.height - 2}px;
   border: 1px solid ${Palette.grayscale[3]};
   border-radius: ${StyleProps.borderRadius};
   cursor: pointer;

@@ -16,7 +16,8 @@ const List = styled.div`
   top: 45px;
   background: white;
   cursor: pointer;
-  width: ${props => props.small ? 174 : StyleProps.inputSize.width - 2}px;
+  width: ${props => props.large ? StyleProps.inputSizes.large.width - 2
+    : StyleProps.inputSizes.regular.width - 2}px;
   border: 1px solid ${Palette.grayscale[3]};
   border-radius: ${StyleProps.borderRadius};
   z-index: 10;
@@ -98,7 +99,7 @@ class Dropdown extends React.Component {
     let labelField = this.props.labelField || 'label'
 
     if (item) {
-      return item[labelField].toString() || item.toString()
+      return (item[labelField] && item[labelField].toString()) || item.toString()
     }
 
     return this.props.noSelectionMessage

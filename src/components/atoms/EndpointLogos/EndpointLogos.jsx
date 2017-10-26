@@ -16,6 +16,13 @@ import openstackMediumImage from './images/openstack-medium.svg'
 import oraclevmMediumImage from './images/oraclevm-medium.svg'
 import vmwareMediumImage from './images/vmware-medium.svg'
 
+import awsLargeImage from './images/aws-large.svg'
+import azureLargeImage from './images/azure-large.svg'
+import opcLargeImage from './images/opc-large.svg'
+import openstackLargeImage from './images/openstack-large.svg'
+import oraclevmLargeImage from './images/oraclevm-large.svg'
+import vmwareLargeImage from './images/vmware-large.svg'
+
 import awsDefaultImage from './images/aws.svg'
 import azureDefaultImage from './images/azure.svg'
 import opcDefaultImage from './images/opc.svg'
@@ -27,35 +34,40 @@ const endpointImages = {
   azure: {
     small: azureSmallImage,
     medium: azureMediumImage,
+    large: azureLargeImage,
     defaultSize: azureDefaultImage,
   },
   openstack: {
     small: openstackSmallImage,
     medium: openstackMediumImage,
+    large: openstackLargeImage,
     defaultSize: openstackDefaultImage,
   },
   opc: {
     small: opcSmallImage,
     medium: opcMediumImage,
+    large: opcLargeImage,
     defaultSize: opcDefaultImage,
   },
   oracle_vm: {
     small: oraclevmSmallImage,
     medium: oraclevmMediumImage,
+    large: oraclevmLargeImage,
     defaultSize: oraclevmDefaultImage,
   },
   vmware_vsphere: {
     small: vmwareSmallImage,
     medium: vmwareMediumImage,
+    large: vmwareLargeImage,
     defaultSize: vmwareDefaultImage,
   },
   aws: {
     small: awsSmallImage,
     medium: awsMediumImage,
+    large: awsLargeImage,
     defaultSize: awsDefaultImage,
   },
 }
-
 const Wrapper = styled.div``
 const SmallLogo = styled.div`
   width: 80px;
@@ -67,6 +79,11 @@ const MediumLogo = styled.div`
   height: 45px;
   background: url('${props => endpointImages[props.endpoint].medium}') no-repeat center;
 `
+const LargeLogo = styled.div`
+  width: 192px;
+  height: 128px;
+  background: url('${props => endpointImages[props.endpoint].large}') no-repeat center;
+`
 const DefaultLogo = styled.div`
   width: 192px;
   height: 64px;
@@ -77,6 +94,7 @@ class EndpointLogos extends React.Component {
   static propTypes = {
     small: PropTypes.bool,
     medium: PropTypes.bool,
+    large: PropTypes.bool,
     endpoint: PropTypes.string,
   }
 
@@ -87,9 +105,10 @@ class EndpointLogos extends React.Component {
 
     let small = this.props.small ? <SmallLogo endpoint={this.props.endpoint} /> : null
     let medium = this.props.medium ? <MediumLogo endpoint={this.props.endpoint} /> : null
+    let large = this.props.large ? <LargeLogo endpoint={this.props.endpoint} /> : null
     let defaultLogo = null
 
-    if (!small && !medium) {
+    if (!small && !medium && !large) {
       defaultLogo = <DefaultLogo endpoint={this.props.endpoint} />
     }
 
@@ -97,6 +116,7 @@ class EndpointLogos extends React.Component {
       <Wrapper>
         {small}
         {medium}
+        {large}
         {defaultLogo}
       </Wrapper>
     )

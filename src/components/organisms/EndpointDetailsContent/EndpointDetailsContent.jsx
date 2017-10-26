@@ -50,6 +50,7 @@ class EndpointDetailsContent extends React.Component {
     connectionInfo: PropTypes.object,
     onDeleteClick: PropTypes.func,
     onValidateClick: PropTypes.func,
+    onEditClick: PropTypes.func,
   }
 
   isUrl(value) {

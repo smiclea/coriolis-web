@@ -66,7 +66,7 @@ const LoginErrorText = styled.div`
   color: white;
   font-size: 12px;
   margin-top: 4px;
-  width: ${StyleProps.inputSize.width}px;
+  width: ${StyleProps.inputSizes.regular.width}px;
   text-align: center;
 `
 

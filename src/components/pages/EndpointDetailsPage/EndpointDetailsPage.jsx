@@ -11,10 +11,13 @@ import {
   ConfirmationModal,
   Modal,
   EndpointValidation,
+  Endpoint,
 } from 'components'
 
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
+import ProviderStore from '../../../stores/ProviderStore'
+import ProviderActions from '../../../actions/ProviderActions'
 import UserStore from '../../../stores/UserStore'
 import UserActions from '../../../actions/UserActions'
 import Wait from '../../../utils/Wait'
@@ -28,16 +31,18 @@ class EndpointDetailsPage extends React.Component {
     match: PropTypes.object,
     endpointStore: PropTypes.object,
     userStore: PropTypes.object,
+    providerStore: PropTypes.object,
   }
 
   static getStores() {
-    return [EndpointStore, UserStore]
+    return [EndpointStore, UserStore, ProviderStore]
   }
 
   static getPropsFromStores() {
     return {
       endpointStore: EndpointStore.getState(),
       userStore: UserStore.getState(),
+      providerStore: ProviderStore.getState(),
     }
   }
 
@@ -47,6 +52,7 @@ class EndpointDetailsPage extends React.Component {
     this.state = {
       showDeleteEndpointConfirmation: false,
       showValidationModal: false,
+      showEndpointModal: false,
     }
   }
 
@@ -102,6 +108,15 @@ class EndpointDetailsPage extends React.Component {
     this.setState({ showValidationModal: false })
   }
 
+  handleEditClick() {
+    ProviderActions.getConnectionInfoSchema(this.getEndpoint().type)
+    this.setState({ showEndpointModal: true })
+  }
+
+  handleCloseEndpointModal() {
+    this.setState({ showEndpointModal: false })
+  }
+
   loadData() {
     EndpointActions.getEndpoints()
 
@@ -135,6 +150,7 @@ class EndpointDetailsPage extends React.Component {
             connectionInfo={this.props.endpointStore.connectionInfo}
             onDeleteClick={() => { this.handleDeleteEndpointClick() }}
             onValidateClick={() => { this.handleValidateClick() }}
+            onEditClick={() => { this.handleEditClick() }}
           />}
         />
         <ConfirmationModal
@@ -155,6 +171,18 @@ class EndpointDetailsPage extends React.Component {
             loading={this.props.endpointStore.validationLoading}
             onCancelClick={() => { this.handleCloseValidationModal() }}
             onRetryClick={() => { this.handleRetryValidation() }}
+          />
+        </Modal>
+        <Modal
+          isOpen={this.state.showEndpointModal}
+          title="Edit Endpoint"
+          onRequestClose={() => { this.handleCloseEndpointModal() }}
+        >
+          <Endpoint
+            connectionInfo={this.props.endpointStore.connectionInfo}
+            schema={this.props.providerStore.connectionInfoSchema}
+            endpoint={this.getEndpoint()}
+            onCancelClick={() => { this.handleCloseEndpointModal() }}
           />
         </Modal>
       </Wrapper>

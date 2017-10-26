@@ -5,11 +5,13 @@ import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
 const Input = styled.input`
-  height: ${StyleProps.inputSize.height}px;
+  width: ${props => props.large ? StyleProps.inputSizes.large.width
+    : StyleProps.inputSizes.regular.width}px;
+  height: ${StyleProps.inputSizes.regular.height}px;
   border-radius: ${StyleProps.borderRadius};
   background-color: #FFF;
   border: 1px solid ${Palette.grayscale[3]};
-  color: ${Palette.grayscale[4]};
+  color: ${Palette.black};
   padding: 0 8px 0 16px;
   font-size: inherit;
   transition: all ${StyleProps.animations.swift};

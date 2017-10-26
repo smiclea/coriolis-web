@@ -8,7 +8,10 @@ const StyleProps = {
     bold: '600',
   },
 
-  inputSize: { width: 176, height: 32 },
+  inputSizes: {
+    regular: { width: 176, height: 32 },
+    large: { width: 224, height: 32 },
+  },
 
   borderRadius: '4px',
 

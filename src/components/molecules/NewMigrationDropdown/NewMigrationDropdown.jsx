@@ -167,7 +167,6 @@ class NewMigrationDropdown extends React.Component {
           value="New"
           primary
           centered
-          small
         />
         {this.renderList()}
       </Wrapper>

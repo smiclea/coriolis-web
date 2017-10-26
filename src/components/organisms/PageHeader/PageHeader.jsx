@@ -57,7 +57,6 @@ class PageHeader extends React.Component {
             onChange={this.props.onProjectChange}
             noItemsMessage="Loading..."
             labelField="name"
-            small
           />
           <NewMigrationDropdown />
           <NotificationDropdown />

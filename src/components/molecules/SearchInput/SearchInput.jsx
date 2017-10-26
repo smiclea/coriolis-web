@@ -18,7 +18,7 @@ const Input = styled(TextInput) `
 `
 const InputAnimation = css`
   ${Input} {
-    width: ${StyleProps.inputSize.width}px;
+    width: ${StyleProps.inputSizes.regular.width}px;
     opacity: 1;
   }
 `

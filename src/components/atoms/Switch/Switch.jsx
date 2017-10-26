@@ -7,6 +7,8 @@ import StyleProps from '../../styleUtils/StyleProps'
 
 const Wrapper = styled.div`
   display: flex;
+  height: ${StyleProps.inputSizes.regular.height}px;
+  align-items: center;
 `
 const InputWrapper = styled.div`
   position: relative;

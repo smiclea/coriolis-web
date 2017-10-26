@@ -21,6 +21,7 @@ const Content = styled.div`
   overflow: auto;
 `
 const List = styled.div`
+  padding-bottom: 32px;
 `
 const Header = styled.div`
 `

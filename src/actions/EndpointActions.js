@@ -5,15 +5,15 @@ import EndpointSource from '../sources/EndpointSource'
 class EndpointActions {
   getEndpoints() {
     EndpointSource.getEndpoints().then(
-      this.getEndpointsCompleted.bind(this),
-      this.getEndpointsFailed.bind(this)
-    ).catch(this.getEndpointsFailed.bind(this))
+      endpoints => { this.getEndpointsCompleted(endpoints) },
+      response => { this.getEndpointsFailed(response) }
+    )
 
     return true
   }
 
-  getEndpointsCompleted(response) {
-    return response || true
+  getEndpointsCompleted(endpoints) {
+    return endpoints
   }
 
   getEndpointsFailed(response) {

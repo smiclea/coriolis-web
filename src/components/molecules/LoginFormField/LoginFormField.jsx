@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `
 
 const StyledTextInput = styled(TextInput) `
-  width: ${StyleProps.inputSize.width}px;
+  width: ${StyleProps.inputSizes.regular.width}px;
 `
 
 const LoginFormField = ({ label, ...props }) => {

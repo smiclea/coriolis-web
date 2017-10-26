@@ -107,7 +107,6 @@ class MainListFilter extends React.Component {
             {this.props.selectionInfo.label}(s) selected
           </SelectionText>
           <Dropdown
-            small
             noSelectionMessage="Select an action"
             items={this.props.actions}
             onChange={item => { this.props.onActionChange(item.value) }}
