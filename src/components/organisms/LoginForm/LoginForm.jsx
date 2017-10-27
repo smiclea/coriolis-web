@@ -74,7 +74,7 @@ class LoginForm extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     loading: PropTypes.bool,
-    loginFailed: PropTypes.bool,
+    loginFailedResponse: PropTypes.object,
     onFormSubmit: PropTypes.func,
   }
 
@@ -113,6 +113,32 @@ class LoginForm extends React.Component {
     }
   }
 
+  renderErrorMessage() {
+    if (!this.props.loginFailedResponse) {
+      return null
+    }
+
+    let errorMessage = 'Request failed, there might be a problem with the connection to the server.'
+
+    if (this.props.loginFailedResponse.status) {
+      switch (this.props.loginFailedResponse.status) {
+        case 401:
+          errorMessage = 'The username or password did not match. Please try again.'
+          break
+        default:
+      }
+    }
+
+    return (
+      <LoginError>
+        <LoginErrorIcon />
+        <LoginErrorText>
+          {errorMessage}
+        </LoginErrorText>
+      </LoginError>
+    )
+  }
+
   render() {
     let loginSeparator = loginButtons.length ? (
       <LoginSeparator>
@@ -125,18 +151,9 @@ class LoginForm extends React.Component {
     let buttonContent = this.props.loading ?
       <span>Please wait ... <SpinnerLayout /></span> : 'Login'
 
-    let loginError = this.props.loginFailed ? (
-      <LoginError>
-        <LoginErrorIcon />
-        <LoginErrorText>
-          The username or password did not match. Please try again.
-        </LoginErrorText>
-      </LoginError>
-    ) : null
-
     return (
       <Form className={this.props.className} onSubmit={this.handleFormSubmit}>
-        {loginError}  
+        {this.renderErrorMessage()}
         <LoginOptions />
         {loginSeparator}
         <FormFields>

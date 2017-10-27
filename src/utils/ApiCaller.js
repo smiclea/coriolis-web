@@ -84,8 +84,11 @@ class ApiCaller {
       }
 
       request.onerror = (result) => {
-        NotificationActions.notify(`Request failed, there might be a problem with the 
+        let loginUrl = '#/'
+        if (window.location.hash !== loginUrl) {
+          NotificationActions.notify(`Request failed, there might be a problem with the 
           connection to the server.`, 'error')
+        }
 
         console.log('Error Response: ', result.data) // eslint-disable-line no-console
         reject({ status: 500, data: 'Connection error' })

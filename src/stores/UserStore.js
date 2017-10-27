@@ -5,7 +5,7 @@ class UserStore {
   constructor() {
     this.user = null
     this.loading = false
-    this.loginFailed = false
+    this.loginFailedResponse = null
 
     this.bindListeners({
       handleLogin: UserActions.LOGIN,
@@ -22,12 +22,12 @@ class UserStore {
   handleLogin() {
     this.loading = true
     this.user = null
-    this.loginFailed = false
+    this.loginFailedResponse = null
   }
 
-  handleLoginFailed() {
+  handleLoginFailed(response) {
     this.loading = false
-    this.loginFailed = true
+    this.loginFailedResponse = response
   }
 
   handleLoginScopedSuccess(data) {
@@ -35,10 +35,10 @@ class UserStore {
     this.loading = false
   }
 
-  handleLoginScopedFailed() {
+  handleLoginScopedFailed(response) {
     this.user = null
     this.loading = false
-    this.loginFailed = false
+    this.loginFailedResponse = response
   }
 
   handleTokenLogin() {

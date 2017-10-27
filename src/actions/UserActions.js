@@ -17,8 +17,8 @@ class UserActions {
     return true
   }
 
-  loginFailed() {
-    return true
+  loginFailed(response) {
+    return response || true
   }
 
   loginScoped(projectId) {

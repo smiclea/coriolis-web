@@ -53,7 +53,7 @@ const Footer = styled.div`
 class LoginPage extends React.Component {
   static propTypes = {
     loading: PropTypes.bool,
-    loginFailed: PropTypes.bool,
+    loginFailedResponse: PropTypes.object,
     user: PropTypes.object,
   }
 
@@ -101,7 +101,7 @@ class LoginPage extends React.Component {
             <StyledLoginForm
               onFormSubmit={data => this.handleFormSubmit(data)}
               loading={this.props.loading}
-              loginFailed={this.props.loginFailed}
+              loginFailedResponse={this.props.loginFailedResponse}
             />
             <Footer />
           </Content>
