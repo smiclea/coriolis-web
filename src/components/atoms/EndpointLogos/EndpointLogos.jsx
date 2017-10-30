@@ -113,7 +113,7 @@ class EndpointLogos extends React.Component {
     }
 
     return (
-      <Wrapper>
+      <Wrapper {...this.props}>
         {small}
         {medium}
         {large}

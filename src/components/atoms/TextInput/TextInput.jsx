@@ -29,7 +29,7 @@ const Input = styled.input`
     outline: none;
   }
   &:disabled {
-    color: ${Palette.grayscale[0]};
+    color: ${Palette.grayscale[3]};
     border-color: ${Palette.grayscale[0]};
     background-color: ${Palette.grayscale[0]};
   }

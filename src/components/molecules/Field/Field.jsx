@@ -29,11 +29,13 @@ class Field extends React.Component {
     required: PropTypes.bool,
     large: PropTypes.bool,
     highlight: PropTypes.bool,
+    disabled: PropTypes.bool,
   }
 
   renderSwitch() {
     return (
       <Switch
+        disabled={this.props.disabled}
         checked={this.props.value}
         onChange={checked => { this.props.onChange(checked) }}
       />
@@ -50,6 +52,7 @@ class Field extends React.Component {
         value={this.props.value}
         onChange={e => { this.props.onChange(e.target.value) }}
         placeholder={this.props.label}
+        disabled={this.props.disabled}
       />
     )
   }
@@ -70,6 +73,7 @@ class Field extends React.Component {
         selectedItem={this.props.value}
         items={items}
         onChange={item => this.props.onChange(item)}
+        disabled={this.props.disabled}
       />
     )
   }
@@ -80,6 +84,7 @@ class Field extends React.Component {
         checked={this.props.value}
         label={this.props.label}
         onChange={e => this.props.onChange(e.target.checked)}
+        disabled={this.props.disabled}
       />
     )
   }

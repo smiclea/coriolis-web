@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { LoginFormField, Button, LoginOptions, Spinner } from 'components'
+import { LoginFormField, Button, LoginOptions, LoadingButton } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 
@@ -41,12 +41,6 @@ const SeparatorText = styled.div`
   color: white;
   flex-grow: 1;
   text-align: center;
-`
-
-const SpinnerLayout = styled(Spinner)`
-  position: absolute;
-  top: 8px;
-  right: 8px;
 `
 const LoginError = styled.div`
   display: flex;
@@ -148,8 +142,10 @@ class LoginForm extends React.Component {
       </LoginSeparator>
     ) : null
 
-    let buttonContent = this.props.loading ?
-      <span>Please wait ... <SpinnerLayout /></span> : 'Login'
+    let buttonStyle = { width: '100%', marginTop: '16px' }
+    let button = this.props.loading ?
+      <LoadingButton style={buttonStyle}>Please wait ... </LoadingButton>
+      : <Button style={buttonStyle}>Login</Button>
 
     return (
       <Form className={this.props.className} onSubmit={this.handleFormSubmit}>
@@ -171,9 +167,7 @@ class LoginForm extends React.Component {
             type="password"
           />
         </FormFields>
-        <Button style={{ position: 'relative', width: '100%', marginTop: '16px' }} disabled={this.props.loading}>
-          {buttonContent}
-        </Button>
+        {button}
       </Form>
     )
   }

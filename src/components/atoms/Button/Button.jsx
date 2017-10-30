@@ -62,8 +62,10 @@ const StyledButton = styled.button`
   ${props => border(props)}
   color: ${props => color(props)};
   padding: 0;
-  min-width: ${StyleProps.inputSizes.regular.width}px;
-  max-width: ${StyleProps.inputSizes.regular.width}px;
+  min-width: ${props => props.large ? StyleProps.inputSizes.large.width
+    : StyleProps.inputSizes.regular.width}px;
+  max-width: ${props => props.large ? StyleProps.inputSizes.large.width
+    : StyleProps.inputSizes.regular.width}px;
   cursor: pointer;
   font-size: inherit;
   &:disabled {

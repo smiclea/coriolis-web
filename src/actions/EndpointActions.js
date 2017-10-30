@@ -67,6 +67,31 @@ class EndpointActions {
   validateFailed(response) {
     return response || true
   }
+
+  clearValidation() {
+    return true
+  }
+
+  update(endpoint) {
+    EndpointSource.update(endpoint).then(
+      endpointResponse => { this.updateSuccess(endpointResponse) },
+      response => { this.updateFailed(response) },
+    )
+
+    return endpoint
+  }
+
+  updateSuccess(endpoint) {
+    return endpoint
+  }
+
+  updateFailed(response) {
+    return response || true
+  }
+
+  clearConnectionInfo() {
+    return true
+  }
 }
 
 export default alt.createActions(EndpointActions)

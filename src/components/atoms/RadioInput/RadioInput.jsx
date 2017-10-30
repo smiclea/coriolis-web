@@ -7,7 +7,9 @@ import StyleProps from '../../styleUtils/StyleProps'
 
 import checkedImage from './images/checked.svg'
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  ${props => props.disabled ? 'opacity: 0.5;' : ''}
+`
 const LabelStyled = styled.label`
   display: flex;
 `
@@ -40,7 +42,7 @@ class RadioInput extends React.Component {
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper {...this.props}>
         <LabelStyled>
           <InputStyled type="radio" {...this.props} />
           <Text>{this.props.label}</Text>

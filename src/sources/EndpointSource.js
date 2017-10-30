@@ -2,8 +2,22 @@ import cookie from 'js-cookie'
 import moment from 'moment'
 
 import Api from '../utils/ApiCaller'
+import { SchemaParser } from './Schemas'
 
 import { servicesUrl } from '../config'
+
+let getBarbicanPayload = data => {
+  return {
+    payload: JSON.stringify(data),
+    payload_content_type: 'text/plain',
+    algorithm: 'aes',
+    bit_length: 256,
+    mode: 'cbc',
+    content_types: {
+      default: 'text/plain',
+    },
+  }
+}
 
 class EdnpointSource {
   static getEndpoints() {
@@ -78,6 +92,68 @@ class EdnpointSource {
       }).then(response => {
         resolve(response.data['validate-connection'])
       }, reject).catch(reject)
+    })
+  }
+
+  static update(endpoint) {
+    return new Promise((resolve, reject) => {
+      let projectId = cookie.get('projectId')
+      let payload = SchemaParser.fieldsToPayload(endpoint)
+
+      if (endpoint.connection_info && endpoint.connection_info.secret_ref) {
+        let uuidIndex = endpoint.connection_info.secret_ref.lastIndexOf('/')
+        let uuid = endpoint.connection_info.secret_ref.substr(uuidIndex + 1)
+
+        Api.sendAjaxRequest({
+          url: `${servicesUrl.barbican}/v1/secrets/${uuid}`,
+          method: 'DELETE',
+        })
+
+        Api.sendAjaxRequest({
+          url: `${servicesUrl.barbican}/v1/secrets`,
+          method: 'POST',
+          data: getBarbicanPayload(payload.connection_info),
+        }).then(response => {
+          let connectionInfo = { secret_ref: response.data.secret_ref }
+          let newPayload = {
+            endpoint: {
+              name: payload.name,
+              description: payload.description,
+              connection_info: connectionInfo,
+            },
+          }
+          Api.sendAjaxRequest({
+            url: `${servicesUrl.coriolis}/${projectId}/endpoints/${endpoint.id}`,
+            method: 'PUT',
+            data: newPayload,
+          }).then(putResponse => {
+            uuidIndex = connectionInfo.secret_ref.lastIndexOf('/')
+            uuid = connectionInfo.secret_ref.substr(uuidIndex + 1)
+            let newEndpoint = putResponse.data.endpoint
+
+            Api.sendAjaxRequest({
+              url: `${servicesUrl.barbican}/v1/secrets/${uuid}/payload`,
+              method: 'GET',
+              json: false,
+              headers: { Accept: 'text/plain' },
+            }).then(conInfoResponse => {
+              newEndpoint.connection_info = {
+                ...newEndpoint.connection_info,
+                ...JSON.parse(conInfoResponse.data),
+              }
+              resolve(newEndpoint)
+            }, reject).catch(reject)
+          }, reject).catch(reject)
+        }, reject).catch(reject)
+      } else {
+        Api.sendAjaxRequest({
+          url: `${servicesUrl.coriolis}/${projectId}/endpoints/${endpoint.id}`,
+          method: 'PUT',
+          data: { endpoint: payload },
+        }).then(response => {
+          resolve(response.data.endpoint)
+        }, reject).catch(reject)
+      }
     })
   }
 }

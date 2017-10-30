@@ -71,6 +71,7 @@ class Dropdown extends React.Component {
     onChange: PropTypes.func,
     noItemsMessage: PropTypes.string,
     noSelectionMessage: PropTypes.string,
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -112,6 +113,10 @@ class Dropdown extends React.Component {
   }
 
   handleButtonClick() {
+    if (this.props.disabled) {
+      return
+    }
+
     this.setState({ showDropdownList: !this.state.showDropdownList })
   }
 

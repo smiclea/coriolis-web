@@ -4,7 +4,7 @@ const SchemaTypes = {
   REPLICA: 4,
 }
 
-let parse = schema => {
+let parseToFields = schema => {
   let fields = Object.keys(schema.properties).map(fieldName => {
     let field = {
       ...schema.properties[fieldName],
@@ -25,25 +25,25 @@ let parse = schema => {
     if (sortPriority[b.name] || (!a.required && b.required)) {
       return 1
     }
-    return 0
+    return a.name.localeCompare(b.name)
   })
 
   return fields
 }
 
-let parsers = {
-  general: (schema, schemaType) => {
-    return parse(schema.oneOf[0], schemaType)
+let parsersToFields = {
+  general: schema => {
+    return parseToFields(schema.oneOf[0])
   },
   azure: schema => {
-    let commonFields = parse(schema).filter(f => f.type !== 'object' && f.name !== 'secret_ref')
+    let commonFields = parseToFields(schema).filter(f => f.type !== 'object' && f.name !== 'secret_ref')
 
     let getOption = (option) => {
       return {
         name: option,
         type: 'radio',
         fields: [
-          ...parse(schema.properties[option]),
+          ...parseToFields(schema.properties[option]),
           ...commonFields,
         ],
       }
@@ -51,7 +51,7 @@ let parsers = {
 
     let radioGroup = {
       name: 'login_type',
-      value: 'user_credentials',
+      default: 'user_credentials',
       type: 'radio-group',
       items: [getOption('user_credentials'), getOption('service_principal_credentials')],
     }
@@ -60,7 +60,32 @@ let parsers = {
   },
 }
 
+let parseToPayload = (data, schema) => {
+  let info = {}
+
+  Object.keys(schema.properties).forEach(fieldName => {
+    if (data[fieldName] && typeof data[fieldName] !== 'object') {
+      info[fieldName] = data[fieldName]
+    }
+  })
+
+  return info
+}
+
+let parsersToPayload = {
+  general: (data, schema) => {
+    return parseToPayload(data, schema.oneOf[0])
+  },
+  azure: (data, schema) => {
+    let payload = parseToPayload(data, schema)
+    payload[data.login_type] = parseToPayload(data, schema.properties[data.login_type])
+    return payload
+  },
+}
+
 class SchemaParser {
+  static storedSchemas = {}
+
   static generateField(name, label, required = false) {
     return {
       name,
@@ -70,12 +95,16 @@ class SchemaParser {
     }
   }
 
-  static parseConnectionSchema(provider, schema) {
-    if (!parsers[provider]) {
+  static schemaToFields(provider, schema) {
+    if (!this.storedSchemas[provider]) {
+      this.storedSchemas[provider] = schema
+    }
+
+    if (!parsersToFields[provider]) {
       provider = 'general'
     }
 
-    let fields = parsers[provider](schema)
+    let fields = parsersToFields[provider](schema)
 
     fields = [
       this.generateField('name', 'Endpoint Name', true),
@@ -84,6 +113,22 @@ class SchemaParser {
     ]
 
     return fields
+  }
+
+  static fieldsToPayload(data) {
+    let storedSchema = this.storedSchemas[data.type] || this.storedSchemas.general
+    let payload = {}
+
+    payload.name = data.name
+    payload.description = data.description
+
+    if (parsersToPayload[data.type]) {
+      payload.connection_info = parsersToPayload[data.type](data, storedSchema)
+    } else {
+      payload.connection_info = parsersToPayload.general(data, storedSchema)
+    }
+
+    return payload
   }
 }
 

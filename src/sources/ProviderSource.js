@@ -15,9 +15,9 @@ class ProviderSource {
         method: 'GET',
       }).then(response => {
         let schema = response.data.schemas.connection_info_schema
-        schema = SchemaParser.parseConnectionSchema(providerName, schema)
+        schema = SchemaParser.schemaToFields(providerName, schema)
         resolve(schema)
-      }, reject).catch(response => { console.error(response); reject(response) })
+      }, reject).catch(reject)
     })
   }
 }

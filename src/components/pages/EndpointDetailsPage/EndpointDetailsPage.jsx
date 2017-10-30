@@ -16,8 +16,6 @@ import {
 
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
-import ProviderStore from '../../../stores/ProviderStore'
-import ProviderActions from '../../../actions/ProviderActions'
 import UserStore from '../../../stores/UserStore'
 import UserActions from '../../../actions/UserActions'
 import Wait from '../../../utils/Wait'
@@ -31,18 +29,16 @@ class EndpointDetailsPage extends React.Component {
     match: PropTypes.object,
     endpointStore: PropTypes.object,
     userStore: PropTypes.object,
-    providerStore: PropTypes.object,
   }
 
   static getStores() {
-    return [EndpointStore, UserStore, ProviderStore]
+    return [EndpointStore, UserStore]
   }
 
   static getPropsFromStores() {
     return {
       endpointStore: EndpointStore.getState(),
       userStore: UserStore.getState(),
-      providerStore: ProviderStore.getState(),
     }
   }
 
@@ -60,6 +56,10 @@ class EndpointDetailsPage extends React.Component {
     document.title = 'Endpoint Details'
 
     this.loadData()
+  }
+
+  componentWillUnmount() {
+    EndpointActions.clearConnectionInfo()
   }
 
   getEndpoint() {
@@ -105,12 +105,16 @@ class EndpointDetailsPage extends React.Component {
   }
 
   handleCloseValidationModal() {
+    EndpointActions.clearValidation()
     this.setState({ showValidationModal: false })
   }
 
   handleEditClick() {
-    ProviderActions.getConnectionInfoSchema(this.getEndpoint().type)
     this.setState({ showEndpointModal: true })
+  }
+
+  handleEditValidateClick(endpoint) {
+    EndpointActions.validate(endpoint)
   }
 
   handleCloseEndpointModal() {
@@ -179,9 +183,8 @@ class EndpointDetailsPage extends React.Component {
           onRequestClose={() => { this.handleCloseEndpointModal() }}
         >
           <Endpoint
-            connectionInfo={this.props.endpointStore.connectionInfo}
-            schema={this.props.providerStore.connectionInfoSchema}
             endpoint={this.getEndpoint()}
+            onValidateClick={endpoint => this.handleEditValidateClick(endpoint)}
             onCancelClick={() => { this.handleCloseEndpointModal() }}
           />
         </Modal>

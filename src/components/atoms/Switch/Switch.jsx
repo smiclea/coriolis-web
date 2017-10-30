@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   height: ${StyleProps.inputSizes.regular.height}px;
   align-items: center;
+  ${props => props.disabled ? 'opacity: 0.5;' : ''}
 `
 const InputWrapper = styled.div`
   position: relative;
@@ -22,7 +23,7 @@ const Input = styled.input`
   margin: 0;
   padding: 0;
   opacity: 0;
-  cursor: pointer;
+  cursor: ${props => props.disabled ? 'default' : 'pointer'};
 `
 const InputBackground = styled.div`
   position: absolute;
@@ -54,6 +55,7 @@ class Switch extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
     checked: PropTypes.bool,
+    disabled: PropTypes.bool,
     checkedLabel: PropTypes.string,
     uncheckedLabel: PropTypes.string,
   }
@@ -71,6 +73,7 @@ class Switch extends React.Component {
         </InputBackground>
         <Input
           type="checkbox"
+          disabled={this.props.disabled}
           checked={this.props.checked}
           onChange={(e) => this.props.onChange(e.target.checked)}
         />
@@ -86,7 +89,7 @@ class Switch extends React.Component {
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper disabled={this.props.disabled}>
         {this.renderInput()}
         {this.renderLabel()}
       </Wrapper>
