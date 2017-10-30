@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { Switch, TextInput, Dropdown } from 'components'
+import { Switch, TextInput, Dropdown, RadioInput } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
@@ -26,7 +26,9 @@ class Field extends React.Component {
     minimum: PropTypes.number,
     maximum: PropTypes.number,
     password: PropTypes.bool,
+    required: PropTypes.bool,
     large: PropTypes.bool,
+    highlight: PropTypes.bool,
   }
 
   renderSwitch() {
@@ -41,10 +43,13 @@ class Field extends React.Component {
   renderTextInput() {
     return (
       <TextInput
+        required={this.props.required}
+        highlight={this.props.highlight}
         type={this.props.password ? 'password' : 'text'}
         large={this.props.large}
         value={this.props.value}
         onChange={e => { this.props.onChange(e.target.value) }}
+        placeholder={this.props.label}
       />
     )
   }
@@ -69,6 +74,16 @@ class Field extends React.Component {
     )
   }
 
+  renderRadioInput() {
+    return (
+      <RadioInput
+        checked={this.props.value}
+        label={this.props.label}
+        onChange={e => this.props.onChange(e.target.checked)}
+      />
+    )
+  }
+
   renderInput() {
     switch (this.props.type) {
       case 'boolean':
@@ -80,6 +95,8 @@ class Field extends React.Component {
           return this.renderIntDropdown()
         }
         return this.renderTextInput()
+      case 'radio':
+        return this.renderRadioInput()
       default:
         return null
     }
@@ -88,7 +105,7 @@ class Field extends React.Component {
   render() {
     return (
       <Wrapper className={this.props.className}>
-        <Label>{this.props.label}</Label>
+        {this.props.type !== 'radio' ? <Label>{this.props.label}</Label> : null}
         {this.renderInput()}
       </Wrapper>
     )

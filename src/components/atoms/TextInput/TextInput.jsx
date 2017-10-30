@@ -4,15 +4,20 @@ import styled from 'styled-components'
 import Palette from '../../styleUtils/Palette'
 import StyleProps from '../../styleUtils/StyleProps'
 
+import starImage from './images/star.svg'
+
+const Wrapper = styled.div`
+  position: relative;
+`
 const Input = styled.input`
   width: ${props => props.large ? StyleProps.inputSizes.large.width
     : StyleProps.inputSizes.regular.width}px;
   height: ${StyleProps.inputSizes.regular.height}px;
   border-radius: ${StyleProps.borderRadius};
   background-color: #FFF;
-  border: 1px solid ${Palette.grayscale[3]};
+  border: 1px solid ${props => props.highlight ? Palette.alert : Palette.grayscale[3]};
   color: ${Palette.black};
-  padding: 0 8px 0 16px;
+  padding: 0 ${props => props.required ? '29px' : '8px'} 0 16px;
   font-size: inherit;
   transition: all ${StyleProps.animations.swift};
   box-sizing: border-box;
@@ -32,15 +37,28 @@ const Input = styled.input`
     color: ${Palette.grayscale[3]};
   }
 `
+const Required = styled.div`
+  display: ${props => props.show ? 'block' : 'none'};
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  width: 8px;
+  height: 8px;
+  background: url('${starImage}') center no-repeat;
+`
 
-const TextInput = ({ _ref, ...props }) => {
+const TextInput = ({ _ref, required, ...props }) => {
   return (
-    <Input innerRef={_ref} type="text" {...props} />
+    <Wrapper>
+      <Input innerRef={_ref} type="text" required={required} {...props} />
+      <Required show={required} />
+    </Wrapper>
   )
 }
 
 TextInput.propTypes = {
   _ref: PropTypes.func,
+  required: PropTypes.bool,
 }
 
 export default TextInput

@@ -7,7 +7,6 @@ class EndpointStore {
     this.loading = false
     this.connectionInfo = null
     this.validationLoading = true
-    this.validation = null
 
     this.bindListeners({
       handleGetEndpoints: EndpointActions.GET_ENDPOINTS,

@@ -5,12 +5,11 @@ const SchemaTypes = {
 }
 
 let parse = schema => {
-  let oneOf = schema.oneOf[0]
-  let fields = Object.keys(oneOf.properties).map(fieldName => {
+  let fields = Object.keys(schema.properties).map(fieldName => {
     let field = {
-      ...oneOf.properties[fieldName],
+      ...schema.properties[fieldName],
       name: fieldName,
-      required: oneOf.required.find(k => k === fieldName) ? true : fieldName === 'username' || fieldName === 'password',
+      required: schema.required && schema.required.find(k => k === fieldName) ? true : fieldName === 'username' || fieldName === 'password',
     }
     return field
   })
@@ -33,18 +32,58 @@ let parse = schema => {
 }
 
 let parsers = {
+  general: (schema, schemaType) => {
+    return parse(schema.oneOf[0], schemaType)
+  },
   azure: schema => {
-    return []
+    let commonFields = parse(schema).filter(f => f.type !== 'object' && f.name !== 'secret_ref')
+
+    let getOption = (option) => {
+      return {
+        name: option,
+        type: 'radio',
+        fields: [
+          ...parse(schema.properties[option]),
+          ...commonFields,
+        ],
+      }
+    }
+
+    let radioGroup = {
+      name: 'login_type',
+      value: 'user_credentials',
+      type: 'radio-group',
+      items: [getOption('user_credentials'), getOption('service_principal_credentials')],
+    }
+
+    return [radioGroup]
   },
 }
 
 class SchemaParser {
-  static parse(provider, schema) {
+  static generateField(name, label, required = false) {
+    return {
+      name,
+      label,
+      type: 'string',
+      required,
+    }
+  }
+
+  static parseConnectionSchema(provider, schema) {
     if (!parsers[provider]) {
-      return parse(schema)
+      provider = 'general'
     }
 
-    return parsers[provider](schema)
+    let fields = parsers[provider](schema)
+
+    fields = [
+      this.generateField('name', 'Endpoint Name', true),
+      this.generateField('description', 'Endpoint Description'),
+      ...fields,
+    ]
+
+    return fields
   }
 }
 
