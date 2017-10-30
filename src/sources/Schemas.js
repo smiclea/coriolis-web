@@ -78,7 +78,7 @@ let parsersToPayload = {
   },
   azure: (data, schema) => {
     let payload = parseToPayload(data, schema)
-    payload[data.login_type] = parseToPayload(data, schema.properties[data.login_type])
+    payload[data.login_type] = parseToPayload(data[data.login_type], schema.properties[data.login_type])
     return payload
   },
 }

@@ -99,7 +99,6 @@ class EdnpointSource {
     return new Promise((resolve, reject) => {
       let projectId = cookie.get('projectId')
       let payload = SchemaParser.fieldsToPayload(endpoint)
-
       if (endpoint.connection_info && endpoint.connection_info.secret_ref) {
         let uuidIndex = endpoint.connection_info.secret_ref.lastIndexOf('/')
         let uuid = endpoint.connection_info.secret_ref.substr(uuidIndex + 1)

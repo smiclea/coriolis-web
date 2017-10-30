@@ -158,7 +158,7 @@ class Endpoint extends React.Component {
         let selectedItem = field.items.find(i => i.name === this.state.endpoint[field.name])
         this.findInvalidFields(invalidFields, selectedItem.fields)
       } else if (field.required) {
-        let value = this.state.endpoint[field.name]
+        let value = this.getFieldValue(field)
         if (!value) {
           invalidFields.push(field.name)
         }
