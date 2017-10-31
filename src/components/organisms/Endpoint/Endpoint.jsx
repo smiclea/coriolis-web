@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { EndpointLogos, Field, Button, StatusIcon, LoadingButton } from 'components'
+import { EndpointLogos, Field, Button, StatusIcon, LoadingButton, CopyButton } from 'components'
 import LabelDictionary from '../../../utils/LabelDictionary'
 import NotificationActions from '../../../actions/NotificationActions'
 import EndpointStore from '../../../stores/EndpointStore'
@@ -11,6 +11,9 @@ import EndpointActions from '../../../actions/EndpointActions'
 import ProviderStore from '../../../stores/ProviderStore'
 import ProviderActions from '../../../actions/ProviderActions'
 import ObjectUtils from '../../../utils/ObjectUtils'
+import Wait from '../../../utils/Wait'
+import Palette from '../../styleUtils/Palette'
+import DomUtils from '../../../utils/DomUtils'
 
 const Wrapper = styled.div`
   padding: 48px 32px 32px 32px;
@@ -41,9 +44,35 @@ const Buttons = styled.div`
 `
 const Status = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const StatusHeader = styled.div`
+  display: flex;
 `
 const StatusMessage = styled.div`
   margin-left: 8px;
+  display: flex;
+  align-items: center;
+  line-height: 12px;
+`
+const ShowErrorButton = styled.span`
+  font-size: 10px;
+  color: ${Palette.primary};
+  margin-left: 8px;
+  cursor: pointer;
+`
+const StatusError = styled.div`
+  margin-top: 32px;
+  cursor: pointer;
+
+  &:hover > span {
+    opacity: 1;
+  }
+  > span {
+    background-position-y: 4px;
+    margin-left: 4px;
+  }
 `
 
 class Endpoint extends React.Component {
@@ -76,6 +105,8 @@ class Endpoint extends React.Component {
     this.state = {
       fields: null,
       invalidFields: [],
+      validating: false,
+      showErrorMessage: false,
     }
   }
 
@@ -86,6 +117,12 @@ class Endpoint extends React.Component {
   componentWillReceiveProps(props) {
     let loginType = this.getLoginType(props.endpointStore.connectionInfo,
       props.providerStore.connectionInfoSchema)
+
+    if (this.state.validating) {
+      if (props.endpointStore.validation && !props.endpointStore.validation.valid) {
+        this.setState({ validating: false })
+      }
+    }
 
     this.setState({
       endpoint: {
@@ -137,6 +174,10 @@ class Endpoint extends React.Component {
     return ''
   }
 
+  isValidating() {
+    return this.state.validating
+  }
+
   findInvalidFields(invalidFields, schemaRoot) {
     schemaRoot.forEach(field => {
       if (field.type === 'radio-group') {
@@ -172,9 +213,29 @@ class Endpoint extends React.Component {
 
   handleValidateClick() {
     if (!this.highlightRequired()) {
+      this.setState({ validating: true })
+
+      NotificationActions.notify('Saving endpoint ...')
+      EndpointActions.clearValidation()
       EndpointActions.update(this.state.endpoint)
+      Wait.for(() => EndpointStore.getState().updating === false, () => {
+        NotificationActions.notify('Validating endpoint ...')
+        EndpointActions.validate(this.state.endpoint)
+      })
     } else {
       NotificationActions.notify('Please fill all the required fields', 'error')
+    }
+  }
+
+  handleShowErrorMessageClick() {
+    this.setState({ showErrorMessage: !this.state.showErrorMessage })
+  }
+
+  handleCopyErrorMessageClick() {
+    let succesful = DomUtils.copyTextToClipboard(this.props.endpointStore.validation.message)
+
+    if (succesful) {
+      NotificationActions.notify('The message has been copied to clipboard.')
     }
   }
 
@@ -204,7 +265,7 @@ class Endpoint extends React.Component {
         <FieldStyled
           {...field}
           large
-          disabled={this.props.endpointStore.validationLoading
+          disabled={this.isValidating()
             || (this.props.endpointStore.validation && this.props.endpointStore.validation.valid)}
           key={field.name}
           password={field.name === 'password'}
@@ -222,22 +283,40 @@ class Endpoint extends React.Component {
 
   renderEndpointStatus() {
     let validation = this.props.endpointStore.validation
-    if (!this.props.endpointStore.validationLoading && (!validation || !validation.valid)) {
+    if (!this.isValidating() && !validation) {
       return null
     }
 
     let status = 'RUNNING'
     let message = 'Validating Endpoint ...'
+    let error = null
+    let showErrorButton = null
 
-    if (validation && validation.valid) {
-      message = 'Endpoint is Valid'
-      status = 'COMPLETED'
+    if (validation) {
+      if (validation.valid) {
+        message = 'Endpoint is Valid'
+        status = 'COMPLETED'
+      } else {
+        status = 'ERROR'
+        message = 'Validation failed'
+        if (validation.message) {
+          showErrorButton = (
+            <ShowErrorButton onClick={() => { this.handleShowErrorMessageClick() }}>
+              {this.state.showErrorMessage ? 'Hide' : 'Show'} Error</ShowErrorButton>
+          )
+          error = this.state.showErrorMessage ?
+            <StatusError onClick={() => { this.handleCopyErrorMessageClick() }}>{validation.message}<CopyButton /></StatusError> : null
+        }
+      }
     }
 
     return (
       <Status>
-        <StatusIcon status={status} />
-        <StatusMessage>{message}</StatusMessage>
+        <StatusHeader>
+          <StatusIcon status={status} />
+          <StatusMessage>{message}{showErrorButton}</StatusMessage>
+        </StatusHeader>
+        {error}
       </Status>
     )
   }
@@ -248,7 +327,7 @@ class Endpoint extends React.Component {
     let message = 'Validating Endpoint ...'
     let validation = this.props.endpointStore.validation
 
-    if (this.props.endpointStore.validationLoading || (validation && validation.valid)) {
+    if (this.isValidating() || (validation && validation.valid)) {
       if (validation && validation.valid) {
         message = 'Saving ...'
       }

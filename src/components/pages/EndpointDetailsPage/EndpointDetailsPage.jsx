@@ -172,7 +172,7 @@ class EndpointDetailsPage extends React.Component {
         >
           <EndpointValidation
             validation={this.props.endpointStore.validation}
-            loading={this.props.endpointStore.validationLoading}
+            loading={this.props.endpointStore.validating}
             onCancelClick={() => { this.handleCloseValidationModal() }}
             onRetryClick={() => { this.handleRetryValidation() }}
           />
