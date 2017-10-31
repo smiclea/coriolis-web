@@ -3,7 +3,14 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { MainTemplate, Navigation, FilterList, PageHeader, EndpointListItem, ConfirmationModal } from 'components'
+import {
+  MainTemplate,
+  Navigation,
+  FilterList,
+  PageHeader,
+  EndpointListItem,
+  ConfirmationModal,
+} from 'components'
 
 import ProjectStore from '../../../stores/ProjectStore'
 import UserStore from '../../../stores/UserStore'
@@ -100,18 +107,6 @@ class EndpointsPage extends React.Component {
     UserActions.switchProject(project.id)
   }
 
-  handleUserItemClick(item) {
-    switch (item.value) {
-      case 'signout':
-        UserActions.logout()
-        return
-      case 'profile':
-        window.location.href = '/#/profile'
-        break
-      default:
-    }
-  }
-
   handleReloadButtonClick() {
     ProjectActions.getProjects()
     EndpointActions.getEndpoints()
@@ -184,10 +179,7 @@ class EndpointsPage extends React.Component {
           headerComponent={
             <PageHeader
               title="Coriolis Endpoints"
-              projects={this.props.projectStore.projects}
               onProjectChange={project => { this.handleProjectChange(project) }}
-              user={this.props.userStore.user}
-              onUserItemClick={item => { this.handleUserItemClick(item) }}
             />
           }
         />

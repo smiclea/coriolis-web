@@ -90,18 +90,6 @@ class MigrationsPage extends React.Component {
     UserActions.switchProject(project.id)
   }
 
-  handleUserItemClick(item) {
-    switch (item.value) {
-      case 'signout':
-        UserActions.logout()
-        return
-      case 'profile':
-        window.location.href = '/#/profile'
-        break
-      default:
-    }
-  }
-
   handleReloadButtonClick() {
     ProjectActions.getProjects()
     EndpointActions.getEndpoints()
@@ -178,10 +166,7 @@ class MigrationsPage extends React.Component {
           headerComponent={
             <PageHeader
               title="Coriolis Migrations"
-              projects={this.props.projectStore.projects}
               onProjectChange={project => { this.handleProjectChange(project) }}
-              user={this.props.userStore.user}
-              onUserItemClick={item => { this.handleUserItemClick(item) }}
             />
           }
         />

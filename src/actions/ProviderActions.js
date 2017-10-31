@@ -18,6 +18,23 @@ class ProviderActions {
   getConnectionInfoSchemaFailed(response) {
     return response || true
   }
+
+  loadProviders() {
+    ProviderSource.loadProviders().then(
+      providers => { this.loadProvidersSuccess(providers) },
+      response => { this.loadProvidersFailed(response) },
+    )
+
+    return true
+  }
+
+  loadProvidersSuccess(providers) {
+    return providers
+  }
+
+  loadProvidersFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(ProviderActions)

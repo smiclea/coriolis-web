@@ -73,7 +73,7 @@ const Description = styled.div`
   color: ${Palette.grayscale[4]}
 `
 
-class NewMigrationDropdown extends React.Component {
+class NewItemDropdown extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
   }
@@ -121,14 +121,17 @@ class NewMigrationDropdown extends React.Component {
 
     let items = [{
       title: 'Migration',
+      value: 'migration',
       description: 'A full VM migration between two clouds',
       icon: { migration: true },
     }, {
       title: 'Replica',
+      value: 'replica',
       description: 'Incrementally replicate virtual machines',
       icon: { replica: true },
     }, {
       title: 'Endpoint',
+      value: 'endpoint',
       description: 'A conection to a public or private cloud',
       icon: { endpoint: true },
     }]
@@ -174,5 +177,5 @@ class NewMigrationDropdown extends React.Component {
   }
 }
 
-export default NewMigrationDropdown
+export default NewItemDropdown
 

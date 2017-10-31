@@ -99,18 +99,6 @@ class ReplicasPage extends React.Component {
     UserActions.switchProject(project.id)
   }
 
-  handleUserItemClick(item) {
-    switch (item.value) {
-      case 'signout':
-        UserActions.logout()
-        return
-      case 'profile':
-        window.location.href = '/#/profile'
-        break
-      default:
-    }
-  }
-
   handleReloadButtonClick() {
     ProjectActions.getProjects()
     ReplicaActions.getReplicas()
@@ -198,10 +186,7 @@ class ReplicasPage extends React.Component {
           headerComponent={
             <PageHeader
               title="Coriolis Replicas"
-              projects={this.props.projectStore.projects}
               onProjectChange={project => { this.handleProjectChange(project) }}
-              user={this.props.userStore.user}
-              onUserItemClick={item => { this.handleUserItemClick(item) }}
             />
           }
         />

@@ -93,7 +93,7 @@ class EndpointListItem extends React.Component {
             <TitleLabel>{this.props.item.name}</TitleLabel>
             <Subtitle>{this.props.item.description || 'N/A'}</Subtitle>
           </Title>
-          <EndpointLogos medium endpoint={this.props.item.type} />
+          <EndpointLogos height={45} endpoint={this.props.item.type} />
           <Created>
             <ItemLabel>Created</ItemLabel>
             <ItemValue>

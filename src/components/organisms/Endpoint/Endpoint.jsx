@@ -77,7 +77,8 @@ const StatusError = styled.div`
 
 class Endpoint extends React.Component {
   static propTypes = {
-    schema: PropTypes.array,
+    isNew: PropTypes.bool,
+    type: PropTypes.string,
     endpoint: PropTypes.object,
     connectionInfo: PropTypes.object,
     onFieldChange: PropTypes.func,
@@ -107,15 +108,16 @@ class Endpoint extends React.Component {
       invalidFields: [],
       validating: false,
       showErrorMessage: false,
+      endpoint: {},
     }
   }
 
   componentDidMount() {
-    ProviderActions.getConnectionInfoSchema(this.props.endpoint.type)
+    ProviderActions.getConnectionInfoSchema(this.getEndpointType())
   }
 
   componentWillReceiveProps(props) {
-    let loginType = this.getLoginType(props.endpointStore.connectionInfo,
+    let selectedRadio = this.getSelectedRadio(props.endpointStore.connectionInfo,
       props.providerStore.connectionInfoSchema)
 
     if (this.state.validating) {
@@ -124,13 +126,21 @@ class Endpoint extends React.Component {
       }
     }
 
-    this.setState({
-      endpoint: {
-        ...ObjectUtils.flatten(props.endpoint),
-        ...loginType,
-        ...ObjectUtils.flatten(props.endpointStore.connectionInfo),
-      },
-    })
+    if (props.endpoint && props.endpointStore.connectionInfo) {
+      this.setState({
+        endpoint: {
+          ...ObjectUtils.flatten(props.endpoint),
+          ...selectedRadio,
+          ...ObjectUtils.flatten(props.endpointStore.connectionInfo),
+        },
+      })
+    } else {
+      this.setState({
+        endpoint: {
+          ...selectedRadio,
+        },
+      })
+    }
 
     this.props.onResizeUpdate()
   }
@@ -140,7 +150,15 @@ class Endpoint extends React.Component {
     clearTimeout(this.closeTimeout)
   }
 
-  getLoginType(connectionInfo, schema) {
+  getEndpointType() {
+    if (this.props.isNew) {
+      return this.props.type
+    }
+
+    return this.props.endpoint.type
+  }
+
+  getSelectedRadio(connectionInfo, schema) {
     let radioGroup = schema.find(f => f.type === 'radio-group')
 
     if (!radioGroup) {
@@ -148,12 +166,17 @@ class Endpoint extends React.Component {
     }
 
     let selectedGroupItem = {}
-    radioGroup.items.forEach(i => {
-      let key = Object.keys(connectionInfo).find(k => k === i.name)
-      if (key) {
-        selectedGroupItem[radioGroup.name] = key
-      }
-    })
+
+    if (!connectionInfo) {
+      selectedGroupItem[radioGroup.name] = radioGroup.default
+    } else {
+      radioGroup.items.forEach(i => {
+        let key = Object.keys(connectionInfo).find(k => k === i.name)
+        if (key) {
+          selectedGroupItem[radioGroup.name] = key
+        }
+      })
+    }
 
     return selectedGroupItem
   }
@@ -240,10 +263,6 @@ class Endpoint extends React.Component {
   }
 
   renderFields(fields, parentGroup) {
-    if (!this.state.endpoint) {
-      return null
-    }
-
     let renderedFields = []
 
     fields.forEach(field => {
@@ -322,6 +341,10 @@ class Endpoint extends React.Component {
   }
 
   renderActionButton() {
+    if (this.props.isNew) {
+      return null
+    }
+
     let button = <Button large onClick={() => this.handleValidateClick()}>Validate and save</Button>
 
     let message = 'Validating Endpoint ...'
@@ -348,7 +371,7 @@ class Endpoint extends React.Component {
 
     return (
       <Wrapper>
-        <EndpointLogos style={{ marginBottom: '16px' }} large endpoint={this.props.endpoint.type} />
+        <EndpointLogos style={{ marginBottom: '16px' }} height={128} endpoint={this.getEndpointType()} />
         {this.renderEndpointStatus()}
         <Fields>
           {this.renderFields(this.props.providerStore.connectionInfoSchema)}
