@@ -9,6 +9,7 @@ class EndpointStore {
     this.validation = null
     this.validating = false
     this.updating = false
+    this.adding = false
 
     this.bindListeners({
       handleGetEndpoints: EndpointActions.GET_ENDPOINTS,
@@ -23,6 +24,9 @@ class EndpointStore {
       handleUpdateSuccess: EndpointActions.UPDATE_SUCCESS,
       handleUpdate: EndpointActions.UPDATE,
       handleClearConnectionInfo: EndpointActions.CLEAR_CONNECTION_INFO,
+      handleAdd: EndpointActions.ADD,
+      handleAddSuccess: EndpointActions.ADD_SUCCESS,
+      handleAddFailed: EndpointActions.ADD_FAILED,
     })
   }
 
@@ -84,6 +88,24 @@ class EndpointStore {
 
   handleClearConnectionInfo() {
     this.connectionInfo = null
+  }
+
+  handleAdd() {
+    this.adding = true
+  }
+
+  handleAddSuccess(endpoint) {
+    this.endpoints = [
+      endpoint,
+      ...this.endpoints,
+    ]
+
+    this.connectionInfo = endpoint.connection_info
+    this.adding = false
+  }
+
+  handleAddFailed() {
+    this.adding = false
   }
 }
 

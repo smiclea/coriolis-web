@@ -92,6 +92,23 @@ class EndpointActions {
   clearConnectionInfo() {
     return true
   }
+
+  add(endpoint) {
+    EndpointSource.add(endpoint).then(
+      endpointResponse => { this.addSuccess(endpointResponse) },
+      response => { this.addFailed(response) },
+    )
+
+    return endpoint
+  }
+
+  addSuccess(endpoint) {
+    return endpoint
+  }
+
+  addFailed(response) {
+    return response || true
+  }
 }
 
 export default alt.createActions(EndpointActions)

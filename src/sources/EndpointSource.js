@@ -5,7 +5,7 @@ import Api from '../utils/ApiCaller'
 import { SchemaParser } from './Schemas'
 import ObjectUtils from '../utils/ObjectUtils'
 
-import { servicesUrl } from '../config'
+import { servicesUrl, useSecret } from '../config'
 
 let getBarbicanPayload = data => {
   return {
@@ -150,6 +150,60 @@ class EdnpointSource {
         Api.sendAjaxRequest({
           url: `${servicesUrl.coriolis}/${projectId}/endpoints/${endpoint.id}`,
           method: 'PUT',
+          data: { endpoint: parsedEndpoint },
+        }).then(response => {
+          resolve(response.data.endpoint)
+        }, reject).catch(reject)
+      }
+    })
+  }
+
+  static add(endpoint) {
+    return new Promise((resolve, reject) => {
+      let parsedEndpoint = SchemaParser.fieldsToPayload(endpoint)
+      let projectId = cookie.get('projectId')
+      if (useSecret) {
+        Api.sendAjaxRequest({
+          url: `${servicesUrl.barbican}/v1/secrets`,
+          method: 'POST',
+          data: getBarbicanPayload(ObjectUtils.skipField(parsedEndpoint.connection_info, 'secret_ref')),
+        }).then(response => {
+          let connectionInfo = { secret_ref: response.data.secret_ref }
+          let newPayload = {
+            endpoint: {
+              name: parsedEndpoint.name,
+              description: parsedEndpoint.description,
+              type: endpoint.type,
+              connection_info: connectionInfo,
+            },
+          }
+          Api.sendAjaxRequest({
+            url: `${servicesUrl.coriolis}/${projectId}/endpoints`,
+            method: 'POST',
+            data: newPayload,
+          }).then(postResponse => {
+            let uuidIndex = connectionInfo.secret_ref.lastIndexOf('/')
+            let uuid = connectionInfo.secret_ref.substr(uuidIndex + 1)
+            let newEndpoint = postResponse.data.endpoint
+
+            Api.sendAjaxRequest({
+              url: `${servicesUrl.barbican}/v1/secrets/${uuid}/payload`,
+              method: 'GET',
+              json: false,
+              headers: { Accept: 'text/plain' },
+            }).then(conInfoResponse => {
+              newEndpoint.connection_info = {
+                ...newEndpoint.connection_info,
+                ...JSON.parse(conInfoResponse.data),
+              }
+              resolve(newEndpoint)
+            }, reject).catch(reject)
+          }, reject).catch(reject)
+        }, reject).catch(reject)
+      } else {
+        Api.sendAjaxRequest({
+          url: `${servicesUrl.coriolis}/${projectId}/endpoints`,
+          method: 'POST',
           data: { endpoint: parsedEndpoint },
         }).then(response => {
           resolve(response.data.endpoint)

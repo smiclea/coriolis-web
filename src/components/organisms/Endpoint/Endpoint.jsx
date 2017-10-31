@@ -77,7 +77,6 @@ const StatusError = styled.div`
 
 class Endpoint extends React.Component {
   static propTypes = {
-    isNew: PropTypes.bool,
     type: PropTypes.string,
     endpoint: PropTypes.object,
     connectionInfo: PropTypes.object,
@@ -109,6 +108,7 @@ class Endpoint extends React.Component {
       validating: false,
       showErrorMessage: false,
       endpoint: {},
+      isNew: null,
     }
   }
 
@@ -136,8 +136,11 @@ class Endpoint extends React.Component {
       })
     } else {
       this.setState({
+        isNew: this.state.isNew === null || this.state.isNew,
         endpoint: {
+          type: props.type,
           ...selectedRadio,
+          ...ObjectUtils.flatten(this.state.endpoint),
         },
       })
     }
@@ -151,11 +154,11 @@ class Endpoint extends React.Component {
   }
 
   getEndpointType() {
-    if (this.props.isNew) {
-      return this.props.type
+    if (this.props.endpoint) {
+      return this.props.endpoint.type
     }
 
-    return this.props.endpoint.type
+    return this.props.type
   }
 
   getSelectedRadio(connectionInfo, schema) {
@@ -222,6 +225,24 @@ class Endpoint extends React.Component {
     return invalidFields.length > 0
   }
 
+  update() {
+    EndpointActions.update(this.state.endpoint)
+    Wait.for(() => EndpointStore.getState().updating === false, () => {
+      NotificationActions.notify('Validating endpoint ...')
+      EndpointActions.validate(this.state.endpoint)
+    })
+  }
+
+  add() {
+    EndpointActions.add(this.state.endpoint)
+    Wait.for(() => EndpointStore.getState().adding === false, () => {
+      let endpoint = EndpointStore.getState().endpoints[0]
+      this.setState({ isNew: false, endpoint })
+      NotificationActions.notify('Validating endpoint ...')
+      EndpointActions.validate(endpoint)
+    })
+  }
+
   handleFieldChange(field, value, parentGroup) {
     let endpoint = { ...this.state.endpoint }
 
@@ -240,11 +261,12 @@ class Endpoint extends React.Component {
 
       NotificationActions.notify('Saving endpoint ...')
       EndpointActions.clearValidation()
-      EndpointActions.update(this.state.endpoint)
-      Wait.for(() => EndpointStore.getState().updating === false, () => {
-        NotificationActions.notify('Validating endpoint ...')
-        EndpointActions.validate(this.state.endpoint)
-      })
+
+      if (this.state.isNew) {
+        this.add()
+      } else {
+        this.update()
+      }
     } else {
       NotificationActions.notify('Please fill all the required fields', 'error')
     }
@@ -341,10 +363,6 @@ class Endpoint extends React.Component {
   }
 
   renderActionButton() {
-    if (this.props.isNew) {
-      return null
-    }
-
     let button = <Button large onClick={() => this.handleValidateClick()}>Validate and save</Button>
 
     let message = 'Validating Endpoint ...'
