@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { EndpointLogos, PasswordValue, Button, CopyValue } from 'components'
+import { EndpointLogos, PasswordValue, Button, CopyValue, LoadingAnimation } from 'components'
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
 import DateUtils from '../../../utils/DateUtils'
@@ -43,11 +43,18 @@ const MainButtons = styled.div`
   }
 `
 const DeleteButton = styled.div``
+const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 32px 0 64px 0;
+`
 
 class EndpointDetailsContent extends React.Component {
   static propTypes = {
     item: PropTypes.object,
     connectionInfo: PropTypes.object,
+    loading: PropTypes.bool,
     onDeleteClick: PropTypes.func,
     onValidateClick: PropTypes.func,
     onEditClick: PropTypes.func,
@@ -55,6 +62,18 @@ class EndpointDetailsContent extends React.Component {
 
   isUrl(value) {
     return /^https?:\/\//.test(value)
+  }
+
+  renderConnectionInfoLoading() {
+    if (!this.props.loading) {
+      return null
+    }
+
+    return (
+      <LoadingWrapper>
+        <LoadingAnimation />
+      </LoadingWrapper>
+    )
   }
 
   renderConnectionInfo(connectionInfo) {
@@ -143,6 +162,7 @@ class EndpointDetailsContent extends React.Component {
             <Label>Created</Label>
             <Value>{DateUtils.getLocalTime(this.props.item.created_at).format('DD/MM/YYYY HH:mm')}</Value>
           </Field>
+          {this.renderConnectionInfoLoading()}
           {this.renderConnectionInfo(this.props.connectionInfo)}
         </Info>
         {this.renderButtons()}

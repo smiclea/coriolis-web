@@ -151,6 +151,7 @@ class EndpointDetailsPage extends React.Component {
           />}
           contentComponent={<EndpointDetailsContent
             item={this.getEndpoint()}
+            loading={this.props.endpointStore.connectionInfoLoading || this.props.endpointStore.loading}
             connectionInfo={this.props.endpointStore.connectionInfo}
             onDeleteClick={() => { this.handleDeleteEndpointClick() }}
             onValidateClick={() => { this.handleValidateClick() }}

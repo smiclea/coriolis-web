@@ -41,7 +41,7 @@ class EndpointActions {
       connectionInfo => { this.getConnectionInfoSuccess(connectionInfo) },
       response => { this.getConnectionInfoFailed(response) },
     )
-    return endpoint
+    return endpoint || true
   }
 
   getConnectionInfoSuccess(connectionInfo) {

@@ -10,6 +10,11 @@ class Wait {
   static for(stopCondition, stopCallback, timeout = 5000, timeoutCallback = () => { }) {
     let startTime = new Date()
 
+    if (stopCondition()) {
+      stopCallback()
+      return
+    }
+
     let interval = setInterval(() => {
       let currentTime = new Date()
 
