@@ -65,6 +65,10 @@ class EndpointDetailsContent extends React.Component {
     return Object.keys(connectionInfo).map(key => {
       let value = connectionInfo[key]
 
+      if (key === 'secret_ref') {
+        return null
+      }
+
       if (typeof connectionInfo[key] === 'object') {
         return this.renderConnectionInfo(connectionInfo[key])
       }

@@ -6,11 +6,11 @@ import connectToStores from 'alt-utils/lib/connectToStores'
 import { EndpointLogos, Field, Button, StatusIcon, LoadingButton } from 'components'
 import LabelDictionary from '../../../utils/LabelDictionary'
 import NotificationActions from '../../../actions/NotificationActions'
-
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
 import ProviderStore from '../../../stores/ProviderStore'
 import ProviderActions from '../../../actions/ProviderActions'
+import ObjectUtils from '../../../utils/ObjectUtils'
 
 const Wrapper = styled.div`
   padding: 48px 32px 32px 32px;
@@ -89,9 +89,9 @@ class Endpoint extends React.Component {
 
     this.setState({
       endpoint: {
-        ...props.endpoint,
+        ...ObjectUtils.flatten(props.endpoint),
         ...loginType,
-        ...props.endpointStore.connectionInfo,
+        ...ObjectUtils.flatten(props.endpointStore.connectionInfo),
       },
     })
 
@@ -126,24 +126,9 @@ class Endpoint extends React.Component {
       return this.state.endpoint[parentGroup.name] === field.name
     }
 
-    let value = null
-    let findValueInState = state => {
-      Object.keys(state).forEach(k => {
-        if (k === field.name) {
-          value = state[k]
-        }
-
-        if (state[k] && typeof state[k] === 'object') {
-          findValueInState(state[k])
-        }
-      })
+    if (this.state.endpoint[field.name]) {
+      return this.state.endpoint[field.name]
     }
-
-    findValueInState(this.state.endpoint)
-    if (value) {
-      return value
-    }
-
 
     if (Object.keys(field).find(k => k === 'default')) {
       return field.default

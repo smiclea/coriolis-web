@@ -3,6 +3,7 @@ import moment from 'moment'
 
 import Api from '../utils/ApiCaller'
 import { SchemaParser } from './Schemas'
+import ObjectUtils from '../utils/ObjectUtils'
 
 import { servicesUrl } from '../config'
 
@@ -98,10 +99,11 @@ class EdnpointSource {
   static update(endpoint) {
     return new Promise((resolve, reject) => {
       let projectId = cookie.get('projectId')
-      let payload = SchemaParser.fieldsToPayload(endpoint)
-      if (endpoint.connection_info && endpoint.connection_info.secret_ref) {
-        let uuidIndex = endpoint.connection_info.secret_ref.lastIndexOf('/')
-        let uuid = endpoint.connection_info.secret_ref.substr(uuidIndex + 1)
+      let parsedEndpoint = SchemaParser.fieldsToPayload(endpoint)
+
+      if (parsedEndpoint.connection_info && parsedEndpoint.connection_info.secret_ref) {
+        let uuidIndex = parsedEndpoint.connection_info.secret_ref.lastIndexOf('/')
+        let uuid = parsedEndpoint.connection_info.secret_ref.substr(uuidIndex + 1)
 
         Api.sendAjaxRequest({
           url: `${servicesUrl.barbican}/v1/secrets/${uuid}`,
@@ -111,13 +113,13 @@ class EdnpointSource {
         Api.sendAjaxRequest({
           url: `${servicesUrl.barbican}/v1/secrets`,
           method: 'POST',
-          data: getBarbicanPayload(payload.connection_info),
+          data: getBarbicanPayload(ObjectUtils.skipField(parsedEndpoint.connection_info, 'secret_ref')),
         }).then(response => {
           let connectionInfo = { secret_ref: response.data.secret_ref }
           let newPayload = {
             endpoint: {
-              name: payload.name,
-              description: payload.description,
+              name: parsedEndpoint.name,
+              description: parsedEndpoint.description,
               connection_info: connectionInfo,
             },
           }
@@ -148,7 +150,7 @@ class EdnpointSource {
         Api.sendAjaxRequest({
           url: `${servicesUrl.coriolis}/${projectId}/endpoints/${endpoint.id}`,
           method: 'PUT',
-          data: { endpoint: payload },
+          data: { endpoint: parsedEndpoint },
         }).then(response => {
           resolve(response.data.endpoint)
         }, reject).catch(reject)

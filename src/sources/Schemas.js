@@ -78,7 +78,7 @@ let parsersToPayload = {
   },
   azure: (data, schema) => {
     let payload = parseToPayload(data, schema)
-    payload[data.login_type] = parseToPayload(data[data.login_type], schema.properties[data.login_type])
+    payload[data.login_type] = parseToPayload(data, schema.properties[data.login_type])
     return payload
   },
 }
@@ -126,6 +126,10 @@ class SchemaParser {
       payload.connection_info = parsersToPayload[data.type](data, storedSchema)
     } else {
       payload.connection_info = parsersToPayload.general(data, storedSchema)
+    }
+
+    if (data.secret_ref) {
+      payload.connection_info.secret_ref = data.secret_ref
     }
 
     return payload
