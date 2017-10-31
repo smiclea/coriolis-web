@@ -78,6 +78,7 @@ const StatusError = styled.div`
 class Endpoint extends React.Component {
   static propTypes = {
     type: PropTypes.string,
+    deleteOnCancel: PropTypes.bool,
     endpoint: PropTypes.object,
     connectionInfo: PropTypes.object,
     onFieldChange: PropTypes.func,
@@ -284,6 +285,13 @@ class Endpoint extends React.Component {
     }
   }
 
+  handleCancelClick() {
+    if (this.props.deleteOnCancel && this.state.isNew === false) {
+      EndpointActions.delete(EndpointStore.getState().endpoints[0])
+    }
+    this.props.onCancelClick()
+  }
+
   renderFields(fields, parentGroup) {
     let renderedFields = []
 
@@ -395,7 +403,7 @@ class Endpoint extends React.Component {
           {this.renderFields(this.props.providerStore.connectionInfoSchema)}
         </Fields>
         <Buttons>
-          <Button large secondary onClick={this.props.onCancelClick}>Cancel</Button>
+          <Button large secondary onClick={() => { this.handleCancelClick() }}>Cancel</Button>
           {this.renderActionButton()}
         </Buttons>
       </Wrapper>
