@@ -32,7 +32,11 @@ const Body = styled.div`
   flex-grow: 1;
   overflow-y: auto; 
 `
-const Navigation = styled.div``
+const Navigation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+`
 const IconRepresentation = styled.div``
 const Footer = styled.div``
 

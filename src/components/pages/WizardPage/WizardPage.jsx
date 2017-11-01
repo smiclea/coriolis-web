@@ -52,10 +52,6 @@ class WizardPage extends React.Component {
 
   componentDidMount() {
     document.title = 'Coriolis Wizard'
-
-    if (!this.props.wizardStore.currentPage) {
-      WizardActions.updateCurrentPage(wizardConfig.pages[0])
-    }
   }
 
   handleUserItemClick(item) {
@@ -70,6 +66,10 @@ class WizardPage extends React.Component {
     }
   }
 
+  handleTypeChange(isReplica) {
+    this.setState({ type: isReplica? 'replica' : 'migration' })
+  }
+
   render() {
     return (
       <Wrapper>
@@ -81,6 +81,7 @@ class WizardPage extends React.Component {
           pageContentComponent={<WizardPageContent
             page={this.props.wizardStore.currentPage}
             type={this.state.type}
+            onTypeChange={isReplica => { this.handleTypeChange(isReplica) }}
           />}
         />
       </Wrapper>

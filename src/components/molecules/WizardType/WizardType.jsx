@@ -59,7 +59,7 @@ class WizardType extends React.Component {
             <Message selected={this.props.selected === 'migration'}>A Coriolis Migration is a one time move one ore more virtual machine. Whatever Blue Bottle Neutra irony 8-bit. Kogi ethnic ugh fashion axe bicycle rights. Gluten-free Odd Future American</Message>
           </Column>
           <Column middle>
-            <Switch big />
+            <Switch big onChange={this.props.onChange} checked={this.props.selected === 'replica'} />
           </Column>
           <Column>
             <Title>Coriolis Replica</Title>

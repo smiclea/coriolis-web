@@ -25,6 +25,21 @@ const Input = styled.input`
   opacity: 0;
   cursor: ${props => props.disabled ? 'default' : 'pointer'};
 `
+const inputBackground = props => {
+  if (props.big) {
+    if (props.checked) {
+      return Palette.alert
+    } else {
+      return Palette.primary
+    }
+  }
+
+  if (props.checked) {
+    return Palette.primary
+  }
+
+  return 'white'
+}
 const InputBackground = styled.div`
   position: absolute;
   top: 0;
@@ -32,19 +47,30 @@ const InputBackground = styled.div`
   right: 0;
   bottom: 0;
   transition: all ${StyleProps.animations.swift};
-  background: ${props => props.checked ? Palette.primary : 'white'};
+  background: ${props => inputBackground(props)};
   border-radius: 50px;
-  border: 1px solid ${Palette.primary};
+  border: 1px solid ${props => props.big && props.checked ? Palette.alert : Palette.primary};
 `
+const getThumbLeft = props => {
+  if (props.big && props.checked) {
+    return 23
+  }
+
+  if (props.checked) {
+    return 15
+  }
+
+  return -1
+}
 const InputThumb = styled.div`
   position: absolute;
   width: ${props => props.big ? 22 : 14}px;
   height: ${props => props.big ? 22 : 14}px;
   transition: all ${StyleProps.animations.swift};
   top: -1px;
-  left: ${props => props.checked ? '15px' : '-1px'};
+  left: ${props => getThumbLeft(props)}px;
   background: white;
-  border: 1px solid ${Palette.primary};
+  border: 1px solid ${props => props.big && props.checked ? Palette.alert : Palette.primary};
   border-radius: 50%;
 `
 const Label = styled.div`
@@ -69,7 +95,7 @@ class Switch extends React.Component {
   renderInput() {
     return (
       <InputWrapper big={this.props.big}>
-        <InputBackground checked={this.props.checked}>
+        <InputBackground big={this.props.big} checked={this.props.checked}>
           <InputThumb big={this.props.big} checked={this.props.checked} />
         </InputBackground>
         <Input
@@ -84,6 +110,10 @@ class Switch extends React.Component {
   }
 
   renderLabel() {
+    if (this.props.big) {
+      return null
+    }
+
     return (
       <Label>{this.props.checked ? this.props.checkedLabel : this.props.uncheckedLabel}</Label>
     )
