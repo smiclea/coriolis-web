@@ -14,6 +14,7 @@ import {
   MigrationDetailsPage,
   EndpointsPage,
   EndpointDetailsPage,
+  WizardPage,
 } from 'components'
 
 import Palette from './styleUtils/Palette'
@@ -49,6 +50,7 @@ class App extends React.Component {
           <Route path="/migration/:page/:id" component={MigrationDetailsPage} />
           <Route path="/endpoints" component={EndpointsPage} exact />
           <Route path="/endpoint/:id" component={EndpointDetailsPage} />
+          <Route path="/wizard/:type" component={WizardPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <Notifications />

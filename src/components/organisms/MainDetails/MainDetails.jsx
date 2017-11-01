@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { EndpointLogos, Table, CopyValue } from 'components'
+import { EndpointLogos, Table, CopyValue, StatusIcon } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
@@ -41,7 +41,7 @@ const Label = styled.div`
   text-transform: uppercase;
 `
 const Value = styled.div`
-  display: inline-table;
+  display: ${props => props.flex ? 'flex' : 'inline-table'};
   margin-top: 3px;
   ${props => props.link ? `color: ${Palette.primary};` : ''}
   ${props => props.link ? 'cursor: pointer;' : ''}
@@ -61,12 +61,12 @@ class MainDetails extends React.Component {
 
   getSourceEndpoint() {
     let endpoint = this.props.endpoints.find(e => e.id === this.props.item.origin_endpoint_id)
-    return endpoint || {}
+    return endpoint
   }
 
   getDestinationEndpoint() {
     let endpoint = this.props.endpoints.find(e => e.id === this.props.item.destination_endpoint_id)
-    return endpoint || {}
+    return endpoint
   }
 
   getLastExecution() {
@@ -130,6 +130,10 @@ class MainDetails extends React.Component {
     return networks
   }
 
+  handleEndpointClick(endpoint) {
+    window.location.href = `/#/endpoint/${endpoint.id}`
+  }
+
   renderNetworksTable() {
     let items = this.getNetworks()
 
@@ -146,6 +150,22 @@ class MainDetails extends React.Component {
     )
   }
 
+  renderEndpointLink(type) {
+    let endpointIsMissing = (
+      <Value flex>
+        <StatusIcon style={{ marginRight: '8px' }} status="ERROR" />Endpoint is missing
+      </Value>
+    )
+
+    let endpoint = type === 'source' ? this.getSourceEndpoint() : this.getDestinationEndpoint()
+
+    if (endpoint) {
+      return <Value link onClick={() => { this.handleEndpointClick(endpoint) }}>{endpoint.name}</Value>
+    }
+
+    return endpointIsMissing
+  }
+
   render() {
     return (
       <Wrapper>
@@ -154,11 +174,11 @@ class MainDetails extends React.Component {
             <Row>
               <Field>
                 <Label>Source</Label>
-                <Value link>{this.getSourceEndpoint().name}</Value>
+                {this.renderEndpointLink('source')}
               </Field>
             </Row>
             <Row>
-              <EndpointLogos endpoint={this.getSourceEndpoint().type} />
+              <EndpointLogos endpoint={this.getSourceEndpoint() && this.getSourceEndpoint().type} />
             </Row>
             <Row marginBottom>
               <Field>
@@ -180,11 +200,11 @@ class MainDetails extends React.Component {
             <Row>
               <Field>
                 <Label>Target</Label>
-                <Value link>{this.getDestinationEndpoint().name}</Value>
+                {this.renderEndpointLink('target')}
               </Field>
             </Row>
             <Row>
-              <EndpointLogos endpoint={this.getDestinationEndpoint().type} />
+              <EndpointLogos endpoint={this.getDestinationEndpoint() && this.getDestinationEndpoint().type} />
             </Row>
             <Row marginBottom>
               <Field>

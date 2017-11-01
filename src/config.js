@@ -29,4 +29,8 @@ export const env = {
   isBrowser: typeof window !== 'undefined',
 }
 
+export const wizardConfig = {
+  pages: ['type', 'source', 'target', 'vms', 'networks', 'options', 'summary'],
+}
+
 export const basename = process.env.PUBLIC_PATH

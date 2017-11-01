@@ -58,12 +58,19 @@ class ReplicaDetailsContent extends React.Component {
     window.location.href = `/#/replica${(item.value && '/') || ''}${item.value}/${this.props.item.id}`
   }
 
+  isEndpointMissing() {
+    let originEndpoint = this.props.endpoints.find(e => e.id === this.props.item.origin_endpoint_id)
+    let targetEndpoint = this.props.endpoints.find(e => e.id === this.props.item.destination_endpoint_id)
+
+    return Boolean(!originEndpoint || !targetEndpoint)
+  }
+
   renderBottomControls() {
     return (
       <Buttons>
         <Button
           primary
-          disabled={this.getStatus() !== 'COMPLETED'}
+          disabled={this.getStatus() !== 'COMPLETED' || this.isEndpointMissing()}
           onClick={this.props.onCreateMigrationClick}
         >Create Migration</Button>
         <Button

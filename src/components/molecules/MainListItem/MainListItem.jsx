@@ -157,13 +157,13 @@ class MainListItem extends React.Component {
   render() {
     let sourceType = this.props.endpointType(this.props.item.origin_endpoint_id)
     let destinationType = this.props.endpointType(this.props.item.destination_endpoint_id)
-    let endpointImages = sourceType && destinationType ? (
+    let endpointImages = (
       <EndpointsImages>
         <EndpointLogos height={32} endpoint={sourceType} />
         <EndpointImageArrow />
         <EndpointLogos height={32} endpoint={destinationType} />
       </EndpointsImages>
-    ) : null
+    )
     return (
       <Wrapper>
         <CheckboxStyled

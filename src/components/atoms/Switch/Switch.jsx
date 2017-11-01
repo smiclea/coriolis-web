@@ -13,13 +13,13 @@ const Wrapper = styled.div`
 `
 const InputWrapper = styled.div`
   position: relative;
-  width: 32px;
-  height: 16px;
+  width: ${props => props.big ? 48 : 32}px;
+  height: ${props => props.big ? 24 : 16}px;
 `
 const Input = styled.input`
   position: absolute;
-  width: 32px;
-  height: 16px;
+  width: ${props => props.big ? 48 : 32}px;
+  height: ${props => props.big ? 24 : 16}px;
   margin: 0;
   padding: 0;
   opacity: 0;
@@ -38,8 +38,8 @@ const InputBackground = styled.div`
 `
 const InputThumb = styled.div`
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: ${props => props.big ? 22 : 14}px;
+  height: ${props => props.big ? 22 : 14}px;
   transition: all ${StyleProps.animations.swift};
   top: -1px;
   left: ${props => props.checked ? '15px' : '-1px'};
@@ -56,6 +56,7 @@ class Switch extends React.Component {
     onChange: PropTypes.func,
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
+    big: PropTypes.bool,
     checkedLabel: PropTypes.string,
     uncheckedLabel: PropTypes.string,
   }
@@ -67,12 +68,13 @@ class Switch extends React.Component {
 
   renderInput() {
     return (
-      <InputWrapper>
+      <InputWrapper big={this.props.big}>
         <InputBackground checked={this.props.checked}>
-          <InputThumb checked={this.props.checked} />
+          <InputThumb big={this.props.big} checked={this.props.checked} />
         </InputBackground>
         <Input
           type="checkbox"
+          big={this.props.big}
           disabled={this.props.disabled}
           checked={this.props.checked}
           onChange={(e) => this.props.onChange(e.target.checked)}

@@ -33,6 +33,11 @@ const StyleProps = {
       }
     `,
   },
+
+  exactWidth: width => css`
+    min-width: ${width};
+    max-width: ${width};
+  `,
 }
 
 export default StyleProps

@@ -10,7 +10,7 @@ import {
   ReplicaDetailsContent,
   Modal,
   ReplicaExecutionOptions,
-  ConfirmationModal,
+  AlertModal,
   ReplicaMigrationOptions,
 } from 'components'
 
@@ -71,6 +71,13 @@ class ReplicaDetailsPage extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.pollInterval)
+  }
+
+  isActionButtonDisabled() {
+    let originEndpoint = this.props.endpointStore.endpoints.find(e => e.id === this.props.replicaStore.replicaDetails.origin_endpoint_id)
+    let targetEndpoint = this.props.endpointStore.endpoints.find(e => e.id === this.props.replicaStore.replicaDetails.destination_endpoint_id)
+
+    return Boolean(!originEndpoint || !targetEndpoint)
   }
 
   handleUserItemClick(item) {
@@ -168,6 +175,7 @@ class ReplicaDetailsPage extends React.Component {
             item={this.props.replicaStore.replicaDetails}
             onBackButonClick={() => { this.handleBackButtonClick() }}
             onActionButtonClick={() => { this.handleActionButtonClick() }}
+            actionButtonDisabled={this.isActionButtonDisabled()}
             typeImage={replicaImage}
             alertInfoPill
             buttonLabel="Execute Now"
@@ -203,7 +211,7 @@ class ReplicaDetailsPage extends React.Component {
             onMigrateClick={options => { this.migrateReplica(options) }}
           />
         </Modal>
-        <ConfirmationModal
+        <AlertModal
           isOpen={this.state.showDeleteExecutionConfirmation}
           title="Delete Execution?"
           message="Are you sure you want to delete this execution?"
@@ -211,7 +219,7 @@ class ReplicaDetailsPage extends React.Component {
           onConfirmation={() => { this.handleDeleteExecutionConfirmation() }}
           onRequestClose={() => { this.handleCloseExecutionConfirmation() }}
         />
-        <ConfirmationModal
+        <AlertModal
           isOpen={this.state.showDeleteReplicaConfirmation}
           title="Delete Replica?"
           message="Are you sure you want to delete this replica?"

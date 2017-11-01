@@ -8,7 +8,7 @@ import {
   DetailsPageHeader,
   DetailsContentHeader,
   EndpointDetailsContent,
-  ConfirmationModal,
+  AlertModal,
   Modal,
   EndpointValidation,
   Endpoint,
@@ -16,6 +16,10 @@ import {
 
 import EndpointStore from '../../../stores/EndpointStore'
 import EndpointActions from '../../../actions/EndpointActions'
+import MigrationStore from '../../../stores/MigrationStore'
+import ReplicaStore from '../../../stores/ReplicaStore'
+import MigrationActions from '../../../actions/MigrationActions'
+import ReplicaActions from '../../../actions/ReplicaActions'
 import UserStore from '../../../stores/UserStore'
 import UserActions from '../../../actions/UserActions'
 import Wait from '../../../utils/Wait'
@@ -29,16 +33,20 @@ class EndpointDetailsPage extends React.Component {
     match: PropTypes.object,
     endpointStore: PropTypes.object,
     userStore: PropTypes.object,
+    migrationStore: PropTypes.object,
+    replicaStore: PropTypes.object,
   }
 
   static getStores() {
-    return [EndpointStore, UserStore]
+    return [EndpointStore, UserStore, MigrationStore, ReplicaStore]
   }
 
   static getPropsFromStores() {
     return {
       endpointStore: EndpointStore.getState(),
       userStore: UserStore.getState(),
+      migrationStore: MigrationStore.getState(),
+      replicaStore: ReplicaStore.getState(),
     }
   }
 
@@ -49,6 +57,8 @@ class EndpointDetailsPage extends React.Component {
       showDeleteEndpointConfirmation: false,
       showValidationModal: false,
       showEndpointModal: false,
+      showEndpointInUseModal: false,
+      showEndpointInUseLoadingModal: false,
     }
   }
 
@@ -64,6 +74,16 @@ class EndpointDetailsPage extends React.Component {
 
   getEndpoint() {
     return this.props.endpointStore.endpoints.find(e => e.id === this.props.match.params.id) || {}
+  }
+
+  getEndpointUsage() {
+    let endpointId = this.props.match.params.id
+    let replicasCount = this.props.replicaStore.replicas.filter(
+      r => r.origin_endpoint_id === endpointId || r.destination_endpoint_id === endpointId).length
+    let migrationsCount = this.props.migrationStore.migrations.filter(
+      r => r.origin_endpoint_id === endpointId || r.destination_endpoint_id === endpointId).length
+
+    return { migrationsCount, replicasCount }
   }
 
   handleUserItemClick(item) {
@@ -83,7 +103,19 @@ class EndpointDetailsPage extends React.Component {
   }
 
   handleDeleteEndpointClick() {
-    this.setState({ showDeleteEndpointConfirmation: true })
+    this.setState({ showEndpointInUseLoadingModal: true })
+
+    ReplicaActions.getReplicas()
+    MigrationActions.getMigrations()
+    Wait.for(() => !ReplicaStore.getState().loading && !MigrationStore.getState().loading, () => {
+      let endpointUsage = this.getEndpointUsage()
+
+      if (endpointUsage.migrationsCount === 0 && endpointUsage.replicasCount === 0) {
+        this.setState({ showDeleteEndpointConfirmation: true, showEndpointInUseLoadingModal: false })
+      } else {
+        this.setState({ showEndpointInUseModal: true, showEndpointInUseLoadingModal: false })
+      }
+    })
   }
 
   handleDeleteEndpointConfirmation() {
@@ -119,6 +151,10 @@ class EndpointDetailsPage extends React.Component {
 
   handleCloseEndpointModal() {
     this.setState({ showEndpointModal: false })
+  }
+
+  handleCloseEndpointInUseModal() {
+    this.setState({ showEndpointInUseModal: false })
   }
 
   loadData() {
@@ -158,13 +194,26 @@ class EndpointDetailsPage extends React.Component {
             onEditClick={() => { this.handleEditClick() }}
           />}
         />
-        <ConfirmationModal
+        <AlertModal
           isOpen={this.state.showDeleteEndpointConfirmation}
           title="Delete Endpoint?"
           message="Are you sure you want to delete this endpoint?"
           extraMessage="Deleting a Coriolis Endpoint is permanent!"
           onConfirmation={() => { this.handleDeleteEndpointConfirmation() }}
           onRequestClose={() => { this.handleCloseDeleteEndpointConfirmation() }}
+        />
+        <AlertModal
+          type="error"
+          isOpen={this.state.showEndpointInUseModal}
+          title="Endpoint is in use"
+          message="The endpoint can't be deleted because it is in use by replicas or migrations."
+          extraMessage="You must first delete the replica or migration which uses this endpoint."
+          onRequestClose={() => { this.handleCloseEndpointInUseModal() }}
+        />
+        <AlertModal
+          type="loading"
+          isOpen={this.state.showEndpointInUseLoadingModal}
+          title="Checking enpoint usage"
         />
         <Modal
           isOpen={this.state.showValidationModal}

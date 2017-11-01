@@ -72,22 +72,22 @@ const Wrapper = styled.div``
 const Logo32 = styled.div`
   width: 80px;
   height: 32px;
-  background: url('${props => endpointImages[props.endpoint].h32}') no-repeat center;
+  background: url('${props => props.endpoint ? endpointImages[props.endpoint].h32 : ''}') no-repeat center;
 `
 const Logo45 = styled.div`
   width: 112px;
   height: 45px;
-  background: url('${props => endpointImages[props.endpoint].h45}') no-repeat center;
+  background: url('${props => props.endpoint ? endpointImages[props.endpoint].h45 : ''}') no-repeat center;
 `
 const Logo128 = styled.div`
   width: 192px;
   height: 128px;
-  background: url('${props => endpointImages[props.endpoint].h128}') no-repeat center;
+  background: url('${props => props.endpoint ? endpointImages[props.endpoint].h128 : ''}') no-repeat center;
 `
 const Logo64 = styled.div`
   width: 192px;
   height: 64px;
-  background: url('${props => endpointImages[props.endpoint].h64}') no-repeat center;
+  background: url('${props => props.endpoint ? endpointImages[props.endpoint].h64 : ''}') no-repeat center;
 `
 
 class EndpointLogos extends React.Component {
@@ -101,10 +101,6 @@ class EndpointLogos extends React.Component {
   }
 
   render() {
-    if (!this.props.endpoint) {
-      return null
-    }
-
     let logo
     switch (this.props.height) {
       case 32:

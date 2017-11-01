@@ -8,7 +8,7 @@ import {
   DetailsPageHeader,
   DetailsContentHeader,
   MigrationDetailsContent,
-  ConfirmationModal,
+  AlertModal,
 } from 'components'
 
 import MigrationStore from '../../../stores/MigrationStore'
@@ -121,7 +121,7 @@ class MigrationDetailsPage extends React.Component {
             onDeleteMigrationClick={() => { this.handleDeleteMigrationClick() }}
           />}
         />
-        <ConfirmationModal
+        <AlertModal
           isOpen={this.state.showDeleteMigrationConfirmation}
           title="Delete Migration?"
           message="Are you sure you want to delete this migration?"

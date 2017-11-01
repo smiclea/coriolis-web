@@ -9,7 +9,7 @@ import {
   FilterList,
   PageHeader,
   EndpointListItem,
-  ConfirmationModal,
+  AlertModal,
 } from 'components'
 
 import ProjectStore from '../../../stores/ProjectStore'
@@ -183,7 +183,7 @@ class EndpointsPage extends React.Component {
             />
           }
         />
-        <ConfirmationModal
+        <AlertModal
           isOpen={this.state.showDeleteEndpointsConfirmation}
           title="Delete Endpoints?"
           message="Are you sure you want to delete the selected endpoints?"

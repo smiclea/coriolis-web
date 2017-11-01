@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { MainTemplate, Navigation, FilterList, PageHeader, ConfirmationModal, MainListItem } from 'components'
+import { MainTemplate, Navigation, FilterList, PageHeader, AlertModal, MainListItem } from 'components'
 
 import migrationItemImage from './images/migration.svg'
 
@@ -170,7 +170,7 @@ class MigrationsPage extends React.Component {
             />
           }
         />
-        <ConfirmationModal
+        <AlertModal
           isOpen={this.state.showDeleteMigrationConfirmation}
           title="Delete Migrations?"
           message="Are you sure you want to delete the selected migrations?"

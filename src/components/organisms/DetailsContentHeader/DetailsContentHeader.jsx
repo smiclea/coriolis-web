@@ -63,6 +63,7 @@ class DetailsContentHeader extends React.Component {
     primaryInfoPill: PropTypes.bool,
     alertButton: PropTypes.bool,
     hollowButton: PropTypes.bool,
+    actionButtonDisabled: PropTypes.bool,
   }
 
   getLastExecution() {
@@ -113,6 +114,7 @@ class DetailsContentHeader extends React.Component {
         alert={this.props.alertButton}
         hollow={this.props.hollowButton}
         onClick={this.props.onActionButtonClick}
+        disabled={this.props.actionButtonDisabled}
       >{this.props.buttonLabel}</Button>
     )
   }

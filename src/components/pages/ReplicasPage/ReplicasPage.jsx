@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import connectToStores from 'alt-utils/lib/connectToStores'
 
-import { MainTemplate, Navigation, FilterList, PageHeader, ConfirmationModal, MainListItem } from 'components'
+import { MainTemplate, Navigation, FilterList, PageHeader, AlertModal, MainListItem } from 'components'
 
 import replicaItemImage from './images/replica.svg'
 
@@ -190,7 +190,7 @@ class ReplicasPage extends React.Component {
             />
           }
         />
-        <ConfirmationModal
+        <AlertModal
           isOpen={this.state.showDeleteReplicaConfirmation}
           title="Delete Replicas?"
           message="Are you sure you want to delete the selected replicas?"
