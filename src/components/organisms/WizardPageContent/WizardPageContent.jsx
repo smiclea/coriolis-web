@@ -64,6 +64,7 @@ class WizardPageContent extends React.Component {
     page: PropTypes.object,
     type: PropTypes.string,
     providers: PropTypes.object,
+    providersLoading: PropTypes.bool,
     wizardData: PropTypes.object,
     endpoints: PropTypes.array,
     onTypeChange: PropTypes.func,
@@ -71,6 +72,7 @@ class WizardPageContent extends React.Component {
     onNextClick: PropTypes.func,
     onSourceEndpointChange: PropTypes.func,
     onTargetEndpointChange: PropTypes.func,
+    onAddEndpoint: PropTypes.func,
   }
 
   getProvidersType(type) {
@@ -100,6 +102,19 @@ class WizardPageContent extends React.Component {
     return providers
   }
 
+  isNextButtonDisabled() {
+    switch (this.props.page.id) {
+      case 'type':
+        return false
+      case 'source':
+        return !this.props.wizardData.source
+      case 'target':
+        return !this.props.wizardData.target
+      default:
+        return true
+    }
+  }
+
   renderHeader() {
     let title = this.props.page.title
 
@@ -126,9 +141,11 @@ class WizardPageContent extends React.Component {
         body = (
           <WizardEndpointList
             providers={this.getProviders('source')}
+            loading={this.props.providersLoading}
             selectedEndpoint={this.props.wizardData.source}
             endpoints={this.props.endpoints}
             onChange={this.props.onSourceEndpointChange}
+            onAddEndpoint={type => { this.props.onAddEndpoint(type, true) }}
           />
         )
         break
@@ -136,9 +153,11 @@ class WizardPageContent extends React.Component {
         body = (
           <WizardEndpointList
             providers={this.getProviders('target')}
+            loading={this.props.providersLoading}
             selectedEndpoint={this.props.wizardData.target}
             endpoints={this.props.endpoints}
             onChange={this.props.onTargetEndpointChange}
+            onAddEndpoint={type => { this.props.onAddEndpoint(type, false) }}
           />
         )
         break
@@ -160,7 +179,7 @@ class WizardPageContent extends React.Component {
           <WizardTypeIcon type={this.props.type} />
           <EndpointLogos height={32} endpoint={targetEndpoint} />
         </IconRepresentation>
-        <Button onClick={this.props.onNextClick}>Next</Button>
+        <Button onClick={this.props.onNextClick} disabled={this.isNextButtonDisabled()}>Next</Button>
       </Navigation>
     )
   }

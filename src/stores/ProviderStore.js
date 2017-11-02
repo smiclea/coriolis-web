@@ -5,6 +5,7 @@ class ProviderStore {
   constructor() {
     this.connectionInfoSchema = []
     this.providers = null
+    this.providersLoading = false
 
     this.bindListeners({
       handleGetConnectionInfoSchemaSuccess: ProviderActions.GET_CONNECTION_INFO_SCHEMA_SUCCESS,
@@ -19,10 +20,12 @@ class ProviderStore {
 
   handleLoadProviders() {
     this.providers = null
+    this.providersLoading = true
   }
 
   handleLoadProvidersSuccess(providers) {
     this.providers = providers
+    this.providersLoading = false
   }
 }
 

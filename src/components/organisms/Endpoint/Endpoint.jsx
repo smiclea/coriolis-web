@@ -391,7 +391,7 @@ class Endpoint extends React.Component {
     if (this.props.endpointStore.validation && this.props.endpointStore.validation.valid
       && !this.closeTimeout) {
       this.closeTimeout = setTimeout(() => {
-        this.props.onCancelClick()
+        this.props.onCancelClick({ autoClose: true })
       }, 2000)
     }
 

@@ -160,7 +160,6 @@ class PageHeader extends React.Component {
           <Endpoint
             deleteOnCancel
             type={this.state.providerType}
-            onValidateClick={endpoint => this.handleEditValidateClick(endpoint)}
             onCancelClick={() => { this.handleCloseEndpointModal() }}
           />
         </Modal>

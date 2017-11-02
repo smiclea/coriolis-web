@@ -7,6 +7,8 @@ import {
   WizardTemplate,
   DetailsPageHeader,
   WizardPageContent,
+  Modal,
+  Endpoint,
 } from 'components'
 
 import UserStore from '../../../stores/UserStore'
@@ -48,6 +50,7 @@ class WizardPage extends React.Component {
 
     this.state = {
       type: 'migration',
+      showNewEndpointModal: false,
     }
   }
 
@@ -60,6 +63,10 @@ class WizardPage extends React.Component {
 
   componentDidMount() {
     document.title = 'Coriolis Wizard'
+  }
+
+  componentWillUnmount() {
+    WizardActions.clearData()
   }
 
   loadDataForPage(page) {
@@ -116,6 +123,25 @@ class WizardPage extends React.Component {
     WizardActions.updateData({ target })
   }
 
+  handleAddEndpoint(newEndpointType, newEndpointFromSource) {
+    this.setState({
+      showNewEndpointModal: true,
+      newEndpointType,
+      newEndpointFromSource,
+    })
+  }
+
+  handleCloseNewEndpointModal(autoClose) {
+    if (autoClose) {
+      if (this.state.newEndpointFromSource) {
+        WizardActions.updateData({ source: this.props.endpointStore.endpoints[0] })
+      } else {
+        WizardActions.updateData({ target: this.props.endpointStore.endpoints[0] })
+      }
+    }
+    this.setState({ showNewEndpointModal: false })
+  }
+
   render() {
     return (
       <Wrapper>
@@ -127,6 +153,7 @@ class WizardPage extends React.Component {
           pageContentComponent={<WizardPageContent
             page={this.props.wizardStore.currentPage}
             providers={this.props.providerStore.providers}
+            providersLoading={this.props.providerStore.providersLoading}
             endpoints={this.props.endpointStore.endpoints}
             wizardData={this.props.wizardStore.data}
             type={this.state.type}
@@ -135,8 +162,20 @@ class WizardPage extends React.Component {
             onNextClick={() => { this.handleNextClick() }}
             onSourceEndpointChange={endpoint => { this.handleSourceEndpointChange(endpoint) }}
             onTargetEndpointChange={endpoint => { this.handleTargetEndpointChange(endpoint) }}
+            onAddEndpoint={(type, fromSource) => { this.handleAddEndpoint(type, fromSource) }}
           />}
         />
+        <Modal
+          isOpen={this.state.showNewEndpointModal}
+          title="New Cloud Endpoint"
+          onRequestClose={() => { this.handleCloseNewEndpointModal() }}
+        >
+          <Endpoint
+            deleteOnCancel
+            type={this.state.newEndpointType}
+            onCancelClick={autoClose => { this.handleCloseNewEndpointModal(autoClose) }}
+          />
+        </Modal>
       </Wrapper>
     )
   }

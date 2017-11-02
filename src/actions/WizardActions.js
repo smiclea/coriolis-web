@@ -5,6 +5,10 @@ class WizardActions {
     return data
   }
 
+  clearData() {
+    return true
+  }
+
   setCurrentPage(page) {
     return page
   }

@@ -72,7 +72,7 @@ class Field extends React.Component {
         large={this.props.large}
         selectedItem={this.props.value}
         items={items}
-        onChange={item => this.props.onChange(item)}
+        onChange={item => this.props.onChange(item.value)}
         disabled={this.props.disabled}
       />
     )
