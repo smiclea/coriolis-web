@@ -68,6 +68,7 @@ class Dropdown extends React.Component {
     selectedItem: PropTypes.any,
     items: PropTypes.array,
     labelField: PropTypes.string,
+    className: PropTypes.string,
     onChange: PropTypes.func,
     noItemsMessage: PropTypes.string,
     noSelectionMessage: PropTypes.string,
@@ -165,7 +166,7 @@ class Dropdown extends React.Component {
     }
 
     return (
-      <Wrapper>
+      <Wrapper className={this.props.className}>
         <DropdownButton
           {...this.props}
           onMouseDown={() => { this.itemMouseDown = true }}

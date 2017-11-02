@@ -13,12 +13,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 96px;
+  margin-top: 32px;
 `
 const Image = styled.div`
   width: 96px;
   height: 96px;
-  background: url('data:image/svg+xml;utf8,${props => props.type === 'replica' ? migrationImage(Palette.alert) : migrationImage(Palette.primary)}') center no-repeat;
+  #stroke {
+    transition: all ${StyleProps.animations.swift};
+    stroke: ${props => props.type === 'replica' ? Palette.alert : Palette.primary};
+  }
 `
 const Row = styled.div`
   display: flex;
@@ -52,7 +55,7 @@ class WizardType extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Image type={this.props.selected} />
+        <Image type={this.props.selected} dangerouslySetInnerHTML={{ __html: migrationImage }} />
         <Row>
           <Column left>
             <Title>Coriolis Migration</Title>

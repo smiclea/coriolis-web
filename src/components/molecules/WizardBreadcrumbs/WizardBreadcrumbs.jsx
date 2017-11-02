@@ -27,50 +27,17 @@ const Name = styled.div`
 
 class WizardBreadcrumbs extends React.Component {
   static propTypes = {
-    selected: PropTypes.string,
-  }
-
-  getLabel(name) {
-    let label = ''
-    switch (name) {
-      case 'type':
-        label = 'Type'
-        break
-      case 'source':
-        label = 'Source Cloud'
-        break
-      case 'target':
-        label = 'Target Cloud'
-        break
-      case 'vms':
-        label = 'Select VMs'
-        break
-      case 'networks':
-        label = 'Networks'
-        break
-      case 'options':
-        label = 'Options'
-        break
-      case 'schedule':
-        label = 'Schedule'
-        break
-      case 'summary':
-        label = 'Summary'
-        break
-      default:
-    }
-
-    return label
+    selected: PropTypes.object,
   }
 
   render() {
     return (
       <Wrapper>
-        {wizardConfig.pages.map(pageName => {
+        {wizardConfig.pages.map(page => {
           return (
-            <Breadcrumb key={pageName}>
-              <Name selected={this.props.selected === pageName}>{this.getLabel(pageName)}</Name>
-              <ArrowStyled primary={this.props.selected === pageName} useDefaultCursor />
+            <Breadcrumb key={page.id}>
+              <Name selected={this.props.selected.id === page.id}>{page.breadcrumb}</Name>
+              <ArrowStyled primary={this.props.selected.id === page.id} useDefaultCursor />
             </Breadcrumb>
           )
         })}

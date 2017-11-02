@@ -10,7 +10,7 @@ class WizardStore {
 
     this.bindListeners({
       handleUpdateData: WizardActions.UPDATE_DATA,
-      handleUpdateCurrentPage: WizardActions.UPDATE_CURRENT_PAGE,
+      handleSetCurrentPage: WizardActions.SET_CURRENT_PAGE,
     })
   }
 
@@ -21,7 +21,7 @@ class WizardStore {
     }
   }
 
-  handleUpdateCurrentPage(page) {
+  handleSetCurrentPage(page) {
     this.currentPage = page
   }
 }

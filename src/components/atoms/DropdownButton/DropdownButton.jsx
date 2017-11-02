@@ -23,6 +23,7 @@ const Label = styled.div`
   margin: 7px 32px 0 16px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
   ${props => props.centered ? 'text-align: center;' : ''}
 `
 

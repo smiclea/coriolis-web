@@ -15,6 +15,13 @@ export const useSecret = true // use secret_ref when creating and endpoint
 
 export const requestPollTimeout = 5000
 
+export const providerTypes = {
+  TARGET_MIGRATION: 1,
+  SOURCE_MIGRATION: 2,
+  TARGET_REPLICA: 4,
+  SOURCE_REPLICA: 8,
+}
+
 export const loginButtons = [
   // {
   //   name: 'Google',
@@ -30,7 +37,16 @@ export const env = {
 }
 
 export const wizardConfig = {
-  pages: ['type', 'source', 'target', 'vms', 'networks', 'options', 'schedule', 'summary'],
+  pages: [
+    { id: 'type', title: 'New', breadcrumb: 'Type' },
+    { id: 'source', title: 'Select your source cloud', breadcrumb: 'Source Cloud' },
+    { id: 'target', title: 'Select your target cloud', breadcrumb: 'Target Cloud' },
+    { id: 'vms', title: 'Select instances', breadcrumb: 'Select VMs' },
+    { id: 'networks', title: 'Networks', breadcrumb: 'Networks' },
+    { id: 'options', title: 'Options', breadcrumb: 'Options' },
+    { id: 'schedule', title: 'Schedule', breadcrumb: 'Schedule' },
+    { id: 'summary', title: 'Summary', breadcrumb: 'Summary' },
+  ],
 }
 
 export const basename = process.env.PUBLIC_PATH

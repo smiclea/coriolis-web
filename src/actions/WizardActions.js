@@ -5,7 +5,7 @@ class WizardActions {
     return data
   }
 
-  updateCurrentPage(page) {
+  setCurrentPage(page) {
     return page
   }
 }

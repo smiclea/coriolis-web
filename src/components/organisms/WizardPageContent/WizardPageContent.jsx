@@ -7,10 +7,12 @@ import {
   Button,
   WizardBreadcrumbs,
   EndpointLogos,
+  WizardEndpointList,
 } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
+import { providerTypes } from '../../../config'
 
 import migrationArrowImage from './images/migration.js'
 
@@ -30,10 +32,13 @@ const Header = styled.div`
   font-size: 32px;
   font-weight: ${StyleProps.fontWeights.light};
   color: ${Palette.primary};
+  margin-bottom: 64px;
 `
 const Body = styled.div`
   flex-grow: 1;
   overflow-y: auto; 
+  display: flex;
+  justify-content: center;
 `
 const Navigation = styled.div`
   display: flex;
@@ -56,19 +61,50 @@ const WizardTypeIcon = styled.div`
 
 class WizardPageContent extends React.Component {
   static propTypes = {
-    page: PropTypes.string,
+    page: PropTypes.object,
     type: PropTypes.string,
+    providers: PropTypes.object,
+    wizardData: PropTypes.object,
+    endpoints: PropTypes.array,
     onTypeChange: PropTypes.func,
+    onBackClick: PropTypes.func,
+    onNextClick: PropTypes.func,
+    onSourceEndpointChange: PropTypes.func,
+    onTargetEndpointChange: PropTypes.func,
+  }
+
+  getProvidersType(type) {
+    if (this.props.type === 'replica') {
+      if (type === 'source') {
+        return providerTypes.SOURCE_REPLICA
+      }
+      return providerTypes.TARGET_REPLICA
+    }
+
+    if (type === 'source') {
+      return providerTypes.SOURCE_MIGRATION
+    }
+    return providerTypes.TARGET_MIGRATION
+  }
+
+  getProviders(type) {
+    let providers = []
+    let providerType = this.getProvidersType(type)
+
+    Object.keys(this.props.providers || {}).forEach(provider => {
+      if (this.props.providers[provider].types.findIndex(t => t === providerType) > -1) {
+        providers.push(provider)
+      }
+    })
+
+    return providers
   }
 
   renderHeader() {
-    let title = ''
+    let title = this.props.page.title
 
-    switch (this.props.page) {
-      case 'type':
-        title = `New ${this.props.type.charAt(0).toUpperCase() + this.props.type.substr(1)}`
-        break
-      default:
+    if (this.props.page.id === 'type') {
+      title += ` ${this.props.type.charAt(0).toUpperCase() + this.props.type.substr(1)}`
     }
 
     return <Header>{title}</Header>
@@ -77,12 +113,32 @@ class WizardPageContent extends React.Component {
   renderBody() {
     let body = null
 
-    switch (this.props.page) {
+    switch (this.props.page.id) {
       case 'type':
         body = (
           <WizardType
             selected={this.props.type}
             onChange={this.props.onTypeChange}
+          />
+        )
+        break
+      case 'source':
+        body = (
+          <WizardEndpointList
+            providers={this.getProviders('source')}
+            selectedEndpoint={this.props.wizardData.source}
+            endpoints={this.props.endpoints}
+            onChange={this.props.onSourceEndpointChange}
+          />
+        )
+        break
+      case 'target':
+        body = (
+          <WizardEndpointList
+            providers={this.getProviders('target')}
+            selectedEndpoint={this.props.wizardData.target}
+            endpoints={this.props.endpoints}
+            onChange={this.props.onTargetEndpointChange}
           />
         )
         break
@@ -93,15 +149,18 @@ class WizardPageContent extends React.Component {
   }
 
   renderNavigationActions() {
+    let sourceEndpoint = this.props.wizardData.source && this.props.wizardData.source.type
+    let targetEndpoint = this.props.wizardData.target && this.props.wizardData.target.type
+
     return (
       <Navigation>
-        <Button secondary>Back</Button>
+        <Button secondary onClick={this.props.onBackClick}>Back</Button>
         <IconRepresentation>
-          <EndpointLogos height={32} />
+          <EndpointLogos height={32} endpoint={sourceEndpoint} />
           <WizardTypeIcon type={this.props.type} />
-          <EndpointLogos height={32} />
+          <EndpointLogos height={32} endpoint={targetEndpoint} />
         </IconRepresentation>
-        <Button>Next</Button>
+        <Button onClick={this.props.onNextClick}>Next</Button>
       </Navigation>
     )
   }
