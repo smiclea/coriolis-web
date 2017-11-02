@@ -5,15 +5,18 @@ import PropTypes from 'prop-types'
 import {
   WizardType,
   Button,
-  Breadcrumbs,
+  WizardBreadcrumbs,
+  EndpointLogos,
 } from 'components'
 
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
 
+import migrationArrowImage from './images/migration.js'
+
 const Wrapper = styled.div`
   ${StyleProps.exactWidth('800px')}
-  margin: 90px auto 32px auto;
+  margin: 64px auto 32px auto;
   position: absolute;
   top: 0;
   left: 0;
@@ -36,9 +39,20 @@ const Navigation = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 16px;
+  margin-bottom: 80px;
 `
-const IconRepresentation = styled.div``
+const IconRepresentation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin: 0 76px;
+`
 const Footer = styled.div``
+const WizardTypeIcon = styled.div`
+  width: 60px;
+  height: 32px;
+  background: url('data:image/svg+xml;utf8,${props => props.type === 'replica' ? migrationArrowImage(Palette.alert) : migrationArrowImage(Palette.primary)}') center no-repeat;
+`
 
 class WizardPageContent extends React.Component {
   static propTypes = {
@@ -82,7 +96,11 @@ class WizardPageContent extends React.Component {
     return (
       <Navigation>
         <Button secondary>Back</Button>
-        <IconRepresentation />
+        <IconRepresentation>
+          <EndpointLogos height={32} />
+          <WizardTypeIcon type={this.props.type} />
+          <EndpointLogos height={32} />
+        </IconRepresentation>
         <Button>Next</Button>
       </Navigation>
     )
@@ -99,7 +117,7 @@ class WizardPageContent extends React.Component {
         {this.renderBody()}
         <Footer>
           {this.renderNavigationActions()}
-          <Breadcrumbs />
+          <WizardBreadcrumbs selected={this.props.page} />
         </Footer>
       </Wrapper>
     )

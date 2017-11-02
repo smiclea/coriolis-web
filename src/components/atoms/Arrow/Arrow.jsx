@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: ${props => props.useDefaultCursor ? 'default' : 'pointer'};
   opacity: ${props => props.opacity};
   transition: all ${StyleProps.animations.swift};
   ${props => getOrientation(props)}
@@ -28,6 +28,7 @@ const Wrapper = styled.div`
 class Arrow extends React.Component {
   static propTypes = {
     primary: PropTypes.bool,
+    useDefaultCursor: PropTypes.bool,
     orientation: PropTypes.string,
     opacity: PropTypes.number,
   }

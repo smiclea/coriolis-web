@@ -7,8 +7,7 @@ import { Switch } from 'components'
 import StyleProps from '../../styleUtils/StyleProps'
 import Palette from '../../styleUtils/Palette'
 
-import replicaImage from './images/replica.svg'
-import migrationImage from './images/migration.svg'
+import migrationImage from './images/migration.js'
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,7 +18,7 @@ const Wrapper = styled.div`
 const Image = styled.div`
   width: 96px;
   height: 96px;
-  background: url('${props => props.type === 'replica' ? replicaImage : migrationImage}') center no-repeat;
+  background: url('data:image/svg+xml;utf8,${props => props.type === 'replica' ? migrationImage(Palette.alert) : migrationImage(Palette.primary)}') center no-repeat;
 `
 const Row = styled.div`
   display: flex;
@@ -40,6 +39,7 @@ const Title = styled.div`
 `
 const Message = styled.div`
   color: ${Palette.grayscale[4]};
+  transition: all ${StyleProps.animations.swift};
   opacity: ${props => props.selected ? 1 : 0.6};
 `
 

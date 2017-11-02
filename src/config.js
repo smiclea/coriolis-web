@@ -30,7 +30,7 @@ export const env = {
 }
 
 export const wizardConfig = {
-  pages: ['type', 'source', 'target', 'vms', 'networks', 'options', 'summary'],
+  pages: ['type', 'source', 'target', 'vms', 'networks', 'options', 'schedule', 'summary'],
 }
 
 export const basename = process.env.PUBLIC_PATH
