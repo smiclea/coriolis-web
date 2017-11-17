@@ -4,26 +4,25 @@
 - [node](https://nodejs.org/en/download/package-manager/) >=6.x and [yarn](https://yarnpkg.com/lang/en/docs/install/) are required
 - clone repo
 - run `yarn install` to install packages and dependencies
-- rename `config.sample.js` to `config.js` in `src` directory
-- change the `coriolisUrl` variable to match the coriolis server path
+- change the `coriolisUrl` variable in ./src/config.js to match the Coriolis Server path
 
 
 ### Build instructions
 - run `yarn build`
-- run `node build/server.js` to execute the build
+- run `node server.js` to start the server
 
-Your server will be running at http://localhost:3000/
+Your server will be running at http://localhost:3001/
 
 
 
 #### Development mode
 - run `yarn start` to start local development server
 
-Your development server will be running at http://localhost:3000/
+Your development server will be running at http://localhost:3001/
 
 This should be used only for development, as it contains live-reload and other development tools.
 
-
+You can view some of the UIs components in the [Storybook](https://github.com/storybooks/storybook) by running `yarn storybook`
 
 ### Apache Configuration
 
