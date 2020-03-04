@@ -65,6 +65,7 @@ type Props = {
   notificationItemsLoading: boolean,
   users: User[],
   licence: Licence | null,
+  licenceError: string | null,
   notificationItems: NotificationItemData[],
   isAdmin: boolean,
   onNewReplicaClick: () => void,
@@ -131,6 +132,7 @@ class DashboardContent extends React.Component<Props, State> {
       <LicenceModule
         licence={this.props.licence}
         loading={this.props.licenceLoading}
+        licenceError={this.props.licenceError}
         style={{
           minWidth: MIDDLE_WIDTHS[0],
           width: MIDDLE_WIDTHS[0],
