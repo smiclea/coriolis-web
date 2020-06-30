@@ -212,7 +212,6 @@ class FilterList extends React.Component<Props, State> {
           items={this.props.filterItems}
           dropdownActions={this.props.dropdownActions || []}
           largeDropdownActionItems={this.props.largeDropdownActionItems}
-          data-test-id="filterList-filter"
         />
         <MainList
           loading={this.props.loading}
@@ -227,7 +226,6 @@ class FilterList extends React.Component<Props, State> {
           emptyListExtraMessage={this.props.emptyListExtraMessage}
           emptyListButtonLabel={this.props.emptyListButtonLabel}
           onEmptyListButtonClick={this.props.onEmptyListButtonClick}
-          data-test-id="filterList-mainList"
         />
         {this.renderPagination()}
       </Wrapper>

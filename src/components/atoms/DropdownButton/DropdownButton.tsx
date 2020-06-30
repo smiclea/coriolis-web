@@ -160,7 +160,6 @@ type Props = {
   className?: string,
   disabled?: boolean,
   disabledLoading?: boolean,
-  'data-test-id'?: string,
   embedded?: boolean,
   highlight?: boolean,
   secondary?: boolean,
@@ -177,7 +176,6 @@ class DropdownButton extends React.Component<Props> {
     const disabled = this.props.disabled || this.props.disabledLoading
     return (
       <Wrapper
-        data-test-id={this.props['data-test-id'] || 'dropdownButton'}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...this.props}
         disabled={disabled}
@@ -198,7 +196,6 @@ class DropdownButton extends React.Component<Props> {
           {...this.props}
           onClick={() => { }}
           ref={() => { }}
-          data-test-id="dropdownButton-value"
           disabled={disabled}
         >
           {this.props.value}
@@ -208,7 +205,6 @@ class DropdownButton extends React.Component<Props> {
           {...this.props}
           ref={(ref: HTMLElement) => { if (this.props.arrowRef) this.props.arrowRef(ref) }}
           onClick={() => { }}
-          data-test-id=""
           disabled={disabled}
           dangerouslySetInnerHTML={{ __html: arrowImage }}
         />

@@ -356,7 +356,6 @@ class WizardOptions extends React.Component<Props> {
         enum={field.enum}
         addNullValue
         required={field.required}
-        data-test-id={`wOptions-field-${field.name}`}
         width={this.props.fieldWidth || StyleProps.inputSizes.wizard.width}
         nullableBoolean={field.nullableBoolean}
         disabled={field.disabled}

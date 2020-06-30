@@ -205,7 +205,6 @@ type Props = {
   alert?: boolean,
   small?: boolean,
   style?: React.CSSProperties
-  'data-test-id'?: string,
 }
 @observer
 class StatusPill extends React.Component<Props> {
@@ -214,7 +213,6 @@ class StatusPill extends React.Component<Props> {
   }
 
   render() {
-    const dataTestId = this.props['data-test-id'] ? this.props['data-test-id'] : `statusPill-${this.props.status || 'null'}`
     let label = this.props.label || this.props.status
     const { status } = this.props
 
@@ -229,7 +227,6 @@ class StatusPill extends React.Component<Props> {
         secondary={this.props.secondary}
         alert={this.props.alert}
         small={this.props.small}
-        data-test-id={dataTestId}
       >
         {label}
       </Wrapper>

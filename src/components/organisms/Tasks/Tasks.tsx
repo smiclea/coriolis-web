@@ -159,7 +159,6 @@ class Tasks extends React.Component<Props, State> {
             columnWidths={ColumnWidths}
             open={Boolean(this.state.openedItems.find(i => i.id === item.id))}
             onDependsOnClick={id => { this.handleDependsOnClick(id) }}
-            data-test-id={`tasks-item-${item.id}`}
           />
         ))}
       </Body>

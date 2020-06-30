@@ -281,7 +281,6 @@ type Props = {
   disabled?: boolean,
   disabledLoading?: boolean,
   width?: number,
-  'data-test-id'?: string,
   embedded?: boolean,
   dimFirstItem?: boolean,
   multipleSelection?: boolean,
@@ -607,7 +606,6 @@ class Dropdown extends React.Component<Props, State> {
               .find(j => this.getValue(j) === value)
             const listItem = (
               <ListItem
-                data-test-id="dropdownListItem"
                 ref={(ref: HTMLElement | null | undefined) => {
                   if (i === 0) { this.firstItemRef = ref }
                 }}
@@ -667,7 +665,6 @@ class Dropdown extends React.Component<Props, State> {
     return (
       <Wrapper
         className={this.props.className}
-        data-test-id={this.props['data-test-id'] || 'dropdown'}
         embedded={this.props.embedded}
         tabIndex={0}
         ref={(ref: HTMLElement | null | undefined) => { this.wrapperRef = ref }}
@@ -678,7 +675,6 @@ class Dropdown extends React.Component<Props, State> {
         <DropdownButton
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...this.props}
-          data-test-id="dropdown-dropdownButton"
           customRef={ref => { this.buttonRef = ref }}
           value={buttonValue()}
           onClick={() => { this.handleButtonClick() }}

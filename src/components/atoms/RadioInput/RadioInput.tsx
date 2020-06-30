@@ -86,10 +86,9 @@ class RadioInput extends React.Component<Props> {
             type="radio"
             {...props}
             disabled={disabled}
-            data-test-id="radioInput-input"
             onChange={e => { this.props.onChange(e.target.checked) }}
           />
-          <Text data-test-id="radioInput-label">{this.props.label}</Text>
+          <Text>{this.props.label}</Text>
         </LabelStyled>
       </Wrapper>
     )

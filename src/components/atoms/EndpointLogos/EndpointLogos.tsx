@@ -44,7 +44,6 @@ type Props = {
   white?: boolean,
   baseUrl?: string,
   onClick?: () => void
-  'data-test-id'?: string,
   style?: React.CSSProperties
 }
 @observer
@@ -56,7 +55,6 @@ class EndpointLogos extends React.Component<Props> {
   renderGenericLogo(size: { w: number, h: number }) {
     return (
       <Generic
-        data-test-id="endpointLogos-genericLogo"
         size={size}
         name={this.props.endpoint || ''}
         disabled={this.props.disabled}
@@ -82,12 +80,11 @@ class EndpointLogos extends React.Component<Props> {
 
     return (
       // eslint-disable-next-line react/jsx-props-no-spreading
-      <Wrapper {...this.props} data-test-id={this.props['data-test-id'] || 'endpointLogos'}>
+      <Wrapper {...this.props}>
         <Logo
           width={size.w}
           height={size.h}
           url={imageUrl}
-          data-test-id="endpointLogos-logo"
         >
           {imageUrl ? null : this.renderGenericLogo(size)}
         </Logo>

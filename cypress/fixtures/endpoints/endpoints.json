@@ -1,0 +1,139 @@
+{
+  "endpoints": [
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "0f40dc58-2923-41aa-93ee-5b00fe1394b1",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/b5e065c6-d901-4623-ab85-114de66e5197"
+      },
+      "type": "aws",
+      "name": "aws",
+      "description": "Amazon Web Services"
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "5afba752-60b0-4dee-8381-9182bb3bc7ec",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/deabe473-0104-40ba-b8e4-1afbbb60bdb4"
+      },
+      "type": "hyper-v",
+      "name": "hyperv",
+      "description": null
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "6bb15199-95b7-4ddd-aff8-22fecd3db772",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/71de941f-7a5c-40d9-8b72-804380d1d39e"
+      },
+      "type": "openstack",
+      "name": "openstack",
+      "description": "OpenStack on 10.107.1.56"
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "897e963e-3506-4bdb-8c39-5f9b79b15470",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/952a2435-5f94-49fc-9a04-e9e1d124989a"
+      },
+      "type": "oracle_vm",
+      "name": "ovm",
+      "description": "Oracle VM on 10.107.1.244"
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "8f6fb2ec-d710-42f2-a7bd-7ef8596998cb",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/84a6a317-6cb6-4a17-94be-b2d55a2a8584"
+      },
+      "type": "vmware_vsphere",
+      "name": "vSphere",
+      "description": "vCenter on 10.107.8.11"
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "b3eb734d-5d45-4e4b-918c-b0025d5178d8",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/86c4ae1f-b046-49cb-a5c5-3ca1a0610473"
+      },
+      "type": "azure",
+      "name": "AzureStack",
+      "description": ""
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "dd919892-556d-41b1-a6c8-e1f3a796f401",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/11ded163-cb15-43f6-aeba-a8718eb3b157"
+      },
+      "type": "oci",
+      "name": "oci",
+      "description": null
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "ea06cdf9-5475-448b-94ac-d89d19bed08a",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/88a6f46c-3fa4-46a7-b1b1-c0c3e0e7c355"
+      },
+      "type": "vmware_vsphere",
+      "name": "vmware_esxi",
+      "description": "esxi on 10.107.8.10"
+    },
+    {
+      "created_at": "2020-06-30T22:36:12.000000",
+      "updated_at": null,
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "fd23d1c2-ac0f-45e3-8a22-d6b3c26bb554",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "connection_info": {
+        "secret_ref": "http://127.0.0.1:9311/v1/secrets/e7daaf96-f3df-4f18-8608-2823367d4142"
+      },
+      "type": "azure",
+      "name": "azure",
+      "description": null
+    }
+  ]
+}

@@ -65,7 +65,6 @@ export type Props = {
   label: string,
   actions: Action[],
   style?: any,
-  'data-test-id'?: string,
   largeItems?: boolean
 }
 
@@ -171,7 +170,6 @@ class ActionDropdown extends React.Component<Props, State> {
             onClick={() => { this.handleItemClick(action) }}
             color={action.color}
             disabled={action.disabled}
-            data-test-id={`${TEST_ID}-listItem-${action.label}`}
             title={action.title}
             large={this.props.largeItems}
           >
@@ -194,7 +192,6 @@ class ActionDropdown extends React.Component<Props, State> {
         width={`${StyleProps.inputSizes.regular.width}px`}
         padding={0}
         customStyle={ListStyle}
-        data-test-id={`${TEST_ID}-list`}
       >
         <Tip ref={(ref: HTMLElement | null | undefined) => { this.tipRef = ref }} borderColor="rgba(111, 114, 118, 0.2)" />
         {this.renderListItems()}
@@ -204,14 +201,13 @@ class ActionDropdown extends React.Component<Props, State> {
 
   render() {
     return (
-      <Wrapper style={this.props.style} data-test-id={this.props['data-test-id']}>
+      <Wrapper style={this.props.style}>
         <DropdownButton
           secondary
           centered
           value={this.props.label}
           customRef={ref => { this.buttonRef = ref }}
           onClick={() => { this.handleButtonClick() }}
-          data-test-id={`${TEST_ID}-dropdownButton`}
         />
         {this.renderList()}
       </Wrapper>

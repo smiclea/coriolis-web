@@ -255,7 +255,7 @@ class WizardSummary extends React.Component<Props> {
         <SectionTitle>Schedule</SectionTitle>
         <Table>
           {schedules.map(schedule => (
-            <Row key={schedule.id} schedule data-test-id={`wSummary-scheduleItem-${schedule.id || 0}`}>
+            <Row key={schedule.id} schedule>
               {this.renderScheduleLabel(schedule)}
             </Row>
           ))}
@@ -465,10 +465,10 @@ class WizardSummary extends React.Component<Props> {
 
             return (
               <Option key={optionName}>
-                <OptionLabel data-test-id={`wSummary-optionLabel-${optionName}`} title={optionLabel}>
+                <OptionLabel title={optionLabel}>
                   {optionLabel}
                 </OptionLabel>
-                <OptionValue data-test-id={`wSummary-optionValue-${optionName}`} title={optionValue}>
+                <OptionValue title={optionValue}>
                   {optionValue}
                 </OptionValue>
               </Option>
@@ -540,10 +540,10 @@ class WizardSummary extends React.Component<Props> {
         <Table>
           {data.networks.map(mapping => (
             <Row key={mapping.sourceNic.network_name} direction="row">
-              <SourceNetwork data-test-id="wSummary-networkSource">{mapping.sourceNic.network_name}</SourceNetwork>
+              <SourceNetwork>{mapping.sourceNic.network_name}</SourceNetwork>
               <NetworkArrow />
               <TargetNetwork>
-                <TargetNetworkName data-test-id="wSummary-networkTarget">{mapping.targetNetwork!.name}</TargetNetworkName>
+                <TargetNetworkName>{mapping.targetNetwork!.name}</TargetNetworkName>
                 {mapping.targetSecurityGroups && mapping.targetSecurityGroups.length ? (
                   <TargetNetworkName>Security Groups: {mapping.targetSecurityGroups.map(s => (typeof s === 'string' ? s : s.name)).join(', ')}</TargetNetworkName>
                 ) : null}
@@ -622,9 +622,8 @@ class WizardSummary extends React.Component<Props> {
                 secondary
                 small
                 label={LabelDictionary.get(data.source && data.source.type).toUpperCase()}
-                data-test-id="wSummary-sourcePill"
               />
-              <OverviewRowLabel data-test-id="wSummary-source">{data.source ? data.source.name : ''}</OverviewRowLabel>
+              <OverviewRowLabel>{data.source ? data.source.name : ''}</OverviewRowLabel>
             </OverviewRowData>
           </OverviewRow>
           <OverviewRow>
@@ -634,9 +633,8 @@ class WizardSummary extends React.Component<Props> {
                 secondary
                 small
                 label={LabelDictionary.get(data.target && data.target.type).toUpperCase()}
-                data-test-id="wSummary-targetPill"
               />
-              <OverviewRowLabel data-test-id="wSummary-target">{data.target && data.target.name}</OverviewRowLabel>
+              <OverviewRowLabel>{data.target && data.target.name}</OverviewRowLabel>
             </OverviewRowData>
           </OverviewRow>
           <OverviewRow>
@@ -646,7 +644,6 @@ class WizardSummary extends React.Component<Props> {
                 alert={type === 'Replica'}
                 small
                 label={this.props.wizardType.toUpperCase()}
-                data-test-id="wSummary-typePill"
               />
               <OverviewRowLabel>Coriolis {type}</OverviewRowLabel>
             </OverviewRowData>

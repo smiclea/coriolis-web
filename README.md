@@ -20,8 +20,8 @@ Your server will be running at `http://localhost:3000/` (the port is configurabl
 
 ## Testing
 
+- run e2e integration tests using `yarn cypress`. Before running `yarn cypress` you must run `yarn install`, `yarn server-dev` and `yarn ui-dev`. Development env. is required so that the component CSS class names are kept (production build minifies them).
 - unit tests can be run using `yarn test`
-- e2e integration tests can be run using `yarn e2e`. First though, you have to create the `private/cypress/config.js` file using `private/cypress/config.template.js` as a template and then run `yarn build` and `node server`.
 
 ## Development mode
 

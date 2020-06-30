@@ -163,7 +163,7 @@ export type Props = {
 class WizardStorage extends React.Component<Props> {
   renderNoStorage() {
     return (
-      <NoStorageMessage data-test-id={`${TEST_ID}-noStorage`}>
+      <NoStorageMessage>
         <BigStorageImage />
         <NoStorageTitle>No storage backends were found</NoStorageTitle>
         <NoStorageSubtitle>
@@ -209,7 +209,6 @@ class WizardStorage extends React.Component<Props> {
           labelField="name"
           valueField="id"
           onChange={(item: StorageBackend) => { this.props.onChange(disk, item, type) }}
-          data-test-id={`${TEST_ID}-${type}-destination`}
         />
       )
   }

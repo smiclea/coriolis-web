@@ -1,0 +1,103 @@
+{
+  "role_assignments": [
+    {
+      "links": {},
+      "scope": {
+        "project": {
+          "id": "3427f31a65814582876aaaeb18c8b624",
+          "name": "service",
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          }
+        }
+      },
+      "user": {
+        "id": "25e4c0bb119741558b8abeee58276349",
+        "name": "barbican",
+        "domain": {
+          "id": "default",
+          "name": "Default"
+        }
+      },
+      "role": {
+        "id": "efbf77885d8540578fbe83ffa2e0707b",
+        "name": "admin"
+      }
+    },
+    {
+      "links": {},
+      "scope": {
+        "project": {
+          "id": "3427f31a65814582876aaaeb18c8b624",
+          "name": "service",
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          }
+        }
+      },
+      "user": {
+        "id": "8458be68ccbc4c39aba23159f4414ad8",
+        "name": "coriolis",
+        "domain": {
+          "id": "default",
+          "name": "Default"
+        }
+      },
+      "role": {
+        "id": "efbf77885d8540578fbe83ffa2e0707b",
+        "name": "admin"
+      }
+    },
+    {
+      "links": {},
+      "scope": {
+        "project": {
+          "id": "5ce600c3117d46a897b4307d73f9b688",
+          "name": "admin",
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          }
+        }
+      },
+      "user": {
+        "id": "8be8dd1628574c0d8ed06673ff71e8b9",
+        "name": "admin",
+        "domain": {
+          "id": "default",
+          "name": "Default"
+        }
+      },
+      "role": {
+        "id": "efbf77885d8540578fbe83ffa2e0707b",
+        "name": "admin"
+      }
+    },
+    {
+      "links": {},
+      "scope": {
+        "system": {
+          "all": true
+        }
+      },
+      "user": {
+        "id": "8be8dd1628574c0d8ed06673ff71e8b9",
+        "name": "admin",
+        "domain": {
+          "id": "default",
+          "name": "Default"
+        }
+      },
+      "role": {
+        "id": "efbf77885d8540578fbe83ffa2e0707b",
+        "name": "admin"
+      }
+    }
+  ],
+  "links": {
+    "next": null,
+    "previous": null
+  }
+}

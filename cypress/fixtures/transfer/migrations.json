@@ -1,0 +1,2953 @@
+{
+  "migrations": [
+    {
+      "base_id": "5607f296-8b14-48e9-9783-a5cb09bc064e",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "destination_environment": {
+        "location": "westus",
+        "resource_group": "coriolis",
+        "worker_size": "Standard_D1_v2",
+        "network_map": {
+          "vmnetwork": "coriolis-jenkins-vnet/default"
+        },
+        "storage_mappings": {}
+      },
+      "type": "migration",
+      "instances": [
+        "datacenter1/test-coriolis-jenkins-openwrt15"
+      ],
+      "reservation_id": "40d29c9a-ed2c-407e-a925-dcaee426bc6d",
+      "notes": "",
+      "origin_endpoint_id": "8f6fb2ec-d710-42f2-a7bd-7ef8596998cb",
+      "destination_endpoint_id": "fd23d1c2-ac0f-45e3-8a22-d6b3c26bb554",
+      "transfer_result": null,
+      "network_map": {
+        "vmnetwork": "coriolis-jenkins-vnet/default"
+      },
+      "storage_mappings": {},
+      "source_environment": {
+        "automatically_enable_cbt": false,
+        "vixdisklib_compatibility_version": "6.0"
+      },
+      "created_at": "2020-07-01T10:28:40.000000",
+      "updated_at": "2020-07-01T10:43:38.000000",
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "5607f296-8b14-48e9-9783-a5cb09bc064e",
+      "replica_id": null,
+      "shutdown_instances": false,
+      "replication_count": 2,
+      "status": "ERROR",
+      "tasks": [
+        {
+          "id": "95a0e6e1-1eb3-4296-a0fd-d16b2b7ae844",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 98,
+          "status": "COMPLETED",
+          "task_type": "GET_INSTANCE_INFO",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 2,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "1ea31319-4881-4452-b552-027346f487cc",
+              "task_id": "95a0e6e1-1eb3-4296-a0fd-d16b2b7ae844",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "VMWare tools are not installed in VM \"test-coriolis-jenkins-openwrt15\", unable to fetch the IP addresses of the VM's NICs.",
+              "created_at": "2020-07-01T10:28:48.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "2b5ca6e7-a220-4648-ab18-77be7d92c93c",
+              "task_id": "95a0e6e1-1eb3-4296-a0fd-d16b2b7ae844",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Retrieving virtual machine data",
+              "created_at": "2020-07-01T10:28:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "ce1e0f66-c74c-4450-a617-128e5734992e",
+              "task_id": "95a0e6e1-1eb3-4296-a0fd-d16b2b7ae844",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Connecting to vSphere host",
+              "created_at": "2020-07-01T10:28:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:28:48.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "574cb1ec-48b9-413f-b160-b4edb1753f18",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 108,
+          "status": "COMPLETED",
+          "task_type": "VALIDATE_MIGRATION_DESTINATION_INPUTS",
+          "exception_details": null,
+          "depends_on": [
+            "95a0e6e1-1eb3-4296-a0fd-d16b2b7ae844"
+          ],
+          "index": 3,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "16761c52-84b9-40e2-aa03-c439f8ee945e",
+              "task_id": "574cb1ec-48b9-413f-b160-b4edb1753f18",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Checking Linux worker image",
+              "created_at": "2020-07-01T10:29:16.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "3a769b22-b612-499f-8a40-aff7ff4d9217",
+              "task_id": "574cb1ec-48b9-413f-b160-b4edb1753f18",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Checking worker size",
+              "created_at": "2020-07-01T10:29:16.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:29:19.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "7cdf2350-4a1a-479b-8cda-3b8a503da73c",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 99,
+          "status": "COMPLETED",
+          "task_type": "VALIDATE_MIGRATION_SOURCE_INPUTS",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 4,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "b129bab6-269e-4ba1-bfea-bc4716d9587d",
+              "task_id": "7cdf2350-4a1a-479b-8cda-3b8a503da73c",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Testing vixDiskLib compatibility",
+              "created_at": "2020-07-01T10:28:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "dab27c62-efd6-43ad-989e-a71f4bd0ec84",
+              "task_id": "7cdf2350-4a1a-479b-8cda-3b8a503da73c",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Compiling export info for VM 'datacenter1/test-coriolis-jenkins-openwrt15'",
+              "created_at": "2020-07-01T10:28:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "eda5ea5f-6817-4f10-b0d9-2ea824eef32b",
+              "task_id": "7cdf2350-4a1a-479b-8cda-3b8a503da73c",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "VMWare tools are not installed in VM \"test-coriolis-jenkins-openwrt15\", unable to fetch the IP addresses of the VM's NICs.",
+              "created_at": "2020-07-01T10:28:48.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "f067d512-d07e-4ce1-a086-bd3bcbc91e70",
+              "task_id": "7cdf2350-4a1a-479b-8cda-3b8a503da73c",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "vixDiskLib is installed and will be run using compatibility mode '6.0' ",
+              "created_at": "2020-07-01T10:28:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "f0837897-296a-42f5-9e27-040908845ad5",
+              "task_id": "7cdf2350-4a1a-479b-8cda-3b8a503da73c",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Checking CBT status",
+              "created_at": "2020-07-01T10:28:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:28:49.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "e8ab6004-2914-40cf-8c9a-0f301112a8c5",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 109,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "7cdf2350-4a1a-479b-8cda-3b8a503da73c"
+          ],
+          "index": 5,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "e2acb8cf-61b4-41bf-a911-8cc1b14ebb0a",
+              "task_id": "e8ab6004-2914-40cf-8c9a-0f301112a8c5",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "No source-side resources required for Replicating from VMWare",
+              "created_at": "2020-07-01T10:28:55.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:28:55.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "9a3b2c21-efc4-42e5-98cc-d001aefe86da",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 116,
+          "status": "COMPLETED",
+          "task_type": "CREATE_INSTANCE_DISKS",
+          "exception_details": null,
+          "depends_on": [
+            "7cdf2350-4a1a-479b-8cda-3b8a503da73c",
+            "574cb1ec-48b9-413f-b160-b4edb1753f18"
+          ],
+          "index": 6,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "deee3ac9-20e2-44f3-b13a-439e476471f0",
+              "task_id": "9a3b2c21-efc4-42e5-98cc-d001aefe86da",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating new disk: coriolis-replica-3e9a17c8-2d09-41f0-988a-214503fa22c6",
+              "created_at": "2020-07-01T10:29:37.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:29:43.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 120,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_MIGRATION_TARGET_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "9a3b2c21-efc4-42e5-98cc-d001aefe86da"
+          ],
+          "index": 7,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "46eb1041-4943-4c3b-81c5-cbf94de0ece0",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Creating new network for worker VM",
+              "created_at": "2020-07-01T10:30:06.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "4bb542e2-c002-404c-816e-33dc0961b7fe",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 9,
+              "total_steps": null,
+              "message": "Testing direct connection to replicator (40.78.7.149:4433)",
+              "created_at": "2020-07-01T10:32:49.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "5c8d0732-b036-4b7d-9523-93aeac0be77d",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 6,
+              "total_steps": null,
+              "message": "Creating new worker VM with OS type \"linux\" and size \"Standard_d1_v2\": \"coriolis-worker-a9f814fb-5933-4000-9548-90d38393ff06\"",
+              "created_at": "2020-07-01T10:31:14.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "6aad5aa1-70ac-4cb0-8a24-cd3b273b7230",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "Creating new worker NIC",
+              "created_at": "2020-07-01T10:30:41.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "6d85e45e-f17e-4e52-ba00-add2c36eee05",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 7,
+              "total_steps": null,
+              "message": "Worker public IP is: 40.78.7.149",
+              "created_at": "2020-07-01T10:32:03.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "6fd55f66-f053-4372-b307-86ec0cfcdbbe",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Creating new secgroup for worker VM",
+              "created_at": "2020-07-01T10:30:32.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "8614b9f6-d671-4e16-8028-6b7642eea0c5",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 10,
+              "total_steps": null,
+              "message": "Attaching disks 'coriolis-replica-3e9a17c8-2d09-41f0-988a-214503fa22c6' to worker VM",
+              "created_at": "2020-07-01T10:32:50.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "a9d36c64-4f4c-47bc-a117-680d709546c3",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 8,
+              "total_steps": null,
+              "message": "Waiting for connectivity on 40.78.7.149:22",
+              "created_at": "2020-07-01T10:32:03.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "b3a2a81e-db50-42d9-9c99-38342b13f79d",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Creating new subnet on \"coriolis-migrnet-a9f814fb-5933-4000-9548-90d38393ff06\" for worker VM",
+              "created_at": "2020-07-01T10:30:37.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "ce8edc9d-6e23-455d-bc34-d27afa948efe",
+              "task_id": "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating new public IP address for worker VM",
+              "created_at": "2020-07-01T10:30:01.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:33:26.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "5e52267b-9cff-4a3e-ab72-36eb027393d2",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 124,
+          "status": "COMPLETED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": null,
+          "depends_on": [
+            "e8ab6004-2914-40cf-8c9a-0f301112a8c5",
+            "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc"
+          ],
+          "index": 8,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "21e9d89a-d303-4dc8-98f2-1652cdf47ce9",
+              "task_id": "5e52267b-9cff-4a3e-ab72-36eb027393d2",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Disk [datastore1] test-coriolis-jenkins-openwrt15/openwrt-15.05-x86-64-combined-ext4-imported.vmdk replica progress: 100%",
+              "created_at": "2020-07-01T10:33:43.000000",
+              "updated_at": "2020-07-01T10:33:44.000000",
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "80eebd3b-aa4b-4845-84ff-e2d4313417fb",
+              "task_id": "5e52267b-9cff-4a3e-ab72-36eb027393d2",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Performing full CBT replica for disk: [datastore1] test-coriolis-jenkins-openwrt15/openwrt-15.05-x86-64-combined-ext4-imported.vmdk. Disk size: 55,050,240. Written blocks size: 13,631,488",
+              "created_at": "2020-07-01T10:33:33.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "9eddd50b-8804-4872-90ba-2d002173ca1a",
+              "task_id": "5e52267b-9cff-4a3e-ab72-36eb027393d2",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating snapshot",
+              "created_at": "2020-07-01T10:33:32.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "d9322062-6e3e-4ffe-8290-91721d8d88d9",
+              "task_id": "5e52267b-9cff-4a3e-ab72-36eb027393d2",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Removing snapshot",
+              "created_at": "2020-07-01T10:33:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:33:48.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "85520568-a0cf-40a5-931c-7db4a371c959",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 130,
+          "status": "COMPLETED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": null,
+          "depends_on": [
+            "5e52267b-9cff-4a3e-ab72-36eb027393d2"
+          ],
+          "index": 9,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "4d6f6247-09e2-4d6e-abc5-2590329faba6",
+              "task_id": "85520568-a0cf-40a5-931c-7db4a371c959",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating snapshot",
+              "created_at": "2020-07-01T10:33:55.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "7034dc7e-94b2-4ee3-8a9c-b0c105313703",
+              "task_id": "85520568-a0cf-40a5-931c-7db4a371c959",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Removing snapshot",
+              "created_at": "2020-07-01T10:33:56.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "b4721765-2f8d-4d91-9362-6e7aeb529193",
+              "task_id": "85520568-a0cf-40a5-931c-7db4a371c959",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "No blocks to replicate for disk: [datastore1] test-coriolis-jenkins-openwrt15/openwrt-15.05-x86-64-combined-ext4-imported.vmdk",
+              "created_at": "2020-07-01T10:33:56.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:33:57.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "d52dd0b7-af02-49f0-b3a8-f6ffdf2988de",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 136,
+          "status": "COMPLETED",
+          "task_type": "DELETE_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "e8ab6004-2914-40cf-8c9a-0f301112a8c5",
+            "85520568-a0cf-40a5-931c-7db4a371c959"
+          ],
+          "index": 10,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:34:04.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 137,
+          "status": "COMPLETED",
+          "task_type": "DELETE_MIGRATION_TARGET_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "f82f5b05-e036-4dbb-8b20-5bbb30a1d4bc",
+            "85520568-a0cf-40a5-931c-7db4a371c959"
+          ],
+          "index": 11,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "0aa443e5-50ee-4dae-a494-a2d43b3ec6b4",
+              "task_id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+              "current_step": 6,
+              "total_steps": null,
+              "message": "Deleting worker secgroup: coriolis-worker-secgroup-a9f814fb-5933-4000-9548-90d38393ff06",
+              "created_at": "2020-07-01T10:35:58.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "0d4b98a7-dd6c-4e32-9b5f-78eb6cfed618",
+              "task_id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Deleting worker root disk \"coriolis-worker-a9f814fb-5933-4000-9548-9OS__1_34ceffcfa584455e96a3a124846ffac0\"",
+              "created_at": "2020-07-01T10:35:03.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "3d65c3d8-d6f0-4968-85df-5d2a1fbbc456",
+              "task_id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Shutting down worker VM \"coriolis-worker-a9f814fb-5933-4000-9548-90d38393ff06\"",
+              "created_at": "2020-07-01T10:34:16.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "4f7d7f7e-4850-4825-b2d9-1a0425f32067",
+              "task_id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Deleting worker VM \"coriolis-worker-a9f814fb-5933-4000-9548-90d38393ff06\"",
+              "created_at": "2020-07-01T10:34:22.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "71e975d9-1d04-4fa3-85c0-96cb8c295a6b",
+              "task_id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "Deleting public ip \"coriolis-worker-pip-a9f814fb-5933-4000-9548-90d38393ff06\"",
+              "created_at": "2020-07-01T10:35:47.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "da5a9de5-3cb0-4aec-be3a-4cf954d581cc",
+              "task_id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+              "current_step": 7,
+              "total_steps": null,
+              "message": "Deleting worker network: \"coriolis-migrnet-a9f814fb-5933-4000-9548-90d38393ff06\"",
+              "created_at": "2020-07-01T10:36:09.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "fae5b387-a245-4700-8447-08dbc51b5efd",
+              "task_id": "992024a9-77a8-4702-a570-99d3ff20a00e",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Deleting worker NIC \"coriolis-worker-nic-a9f814fb-5933-4000-9548-90d38393ff06\"",
+              "created_at": "2020-07-01T10:35:34.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:36:21.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "662c700d-1f86-40b9-87e0-b33aa81bd1b2",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 144,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_INSTANCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "85520568-a0cf-40a5-931c-7db4a371c959",
+            "992024a9-77a8-4702-a570-99d3ff20a00e"
+          ],
+          "index": 12,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:36:39.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 148,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_OS_MORPHING_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "662c700d-1f86-40b9-87e0-b33aa81bd1b2"
+          ],
+          "index": 13,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "177e97e8-ab84-41a2-8336-5ef4c9dc77db",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating new public IP address for worker VM",
+              "created_at": "2020-07-01T10:36:58.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "1b05bff6-66c1-4cc2-ab52-53aa515d99e1",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Creating new secgroup for worker VM",
+              "created_at": "2020-07-01T10:37:09.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "26d56328-a722-4829-b554-a20853bc0291",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Creating new subnet on \"coriolis-migrnet-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5\" for worker VM",
+              "created_at": "2020-07-01T10:37:15.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "7b3017b4-e99f-4bc4-a4fe-264cc8efbed5",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Creating new network for worker VM",
+              "created_at": "2020-07-01T10:37:04.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "932c3822-4dfb-475b-b740-14c88b572ffe",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 8,
+              "total_steps": null,
+              "message": "Waiting for connectivity on 40.112.195.154:22",
+              "created_at": "2020-07-01T10:38:41.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "d2556dcf-bc7c-4aaa-bb5a-3aa9ad53929b",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "Creating new worker NIC",
+              "created_at": "2020-07-01T10:37:19.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "db5de0a2-8112-47cc-9c9d-35beec60bb77",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 6,
+              "total_steps": null,
+              "message": "Creating new worker VM with OS type \"linux\" and size \"Standard_d1_v2\": \"coriolis-worker-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5\"",
+              "created_at": "2020-07-01T10:37:51.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "e2072204-8e95-4627-aaf9-a4a539a18024",
+              "task_id": "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+              "current_step": 7,
+              "total_steps": null,
+              "message": "Worker public IP is: 40.112.195.154",
+              "created_at": "2020-07-01T10:38:41.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:39:15.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "8f3ae7bb-038d-4804-93d7-db93527e080e",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 152,
+          "status": "ERROR",
+          "task_type": "OS_MORPHING",
+          "exception_details": "root partition not found",
+          "depends_on": [
+            "f1100b11-9730-4d16-8135-f1b7cd39ff47"
+          ],
+          "index": 14,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "78b4c8ec-a698-4768-97f1-3f7e1b56c32c",
+              "task_id": "8f3ae7bb-038d-4804-93d7-db93527e080e",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Connecting through SSH to OSMorphing host on: 40.112.195.154:22",
+              "created_at": "2020-07-01T10:39:28.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "9c9b685c-7760-4394-80da-c92a80ca5e6e",
+              "task_id": "8f3ae7bb-038d-4804-93d7-db93527e080e",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Connecting through SSH to OSMorphing host on: 40.112.195.154:22",
+              "created_at": "2020-07-01T10:39:22.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "d07e1c8a-8141-45f0-bbb5-c8c6bd5129b7",
+              "task_id": "8f3ae7bb-038d-4804-93d7-db93527e080e",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Discovering and mounting OS partitions",
+              "created_at": "2020-07-01T10:39:40.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:40:07.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 156,
+          "status": "COMPLETED",
+          "task_type": "DELETE_OS_MORPHING_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "f1100b11-9730-4d16-8135-f1b7cd39ff47",
+            "8f3ae7bb-038d-4804-93d7-db93527e080e"
+          ],
+          "index": 15,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "0ab87a70-0d33-458c-8f55-3b0978e3a8b5",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Deleting worker root disk \"coriolis-worker-0c1c85ce-11fc-4af2-b3ae-0OS__1_928f0b1ef70542aead24ed5030007081\"",
+              "created_at": "2020-07-01T10:41:12.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "45cdf38e-0bb6-48a4-9d14-e57182716876",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 7,
+              "total_steps": null,
+              "message": "Deleting worker secgroup: coriolis-worker-secgroup-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5",
+              "created_at": "2020-07-01T10:42:06.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "4f120879-55a0-4055-8914-83db90f32d1f",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Deleting worker VM \"coriolis-worker-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5\"",
+              "created_at": "2020-07-01T10:40:31.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "a3733458-93ed-4711-a524-ff7bca1749a8",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 8,
+              "total_steps": null,
+              "message": "Deleting worker network: \"coriolis-migrnet-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5\"",
+              "created_at": "2020-07-01T10:42:17.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "d9d42ce9-317f-4ad5-b95b-64fe66ea9c96",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 6,
+              "total_steps": null,
+              "message": "Deleting public ip \"coriolis-worker-pip-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5\"",
+              "created_at": "2020-07-01T10:41:55.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "de561bad-7be7-4d81-9354-e8eb4cdd1cde",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "Deleting worker NIC \"coriolis-worker-nic-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5\"",
+              "created_at": "2020-07-01T10:41:43.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "deba40d8-6452-4250-bc83-382fa1994a3e",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Shutting down worker VM \"coriolis-worker-0c1c85ce-11fc-4af2-b3ae-091ec630c6b5\"",
+              "created_at": "2020-07-01T10:40:25.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "f751b0bf-f7c8-4e8d-ba00-873c775c1022",
+              "task_id": "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Removing worker instance resources",
+              "created_at": "2020-07-01T10:40:24.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:42:29.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "6a24706f-0a9a-4d05-b1a4-64f9400b3ab5",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "GET_OPTIMAL_FLAVOR",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "8f3ae7bb-038d-4804-93d7-db93527e080e",
+            "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214"
+          ],
+          "index": 16,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:42:29.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "f40255a2-5bf9-47b4-b301-f3e8406ad4f5",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "FINALIZE_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "6a24706f-0a9a-4d05-b1a4-64f9400b3ab5"
+          ],
+          "index": 17,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:42:29.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "cc329f68-434a-4f8c-9f97-e1fad1df9ff5",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 160,
+          "status": "COMPLETED",
+          "task_type": "CLEANUP_FAILED_INSTANCE_DEPLOYMENT",
+          "exception_details": null,
+          "depends_on": [
+            "662c700d-1f86-40b9-87e0-b33aa81bd1b2",
+            "f40255a2-5bf9-47b4-b301-f3e8406ad4f5"
+          ],
+          "index": 18,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:42:48.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "01cfe57e-9add-484f-838d-df0581c83a28",
+          "execution_id": "0bd55688-1d40-424c-a380-794e911097fe",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 164,
+          "status": "COMPLETED",
+          "task_type": "CLEANUP_INSTANCE_STORAGE",
+          "exception_details": null,
+          "depends_on": [
+            "9a3b2c21-efc4-42e5-98cc-d001aefe86da",
+            "992024a9-77a8-4702-a570-99d3ff20a00e",
+            "cc329f68-434a-4f8c-9f97-e1fad1df9ff5",
+            "91f7f4e5-d057-4f50-9a2f-fba2ba4ab214"
+          ],
+          "index": 19,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "d37b2cd5-3aee-4f5d-9575-5d34446d22d0",
+              "task_id": "01cfe57e-9add-484f-838d-df0581c83a28",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Deleting volume \"coriolis-replica-3e9a17c8-2d09-41f0-988a-214503fa22c6\" (source disk ID \"2000\")",
+              "created_at": "2020-07-01T10:43:05.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T10:28:40.000000",
+          "updated_at": "2020-07-01T10:43:38.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        }
+      ]
+    },
+    {
+      "base_id": "8fa7a3ec-2827-4d20-9853-9b86b96d7ba0",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "destination_environment": {
+        "location": "westus",
+        "resource_group": "coriolis",
+        "worker_size": "Standard_D1_v2",
+        "network_map": {
+          "vmnetwork": "coriolis-jenkins-vnet/default"
+        },
+        "storage_mappings": {}
+      },
+      "type": "migration",
+      "instances": [
+        "datacenter1/test-coriolis-jenkins-oracle-linux"
+      ],
+      "reservation_id": "6c1e7f4b-98fc-4313-8d09-0a34e07fd8a5",
+      "notes": "",
+      "origin_endpoint_id": "8f6fb2ec-d710-42f2-a7bd-7ef8596998cb",
+      "destination_endpoint_id": "fd23d1c2-ac0f-45e3-8a22-d6b3c26bb554",
+      "transfer_result": null,
+      "network_map": {
+        "vmnetwork": "coriolis-jenkins-vnet/default"
+      },
+      "storage_mappings": {},
+      "source_environment": {
+        "automatically_enable_cbt": false,
+        "vixdisklib_compatibility_version": "6.0"
+      },
+      "created_at": "2020-07-06T10:35:01.000000",
+      "updated_at": "2020-07-06T10:35:22.000000",
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "8fa7a3ec-2827-4d20-9853-9b86b96d7ba0",
+      "replica_id": null,
+      "shutdown_instances": false,
+      "replication_count": 2,
+      "status": "CANCELED",
+      "tasks": [
+        {
+          "id": "335596bd-7240-4624-aef8-ca2efe586b4b",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": "coriolis-worker",
+          "process_id": 184,
+          "status": "COMPLETED",
+          "task_type": "GET_INSTANCE_INFO",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 2,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "b03e0e26-ca00-416d-bd19-9791c34a32ce",
+              "task_id": "335596bd-7240-4624-aef8-ca2efe586b4b",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Connecting to vSphere host",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "ff0d8bb0-c3a8-48d5-aa24-5b37d9ee14ce",
+              "task_id": "335596bd-7240-4624-aef8-ca2efe586b4b",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Retrieving virtual machine data",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:13.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "d219593f-6abc-4bd1-a1d0-6a98d74113e2",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": "coriolis-worker",
+          "process_id": 215,
+          "status": "CANCELED",
+          "task_type": "VALIDATE_MIGRATION_DESTINATION_INPUTS",
+          "exception_details": "This task was user-cancelled. Additional cancellation info from worker service: 'Task was canceled.'",
+          "depends_on": [
+            "335596bd-7240-4624-aef8-ca2efe586b4b"
+          ],
+          "index": 3,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "e4e02188-e7ba-4187-bd44-f14d5152d98f",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": "coriolis-worker",
+          "process_id": 185,
+          "status": "COMPLETED",
+          "task_type": "VALIDATE_MIGRATION_SOURCE_INPUTS",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 4,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "3fa016b7-6f4b-4286-bf6a-a5e635631308",
+              "task_id": "e4e02188-e7ba-4187-bd44-f14d5152d98f",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Compiling export info for VM 'datacenter1/test-coriolis-jenkins-oracle-linux'",
+              "created_at": "2020-07-06T10:35:12.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "4376ac02-c097-409f-862b-b75fb7968e76",
+              "task_id": "e4e02188-e7ba-4187-bd44-f14d5152d98f",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "vixDiskLib is installed and will be run using compatibility mode '6.0' ",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "bfca10dc-b31d-4862-99eb-67ba5ce4d206",
+              "task_id": "e4e02188-e7ba-4187-bd44-f14d5152d98f",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Testing vixDiskLib compatibility",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "e80a3c02-dc38-4222-8afd-2c42d5cb0310",
+              "task_id": "e4e02188-e7ba-4187-bd44-f14d5152d98f",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Checking CBT status",
+              "created_at": "2020-07-06T10:35:12.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:14.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "e97891c8-b823-4992-b4a3-0ea544dd7742",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": "coriolis-worker",
+          "process_id": 217,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "e4e02188-e7ba-4187-bd44-f14d5152d98f"
+          ],
+          "index": 5,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "1b1ca6bc-c685-42dd-81b4-c9352c795d07",
+              "task_id": "e97891c8-b823-4992-b4a3-0ea544dd7742",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "No source-side resources required for Replicating from VMWare",
+              "created_at": "2020-07-06T10:35:22.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:22.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "1e1cb245-b904-4010-be7f-57a9c680dc8c",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CREATE_INSTANCE_DISKS",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "e4e02188-e7ba-4187-bd44-f14d5152d98f",
+            "d219593f-6abc-4bd1-a1d0-6a98d74113e2"
+          ],
+          "index": 6,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "3025838b-55d8-4d51-982e-ddc13e6770b8",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DEPLOY_MIGRATION_TARGET_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "1e1cb245-b904-4010-be7f-57a9c680dc8c"
+          ],
+          "index": 7,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "ea55a311-9e50-4cbd-ad75-c5c62df4c2f5",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "e97891c8-b823-4992-b4a3-0ea544dd7742",
+            "3025838b-55d8-4d51-982e-ddc13e6770b8"
+          ],
+          "index": 8,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "a160b944-32f8-45fd-bfca-2f716718083d",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "ea55a311-9e50-4cbd-ad75-c5c62df4c2f5"
+          ],
+          "index": 9,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "baf77d01-3fa4-4d46-8b45-98526dd623c1",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": "coriolis-worker",
+          "process_id": 236,
+          "status": "COMPLETED",
+          "task_type": "DELETE_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "e97891c8-b823-4992-b4a3-0ea544dd7742",
+            "a160b944-32f8-45fd-bfca-2f716718083d"
+          ],
+          "index": 10,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:34.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "254f5e20-8ab9-4792-95b7-19dc69168a85",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DELETE_MIGRATION_TARGET_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "3025838b-55d8-4d51-982e-ddc13e6770b8",
+            "a160b944-32f8-45fd-bfca-2f716718083d"
+          ],
+          "index": 11,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "89df4978-4c59-4eb8-a43e-ade749424add",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DEPLOY_INSTANCE_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "a160b944-32f8-45fd-bfca-2f716718083d",
+            "254f5e20-8ab9-4792-95b7-19dc69168a85"
+          ],
+          "index": 12,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "658de3d6-1599-44c1-9881-c44379bdc7ab",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "GET_OPTIMAL_FLAVOR",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "89df4978-4c59-4eb8-a43e-ade749424add"
+          ],
+          "index": 13,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "91bf34b4-1ffb-4ea4-a910-2482d22eb8a1",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "FINALIZE_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "658de3d6-1599-44c1-9881-c44379bdc7ab"
+          ],
+          "index": 14,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "2e517a9f-4df7-4ceb-953f-f6ced246e38b",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CLEANUP_FAILED_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "89df4978-4c59-4eb8-a43e-ade749424add",
+            "91bf34b4-1ffb-4ea4-a910-2482d22eb8a1"
+          ],
+          "index": 15,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "75dfa7e1-baff-40cf-9f3a-41ba97e71c20",
+          "execution_id": "db2176a6-6b4a-42f7-affe-21001a21d4e2",
+          "instance": "datacenter1/test-coriolis-jenkins-oracle-linux",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CLEANUP_INSTANCE_STORAGE",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "1e1cb245-b904-4010-be7f-57a9c680dc8c",
+            "254f5e20-8ab9-4792-95b7-19dc69168a85",
+            "2e517a9f-4df7-4ceb-953f-f6ced246e38b"
+          ],
+          "index": 16,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        }
+      ]
+    },
+    {
+      "base_id": "c92c4383-cc2a-49c0-9508-ab77bcb5855e",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "destination_environment": {
+        "location": "westus",
+        "resource_group": "coriolis",
+        "worker_size": "Standard_D1_v2",
+        "network_map": {
+          "vmnetwork": "coriolis-jenkins-vnet/default"
+        },
+        "storage_mappings": {}
+      },
+      "type": "migration",
+      "instances": [
+        "datacenter1/test-coriolis-jenkins-openwrt15"
+      ],
+      "reservation_id": null,
+      "notes": null,
+      "origin_endpoint_id": "8f6fb2ec-d710-42f2-a7bd-7ef8596998cb",
+      "destination_endpoint_id": "fd23d1c2-ac0f-45e3-8a22-d6b3c26bb554",
+      "transfer_result": null,
+      "network_map": {
+        "vmnetwork": "coriolis-jenkins-vnet/default"
+      },
+      "storage_mappings": {},
+      "source_environment": {
+        "automatically_enable_cbt": true,
+        "vixdisklib_compatibility_version": "6.0"
+      },
+      "created_at": "2020-07-01T09:53:18.000000",
+      "updated_at": "2020-07-01T10:02:17.000000",
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "c92c4383-cc2a-49c0-9508-ab77bcb5855e",
+      "replica_id": "94c58b1e-a5e3-45c2-8769-5901468896f0",
+      "shutdown_instances": false,
+      "replication_count": 2,
+      "status": "ERROR",
+      "tasks": [
+        {
+          "id": "65563d1e-e0db-4cef-abe6-474eda302a3f",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 66,
+          "status": "COMPLETED",
+          "task_type": "VALIDATE_REPLICA_DEPLOYMENT_INPUTS",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 2,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "0275ef01-afa8-4768-8d68-c629b2a2c0ac",
+              "task_id": "65563d1e-e0db-4cef-abe6-474eda302a3f",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Checking network mapping",
+              "created_at": "2020-07-01T09:53:37.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "9e5c9d98-c0d3-4213-b2ba-303f4bf65b13",
+              "task_id": "65563d1e-e0db-4cef-abe6-474eda302a3f",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Checking OSMorphing image",
+              "created_at": "2020-07-01T09:53:59.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "fee30a03-6d27-4e42-a060-e3491d4cafd4",
+              "task_id": "65563d1e-e0db-4cef-abe6-474eda302a3f",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Checking worker size",
+              "created_at": "2020-07-01T09:53:59.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T09:54:02.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "8ea73ef3-4778-4e14-be7e-c4d2caaad41c",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 70,
+          "status": "COMPLETED",
+          "task_type": "CREATE_REPLICA_DISK_SNAPSHOTS",
+          "exception_details": null,
+          "depends_on": [
+            "65563d1e-e0db-4cef-abe6-474eda302a3f"
+          ],
+          "index": 3,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "da72e329-7cc9-4794-8315-3d7e7042e2f1",
+              "task_id": "8ea73ef3-4778-4e14-be7e-c4d2caaad41c",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating disk snapshot for coriolis-replica-f7b01542-ed22-4103-9c5a-fc00f4ff070a",
+              "created_at": "2020-07-01T09:54:19.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T09:54:26.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "88734dee-0c04-4da9-8082-8e918a425868",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 74,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_REPLICA_INSTANCE",
+          "exception_details": null,
+          "depends_on": [
+            "8ea73ef3-4778-4e14-be7e-c4d2caaad41c"
+          ],
+          "index": 4,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "28766e38-5279-43ed-9a65-46e08858cfb3",
+              "task_id": "88734dee-0c04-4da9-8082-8e918a425868",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating volume from snapshot \"1b5db141-82a6-433a-9571-30ac01913cf4\"",
+              "created_at": "2020-07-01T09:54:43.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T09:54:50.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 78,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_OS_MORPHING_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "88734dee-0c04-4da9-8082-8e918a425868"
+          ],
+          "index": 5,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "5a11256a-5ffe-4bab-8ba0-92694d4d2a1a",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 6,
+              "total_steps": null,
+              "message": "Creating new worker VM with OS type \"linux\" and size \"Standard_d1_v2\": \"coriolis-worker-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95\"",
+              "created_at": "2020-07-01T09:56:21.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "65f69e00-7147-4e2f-958d-0209e132ad07",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Creating new public IP address for worker VM",
+              "created_at": "2020-07-01T09:55:07.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "b1df81df-8a2f-4849-9291-5eb18310d878",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "Creating new worker NIC",
+              "created_at": "2020-07-01T09:55:48.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "bbbe6ff2-1be4-452e-8905-815ab05e2a0e",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Creating new subnet on \"coriolis-migrnet-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95\" for worker VM",
+              "created_at": "2020-07-01T09:55:44.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "c324e9d5-c7f1-445f-8d01-ea69355fd78b",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Creating new network for worker VM",
+              "created_at": "2020-07-01T09:55:13.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "d27b9857-21d5-4d26-a114-b6b92d2d7fd0",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 8,
+              "total_steps": null,
+              "message": "Waiting for connectivity on 40.78.46.139:22",
+              "created_at": "2020-07-01T09:57:40.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "ec3b3ce6-c3e2-4811-8da1-8f067bd2d284",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 7,
+              "total_steps": null,
+              "message": "Worker public IP is: 40.78.46.139",
+              "created_at": "2020-07-01T09:57:40.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "ee14261a-70b5-413f-95c9-71c1921ee7a6",
+              "task_id": "8051400c-d1bd-46b1-9986-8721c9a02000",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Creating new secgroup for worker VM",
+              "created_at": "2020-07-01T09:55:39.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T09:58:14.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "bd46d14f-c58d-4043-8fb4-68dee4b0786a",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 82,
+          "status": "ERROR",
+          "task_type": "OS_MORPHING",
+          "exception_details": "root partition not found",
+          "depends_on": [
+            "8051400c-d1bd-46b1-9986-8721c9a02000"
+          ],
+          "index": 6,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "6b11bd39-51f4-42d8-90f4-a786bad4613b",
+              "task_id": "bd46d14f-c58d-4043-8fb4-68dee4b0786a",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Connecting through SSH to OSMorphing host on: 40.78.46.139:22",
+              "created_at": "2020-07-01T09:58:21.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "8dce3bb5-c860-41c8-9280-58036a01a944",
+              "task_id": "bd46d14f-c58d-4043-8fb4-68dee4b0786a",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Connecting through SSH to OSMorphing host on: 40.78.46.139:22",
+              "created_at": "2020-07-01T09:58:27.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "ce1c8634-ab4e-4839-b3b5-1a29f6f058f3",
+              "task_id": "bd46d14f-c58d-4043-8fb4-68dee4b0786a",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Discovering and mounting OS partitions",
+              "created_at": "2020-07-01T09:58:40.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T09:59:08.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 86,
+          "status": "COMPLETED",
+          "task_type": "DELETE_OS_MORPHING_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "8051400c-d1bd-46b1-9986-8721c9a02000",
+            "bd46d14f-c58d-4043-8fb4-68dee4b0786a"
+          ],
+          "index": 7,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "050c4fea-73e0-43f6-9931-1cde1c0f0b4c",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 7,
+              "total_steps": null,
+              "message": "Deleting worker secgroup: coriolis-worker-secgroup-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95",
+              "created_at": "2020-07-01T10:01:06.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "16d91e5a-62d2-40a1-b193-b95ab61ddc9b",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 8,
+              "total_steps": null,
+              "message": "Deleting worker network: \"coriolis-migrnet-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95\"",
+              "created_at": "2020-07-01T10:01:17.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "47b6960b-e09b-4a89-9ef6-27e358ad3a7a",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Removing worker instance resources",
+              "created_at": "2020-07-01T09:59:25.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "547869e8-815e-4325-9c9f-5a9f1ed8b05f",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Deleting worker VM \"coriolis-worker-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95\"",
+              "created_at": "2020-07-01T09:59:31.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "69ed40d3-ac9a-44ae-b6c7-96bc7189c6a0",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Shutting down worker VM \"coriolis-worker-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95\"",
+              "created_at": "2020-07-01T09:59:26.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "868edc0d-c6f7-4675-a8cd-6e326af2f36d",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 6,
+              "total_steps": null,
+              "message": "Deleting public ip \"coriolis-worker-pip-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95\"",
+              "created_at": "2020-07-01T10:00:56.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "9eae8c13-4bf3-475e-8d73-fb84a036bc98",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Deleting worker root disk \"coriolis-worker-1936ac6b-59f4-4409-bbc7-4OS__1_702f78e32ca648259da5e14b7b69a823\"",
+              "created_at": "2020-07-01T10:00:12.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "df6edae3-d0ce-475e-af02-e38d57c3e4a9",
+              "task_id": "0c45f314-60c2-43f2-9e83-7472507a5579",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "Deleting worker NIC \"coriolis-worker-nic-1936ac6b-59f4-4409-bbc7-4d5f9c38ac95\"",
+              "created_at": "2020-07-01T10:00:44.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T10:01:29.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "e3e26d16-d316-461f-829b-1716240de60c",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "GET_OPTIMAL_FLAVOR",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "bd46d14f-c58d-4043-8fb4-68dee4b0786a",
+            "0c45f314-60c2-43f2-9e83-7472507a5579"
+          ],
+          "index": 8,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T10:01:29.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "ddfe059d-e8a4-43da-ba8f-b4f8ad45df4b",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "FINALIZE_REPLICA_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "e3e26d16-d316-461f-829b-1716240de60c"
+          ],
+          "index": 9,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T10:01:29.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "50bcc968-b6cf-47dd-b1db-4910542351b7",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 90,
+          "status": "COMPLETED",
+          "task_type": "DELETE_REPLICA_DISK_SNAPSHOTS",
+          "exception_details": null,
+          "depends_on": [
+            "8ea73ef3-4778-4e14-be7e-c4d2caaad41c",
+            "ddfe059d-e8a4-43da-ba8f-b4f8ad45df4b"
+          ],
+          "index": 10,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "b9a1d9c7-1fc0-44b8-b595-63b4d05480a6",
+              "task_id": "50bcc968-b6cf-47dd-b1db-4910542351b7",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Deleting snapshot for volume: \"coriolis-replica-f7b01542-ed22-4103-9c5a-fc00f4ff070a\"",
+              "created_at": "2020-07-01T10:01:45.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T10:01:47.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "919a115e-87bb-48ce-8fec-603d9b80e2e5",
+          "execution_id": "80717266-4be3-4ae9-b66a-2404ff1097da",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 91,
+          "status": "COMPLETED",
+          "task_type": "CLEANUP_FAILED_REPLICA_INSTANCE_DEPLOYMENT",
+          "exception_details": null,
+          "depends_on": [
+            "88734dee-0c04-4da9-8082-8e918a425868",
+            "ddfe059d-e8a4-43da-ba8f-b4f8ad45df4b"
+          ],
+          "index": 11,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "66401748-e2d0-423c-ae32-e6a373555c2e",
+              "task_id": "919a115e-87bb-48ce-8fec-603d9b80e2e5",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Removing volumes",
+              "created_at": "2020-07-01T10:01:45.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-01T09:53:18.000000",
+          "updated_at": "2020-07-01T10:02:17.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        }
+      ]
+    },
+    {
+      "base_id": "e80e9dfe-b58f-44cb-b011-29eb3bddeb48",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "destination_environment": {
+        "location": "westus",
+        "resource_group": "coriolis",
+        "worker_size": "Standard_D1_v2",
+        "network_map": {
+          "vmnetwork": "coriolis-jenkins-vnet/default"
+        },
+        "storage_mappings": {}
+      },
+      "type": "migration",
+      "instances": [
+        "datacenter1/test-coriolis-jenkins-ubuntu1804"
+      ],
+      "reservation_id": "5b427ec6-ba65-48bc-9f9b-54b5b7adcfd5",
+      "notes": "",
+      "origin_endpoint_id": "8f6fb2ec-d710-42f2-a7bd-7ef8596998cb",
+      "destination_endpoint_id": "fd23d1c2-ac0f-45e3-8a22-d6b3c26bb554",
+      "transfer_result": null,
+      "network_map": {
+        "vmnetwork": "coriolis-jenkins-vnet/default"
+      },
+      "storage_mappings": {},
+      "source_environment": {
+        "automatically_enable_cbt": false,
+        "vixdisklib_compatibility_version": "6.0"
+      },
+      "created_at": "2020-07-06T10:35:01.000000",
+      "updated_at": "2020-07-06T10:35:20.000000",
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "e80e9dfe-b58f-44cb-b011-29eb3bddeb48",
+      "replica_id": null,
+      "shutdown_instances": false,
+      "replication_count": 2,
+      "status": "CANCELED",
+      "tasks": [
+        {
+          "id": "60194090-a8e2-475a-b0f0-18b59610ff2c",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": "coriolis-worker",
+          "process_id": 182,
+          "status": "COMPLETED",
+          "task_type": "GET_INSTANCE_INFO",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 2,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "c118495e-eacb-411b-a37e-f701219a0cad",
+              "task_id": "60194090-a8e2-475a-b0f0-18b59610ff2c",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Retrieving virtual machine data",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "d6aa0e35-2ed6-4032-8dd6-532a29eb6a06",
+              "task_id": "60194090-a8e2-475a-b0f0-18b59610ff2c",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Connecting to vSphere host",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:12.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "a6fc47c3-4c39-416b-90a5-b8f742095d6b",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": "coriolis-worker",
+          "process_id": 210,
+          "status": "CANCELED",
+          "task_type": "VALIDATE_MIGRATION_DESTINATION_INPUTS",
+          "exception_details": "This task was user-cancelled. Additional cancellation info from worker service: 'Task was canceled.'",
+          "depends_on": [
+            "60194090-a8e2-475a-b0f0-18b59610ff2c"
+          ],
+          "index": 3,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:27.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "6242e82a-15ed-4c1e-acc5-85ae8de31e4b",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": "coriolis-worker",
+          "process_id": 181,
+          "status": "COMPLETED",
+          "task_type": "VALIDATE_MIGRATION_SOURCE_INPUTS",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 4,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "0d0e4a8b-b202-46b1-bfaa-efe34366ff53",
+              "task_id": "6242e82a-15ed-4c1e-acc5-85ae8de31e4b",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Testing vixDiskLib compatibility",
+              "created_at": "2020-07-06T10:35:10.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "3a972da5-2a7b-4950-90f3-e4d8dc057a5e",
+              "task_id": "6242e82a-15ed-4c1e-acc5-85ae8de31e4b",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Checking CBT status",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "3f1db44f-d383-40ea-aefc-31af31246438",
+              "task_id": "6242e82a-15ed-4c1e-acc5-85ae8de31e4b",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Compiling export info for VM 'datacenter1/test-coriolis-jenkins-ubuntu1804'",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "d7ce7101-62a4-461a-9a42-6fb8b7839639",
+              "task_id": "6242e82a-15ed-4c1e-acc5-85ae8de31e4b",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "vixDiskLib is installed and will be run using compatibility mode '6.0' ",
+              "created_at": "2020-07-06T10:35:10.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:12.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "3e61dfb4-d89e-44a6-ae7d-e850364ca7ff",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": "coriolis-worker",
+          "process_id": 211,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "6242e82a-15ed-4c1e-acc5-85ae8de31e4b"
+          ],
+          "index": 5,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "47548bc8-6ed7-4d7c-b7a3-b0e78227bf2c",
+              "task_id": "3e61dfb4-d89e-44a6-ae7d-e850364ca7ff",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "No source-side resources required for Replicating from VMWare",
+              "created_at": "2020-07-06T10:35:19.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:20.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "6fbcb04c-64d7-4846-9cc8-02e4eb2e6e01",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CREATE_INSTANCE_DISKS",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "6242e82a-15ed-4c1e-acc5-85ae8de31e4b",
+            "a6fc47c3-4c39-416b-90a5-b8f742095d6b"
+          ],
+          "index": 6,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "f7ab7b89-0ed5-4b11-b2c3-8dbc7707f0b5",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DEPLOY_MIGRATION_TARGET_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "6fbcb04c-64d7-4846-9cc8-02e4eb2e6e01"
+          ],
+          "index": 7,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "fccd5517-3c5f-426f-a079-7497951b83f9",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "3e61dfb4-d89e-44a6-ae7d-e850364ca7ff",
+            "f7ab7b89-0ed5-4b11-b2c3-8dbc7707f0b5"
+          ],
+          "index": 8,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "3a78a753-b2fc-420e-9f90-21630e792b35",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "fccd5517-3c5f-426f-a079-7497951b83f9"
+          ],
+          "index": 9,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "603646f3-8637-4d71-86f6-37ff99c80658",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": "coriolis-worker",
+          "process_id": 234,
+          "status": "COMPLETED",
+          "task_type": "DELETE_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "3e61dfb4-d89e-44a6-ae7d-e850364ca7ff",
+            "3a78a753-b2fc-420e-9f90-21630e792b35"
+          ],
+          "index": 10,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:33.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "e5231e6d-872b-445d-8429-f676a136ed1b",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DELETE_MIGRATION_TARGET_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "f7ab7b89-0ed5-4b11-b2c3-8dbc7707f0b5",
+            "3a78a753-b2fc-420e-9f90-21630e792b35"
+          ],
+          "index": 11,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "d1d8c8a2-97bc-4ad0-ad71-9d3e7b3ec212",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DEPLOY_INSTANCE_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "3a78a753-b2fc-420e-9f90-21630e792b35",
+            "e5231e6d-872b-445d-8429-f676a136ed1b"
+          ],
+          "index": 12,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "051d4eb6-127d-4419-8142-756ea4e17789",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "GET_OPTIMAL_FLAVOR",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "d1d8c8a2-97bc-4ad0-ad71-9d3e7b3ec212"
+          ],
+          "index": 13,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "9bacaef8-ec00-4eb9-9f3b-006f8b317be2",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "FINALIZE_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "051d4eb6-127d-4419-8142-756ea4e17789"
+          ],
+          "index": 14,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "2900e716-a4ca-4ab8-8c92-4e1dac9b54c3",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CLEANUP_FAILED_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "d1d8c8a2-97bc-4ad0-ad71-9d3e7b3ec212",
+            "9bacaef8-ec00-4eb9-9f3b-006f8b317be2"
+          ],
+          "index": 15,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "a313ef3a-8fd4-48dc-b85e-063b9af8e8cd",
+          "execution_id": "0d8afdd6-3d63-4566-8cc8-3726053765b9",
+          "instance": "datacenter1/test-coriolis-jenkins-ubuntu1804",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CLEANUP_INSTANCE_STORAGE",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "6fbcb04c-64d7-4846-9cc8-02e4eb2e6e01",
+            "e5231e6d-872b-445d-8429-f676a136ed1b",
+            "2900e716-a4ca-4ab8-8c92-4e1dac9b54c3"
+          ],
+          "index": 16,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        }
+      ]
+    },
+    {
+      "base_id": "f30beec0-1a8a-47e6-a9c9-d15ad749bd09",
+      "user_id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "project_id": "5ce600c3117d46a897b4307d73f9b688",
+      "destination_environment": {
+        "location": "westus",
+        "resource_group": "coriolis",
+        "worker_size": "Standard_D1_v2",
+        "network_map": {
+          "vmnetwork": "coriolis-jenkins-vnet/default"
+        },
+        "storage_mappings": {}
+      },
+      "type": "migration",
+      "instances": [
+        "datacenter1/test-coriolis-jenkins-openwrt15"
+      ],
+      "reservation_id": "6ab65dff-1abe-4977-bce7-a3e02d56f0f1",
+      "notes": "",
+      "origin_endpoint_id": "8f6fb2ec-d710-42f2-a7bd-7ef8596998cb",
+      "destination_endpoint_id": "fd23d1c2-ac0f-45e3-8a22-d6b3c26bb554",
+      "transfer_result": null,
+      "network_map": {
+        "vmnetwork": "coriolis-jenkins-vnet/default"
+      },
+      "storage_mappings": {},
+      "source_environment": {
+        "automatically_enable_cbt": false,
+        "vixdisklib_compatibility_version": "6.0"
+      },
+      "created_at": "2020-07-06T10:35:01.000000",
+      "updated_at": "2020-07-06T10:35:21.000000",
+      "deleted_at": null,
+      "deleted": "0",
+      "id": "f30beec0-1a8a-47e6-a9c9-d15ad749bd09",
+      "replica_id": null,
+      "shutdown_instances": false,
+      "replication_count": 2,
+      "status": "CANCELED",
+      "tasks": [
+        {
+          "id": "80cdeb39-32be-4362-af33-8adc3058581d",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 180,
+          "status": "COMPLETED",
+          "task_type": "GET_INSTANCE_INFO",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 2,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "3db3bb74-9502-4cee-a80c-aacd466c5088",
+              "task_id": "80cdeb39-32be-4362-af33-8adc3058581d",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Connecting to vSphere host",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "3ec6f132-e2c0-4b54-8031-9bbad8ff5808",
+              "task_id": "80cdeb39-32be-4362-af33-8adc3058581d",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "VMWare tools are not installed in VM \"test-coriolis-jenkins-openwrt15\", unable to fetch the IP addresses of the VM's NICs.",
+              "created_at": "2020-07-06T10:35:12.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "e33ee32b-2eec-4643-8650-f8c3e83d1337",
+              "task_id": "80cdeb39-32be-4362-af33-8adc3058581d",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "Retrieving virtual machine data",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:13.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "36aee88f-b3ba-46b1-a11c-9f66fed98ad3",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 213,
+          "status": "CANCELED",
+          "task_type": "VALIDATE_MIGRATION_DESTINATION_INPUTS",
+          "exception_details": "This task was user-cancelled. Additional cancellation info from worker service: 'Task was canceled.'",
+          "depends_on": [
+            "80cdeb39-32be-4362-af33-8adc3058581d"
+          ],
+          "index": 3,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:27.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "8cb8b281-9d40-4f95-aa2c-985162bc815f",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 183,
+          "status": "COMPLETED",
+          "task_type": "VALIDATE_MIGRATION_SOURCE_INPUTS",
+          "exception_details": null,
+          "depends_on": null,
+          "index": 4,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "1abe5aa5-6335-46b8-8a6c-c75730b9285a",
+              "task_id": "8cb8b281-9d40-4f95-aa2c-985162bc815f",
+              "current_step": 2,
+              "total_steps": null,
+              "message": "vixDiskLib is installed and will be run using compatibility mode '6.0' ",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "2d820440-9d6e-4f9d-abbf-4520d63cde28",
+              "task_id": "8cb8b281-9d40-4f95-aa2c-985162bc815f",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "Testing vixDiskLib compatibility",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "87be7c46-47fd-4375-a8b7-e32e734aedde",
+              "task_id": "8cb8b281-9d40-4f95-aa2c-985162bc815f",
+              "current_step": 4,
+              "total_steps": null,
+              "message": "Checking CBT status",
+              "created_at": "2020-07-06T10:35:12.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "b4fc6961-5236-41bc-a30f-4015d2dc0345",
+              "task_id": "8cb8b281-9d40-4f95-aa2c-985162bc815f",
+              "current_step": 3,
+              "total_steps": null,
+              "message": "Compiling export info for VM 'datacenter1/test-coriolis-jenkins-openwrt15'",
+              "created_at": "2020-07-06T10:35:11.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            },
+            {
+              "id": "bf021ec9-2955-4387-b3f4-497532d0cefd",
+              "task_id": "8cb8b281-9d40-4f95-aa2c-985162bc815f",
+              "current_step": 5,
+              "total_steps": null,
+              "message": "VMWare tools are not installed in VM \"test-coriolis-jenkins-openwrt15\", unable to fetch the IP addresses of the VM's NICs.",
+              "created_at": "2020-07-06T10:35:12.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:13.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "93a862b2-053c-4fc5-b691-d5103163775e",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 214,
+          "status": "COMPLETED",
+          "task_type": "DEPLOY_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "8cb8b281-9d40-4f95-aa2c-985162bc815f"
+          ],
+          "index": 5,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [
+            {
+              "id": "6ebd2a39-7d30-40f0-8d95-e707188b2a29",
+              "task_id": "93a862b2-053c-4fc5-b691-d5103163775e",
+              "current_step": 1,
+              "total_steps": null,
+              "message": "No source-side resources required for Replicating from VMWare",
+              "created_at": "2020-07-06T10:35:21.000000",
+              "updated_at": null,
+              "deleted_at": null,
+              "deleted": "0"
+            }
+          ],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:21.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "04c114f4-798c-4782-bbc0-91f5f66b9ce8",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CREATE_INSTANCE_DISKS",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "8cb8b281-9d40-4f95-aa2c-985162bc815f",
+            "36aee88f-b3ba-46b1-a11c-9f66fed98ad3"
+          ],
+          "index": 6,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "61d182b9-bd65-49ee-8439-14c9f594b2b3",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DEPLOY_MIGRATION_TARGET_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "04c114f4-798c-4782-bbc0-91f5f66b9ce8"
+          ],
+          "index": 7,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "562d0716-570c-4ceb-9763-327882beb844",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": "Unscheduled due to some parent tasks not having completed successfully.",
+          "depends_on": [
+            "93a862b2-053c-4fc5-b691-d5103163775e",
+            "61d182b9-bd65-49ee-8439-14c9f594b2b3"
+          ],
+          "index": 8,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "816c77b7-51b0-4d98-8c45-ca07665fff72",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "REPLICATE_DISKS",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "562d0716-570c-4ceb-9763-327882beb844"
+          ],
+          "index": 9,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "113f05e3-c250-4444-a811-d4119c7bb4b9",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": "coriolis-worker",
+          "process_id": 235,
+          "status": "COMPLETED",
+          "task_type": "DELETE_MIGRATION_SOURCE_RESOURCES",
+          "exception_details": null,
+          "depends_on": [
+            "93a862b2-053c-4fc5-b691-d5103163775e",
+            "816c77b7-51b0-4d98-8c45-ca07665fff72"
+          ],
+          "index": 10,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:33.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "aabccafc-d29e-4360-a595-9c3c05c18c0f",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DELETE_MIGRATION_TARGET_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "61d182b9-bd65-49ee-8439-14c9f594b2b3",
+            "816c77b7-51b0-4d98-8c45-ca07665fff72"
+          ],
+          "index": 11,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "c8d574de-f7af-423f-9883-50f02b816c6e",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "DEPLOY_INSTANCE_RESOURCES",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "816c77b7-51b0-4d98-8c45-ca07665fff72",
+            "aabccafc-d29e-4360-a595-9c3c05c18c0f"
+          ],
+          "index": 12,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "b9826931-023f-4da9-b322-174563300a3d",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "GET_OPTIMAL_FLAVOR",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "c8d574de-f7af-423f-9883-50f02b816c6e"
+          ],
+          "index": 13,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "db05d393-4fd5-4002-801b-267062a17c87",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "FINALIZE_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "b9826931-023f-4da9-b322-174563300a3d"
+          ],
+          "index": 14,
+          "on_error": false,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "f0d6b37a-1f50-49c8-8658-6781843cf720",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CLEANUP_FAILED_INSTANCE_DEPLOYMENT",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "c8d574de-f7af-423f-9883-50f02b816c6e",
+            "db05d393-4fd5-4002-801b-267062a17c87"
+          ],
+          "index": 15,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        },
+        {
+          "id": "74dbe25f-6345-4163-9698-9f3f119cd035",
+          "execution_id": "1543a81f-d024-409b-a6d3-7a82cfe804ba",
+          "instance": "datacenter1/test-coriolis-jenkins-openwrt15",
+          "host": null,
+          "process_id": null,
+          "status": "UNSCHEDULED",
+          "task_type": "CLEANUP_INSTANCE_STORAGE",
+          "exception_details": "Unscheduled due to the unscheduling of all parent tasks.",
+          "depends_on": [
+            "04c114f4-798c-4782-bbc0-91f5f66b9ce8",
+            "aabccafc-d29e-4360-a595-9c3c05c18c0f",
+            "f0d6b37a-1f50-49c8-8658-6781843cf720"
+          ],
+          "index": 16,
+          "on_error": true,
+          "events": [],
+          "progress_updates": [],
+          "created_at": "2020-07-06T10:35:01.000000",
+          "updated_at": "2020-07-06T10:35:28.000000",
+          "deleted_at": null,
+          "deleted": "0"
+        }
+      ]
+    }
+  ]
+}

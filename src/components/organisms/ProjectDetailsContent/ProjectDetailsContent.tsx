@@ -106,7 +106,6 @@ type Props = {
 type State = {
   showRemoveUserAlert: boolean,
 }
-const testName = 'pdContent'
 @observer
 class ProjectDetailsContent extends React.Component<Props, State> {
   state = {
@@ -186,7 +185,7 @@ class ProjectDetailsContent extends React.Component<Props, State> {
       <Info>
         <Field>
           <Label>Name</Label>
-          {this.renderValue(project.name, 'name')}
+          {this.renderValue(project.name)}
         </Field>
         <Field>
           <Label>Description</Label>
@@ -198,7 +197,7 @@ class ProjectDetailsContent extends React.Component<Props, State> {
         </Field>
         <Field>
           <Label>ID</Label>
-          {this.renderValue(project.id, 'id')}
+          {this.renderValue(project.id)}
         </Field>
         <Field>
           <Label>Enabled</Label>
@@ -239,13 +238,11 @@ class ProjectDetailsContent extends React.Component<Props, State> {
       const userRoles = getUserRoles(user)
       const columns = [
         <UserName
-          data-test-id={`pdContent-users-${user.name}`}
           disabled={!user.enabled}
           to={`/users/${user.id}`}
         >{user.name}
         </UserName>,
         <DropdownLink
-          data-test-id={`${testName}-roles-${user.name}`}
           width="214px"
           getLabel={() => (userRoles.length > 0 ? userRoles.map(r => r.label).join(', ') : 'No roles')}
           selectedItems={userRoles.map(r => r.value)}
@@ -262,7 +259,6 @@ class ProjectDetailsContent extends React.Component<Props, State> {
         />,
         <UserColumn disabled={!user.enabled}>{user.enabled ? 'Enabled' : 'Disabled'}</UserColumn>,
         <DropdownLink
-          data-test-id={`${testName}-actions-${user.name}`}
           noCheckmark
           width="82px"
           items={userActions}
@@ -280,7 +276,6 @@ class ProjectDetailsContent extends React.Component<Props, State> {
 
     return (
       <TableStyled
-        data-test-id={`${testName}-members`}
         header={['Member', 'Roles', 'Status', '']}
         items={rows}
         noItemsLabel="No members available!"
@@ -289,10 +284,9 @@ class ProjectDetailsContent extends React.Component<Props, State> {
     )
   }
 
-  renderValue(value: string, dataTestId: string) {
+  renderValue(value: string) {
     return value !== '-' ? (
       <CopyValue
-        data-test-id={`${testName}-${dataTestId}`}
         value={value}
         maxWidth="90%"
       />

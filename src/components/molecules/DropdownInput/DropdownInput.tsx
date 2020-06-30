@@ -82,7 +82,6 @@ class DropdownInput extends React.Component<Props, State> {
           secondary
           disabled={this.props.disabled}
           arrowImage={arrowImage}
-          data-test-id="ddInput-link"
         />
         <TextInput
           embedded
@@ -92,7 +91,6 @@ class DropdownInput extends React.Component<Props, State> {
           onChange={e => { this.props.onInputChange(e.target.value) }}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
-          data-test-id="ddInput-text"
         />
         {this.props.required ? <Required /> : null}
       </Wrapper>

@@ -59,7 +59,6 @@ type Props = {
   selectedValue?: string,
   onChange?: (item: ItemType) => void,
   className?: string,
-  'data-test-id'?: string,
   style?: React.CSSProperties,
 }
 @observer
@@ -85,13 +84,11 @@ class ToggleButtonBar extends React.Component<Props> {
 
     return (
       <Wrapper
-        data-test-id={this.props['data-test-id'] || 'toggleButtonBar-wrapper'}
         className={this.props.className}
         style={this.props.style}
       >
         {this.props.items.map(item => (
           <Item
-            data-test-id={`toggleButtonBar-${item.value}`}
             key={item.value}
             selected={this.props.selectedValue === item.value}
             onClick={() => { this.change(item) }}

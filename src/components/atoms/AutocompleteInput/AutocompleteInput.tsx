@@ -113,7 +113,6 @@ class AutocompleteInput extends React.Component<Props, State> {
         }}
       >
         <TextInput
-          data-test-id="acInput-text"
           disabled={disabled}
           value={this.props.value}
           onChange={e => { this.props.onChange(e.target.value) }}
@@ -136,7 +135,6 @@ class AutocompleteInput extends React.Component<Props, State> {
           onInputKeyDown={this.props.onInputKeyDown}
         />
         <Arrow
-          data-test-id="acInput-arrow"
           disabled={disabled}
           dangerouslySetInnerHTML={{ __html: arrowImage }}
           onClick={() => { if (this.textInputRef) this.textInputRef.focus() }}

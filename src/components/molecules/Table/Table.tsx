@@ -107,7 +107,6 @@ type Props = {
   noItemsStyle?: any,
   bodyStyle?: any,
   headerStyle?: any,
-  'data-test-id'?: string,
 }
 @observer
 class Table extends React.Component<Props> {
@@ -127,7 +126,6 @@ class Table extends React.Component<Props> {
             // eslint-disable-next-line react/no-array-index-key
             key={i}
             secondary={this.props.useSecondaryStyle}
-            data-test-id={`table-header-${i}`}
           >{headerItem}
           </HeaderData>
         ))}
@@ -143,7 +141,6 @@ class Table extends React.Component<Props> {
     return (
       <NoItems
         secondary={this.props.useSecondaryStyle}
-        data-test-id="table-noItems"
         style={this.props.noItemsStyle}
       >{this.props.noItemsComponent || this.props.noItemsLabel}
       </NoItems>
@@ -160,7 +157,7 @@ class Table extends React.Component<Props> {
       <Body customStyle={this.props.bodyStyle}>
         {this.props.items.map((row, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <Row key={i} secondary={this.props.useSecondaryStyle} data-test-id={`table-row-${i}`}>
+          <Row key={i} secondary={this.props.useSecondaryStyle}>
             {
                 row.constructor === Array ? row.map((data, j) => {
                   let columnStyle = ''
@@ -171,7 +168,7 @@ class Table extends React.Component<Props> {
 
                   return (
                     // eslint-disable-next-line react/no-array-index-key
-                    <RowData customStyle={columnStyle} width={dataWidth} key={`${i}-${j}`} data-test-id={`table-data-${i}-${j}`}>
+                    <RowData customStyle={columnStyle} width={dataWidth} key={`${i}-${j}`}>
                       {data}
                     </RowData>
                   )
@@ -186,7 +183,6 @@ class Table extends React.Component<Props> {
   render() {
     return (
       <Wrapper
-        data-test-id={this.props['data-test-id'] || 'table-wrapper'}
         className={this.props.className}
         secondary={this.props.useSecondaryStyle}
       >

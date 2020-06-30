@@ -1,0 +1,19 @@
+{
+  "projects": [
+    {
+      "id": "5ce600c3117d46a897b4307d73f9b688",
+      "name": "admin",
+      "domain_id": "default",
+      "description": "Bootstrap project for initializing the cloud.",
+      "enabled": true,
+      "parent_id": "default",
+      "is_domain": false,
+      "tags": [],
+      "options": {}
+    }
+  ],
+  "links": {
+    "next": null,
+    "previous": null
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "8be8dd1628574c0d8ed06673ff71e8b9",
+      "name": "admin",
+      "domain_id": "default",
+      "enabled": true,
+      "password_expires_at": null,
+      "options": {}
+    },
+    {
+      "email": null,
+      "description": null,
+      "id": "25e4c0bb119741558b8abeee58276349",
+      "name": "barbican",
+      "domain_id": "default",
+      "enabled": true,
+      "default_project_id": "3427f31a65814582876aaaeb18c8b624",
+      "password_expires_at": null,
+      "options": {}
+    },
+    {
+      "email": "coriolis@localhost",
+      "description": null,
+      "id": "8458be68ccbc4c39aba23159f4414ad8",
+      "name": "coriolis",
+      "domain_id": "default",
+      "enabled": true,
+      "default_project_id": "3427f31a65814582876aaaeb18c8b624",
+      "password_expires_at": null,
+      "options": {}
+    }
+  ]
+}

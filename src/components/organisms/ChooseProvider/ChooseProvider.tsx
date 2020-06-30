@@ -322,7 +322,6 @@ class ChooseProvider extends React.Component<Props, State> {
               height={128}
               key={k}
               endpoint={k}
-              data-test-id={`cProvider-endpointLogo-${k}`}
               onClick={() => { this.props.onProviderClick(k) }}
             />
           ))}
@@ -341,7 +340,7 @@ class ChooseProvider extends React.Component<Props, State> {
           multiple
           onChange={e => { this.handleFileUpload(e.target.files) }}
         />
-        <Button secondary onClick={this.props.onCancelClick} data-test-id="cProvider-cancelButton">Cancel</Button>
+        <Button secondary onClick={this.props.onCancelClick}>Cancel</Button>
       </Providers>
     )
   }

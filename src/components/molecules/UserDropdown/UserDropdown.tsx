@@ -172,7 +172,6 @@ class UserDropdown extends React.Component<Props, State> {
         onMouseUp={() => { this.itemMouseDown = false }}
       >
         <Username
-          data-test-id="userDropdown-username"
           to={href || ''}
         >{this.props.user.name}
         </Username>
@@ -205,7 +204,7 @@ class UserDropdown extends React.Component<Props, State> {
             onMouseDown={() => { this.itemMouseDown = true }}
             onMouseUp={() => { this.itemMouseDown = false }}
           >
-            <Label selectable onClick={() => { this.handleItemClick(item) }} data-test-id={`userDropdown-label-${item.value}`}>{item.label}</Label>
+            <Label selectable onClick={() => { this.handleItemClick(item) }}>{item.label}</Label>
           </ListItem>
         )) : null}
       </List>
@@ -222,7 +221,6 @@ class UserDropdown extends React.Component<Props, State> {
           onMouseUp={() => { this.itemMouseDown = false }}
           onClick={() => this.handleButtonClick()}
           white={this.props.white}
-          data-test-id="userDropdown-button"
         />
         {this.renderList()}
       </Wrapper>
