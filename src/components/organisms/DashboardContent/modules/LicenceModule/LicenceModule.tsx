@@ -80,11 +80,13 @@ const TopInfoDateBottom = styled.div<any>`
 const Charts = styled.div<any>`
   margin-top: 24px;
 `
+const ChartRow = styled.div`
+  display: flex;
+  margin-left: -32px;
+`
 const Chart = styled.div<any>`
-  margin-top: 20px;
-  &:first-child {
-    margin-top: 0;
-  }
+  width: 100%;
+  margin-left: 32px;
 `
 const ChartHeader = styled.div<any>`
   display: flex;
@@ -137,25 +139,46 @@ class LicenceModule extends React.Component<Props> {
   }
 
   renderLicenceStatusText(info: Licence): React.ReactNode {
-    const graphData = [{
-      color: Palette.alert,
-      current: info.lifetimePerformedReplicas,
-      total: info.currentAvailableReplicas,
-      label: 'Replicas',
-      info: 'The number of lifetime performed replicas over the number of replicas available in current licence',
-    }, {
-      color: Palette.primary,
-      current: info.currentPerformedMigrations,
-      total: info.currentAvailableMigrations,
-      label: 'Migrations',
-      info: 'The number of migrations performed with current licence over the number of migrations available in current licence',
-    }]
+    const graphDataRows = [
+      [
+        {
+          color: Palette.alert,
+          current: info.currentPerformedReplicas,
+          total: info.currentAvailableReplicas,
+          label: 'Current Replicas',
+          info: 'The number of replicas performed with current licence over the number of replicas available in current licence',
+        },
+        {
+          color: Palette.alert,
+          current: info.lifetimePerformedReplicas,
+          total: info.lifetimeAvailableReplicas,
+          label: 'Lifetime Replicas',
+          info: 'The number of lifetime performed replicas over the number of lifetime available replicas',
+        },
+      ],
+      [
+        {
+          color: Palette.primary,
+          current: info.currentPerformedMigrations,
+          total: info.currentAvailableMigrations,
+          label: 'Current Migrations',
+          info: 'The number of migrations performed with current licence over the number of migrations available in current licence',
+        },
+        {
+          color: Palette.primary,
+          current: info.lifetimePerformedMigrations,
+          total: info.lifetimeAvailableMigrations,
+          label: 'Lifetime Migrations',
+          info: 'The number of lifetime performed migrations over the number of lifetime available migrations',
+        },
+      ],
+    ]
     const latestLicenceExpiryDate = moment(info.latestLicenceExpiryDate)
     return (
       <LicenceInfo>
         <TopInfo>
           <TopInfoText>
-            Earliest Coriolis® Licence expires
+            Earliest Coriolis® Licence expires&nbsp;
             {this.renderExpiration(info.earliestLicenceExpiryDate)}.<br /><br />
             Latest Coriolis® Licence expires {this.renderExpiration(info.latestLicenceExpiryDate)}.
           </TopInfoText>
@@ -165,18 +188,22 @@ class LicenceModule extends React.Component<Props> {
           </TopInfoDate>
         </TopInfo>
         <Charts>
-          {graphData.map(data => (
-            <Chart key={data.label}>
-              <ChartHeader>
-                <ChartHeaderCurrent>
-                  {data.current} {data.label} <InfoIcon marginBottom={-3} text={data.info} />
-                </ChartHeaderCurrent>
-                <ChartHeaderTotal>{data.total}</ChartHeaderTotal>
-              </ChartHeader>
-              <ChartBodyWrapper>
-                <ChartBody color={data.color} width={(data.current / data.total) * 100} />
-              </ChartBodyWrapper>
-            </Chart>
+          {graphDataRows.map(row => (
+            <ChartRow>
+              {row.map(data => (
+                <Chart key={data.label}>
+                  <ChartHeader>
+                    <ChartHeaderCurrent>
+                      {data.current} {data.label} <InfoIcon marginBottom={-3} text={data.info} />
+                    </ChartHeaderCurrent>
+                    <ChartHeaderTotal>{data.total}</ChartHeaderTotal>
+                  </ChartHeader>
+                  <ChartBodyWrapper>
+                    <ChartBody color={data.color} width={(data.current / data.total) * 100} />
+                  </ChartBodyWrapper>
+                </Chart>
+              ))}
+            </ChartRow>
           ))}
         </Charts>
       </LicenceInfo>

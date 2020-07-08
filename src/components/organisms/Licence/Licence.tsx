@@ -248,7 +248,7 @@ class LicenceC extends React.Component<Props, State> {
     }
     return (
       <LicenceRowDescription>
-        Earliest Coriolis® Licence expires
+        Earliest Coriolis® Licence expires&nbsp;
         {this.renderExpiration(info.earliestLicenceExpiryDate)}.<br />
         Latest Coriolis® Licence expires {this.renderExpiration(info.latestLicenceExpiryDate)}.
       </LicenceRowDescription>
