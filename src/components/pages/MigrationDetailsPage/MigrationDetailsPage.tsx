@@ -318,7 +318,7 @@ class MigrationDetailsPage extends React.Component<Props, State> {
     const dropdownActions = [
       {
         label: 'Cancel',
-        disabled: this.getStatus() !== 'RUNNING',
+        disabled: this.getStatus() !== 'RUNNING' && this.getStatus() !== 'AWAITING_MINION_ALLOCATIONS',
         hidden: this.getStatus() === 'CANCELLING',
         action: () => { this.handleCancelMigrationClick() },
       },
