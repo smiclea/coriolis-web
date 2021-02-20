@@ -26,7 +26,7 @@ import CopyMultilineValue from '../../atoms/CopyMultilineValue'
 import PasswordValue from '../../atoms/PasswordValue'
 
 import type { Instance } from '../../../@types/Instance'
-import type { Endpoint } from '../../../@types/Endpoint'
+import type { Endpoint, StorageBackend } from '../../../@types/Endpoint'
 import type { Network } from '../../../@types/Network'
 import type { Field as FieldType } from '../../../@types/Field'
 import fieldHelper from '../../../@types/Field'
@@ -134,6 +134,7 @@ const PropertyValue = styled.div<any>`
 type Props = {
   item?: TransferItem | null,
   minionPools: MinionPool[]
+  storageBackends: StorageBackend[]
   destinationSchema: FieldType[],
   destinationSchemaLoading: boolean,
   sourceSchema: FieldType[],
@@ -220,7 +221,7 @@ class MainDetails extends React.Component<Props, State> {
         })
       } else if (value && typeof value === 'object') {
         properties = properties.concat(Object.keys(value).map(p => {
-          if (p === 'disk_mappings') {
+          if (p === 'disk_mappings' || p === 'backend_mappings') {
             return null
           }
           let fieldName = pn
@@ -447,6 +448,7 @@ class MainDetails extends React.Component<Props, State> {
             minionPools={this.props.minionPools}
             instancesDetails={this.props.instancesDetails}
             networks={this.props.networks}
+            storageBackends={this.props.storageBackends}
           />
         )}
         {this.renderLoading()}
